@@ -14,7 +14,7 @@
 		1186C93A299FFA66002852BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1186C939299FFA66002852BB /* Assets.xcassets */; };
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
-		1186C98C29A2AB7B002852BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1186C98B29A2AB7B002852BB /* SnapKit */; };
+		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +27,7 @@
 		1186C93C299FFA66002852BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
+		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +35,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1186C98C29A2AB7B002852BB /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +60,7 @@
 		1186C92F299FFA66002852BB /* FashionStore */ = {
 			isa = PBXGroup;
 			children = (
+				1186C98D29A2ACDD002852BB /* Extentions */,
 				1186C98429A29E05002852BB /* AppMain */,
 				1186C98829A2A30E002852BB /* UI */,
 			);
@@ -104,6 +105,14 @@
 			path = TestScreen;
 			sourceTree = "<group>";
 		};
+		1186C98D29A2ACDD002852BB /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -121,7 +130,6 @@
 			);
 			name = FashionStore;
 			packageProductDependencies = (
-				1186C98B29A2AB7B002852BB /* SnapKit */,
 			);
 			productName = FashionStore;
 			productReference = 1186C92D299FFA66002852BB /* FashionStore.app */;
@@ -152,7 +160,6 @@
 			);
 			mainGroup = 1186C924299FFA66002852BB;
 			packageReferences = (
-				1186C98A29A2AB7B002852BB /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 1186C92E299FFA66002852BB /* Products */;
 			projectDirPath = "";
@@ -185,6 +192,7 @@
 				1186C935299FFA66002852BB /* TestViewController.swift in Sources */,
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
 				1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */,
+				1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,25 +410,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		1186C98A29A2AB7B002852BB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1186C98B29A2AB7B002852BB /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1186C98A29A2AB7B002852BB /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1186C925299FFA66002852BB /* Project object */;
 }
