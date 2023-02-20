@@ -6,7 +6,7 @@
 - [ ] MVP 
 
 ## Frameworks
-- [x] SnapKit
+- [ ] SnapKit
 - [ ] Firebase
 
 ## Technologies
