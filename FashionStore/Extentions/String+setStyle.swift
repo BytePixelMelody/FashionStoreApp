@@ -17,6 +17,7 @@ extension String {
         // lineHeightMultiple - multiplier to standard value
         let lineHeightMultiple = style.lineHeight / style.font.lineHeight
         paragraphStyle.lineHeightMultiple = lineHeightMultiple
+        //paragraphStyle.alignment = .center
         
         let mutableAttributedString = NSMutableAttributedString(
             string: string,
@@ -47,9 +48,58 @@ extension TextStyle {
     static let titleLarge = TextStyle(
         fontName: "TenorSans",
         size: 18,
-        color: UIColor(named: "TitleActive") ?? .black,
+        color: UIColor(named: "Active") ?? .black,
         lineHeight: 40,
         letterSpacing: 4
+    )
+    static let titleMedium = TextStyle(
+        fontName: "TenorSans",
+        size: 16,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 24,
+        letterSpacing: 3
+    )
+    static let titleSmall = TextStyle(
+        fontName: "TenorSans",
+        size: 14,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 20,
+        letterSpacing: 2
+    )
+    static let bodyLarge = TextStyle(
+        fontName: "TenorSans",
+        size: 16,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 24,
+        letterSpacing: 0
+    )
+    static let bodyMedium = TextStyle(
+        fontName: "TenorSans",
+        size: 14,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 24,
+        letterSpacing: 0
+    )
+    static let bodySmall = TextStyle(
+        fontName: "TenorSans",
+        size: 12,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 18,
+        letterSpacing: 0
+    )
+    static let priceLarge = TextStyle(
+        fontName: "TenorSans",
+        size: 18,
+        color: UIColor(named: "Secondary") ?? .black,
+        lineHeight: 24,
+        letterSpacing: 0
+    )
+    static let priceMedium = TextStyle(
+        fontName: "TenorSans",
+        size: 15,
+        color: UIColor(named: "Secondary") ?? .black,
+        lineHeight: 24,
+        letterSpacing: 0
     )
 }
 

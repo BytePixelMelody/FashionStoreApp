@@ -6,7 +6,7 @@
 - [ ] MVP 
 
 ## Frameworks
-- [ ] SnapKit
+- [x] SnapKit
 - [ ] Firebase
 
 ## Technologies
@@ -17,16 +17,16 @@
 - [ ] Generics
 - [ ] JSON service
 - [ ] Network service
-- [ ] Async/await
 - [ ] Error handlers
 - [ ] Unit tests
 
 ## Code patterns
+- [ ] Async/await
 - [ ] Builder
 - [ ] Router
 - [ ] Target-Action
 - [ ] Delegate
-- [ ] Font style formatter
+- [x] Font style formatter
 
 <!-- URL's -->
 [platform-image]: https://img.shields.io/badge/Platform-iOS-green.svg

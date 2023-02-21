@@ -17,11 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzu-fC-pmj">
-                                <rect key="frame" x="71.666666666666686" y="376" width="250" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="BI0-95-Rbs"/>
-                                    <constraint firstAttribute="width" constant="250" id="Zae-S1-kkz"/>
-                                </constraints>
+                                <rect key="frame" x="176" y="416" width="41.333333333333343" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
