@@ -17,6 +17,7 @@
 - [ ] Generics
 - [ ] JSON service
 - [ ] Network service
+- [x] Font styles with accessibility
 - [ ] Error handlers
 - [ ] Unit tests
 
@@ -26,7 +27,6 @@
 - [ ] Router
 - [ ] Target-Action
 - [ ] Delegate
-- [x] Font style formatter
 
 <!-- URL's -->
 [platform-image]: https://img.shields.io/badge/Platform-iOS-green.svg

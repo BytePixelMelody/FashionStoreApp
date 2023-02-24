@@ -11,21 +11,22 @@ extension String {
     public func setStyle(style: TextStyle) -> NSMutableAttributedString {
         let string = self
         
+        // accessibility font scale
+        let scaledFont = style.fontMetrics.scaledFont(for: style.font)
+        let scaledLineHeight = style.fontMetrics.scaledValue(for: style.lineHeight)
+        let scaledLetterSpacing = style.fontMetrics.scaledValue(for: style.letterSpacing)
+        
         let paragraphStyle = NSMutableParagraphStyle()
-        // style.lineHeight - Figma's space between top and top of two lines
-        // style.font.lineHeight - standard space between top and top of two lines
-        // lineHeightMultiple - multiplier to standard value
-        let lineHeightMultiple = style.lineHeight / style.font.lineHeight
-        paragraphStyle.lineHeightMultiple = lineHeightMultiple
-        //paragraphStyle.alignment = .center
+        paragraphStyle.minimumLineHeight = scaledLineHeight
         
         let mutableAttributedString = NSMutableAttributedString(
             string: string,
             attributes: [
-                .font : style.font,
+                .font : scaledFont,
                 .foregroundColor : style.color,
-                .kern : style.letterSpacing,
+                .kern : scaledLetterSpacing,
                 .paragraphStyle : paragraphStyle,
+                .baselineOffset : (scaledLineHeight - scaledFont.lineHeight) / 4
             ]
         )
         
@@ -41,7 +42,8 @@ public struct TextStyle {
     var size: Double
     var color: UIColor
     var lineHeight: Double
-    var letterSpacing: Int
+    var letterSpacing: Double
+    var fontMetrics: UIFontMetrics
 }
 
 extension TextStyle {
@@ -50,56 +52,64 @@ extension TextStyle {
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 40,
-        letterSpacing: 4
+        letterSpacing: 4,
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let titleMedium = TextStyle(
         fontName: "TenorSans",
         size: 16,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 24,
-        letterSpacing: 3
+        letterSpacing: 3,
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let titleSmall = TextStyle(
         fontName: "TenorSans",
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 20,
-        letterSpacing: 2
+        letterSpacing: 2,
+        fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let bodyLarge = TextStyle(
         fontName: "TenorSans",
         size: 16,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let bodyMedium = TextStyle(
         fontName: "TenorSans",
         size: 14,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let bodySmall = TextStyle(
         fontName: "TenorSans",
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 18,
-        letterSpacing: 0
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let priceLarge = TextStyle(
         fontName: "TenorSans",
         size: 18,
         color: UIColor(named: "Secondary") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.headline.metrics
     )
     static let priceMedium = TextStyle(
         fontName: "TenorSans",
         size: 15,
         color: UIColor(named: "Secondary") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.subheadline.metrics
     )
 }
 
