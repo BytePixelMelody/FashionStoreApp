@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113FE9BE29AA9ADB00F4E7A3 /* CATransitions+types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */; };
 		1186C931299FFA66002852BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C930299FFA66002852BB /* AppDelegate.swift */; };
 		1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C932299FFA66002852BB /* SceneDelegate.swift */; };
 		1186C935299FFA66002852BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C934299FFA66002852BB /* TestViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransitions+types.swift"; sourceTree = "<group>"; };
 		1186C92D299FFA66002852BB /* FashionStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FashionStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1186C930299FFA66002852BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1186C932299FFA66002852BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
+				113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				1186C935299FFA66002852BB /* TestViewController.swift in Sources */,
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
 				1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */,
+				113FE9BE29AA9ADB00F4E7A3 /* CATransitions+types.swift in Sources */,
 				1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
