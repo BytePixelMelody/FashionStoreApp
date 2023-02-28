@@ -19,6 +19,7 @@
 - [ ] Network service
 - [x] Font styles with accessibility
 - [ ] Error handlers
+- [ ] Deep link
 - [ ] Unit tests
 
 ## Code patterns
