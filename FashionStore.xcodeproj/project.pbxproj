@@ -10,6 +10,11 @@
 		113FE9BE29AA9ADB00F4E7A3 /* CATransitions+types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */; };
 		117CB24929AE10C6006F4192 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StartViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
+		117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */; };
+		117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25529AE13F4006F4192 /* AddressViewController.swift */; };
+		117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25729AE140A006F4192 /* ProductViewController.swift */; };
+		117CB25A29AE1415006F4192 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25929AE1415006F4192 /* CartViewController.swift */; };
+		117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25B29AE142E006F4192 /* CheckoutViewController.swift */; };
 		1186C931299FFA66002852BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C930299FFA66002852BB /* AppDelegate.swift */; };
 		1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C932299FFA66002852BB /* SceneDelegate.swift */; };
 		1186C935299FFA66002852BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C934299FFA66002852BB /* TestViewController.swift */; };
@@ -23,6 +28,11 @@
 /* Begin PBXFileReference section */
 		113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransitions+types.swift"; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
+		117CB25529AE13F4006F4192 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		117CB25729AE140A006F4192 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		117CB25929AE1415006F4192 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		117CB25B29AE142E006F4192 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		1186C92D299FFA66002852BB /* FashionStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FashionStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1186C930299FFA66002852BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1186C932299FFA66002852BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +68,7 @@
 		117CB24E29AE11E4006F4192 /* ProductScreen */ = {
 			isa = PBXGroup;
 			children = (
+				117CB25729AE140A006F4192 /* ProductViewController.swift */,
 			);
 			path = ProductScreen;
 			sourceTree = "<group>";
@@ -65,6 +76,7 @@
 		117CB24F29AE11F5006F4192 /* CartScreen */ = {
 			isa = PBXGroup;
 			children = (
+				117CB25929AE1415006F4192 /* CartViewController.swift */,
 			);
 			path = CartScreen;
 			sourceTree = "<group>";
@@ -72,6 +84,7 @@
 		117CB25029AE1206006F4192 /* CheckoutScreen */ = {
 			isa = PBXGroup;
 			children = (
+				117CB25B29AE142E006F4192 /* CheckoutViewController.swift */,
 			);
 			path = CheckoutScreen;
 			sourceTree = "<group>";
@@ -79,6 +92,7 @@
 		117CB25129AE1250006F4192 /* AddressScreen */ = {
 			isa = PBXGroup;
 			children = (
+				117CB25529AE13F4006F4192 /* AddressViewController.swift */,
 			);
 			path = AddressScreen;
 			sourceTree = "<group>";
@@ -86,6 +100,7 @@
 		117CB25229AE1297006F4192 /* PaymentMethodScreen */ = {
 			isa = PBXGroup;
 			children = (
+				117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */,
 			);
 			path = PaymentMethodScreen;
 			sourceTree = "<group>";
@@ -249,8 +264,13 @@
 			files = (
 				1186C935299FFA66002852BB /* TestViewController.swift in Sources */,
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
+				117CB25A29AE1415006F4192 /* CartViewController.swift in Sources */,
 				1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */,
+				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
+				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
+				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				113FE9BE29AA9ADB00F4E7A3 /* CATransitions+types.swift in Sources */,
+				117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */,
 				1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */,
 				117CB24929AE10C6006F4192 /* StartViewController.swift in Sources */,
 			);
