@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class StartViewController: UIViewController {
+class StoreViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
