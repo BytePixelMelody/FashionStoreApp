@@ -7,6 +7,15 @@
 
 import Foundation
 
-class PaymentMethodPresenter {
+protocol PaymentMethodPresenterProtocol {
     
+}
+
+class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
+    weak var view: PaymentMethodViewProtocol?
+    private let router: RouterProtocol
+
+    init(router: RouterProtocol) {
+        self.router = router
+    }
 }

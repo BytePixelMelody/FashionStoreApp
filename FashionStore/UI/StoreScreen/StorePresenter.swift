@@ -7,6 +7,15 @@
 
 import Foundation
 
-class StorePresenter {
+protocol StorePresenterProtocol {
     
+}
+
+class StorePresenter: StorePresenterProtocol {
+    weak var view: StoreViewProtocol?
+    private let router: RouterProtocol
+    
+    init(router: RouterProtocol) {
+        self.router = router
+    }
 }

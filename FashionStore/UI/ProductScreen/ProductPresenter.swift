@@ -7,6 +7,15 @@
 
 import Foundation
 
-class ProductPresenter {
+protocol ProductPresenterProtocol {
     
+}
+
+class ProductPresenter: ProductPresenterProtocol {
+    weak var view: ProductViewProtocol?
+    private let router: RouterProtocol
+    
+    init(router: RouterProtocol) {
+        self.router = router
+    }
 }

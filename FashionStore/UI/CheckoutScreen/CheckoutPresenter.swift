@@ -7,6 +7,15 @@
 
 import Foundation
 
-class CheckoutPresenter {
+protocol CheckoutPresenterProtocol {
     
+}
+
+class CheckoutPresenter: CheckoutPresenterProtocol {
+    weak var view: CheckoutViewProtocol?
+    private let router: RouterProtocol
+
+    init(router: RouterProtocol) {
+        self.router = router
+    }
 }

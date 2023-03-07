@@ -7,6 +7,15 @@
 
 import Foundation
 
-class CartPresenter {
+protocol CartPresenterProtocol {
     
+}
+
+class CartPresenter: CartPresenterProtocol {
+    weak var view: CartViewProtocol?
+    private let router: RouterProtocol
+
+    init(router: RouterProtocol) {
+        self.router = router
+    }
 }

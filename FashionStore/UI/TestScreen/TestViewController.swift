@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import SnapKit
+
+protocol TestViewProtocol: AnyObject {
+    
+}
 
 class TestViewController: UIViewController {
     
-    @IBOutlet var label: UILabel!
-    let labelText = "TITLE\nUppercase"
+    var presenter: TestPresenterProtocol!
+    
+    @IBOutlet private var label: UILabel!
+    
+    private let labelText = "TITLE\nUppercase"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,3 +38,6 @@ class TestViewController: UIViewController {
     }
 }
 
+extension TestViewController: TestViewProtocol {
+    
+}
