@@ -2,8 +2,8 @@
 
 # Fashion Store App
 
-## Architecture
-- [ ] MVP 
+## Architectural pattern
+- [x] MVP 
 
 ## Frameworks
 - [x] SnapKit
@@ -24,8 +24,9 @@
 
 ## Code patterns
 - [ ] Async/await
-- [ ] Builder
-- [ ] Router
+- [x] Builder
+- [x] Router
+- [x] Factory
 - [ ] Target-Action
 - [ ] Delegate
 

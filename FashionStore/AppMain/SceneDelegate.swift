@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let moduleBuilder = ModuleBuilder()
         let router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
-        router.showTestScreen()
+        router.showStoreScreen()
         
         window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()

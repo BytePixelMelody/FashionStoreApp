@@ -24,6 +24,7 @@
 		1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D229B72C2E00833991 /* TestPresenter.swift */; };
 		1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D729B72D8B00833991 /* ModuleBuilder.swift */; };
 		1185D6DA29B72D9C00833991 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D929B72D9C00833991 /* Router.swift */; };
+		1185D6DC29B7C09500833991 /* UIButton+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6DB29B7C09500833991 /* UIButton+make.swift */; };
 		1186C931299FFA66002852BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C930299FFA66002852BB /* AppDelegate.swift */; };
 		1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C932299FFA66002852BB /* SceneDelegate.swift */; };
 		1186C935299FFA66002852BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C934299FFA66002852BB /* TestViewController.swift */; };
@@ -51,6 +52,7 @@
 		1185D6D229B72C2E00833991 /* TestPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPresenter.swift; sourceTree = "<group>"; };
 		1185D6D729B72D8B00833991 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		1185D6D929B72D9C00833991 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		1185D6DB29B7C09500833991 /* UIButton+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+make.swift"; sourceTree = "<group>"; };
 		1186C92D299FFA66002852BB /* FashionStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FashionStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1186C930299FFA66002852BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1186C932299FFA66002852BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
 				113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */,
+				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				1185D6C929B72BEE00833991 /* ProductPresenter.swift in Sources */,
 				1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */,
 				117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */,
+				1185D6DC29B7C09500833991 /* UIButton+make.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

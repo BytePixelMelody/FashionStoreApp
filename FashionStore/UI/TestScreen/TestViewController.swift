@@ -18,7 +18,7 @@ class TestViewController: UIViewController {
     
     @IBOutlet private var label: UILabel!
     
-    private let labelText = "TITLE\nUppercase"
+    private let labelText = "Test\nView\nController"
 
     override func viewDidLoad() {
         super.viewDidLoad()
