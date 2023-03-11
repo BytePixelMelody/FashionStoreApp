@@ -116,7 +116,7 @@ extension TextStyle {
         size: 16,
         color: UIColor(named: "OffWhite") ?? .white,
         lineHeight: 26,
-        letterSpacing: 0.16, // letter spacing = 1% = 16 / 100 * 1
+        letterSpacing: 0.16, // letter spacing 1% = 16 / 100 * 1
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
 }

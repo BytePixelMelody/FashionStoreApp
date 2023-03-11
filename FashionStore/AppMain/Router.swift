@@ -12,6 +12,8 @@ protocol RouterProtocol {
     var navigationController: UINavigationController { get set }
     var moduleBuilder: ModuleBuilderProtocol { get set }
     
+    func popScreen()
+    func dismissScreen()
     func showStoreScreen()
     func showProductScreen()
     func showCartScreen()
@@ -30,6 +32,14 @@ class Router: RouterProtocol {
         self.moduleBuilder = moduleBuilder
     }
     
+    func popScreen() {
+        navigationController.popViewController(animated: true)
+    }
+    
+    func dismissScreen() {
+        navigationController.dismiss(animated: true)
+    }
+    
     func showStoreScreen() {
         let viewController = moduleBuilder.createStoreModule(router: self)
         navigationController.setViewControllers([viewController], animated: true)
@@ -37,12 +47,13 @@ class Router: RouterProtocol {
     
     func showProductScreen() {
         let viewController = moduleBuilder.createProductModule(router: self)
-        navigationController.setViewControllers([viewController], animated: true)
+        navigationController.pushViewController(viewController, animated: true)
     }
-    
+
     func showCartScreen() {
         let viewController = moduleBuilder.createCartModule(router: self)
-        navigationController.setViewControllers([viewController], animated: true)
+        viewController.modalPresentationStyle = .fullScreen
+        navigationController.present(viewController, animated: true)
     }
     
     func showAddressScreen() {

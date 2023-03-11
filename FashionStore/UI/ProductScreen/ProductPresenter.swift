@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ProductPresenterProtocol {
-    
+    func backScreen()
+    func showCart()
 }
 
 class ProductPresenter: ProductPresenterProtocol {
@@ -17,5 +18,13 @@ class ProductPresenter: ProductPresenterProtocol {
     
     init(router: RouterProtocol) {
         self.router = router
+    }
+    
+    func backScreen() {
+        router.popScreen()
+    }
+    
+    func showCart() {
+        router.showCartScreen()
     }
 }

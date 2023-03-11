@@ -13,6 +13,17 @@ protocol CartViewProtocol: AnyObject {
 }
 
 class CartViewController: UIViewController {
+    private static let topButtonTitle = "CLOSE"
+    private static let labelText = "Store\nView\nController"
+    private static let bottomButtonTitle = "TO PRODUCT"
+    
+    private var topButton = UIButton.makeDarkButton()
+    private var label = {
+        let label = UILabel(frame: .zero)
+        label.numberOfLines = 0
+        return label
+    }()
+    private var bottomButton = UIButton.makeDarkButton()
 
     private let presenter: CartPresenterProtocol
     
@@ -25,27 +36,12 @@ class CartViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        view.backgroundColor = .white
-        setupLabel()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
     }
     
-    private func setupLabel() {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 0
-        label.attributedText = "Cart\nView\nController".uppercased().setStyle(style: .titleLarge)
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-    }
-
 }
 
 extension CartViewController: CartViewProtocol {

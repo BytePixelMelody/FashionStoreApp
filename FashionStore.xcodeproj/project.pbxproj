@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		113FE9BE29AA9ADB00F4E7A3 /* CATransitions+types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
 		117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */; };
@@ -36,7 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransitions+types.swift"; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
 		117CB25529AE13F4006F4192 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
-				113FE9BD29AA9ADB00F4E7A3 /* CATransitions+types.swift */,
 				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
 			);
 			path = Extentions;
@@ -330,7 +327,6 @@
 				1185D6D129B72C1D00833991 /* CheckoutPresenter.swift in Sources */,
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,
 				1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */,
-				113FE9BE29AA9ADB00F4E7A3 /* CATransitions+types.swift in Sources */,
 				1185D6C729B72BD200833991 /* StorePresenter.swift in Sources */,
 				117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */,
 				1185D6C929B72BEE00833991 /* ProductPresenter.swift in Sources */,

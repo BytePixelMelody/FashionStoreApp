@@ -10,14 +10,33 @@ import UIKit
 
 // button factory
 extension UIButton {
-    public static func makeButtonDark(text: String) -> UIButton {
+    public static func makeDarkButton(imageName: String? = nil,
+                                      handler: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
         
-        config.attributedTitle = AttributedString(text.setStyle(style: .buttonDark))
         config.background.backgroundColor = UIColor(named: "Active") ?? .black
         config.background.cornerRadius = 0
+        if let imageName {
+            config.image = UIImage(named: imageName)
+        }
+        config.imagePadding = 24
         
-        let button = UIButton(configuration: config)
+        let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
+            if let handler { handler() }
+        }))
+        return button
+    }
+    
+    public static func makeIconicButton(imageName: String,
+                                        handler: (() -> Void)? = nil) -> UIButton {
+        var config = UIButton.Configuration.plain()
+        
+        config.image = UIImage(named: imageName)
+        config.contentInsets = .zero
+        
+        let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
+            if let handler { handler() }
+        }))
         return button
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol StorePresenterProtocol {
-    
+    func showProduct()
 }
 
 class StorePresenter: StorePresenterProtocol {
@@ -17,5 +17,9 @@ class StorePresenter: StorePresenterProtocol {
     
     init(router: RouterProtocol) {
         self.router = router
+    }
+    
+    func showProduct() {
+        router.showProductScreen()
     }
 }

@@ -13,13 +13,12 @@ protocol TestViewProtocol: AnyObject {
 }
 
 class TestViewController: UIViewController {
-    
-    var presenter: TestPresenterProtocol!
+    private static let labelText = "Test\nView\nController"
     
     @IBOutlet private var label: UILabel!
     
-    private let labelText = "Test\nView\nController"
-
+    var presenter: TestPresenterProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +26,7 @@ class TestViewController: UIViewController {
     }
     
     public func fillByStyledText() {
-        label.attributedText = labelText.uppercased().setStyle(style: .titleLarge)
+        label.attributedText = Self.labelText.uppercased().setStyle(style: .titleLarge)
     }
 
     // accessibility font scale on the fly
