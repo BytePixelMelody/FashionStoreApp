@@ -26,7 +26,7 @@ class TestViewController: UIViewController {
     }
     
     public func fillByStyledText() {
-        label.attributedText = Self.labelText.uppercased().setStyle(style: .titleLarge)
+        label.attributedText = Self.labelText.uppercased().setStyle(style: .titleLargeAlignLeft)
     }
 
     // accessibility font scale on the fly

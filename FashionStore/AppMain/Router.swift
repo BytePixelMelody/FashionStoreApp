@@ -12,8 +12,8 @@ protocol RouterProtocol {
     var navigationController: UINavigationController { get set }
     var moduleBuilder: ModuleBuilderProtocol { get set }
     
-    func popScreen()
-    func dismissScreen()
+    func popScreen() // pushed, shown, set
+    func dismissScreen() // modal
     func showStoreScreen()
     func showProductScreen()
     func showCartScreen()

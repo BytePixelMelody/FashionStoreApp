@@ -18,6 +18,7 @@ extension String {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = scaledLineHeight
+        paragraphStyle.alignment = style.alignment
         
         let mutableAttributedString = NSMutableAttributedString(
             string: string,
@@ -38,25 +39,32 @@ public struct TextStyle {
     var font: UIFont {
         UIFont(name: fontName, size: size) ?? .systemFont(ofSize: size)
     }
-    var fontName: String
+    var fontName: String = "TenorSans"
     var size: Double
     var color: UIColor
     var lineHeight: Double
     var letterSpacing: Double
     var fontMetrics: UIFontMetrics
+    var alignment: NSTextAlignment = .left
 }
 
 extension TextStyle {
-    static let titleLarge = TextStyle(
-        fontName: "TenorSans",
+    static let titleLargeAlignLeft = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 40,
         letterSpacing: 4,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
+    static let titleLargeAlignCenter = TextStyle(
+        size: 18,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 40,
+        letterSpacing: 4,
+        fontMetrics: UIFont.TextStyle.title1.metrics,
+        alignment: .center
+    )
     static let titleMedium = TextStyle(
-        fontName: "TenorSans",
         size: 16,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 24,
@@ -64,7 +72,6 @@ extension TextStyle {
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let titleSmall = TextStyle(
-        fontName: "TenorSans",
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 20,
@@ -72,15 +79,21 @@ extension TextStyle {
         fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let bodyLarge = TextStyle(
-        fontName: "TenorSans",
         size: 16,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
         letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
+    static let bodyLargeAlignCenter = TextStyle(
+        size: 16,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 24,
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.title1.metrics,
+        alignment: .center
+    )
     static let bodyMedium = TextStyle(
-        fontName: "TenorSans",
         size: 14,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
@@ -88,7 +101,6 @@ extension TextStyle {
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let bodySmall = TextStyle(
-        fontName: "TenorSans",
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 18,
@@ -96,7 +108,6 @@ extension TextStyle {
         fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let priceLarge = TextStyle(
-        fontName: "TenorSans",
         size: 18,
         color: UIColor(named: "Secondary") ?? .black,
         lineHeight: 24,
@@ -104,7 +115,6 @@ extension TextStyle {
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
     static let priceMedium = TextStyle(
-        fontName: "TenorSans",
         size: 15,
         color: UIColor(named: "Secondary") ?? .black,
         lineHeight: 24,
@@ -112,7 +122,6 @@ extension TextStyle {
         fontMetrics: UIFont.TextStyle.subheadline.metrics
     )
     static let buttonDark = TextStyle(
-        fontName: "TenorSans",
         size: 16,
         color: UIColor(named: "OffWhite") ?? .white,
         lineHeight: 26,

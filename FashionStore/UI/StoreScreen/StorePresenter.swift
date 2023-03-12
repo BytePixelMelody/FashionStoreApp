@@ -9,6 +9,7 @@ import Foundation
 
 protocol StorePresenterProtocol {
     func showProduct()
+    func showCart()
 }
 
 class StorePresenter: StorePresenterProtocol {
@@ -21,5 +22,9 @@ class StorePresenter: StorePresenterProtocol {
     
     func showProduct() {
         router.showProductScreen()
+    }
+    
+    func showCart() {
+        router.showCartScreen()
     }
 }

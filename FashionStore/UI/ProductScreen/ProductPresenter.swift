@@ -10,6 +10,7 @@ import Foundation
 protocol ProductPresenterProtocol {
     func backScreen()
     func showCart()
+    func addProductToCart()
 }
 
 class ProductPresenter: ProductPresenterProtocol {
@@ -26,5 +27,9 @@ class ProductPresenter: ProductPresenterProtocol {
     
     func showCart() {
         router.showCartScreen()
+    }
+    
+    func addProductToCart() {
+        
     }
 }

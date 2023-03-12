@@ -15,7 +15,7 @@ extension UIButton {
         var config = UIButton.Configuration.filled()
         
         config.background.backgroundColor = UIColor(named: "Active") ?? .black
-        config.background.cornerRadius = 0
+        config.cornerStyle = .capsule
         if let imageName {
             config.image = UIImage(named: imageName)
         }

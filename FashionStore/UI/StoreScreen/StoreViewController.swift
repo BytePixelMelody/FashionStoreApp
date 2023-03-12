@@ -13,11 +13,18 @@ protocol StoreViewProtocol: AnyObject {
 }
 
 class StoreViewController: UIViewController {
-    private let presenter: StorePresenterProtocol
-
     private static let screenNameTitle = "Fashion\nStore"
     private static let toProductTitle = "TO PRODUCT"
     
+    private let presenter: StorePresenterProtocol
+    
+    private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
+    
+    private lazy var goCart: () -> Void = { [weak self] in
+        self?.presenter.showCart()
+    }
+    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCart)
+
     private var screenNameLabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 0
@@ -28,7 +35,7 @@ class StoreViewController: UIViewController {
         self?.presenter.showProduct()
     }
     
-    private lazy var toProductButton = UIButton.makeDarkButton(imageName: "TagDark", handler: goProduct)
+    private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, handler: goProduct)
     
     init(presenter: StorePresenterProtocol) {
         self.presenter = presenter
@@ -49,15 +56,34 @@ class StoreViewController: UIViewController {
     }
     
     private func setupUiTexts() {
-        screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLarge)
-        toProductButton.configuration?.attributedTitle = AttributedString(Self.toProductTitle.setStyle(style: .buttonDark))
+        screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLargeAlignLeft)
+        productButton.configuration?.attributedTitle = AttributedString(Self.toProductTitle.setStyle(style: .buttonDark))
     }
     
     private func arrangeUiElements() {
+        arrangeLogoImage()
+        arrangeGoCartButton()
         arrangeScreenNameLabel()
         arrangeToProductButton()
     }
     
+    private func arrangeLogoImage() {
+        view.addSubview(logoImage)
+        logoImage.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
+            make.centerX.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func arrangeGoCartButton() {
+        view.addSubview(goCartButton)
+        goCartButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
+            make.size.equalTo(44)
+        }
+    }
+
     private func arrangeScreenNameLabel() {
         view.addSubview(screenNameLabel)
         screenNameLabel.snp.makeConstraints { make in
@@ -66,8 +92,8 @@ class StoreViewController: UIViewController {
     }
     
     private func arrangeToProductButton() {
-        view.addSubview(toProductButton)
-        toProductButton.snp.makeConstraints { make in
+        view.addSubview(productButton)
+        productButton.snp.makeConstraints { make in
             make.top.equalTo(screenNameLabel.snp.bottom).offset(24)
             make.centerX.equalTo(screenNameLabel)
             make.height.equalTo(50)

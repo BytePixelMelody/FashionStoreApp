@@ -32,6 +32,9 @@
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
 		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
+		11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4A929BDE87200B979B4 /* ImageName.swift */; };
+		11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AC29BE095200B979B4 /* CartProduct.swift */; };
+		11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AE29BE09EA00B979B4 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +64,9 @@
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
 		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
+		11E5F4A929BDE87200B979B4 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
+		11E5F4AC29BE095200B979B4 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
+		11E5F4AE29BE09EA00B979B4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,7 @@
 				1186C98D29A2ACDD002852BB /* Extentions */,
 				1186C98429A29E05002852BB /* AppMain */,
 				1186C98829A2A30E002852BB /* UI */,
+				11E5F4AB29BE093900B979B4 /* Model */,
 				1185D6D429B72C5700833991 /* Services */,
 			);
 			path = FashionStore;
@@ -184,6 +191,7 @@
 			children = (
 				1186C98529A29E1D002852BB /* Font */,
 				1186C939299FFA66002852BB /* Assets.xcassets */,
+				11E5F4A929BDE87200B979B4 /* ImageName.swift */,
 				1186C93E299FFA66002852BB /* Info.plist */,
 				1186C93B299FFA66002852BB /* LaunchScreen.storyboard */,
 				1185D6D729B72D8B00833991 /* ModuleBuilder.swift */,
@@ -233,6 +241,15 @@
 				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		11E5F4AB29BE093900B979B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11E5F4AC29BE095200B979B4 /* CartProduct.swift */,
+				11E5F4AE29BE09EA00B979B4 /* Product.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,8 +338,11 @@
 				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
+				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
+				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
+				11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */,
 				1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */,
 				1185D6D129B72C1D00833991 /* CheckoutPresenter.swift in Sources */,
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,
