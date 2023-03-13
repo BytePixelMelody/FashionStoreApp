@@ -106,7 +106,6 @@ class StoreViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         setupUiTexts()
-        debugPrint("Accessibility settings was changed - scale font size on StoreViewController")
     }
     
 }

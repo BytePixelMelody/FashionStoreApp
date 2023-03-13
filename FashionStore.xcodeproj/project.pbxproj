@@ -35,6 +35,7 @@
 		11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4A929BDE87200B979B4 /* ImageName.swift */; };
 		11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AC29BE095200B979B4 /* CartProduct.swift */; };
 		11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AE29BE09EA00B979B4 /* Product.swift */; };
+		11E5F4B329BF398A00B979B4 /* CATransition+types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4B229BF398A00B979B4 /* CATransition+types.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		11E5F4A929BDE87200B979B4 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		11E5F4AC29BE095200B979B4 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		11E5F4AE29BE09EA00B979B4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		11E5F4B229BF398A00B979B4 /* CATransition+types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransition+types.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,9 +191,7 @@
 		1186C98429A29E05002852BB /* AppMain */ = {
 			isa = PBXGroup;
 			children = (
-				1186C98529A29E1D002852BB /* Font */,
-				1186C939299FFA66002852BB /* Assets.xcassets */,
-				11E5F4A929BDE87200B979B4 /* ImageName.swift */,
+				11E5F4B129BE338B00B979B4 /* Design */,
 				1186C93E299FFA66002852BB /* Info.plist */,
 				1186C93B299FFA66002852BB /* LaunchScreen.storyboard */,
 				1185D6D729B72D8B00833991 /* ModuleBuilder.swift */,
@@ -202,12 +202,12 @@
 			path = AppMain;
 			sourceTree = "<group>";
 		};
-		1186C98529A29E1D002852BB /* Font */ = {
+		1186C98529A29E1D002852BB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */,
 			);
-			path = Font;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		1186C98829A2A30E002852BB /* UI */ = {
@@ -216,9 +216,9 @@
 				117CB24D29AE11AC006F4192 /* StoreScreen */,
 				117CB24E29AE11E4006F4192 /* ProductScreen */,
 				117CB24F29AE11F5006F4192 /* CartScreen */,
+				117CB25029AE1206006F4192 /* CheckoutScreen */,
 				117CB25129AE1250006F4192 /* AddressScreen */,
 				117CB25229AE1297006F4192 /* PaymentMethodScreen */,
-				117CB25029AE1206006F4192 /* CheckoutScreen */,
 				1186C98929A2A324002852BB /* TestScreen */,
 			);
 			path = UI;
@@ -239,6 +239,7 @@
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
 				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
+				11E5F4B229BF398A00B979B4 /* CATransition+types.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -250,6 +251,16 @@
 				11E5F4AE29BE09EA00B979B4 /* Product.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		11E5F4B129BE338B00B979B4 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				1186C98529A29E1D002852BB /* Fonts */,
+				1186C939299FFA66002852BB /* Assets.xcassets */,
+				11E5F4A929BDE87200B979B4 /* ImageName.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +351,7 @@
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
 				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
+				11E5F4B329BF398A00B979B4 /* CATransition+types.swift in Sources */,
 				1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */,

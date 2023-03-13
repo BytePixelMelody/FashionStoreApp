@@ -19,4 +19,5 @@ struct ImageName {
     public static let search = "Search"
     public static let tag = "Tag"
     public static let tagDark = "TagDark"
+    public static let lineGray = "LineGray"
 }

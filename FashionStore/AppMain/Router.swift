@@ -12,8 +12,9 @@ protocol RouterProtocol {
     var navigationController: UINavigationController { get set }
     var moduleBuilder: ModuleBuilderProtocol { get set }
     
-    func popScreen() // pushed, shown, set
-    func dismissScreen() // modal
+    func popScreen() // close screen with standard animation
+    func popScreenToBottom() // close screen with to bottom animation
+    func popTwoScreensToBottom() // close 2 screen with to bottom animation
     func showStoreScreen()
     func showProductScreen()
     func showCartScreen()
@@ -32,12 +33,33 @@ class Router: RouterProtocol {
         self.moduleBuilder = moduleBuilder
     }
     
+    // close screen
     func popScreen() {
         navigationController.popViewController(animated: true)
     }
+
+    // close screen with "to bottom" animation
+    func popScreenToBottom() {
+        navigationController.view.layer.add(CATransition.toBottom, forKey: nil)
+        navigationController.popViewController(animated: false)
+        
+        // turn on navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = true
+    }
     
-    func dismissScreen() {
-        navigationController.dismiss(animated: true)
+    // close two screens with "to bottom" animation
+    func popTwoScreensToBottom() {
+        // remove penultimate screen
+        let countViewControllers = navigationController.viewControllers.count
+        guard countViewControllers > 2 else { return }
+        navigationController.viewControllers.remove(at: countViewControllers - 2)
+        
+        // close last screen
+        navigationController.view.layer.add(CATransition.toBottom, forKey: nil)
+        navigationController.popViewController(animated: false)
+        
+        // turn on navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     func showStoreScreen() {
@@ -50,10 +72,24 @@ class Router: RouterProtocol {
         navigationController.pushViewController(viewController, animated: true)
     }
 
+    // screen will be presented with animation like modal
     func showCartScreen() {
         let viewController = moduleBuilder.createCartModule(router: self)
-        viewController.modalPresentationStyle = .fullScreen
-        navigationController.present(viewController, animated: true)
+        navigationController.view.layer.add(CATransition.toTop, forKey: nil)
+        navigationController.pushViewController(viewController, animated: false)
+        
+        // turn off navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
+    // screen will be presented with animation like modal
+    func showCheckoutScreen() {
+        let viewController = moduleBuilder.createCheckoutModule(router: self)
+        navigationController.view.layer.add(CATransition.toTop, forKey: nil)
+        navigationController.pushViewController(viewController, animated: false)
+        
+        // turn off navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     func showAddressScreen() {
@@ -63,11 +99,6 @@ class Router: RouterProtocol {
     
     func showPaymentMethodScreen() {
         let viewController = moduleBuilder.createPaymentMethodModule(router: self)
-        navigationController.setViewControllers([viewController], animated: true)
-    }
-    
-    func showCheckoutScreen() {
-        let viewController = moduleBuilder.createCheckoutModule(router: self)
         navigationController.setViewControllers([viewController], animated: true)
     }
     

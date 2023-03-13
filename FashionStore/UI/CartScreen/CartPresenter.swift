@@ -10,7 +10,7 @@ import Foundation
 protocol CartPresenterProtocol {
     func closeScreen()
     func checkout()
-    func cartIsEmpty() -> Bool
+    func cartIsEmptyCheck()
 }
 
 class CartPresenter: CartPresenterProtocol {
@@ -23,14 +23,18 @@ class CartPresenter: CartPresenterProtocol {
     }
     
     func closeScreen() {
-        router.dismissScreen()
+        router.popScreenToBottom()
     }
     
     func checkout() {
-        fatalError("Not realised")
+        router.showCheckoutScreen()
     }
     
-    func cartIsEmpty() -> Bool {
-        cartProducts.isEmpty
+    func cartIsEmptyCheck() {
+        if !cartProducts.isEmpty {
+            view?.showEmptyCart()
+        } else {
+            view?.showFullCart()
+        }
     }
 }

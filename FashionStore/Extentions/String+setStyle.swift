@@ -109,17 +109,24 @@ extension TextStyle {
     )
     static let priceLarge = TextStyle(
         size: 18,
-        color: UIColor(named: "Secondary") ?? .black,
+        color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 24,
         letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
     static let priceMedium = TextStyle(
         size: 15,
-        color: UIColor(named: "Secondary") ?? .black,
+        color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 24,
         letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.subheadline.metrics
+    )
+    static let priceTotal = TextStyle(
+        size: 16,
+        color: UIColor(named: "Secondary") ?? .brown,
+        lineHeight: 20,
+        letterSpacing: 3,
+        fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let buttonDark = TextStyle(
         size: 16,

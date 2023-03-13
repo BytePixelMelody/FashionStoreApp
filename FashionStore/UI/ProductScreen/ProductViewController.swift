@@ -13,7 +13,7 @@ protocol ProductViewProtocol: AnyObject {
 }
 
 class ProductViewController: UIViewController {
-    private static let screenNameTitle = "Product\nView\nController"
+    private static let screenNameTitle = "Product\nDescription"
     private static let addToCartButtonTitle = "Add to cart"
     
     private let presenter: ProductPresenterProtocol
@@ -118,7 +118,6 @@ class ProductViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         setupUiTexts()
-        debugPrint("Accessibility settings was changed - scale font size on ProductViewController")
     }
     
 }

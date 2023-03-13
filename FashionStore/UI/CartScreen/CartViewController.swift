@@ -9,7 +9,8 @@ import UIKit
 import SnapKit
 
 protocol CartViewProtocol: AnyObject {
-    
+    func showEmptyCart()
+    func showFullCart()
 }
 
 class CartViewController: UIViewController {
@@ -17,6 +18,8 @@ class CartViewController: UIViewController {
     private static let cartIsEmptyTitle = "Your card is empty.\nChoose the best goods from our catalog"
     private static let continueShoppingButtonTitle = "Continue shopping"
     private static let checkoutButtonTitle = "Checkout"
+    private static let totalLabelTitle = "Total"
+    private static let totalPriceLabelTitle = "$0"
 
     private let presenter: CartPresenterProtocol
     
@@ -33,12 +36,23 @@ class CartViewController: UIViewController {
 
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
 
-    
-    
-    
     private var cartIsEmptyLabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 0
+        return label
+    }()
+        
+    private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
+
+    private var totalLabel = {
+        let label = UILabel(frame: .zero)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    private var totalPriceLabel = {
+        let label = UILabel(frame: .zero)
+        label.numberOfLines = 1
         return label
     }()
     
@@ -48,9 +62,6 @@ class CartViewController: UIViewController {
         self?.presenter.checkout()
     }
     private lazy var checkoutButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: checkout)
-
-    
-    
     
     init(presenter: CartPresenterProtocol) {
         self.presenter = presenter
@@ -68,30 +79,50 @@ class CartViewController: UIViewController {
         
         setupUiTexts()
         arrangeUiElements()
+        presenter.cartIsEmptyCheck()
     }
     
     private func setupUiTexts() {
         headerLabel.attributedText = Self.headerTitle.uppercased().setStyle(style: .titleLargeAlignCenter)
-        
-        if presenter.cartIsEmpty() {
-            cartIsEmptyLabel.attributedText = Self.cartIsEmptyTitle.setStyle(style: .bodyLargeAlignCenter)
-            continueShoppingButton.configuration?.attributedTitle = AttributedString(Self.continueShoppingButtonTitle.uppercased().setStyle(style: .buttonDark))
-        } else {
-            checkoutButton.configuration?.attributedTitle = AttributedString(Self.checkoutButtonTitle.uppercased().setStyle(style: .buttonDark))
-        }
+        cartIsEmptyLabel.attributedText = Self.cartIsEmptyTitle.setStyle(style: .bodyLargeAlignCenter)
+        continueShoppingButton.configuration?.attributedTitle = AttributedString(Self.continueShoppingButtonTitle.uppercased().setStyle(style: .buttonDark))
+        checkoutButton.configuration?.attributedTitle = AttributedString(Self.checkoutButtonTitle.uppercased().setStyle(style: .buttonDark))
+        totalLabel.attributedText = Self.totalLabelTitle.uppercased().setStyle(style: .titleSmall)
+        totalPriceLabel.attributedText = Self.totalPriceLabelTitle.setStyle(style: .priceTotal)
     }
     
     private func arrangeUiElements() {
         arrangeCloseButton()
         arrangeHeaderLabel()
         arrangeSpacerImage()
-        
-        if presenter.cartIsEmpty() {
-            arrangeCartIsEmptyLabel()
-            arrangeContinueShoppingButton()
-        } else {
-            arrangeCheckoutButton()
-        }
+        arrangeCartIsEmptyLabel()
+        arrangeContinueShoppingButton()
+        arrangeCheckoutButton()
+        arrangeTotalLabel()
+        arrangeTotalPriceLabel()
+        arrangeLineImage()
+    }
+    
+    public func showEmptyCart() {
+        // show
+        cartIsEmptyLabel.isHidden = false
+        continueShoppingButton.isHidden = false
+        // hide
+        checkoutButton.isHidden = true
+        totalLabel.isHidden = true
+        totalPriceLabel.isHidden = true
+        lineImage.isHidden = true
+    }
+    
+    public func showFullCart() {
+        // show
+        checkoutButton.isHidden = false
+        totalLabel.isHidden = false
+        totalPriceLabel.isHidden = false
+        lineImage.isHidden = false
+        // hide
+        cartIsEmptyLabel.isHidden = true
+        continueShoppingButton.isHidden = true
     }
     
     private func arrangeCloseButton() {
@@ -106,9 +137,10 @@ class CartViewController: UIViewController {
     private func arrangeHeaderLabel() {
         view.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).offset(6)
+            make.top.equalTo(closeButton.snp.bottom)
             make.height.equalTo(32)
-            make.centerX.width.equalTo(view.readableContentGuide)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().inset(32)
         }
     }
 
@@ -143,12 +175,35 @@ class CartViewController: UIViewController {
         }
     }
     
+    private func arrangeTotalLabel() {
+        view.addSubview(totalLabel)
+        totalLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(16)
+            make.firstBaseline.equalTo(checkoutButton.snp.top).offset(-29)
+        }
+    }
+    
+    private func arrangeTotalPriceLabel() {
+        view.addSubview(totalPriceLabel)
+        totalPriceLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.firstBaseline.equalTo(checkoutButton.snp.top).offset(-29)
+        }
+    }
+    
+    private func arrangeLineImage() {
+        view.addSubview(lineImage)
+        lineImage.snp.makeConstraints { make in
+            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
+            make.left.right.equalToSuperview().inset(16)
+        }
+    }
+    
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         setupUiTexts()
-        debugPrint("Accessibility settings was changed - scale font size on ProductViewController")
     }
 }
 

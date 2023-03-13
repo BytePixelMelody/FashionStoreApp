@@ -20,6 +20,7 @@
 - [x] Font styles with accessibility
 - [ ] Error handlers
 - [ ] Deep link
+- [x] Customized animation
 - [ ] Unit tests
 
 ## Code patterns
