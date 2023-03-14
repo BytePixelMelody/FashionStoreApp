@@ -12,7 +12,7 @@ extension CATransition {
     
     static var toBottom: CATransition {
         let caTransition = CATransition()
-        caTransition.duration = 0.45
+        caTransition.duration = 0.4
         caTransition.timingFunction = CAMediaTimingFunction(name: .easeOut)
         caTransition.type = .reveal
         caTransition.subtype = .fromBottom

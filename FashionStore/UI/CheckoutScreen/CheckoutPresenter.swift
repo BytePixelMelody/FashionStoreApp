@@ -36,8 +36,8 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
     
     func checkoutIsEmptyCheck() {
-        if cartProducts.isEmpty {
-            view?.showEmptyCheckout()
+        if !cartProducts.isEmpty {
+            view?.showEmptyCheckoutWithAnimation()
         } else {
             view?.showFullCheckout()
         }

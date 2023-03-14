@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol CheckoutViewProtocol: AnyObject {
-    func showEmptyCheckout()
+    func showEmptyCheckoutWithAnimation()
     func showFullCheckout()
 }
 
@@ -27,6 +27,11 @@ class CheckoutViewController: UIViewController {
         self?.presenter.closeScreen()
     }
     private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeCheckout)
+    
+    private lazy var closeCheckoutAndCart: () -> Void = { [weak self] in
+        self?.presenter.closeCheckoutAndCart()
+    }
+    private lazy var closeCheckoutAndCartButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeCheckoutAndCart)
 
     private var headerLabel = {
         let label = UILabel(frame: .zero)
@@ -56,9 +61,6 @@ class CheckoutViewController: UIViewController {
         return label
     }()
     
-    private lazy var closeCheckoutAndCart: () -> Void = { [weak self] in
-        self?.presenter.closeCheckoutAndCart()
-    }
     private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCart)
     
     private lazy var placeOrder: () -> Void = { [weak self] in
@@ -96,6 +98,7 @@ class CheckoutViewController: UIViewController {
     
     private func arrangeUiElements() {
         arrangeCloseButton()
+        arrangeCloseCheckoutAndCartButton()
         arrangeHeaderLabel()
         arrangeSpacerImage()
         arrangeCheckoutIsEmptyLabel()
@@ -106,24 +109,54 @@ class CheckoutViewController: UIViewController {
         arrangeLineImage()
     }
     
-    public func showEmptyCheckout() {
+    public func showEmptyCheckoutWithAnimation() {
+        
         // show
+        closeCheckoutAndCartButton.alpha = 0
+        checkoutIsEmptyLabel.alpha = 0
+        continueShoppingButton.alpha = 0
+        
+        // show
+        closeCheckoutAndCartButton.isHidden = false
         checkoutIsEmptyLabel.isHidden = false
         continueShoppingButton.isHidden = false
-        // hide
-        placeOrderButton.isHidden = true
-        totalLabel.isHidden = true
-        totalPriceLabel.isHidden = true
-        lineImage.isHidden = true
+        
+        // show to actual user interaction
+        view.bringSubviewToFront(closeCheckoutAndCartButton)
+        view.bringSubviewToFront(checkoutIsEmptyLabel)
+        view.bringSubviewToFront(continueShoppingButton)
+        
+        // animations
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
+            // show
+            self?.closeCheckoutAndCartButton.alpha = 1
+            self?.checkoutIsEmptyLabel.alpha = 1
+            self?.continueShoppingButton.alpha = 1
+            // hide
+            self?.closeButton.alpha = 0
+            self?.placeOrderButton.alpha = 0
+            self?.totalLabel.alpha = 0
+            self?.totalPriceLabel.alpha = 0
+            self?.lineImage.alpha = 0
+        }) { [weak self] _ in
+            // hide
+            self?.closeButton.isHidden = true
+            self?.placeOrderButton.isHidden = true
+            self?.totalLabel.isHidden = true
+            self?.totalPriceLabel.isHidden = true
+            self?.lineImage.isHidden = true
+        }
     }
     
     public func showFullCheckout() {
         // show
+        closeButton.isHidden = false
         placeOrderButton.isHidden = false
         totalLabel.isHidden = false
         totalPriceLabel.isHidden = false
         lineImage.isHidden = false
         // hide
+        closeCheckoutAndCartButton.isHidden = true
         checkoutIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
     }
@@ -131,6 +164,15 @@ class CheckoutViewController: UIViewController {
     private func arrangeCloseButton() {
         view.addSubview(closeButton)
         closeButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
+            make.size.equalTo(44)
+        }
+    }
+    
+    private func arrangeCloseCheckoutAndCartButton() {
+        view.addSubview(closeCheckoutAndCartButton)
+        closeCheckoutAndCartButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
             make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
             make.size.equalTo(44)
