@@ -12,7 +12,7 @@
 ## Technologies
 - [x] UIKit
 - [ ] Design moved from Figma
-- [ ] UI fully by code
+- [x] UI fully by code
 - [ ] Collection views
 - [ ] Generics
 - [ ] JSON service

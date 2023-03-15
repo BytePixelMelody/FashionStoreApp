@@ -59,7 +59,7 @@ class CartViewController: UIViewController {
     private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCart)
     
     private lazy var checkout: () -> Void = { [weak self] in
-        self?.presenter.checkout()
+        self?.presenter.showCheckout()
     }
     private lazy var checkoutButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: checkout)
     
@@ -137,10 +137,9 @@ class CartViewController: UIViewController {
     private func arrangeHeaderLabel() {
         view.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom)
+            make.top.equalTo(closeButton.snp.bottom).inset(4)
             make.height.equalTo(32)
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(32)
+            make.left.right.equalToSuperview().inset(50)
         }
     }
 

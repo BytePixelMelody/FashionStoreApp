@@ -135,6 +135,20 @@ extension TextStyle {
         letterSpacing: 0.16, // letter spacing 1% = 16 / 100 * 1
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
+    static let subHeader = TextStyle(
+        size: 14,
+        color: UIColor(named: "Placeholder") ?? .gray,
+        lineHeight: 16,
+        letterSpacing: 1,
+        fontMetrics: UIFont.TextStyle.title2.metrics
+    )
+    static let placeholder = TextStyle(
+        size: 15,
+        color: UIColor(named: "PlaceholderLight") ?? .gray,
+        lineHeight: 18,
+        letterSpacing: 0,
+        fontMetrics: UIFont.TextStyle.title2.metrics
+    )
 }
 
 

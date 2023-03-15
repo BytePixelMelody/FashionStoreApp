@@ -9,7 +9,7 @@ import Foundation
 
 protocol CartPresenterProtocol {
     func closeScreen()
-    func checkout()
+    func showCheckout()
     func cartIsEmptyCheck()
 }
 
@@ -26,7 +26,7 @@ class CartPresenter: CartPresenterProtocol {
         router.popScreenToBottom()
     }
     
-    func checkout() {
+    func showCheckout() {
         router.showCheckoutScreen()
     }
     

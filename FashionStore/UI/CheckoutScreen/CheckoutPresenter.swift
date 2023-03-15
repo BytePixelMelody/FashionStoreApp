@@ -9,6 +9,8 @@ import Foundation
 
 protocol CheckoutPresenterProtocol {
     func closeScreen()
+    func addAddress()
+    func addPaymentCard()
     func placeOrder()
     func checkoutIsEmptyCheck()
     func closeCheckoutAndCart()
@@ -27,12 +29,20 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.popScreenToBottom()
     }
     
+    func addAddress() {
+        router.showAddressScreen()
+    }
+    
+    func addPaymentCard() {
+        router.showPaymentMethodScreen()
+    }
+    
     func closeCheckoutAndCart() {
         router.popTwoScreensToBottom()
     }
     
     func placeOrder() {
-        fatalError("Show Address / Payment Method / Success not realised")
+        //fatalError("Show Address / Payment Method / Success not realised")
     }
     
     func checkoutIsEmptyCheck() {
