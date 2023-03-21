@@ -14,6 +14,7 @@ protocol CartViewProtocol: AnyObject {
 }
 
 class CartViewController: UIViewController {
+    
     private static let headerTitle = "Cart"
     private static let cartIsEmptyTitle = "Your card is empty.\nChoose the best goods from our catalog"
     private static let continueShoppingButtonTitle = "Continue shopping"
@@ -23,10 +24,10 @@ class CartViewController: UIViewController {
 
     private let presenter: CartPresenterProtocol
     
-    private lazy var closeCart: () -> Void = { [weak self] in
+    private lazy var closeScreen: () -> Void = { [weak self] in
         self?.presenter.closeScreen()
     }
-    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeCart)
+    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreen)
 
     private var headerLabel = {
         let label = UILabel(frame: .zero)
@@ -56,7 +57,7 @@ class CartViewController: UIViewController {
         return label
     }()
     
-    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCart)
+    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeScreen)
     
     private lazy var checkout: () -> Void = { [weak self] in
         self?.presenter.showCheckout()
@@ -79,7 +80,12 @@ class CartViewController: UIViewController {
         
         setupUiTexts()
         arrangeUiElements()
-        presenter.cartIsEmptyCheck()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presenter.cartIsEmptyCheck()        
     }
     
     private func setupUiTexts() {
@@ -158,19 +164,11 @@ class CartViewController: UIViewController {
         }
     }
     
-    private func arrangeContinueShoppingButton() {
-        view.addSubview(continueShoppingButton)
-        continueShoppingButton.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(34)
-            make.height.equalTo(50)
-        }
-    }
-
-    private func arrangeCheckoutButton() {
-        view.addSubview(checkoutButton)
-        checkoutButton.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(34)
-            make.height.equalTo(50)
+    private func arrangeLineImage() {
+        view.addSubview(lineImage)
+        lineImage.snp.makeConstraints { make in
+            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
+            make.left.right.equalToSuperview().inset(16)
         }
     }
     
@@ -190,11 +188,19 @@ class CartViewController: UIViewController {
         }
     }
     
-    private func arrangeLineImage() {
-        view.addSubview(lineImage)
-        lineImage.snp.makeConstraints { make in
-            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
-            make.left.right.equalToSuperview().inset(16)
+    private func arrangeContinueShoppingButton() {
+        view.addSubview(continueShoppingButton)
+        continueShoppingButton.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview().inset(34)
+            make.height.equalTo(50)
+        }
+    }
+    
+    private func arrangeCheckoutButton() {
+        view.addSubview(checkoutButton)
+        checkoutButton.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview().inset(34)
+            make.height.equalTo(50)
         }
     }
     

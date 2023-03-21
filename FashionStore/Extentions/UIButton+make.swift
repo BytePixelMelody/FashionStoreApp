@@ -40,7 +40,7 @@ extension UIButton {
         return button
     }
     
-    public static func makeGrayButton(imageName: String? = nil,
+    public static func makeGrayCapsuleButton(imageName: String? = nil,
                                       handler: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
 

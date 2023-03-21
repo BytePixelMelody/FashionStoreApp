@@ -42,11 +42,11 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
     
     func placeOrder() {
-        //fatalError("Show Address / Payment Method / Success not realised")
+        
     }
     
     func checkoutIsEmptyCheck() {
-        if !cartProducts.isEmpty {
+        if cartProducts.isEmpty {
             view?.showEmptyCheckoutWithAnimation()
         } else {
             view?.showFullCheckout()

@@ -14,6 +14,7 @@ protocol CheckoutViewProtocol: AnyObject {
 }
 
 class CheckoutViewController: UIViewController {
+    
     private static let headerTitle = "Checkout"
     private static let shippingAddressLabelTitle = "Shipping address"
     private static let addAddressButtonTitle = "Add shipping address"
@@ -27,10 +28,10 @@ class CheckoutViewController: UIViewController {
     
     private let presenter: CheckoutPresenterProtocol
     
-    private lazy var closeCheckout: () -> Void = { [weak self] in
+    private lazy var closeScreen: () -> Void = { [weak self] in
         self?.presenter.closeScreen()
     }
-    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeCheckout)
+    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreen)
     
     private lazy var closeCheckoutAndCart: () -> Void = { [weak self] in
         self?.presenter.closeCheckoutAndCart()
@@ -54,7 +55,7 @@ class CheckoutViewController: UIViewController {
     private lazy var addAddress: () -> Void = { [weak self] in
         self?.presenter.addAddress()
     }
-    private lazy var addAddressButton = UIButton.makeGrayButton(imageName: ImageName.plus, handler: addAddress)
+    private lazy var addAddressButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addAddress)
     
     private var paymentMethodLabel = {
         let label = UILabel(frame: .zero)
@@ -65,7 +66,7 @@ class CheckoutViewController: UIViewController {
     private lazy var addPaymentCard: () -> Void = { [weak self] in
         self?.presenter.addPaymentCard()
     }
-    private lazy var addPaymentMethodButton = UIButton.makeGrayButton(imageName: ImageName.plus, handler: addPaymentCard)
+    private lazy var addPaymentMethodButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addPaymentCard)
 
     private var checkoutIsEmptyLabel = {
         let label = UILabel(frame: .zero)
@@ -110,6 +111,11 @@ class CheckoutViewController: UIViewController {
 
         setupUiTexts()
         arrangeUiElements()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         presenter.checkoutIsEmptyCheck()
     }
     
@@ -215,23 +221,16 @@ class CheckoutViewController: UIViewController {
     private func arrangeCheckoutIsEmptyLabel() {
         view.addSubview(checkoutIsEmptyLabel)
         checkoutIsEmptyLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.top.equalTo(spacerImage.snp.bottom).offset(300)
+            make.centerX.equalToSuperview()
         }
     }
     
-    private func arrangeContinueShoppingButton() {
-        view.addSubview(continueShoppingButton)
-        continueShoppingButton.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(34)
-            make.height.equalTo(50)
-        }
-    }
-
-    private func arrangePlaceOrderButton() {
-        view.addSubview(placeOrderButton)
-        placeOrderButton.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(34)
-            make.height.equalTo(50)
+    private func arrangeLineImage() {
+        view.addSubview(lineImage)
+        lineImage.snp.makeConstraints { make in
+            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
+            make.left.right.equalToSuperview().inset(16)
         }
     }
     
@@ -251,13 +250,32 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-    private func arrangeLineImage() {
-        view.addSubview(lineImage)
-        lineImage.snp.makeConstraints { make in
-            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
-            make.left.right.equalToSuperview().inset(16)
+    private func arrangeContinueShoppingButton() {
+        view.addSubview(continueShoppingButton)
+        continueShoppingButton.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview().inset(34)
+            make.height.equalTo(50)
         }
     }
+    
+    private func arrangePlaceOrderButton() {
+        view.addSubview(placeOrderButton)
+        placeOrderButton.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview().inset(34)
+            make.height.equalTo(50)
+        }
+    }
+
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupUiTexts()
+    }
+
+}
+
+extension CheckoutViewController: CheckoutViewProtocol {
     
     public func showEmptyCheckoutWithAnimation() {
         
@@ -310,16 +328,5 @@ class CheckoutViewController: UIViewController {
         checkoutIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
     }
-    
-    // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        setupUiTexts()
-    }
-
-}
-
-extension CheckoutViewController: CheckoutViewProtocol {
     
 }

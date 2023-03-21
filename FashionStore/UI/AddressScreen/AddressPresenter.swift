@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AddressPresenterProtocol {
-    
+    func closeScreen()
 }
 
 class AddressPresenter: AddressPresenterProtocol {
@@ -17,5 +17,9 @@ class AddressPresenter: AddressPresenterProtocol {
 
     init(router: RouterProtocol) {
         self.router = router
+    }
+    
+    func closeScreen() {
+        router.popScreenToBottom()
     }
 }

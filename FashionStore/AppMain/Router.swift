@@ -42,7 +42,6 @@ class Router: RouterProtocol {
     func popScreenToBottom() {
         navigationController.view.layer.add(CATransition.toBottom, forKey: nil)
         navigationController.popViewController(animated: false)
-        
         // turn on navigation swipes
         navigationController.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -53,11 +52,9 @@ class Router: RouterProtocol {
         let countViewControllers = navigationController.viewControllers.count
         guard countViewControllers > 2 else { return }
         navigationController.viewControllers.remove(at: countViewControllers - 2)
-        
         // close last screen
         navigationController.view.layer.add(CATransition.toBottom, forKey: nil)
         navigationController.popViewController(animated: false)
-        
         // turn on navigation swipes
         navigationController.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -77,7 +74,6 @@ class Router: RouterProtocol {
         let viewController = moduleBuilder.createCartModule(router: self)
         navigationController.view.layer.add(CATransition.toTop, forKey: nil)
         navigationController.pushViewController(viewController, animated: false)
-        
         // turn off navigation swipes
         navigationController.interactivePopGestureRecognizer?.isEnabled = false
     }
@@ -87,19 +83,24 @@ class Router: RouterProtocol {
         let viewController = moduleBuilder.createCheckoutModule(router: self)
         navigationController.view.layer.add(CATransition.toTop, forKey: nil)
         navigationController.pushViewController(viewController, animated: false)
-        
         // turn off navigation swipes
         navigationController.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     func showAddressScreen() {
         let viewController = moduleBuilder.createAddressModule(router: self)
-        navigationController.setViewControllers([viewController], animated: true)
-    }
+        navigationController.view.layer.add(CATransition.toTop, forKey: nil)
+        navigationController.pushViewController(viewController, animated: false)
+        // turn off navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+   }
     
     func showPaymentMethodScreen() {
         let viewController = moduleBuilder.createPaymentMethodModule(router: self)
-        navigationController.setViewControllers([viewController], animated: true)
+        navigationController.view.layer.add(CATransition.toTop, forKey: nil)
+        navigationController.pushViewController(viewController, animated: false)
+        // turn off navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     func showTestScreen() {

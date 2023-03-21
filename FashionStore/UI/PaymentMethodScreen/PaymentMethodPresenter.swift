@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PaymentMethodPresenterProtocol {
-    
+    func closeScreen()
 }
 
 class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
@@ -17,5 +17,9 @@ class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
 
     init(router: RouterProtocol) {
         self.router = router
+    }
+    
+    func closeScreen() {
+        router.popScreenToBottom()
     }
 }

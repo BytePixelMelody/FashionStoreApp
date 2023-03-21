@@ -17,7 +17,8 @@
 - [ ] Generics
 - [ ] JSON service
 - [ ] Network service
-- [x] Font styles with accessibility
+- [x] Typographic font styles
+- [x] Accessibility font size support
 - [ ] Error handlers
 - [ ] Deep link
 - [x] Customized animation

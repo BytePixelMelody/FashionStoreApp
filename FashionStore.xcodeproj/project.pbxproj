@@ -32,6 +32,7 @@
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
 		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
+		11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextField+make.swift */; };
 		11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4A929BDE87200B979B4 /* ImageName.swift */; };
 		11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AC29BE095200B979B4 /* CartProduct.swift */; };
 		11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AE29BE09EA00B979B4 /* Product.swift */; };
@@ -65,6 +66,7 @@
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
 		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
+		11CF2AD529C896D50065D47F /* UITextField+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+make.swift"; sourceTree = "<group>"; };
 		11E5F4A929BDE87200B979B4 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		11E5F4AC29BE095200B979B4 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		11E5F4AE29BE09EA00B979B4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
 				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
+				11CF2AD529C896D50065D47F /* UITextField+make.swift */,
 				11E5F4B229BF398A00B979B4 /* CATransition+types.swift */,
 			);
 			path = Extentions;
@@ -349,6 +352,7 @@
 				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
+				11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */,
 				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransition+types.swift in Sources */,
