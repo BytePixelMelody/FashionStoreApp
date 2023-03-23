@@ -5,6 +5,11 @@
 //  Created by Vyacheslav on 28.02.2023.
 //
 
+// MARK: subviews: ClosableHeaderView, HeaderView, AddressGroupView, PaymentGroupView, PopUpView, FooterView 
+// MARK: subviews: Collection Views with one presenter on screen, which communicates with subviews via ViewController
+// MARK: stack views: AddressGroupView, PaymentGroupView, Chipping screen, Payment screen
+// MARK: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
+
 import UIKit
 import SnapKit
 
@@ -25,11 +30,7 @@ class StoreViewController: UIViewController {
     }
     private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCart)
 
-    private var screenNameLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 0
-        return label
-    }()
+    private var screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
     private lazy var goProduct: () -> Void = { [weak self] in
         self?.presenter.showProduct()

@@ -30,11 +30,7 @@ class ProductViewController: UIViewController {
     }
     private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCart)
     
-    private var screenNameLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 0
-        return label
-    }()
+    private var screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
     private lazy var addToCart: () -> Void = { [weak self] in
         self?.presenter.addProductToCart()

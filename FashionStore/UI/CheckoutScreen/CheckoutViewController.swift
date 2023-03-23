@@ -38,55 +38,31 @@ class CheckoutViewController: UIViewController {
     }
     private lazy var closeCheckoutAndCartButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeCheckoutAndCart)
 
-    private var headerLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        return label
-    }()
+    private var headerLabel = UILabel.makeLabel(numberOfLines: 1)
 
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
 
-    private var shippingAddressLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        return label
-    }()
+    private var shippingAddressLabel = UILabel.makeLabel(numberOfLines: 1)
     
     private lazy var addAddress: () -> Void = { [weak self] in
         self?.presenter.addAddress()
     }
     private lazy var addAddressButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addAddress)
     
-    private var paymentMethodLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        return label
-    }()
+    private var paymentMethodLabel = UILabel.makeLabel(numberOfLines: 1)
 
     private lazy var addPaymentCard: () -> Void = { [weak self] in
         self?.presenter.addPaymentCard()
     }
     private lazy var addPaymentMethodButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addPaymentCard)
 
-    private var checkoutIsEmptyLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 0
-        return label
-    }()
+    private var checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
 
-    private var totalLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        return label
-    }()
+    private var totalLabel = UILabel.makeLabel(numberOfLines: 1)
     
-    private var totalPriceLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        return label
-    }()
+    private var totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
     private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCart)
     

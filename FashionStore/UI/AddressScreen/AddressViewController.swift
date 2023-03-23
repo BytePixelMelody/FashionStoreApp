@@ -30,11 +30,7 @@ class AddressViewController: UIViewController {
     }
     private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreen)
     
-    private var headerLabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        return label
-    }()
+    private var headerLabel = UILabel.makeLabel(numberOfLines: 1)
     
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
     
