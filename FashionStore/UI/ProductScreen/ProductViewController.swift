@@ -63,7 +63,6 @@ class ProductViewController: UIViewController {
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
         setupUiTexts()
     }
 

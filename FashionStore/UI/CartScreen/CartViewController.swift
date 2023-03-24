@@ -11,6 +11,7 @@ import SnapKit
 protocol CartViewProtocol: AnyObject {
     func showEmptyCartWithAnimation()
     func showFullCart()
+    func setTotalPrice(price: Decimal)
 }
 
 class CartViewController: UIViewController {
@@ -20,7 +21,7 @@ class CartViewController: UIViewController {
     private static let continueShoppingButtonTitle = "Continue shopping"
     private static let checkoutButtonTitle = "Checkout"
     private static let totalLabelTitle = "Total"
-    private static let totalPriceLabelTitle = "$0"
+    private static let currencySign = "$"
 
     private let presenter: CartPresenterProtocol
     
@@ -32,19 +33,13 @@ class CartViewController: UIViewController {
 
     private let cartIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
-    // TODO: footerTotalPriceView, 
-    private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
-
-    private let totalLabel = UILabel.makeLabel(numberOfLines: 1)
-    
-    private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
-    
-    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeScreenAction)
-    
     private lazy var checkoutAction: () -> Void = { [weak self] in
         self?.presenter.showCheckout()
     }
-    private lazy var checkoutButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: checkoutAction)
+
+    private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, actionHandler: checkoutAction, buttonTitle: Self.checkoutButtonTitle)
+    
+    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeScreenAction)
     
     init(presenter: CartPresenterProtocol) {
         self.presenter = presenter
@@ -73,15 +68,11 @@ class CartViewController: UIViewController {
     private func setupUiTexts() {
         cartIsEmptyLabel.attributedText = Self.cartIsEmptyTitle.setStyle(style: .bodyLargeAlignCenter)
         continueShoppingButton.configuration?.attributedTitle = AttributedString(Self.continueShoppingButtonTitle.uppercased().setStyle(style: .buttonDark))
-        checkoutButton.configuration?.attributedTitle = AttributedString(Self.checkoutButtonTitle.uppercased().setStyle(style: .buttonDark))
-        totalLabel.attributedText = Self.totalLabelTitle.uppercased().setStyle(style: .titleSmall)
-        totalPriceLabel.attributedText = Self.totalPriceLabelTitle.setStyle(style: .priceTotal)
     }
     
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
         setupUiTexts()
     }
 
@@ -89,10 +80,7 @@ class CartViewController: UIViewController {
         arrangeClosableHeaderView()
         arrangeCartIsEmptyLabel()
         arrangeContinueShoppingButton()
-        arrangeCheckoutButton()
-        arrangeTotalLabel()
-        arrangeTotalPriceLabel()
-        arrangeLineImage()
+        arrangeFooterTotalPriceView()
     }
     
     private func arrangeClosableHeaderView() {
@@ -110,30 +98,6 @@ class CartViewController: UIViewController {
         }
     }
     
-    private func arrangeLineImage() {
-        view.addSubview(lineImage)
-        lineImage.snp.makeConstraints { make in
-            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
-            make.left.right.equalToSuperview().inset(16)
-        }
-    }
-    
-    private func arrangeTotalLabel() {
-        view.addSubview(totalLabel)
-        totalLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(16)
-            make.firstBaseline.equalTo(checkoutButton.snp.top).offset(-29)
-        }
-    }
-    
-    private func arrangeTotalPriceLabel() {
-        view.addSubview(totalPriceLabel)
-        totalPriceLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(16)
-            make.firstBaseline.equalTo(checkoutButton.snp.top).offset(-29)
-        }
-    }
-    
     private func arrangeContinueShoppingButton() {
         view.addSubview(continueShoppingButton)
         continueShoppingButton.snp.makeConstraints { make in
@@ -142,11 +106,10 @@ class CartViewController: UIViewController {
         }
     }
     
-    private func arrangeCheckoutButton() {
-        view.addSubview(checkoutButton)
-        checkoutButton.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(34)
-            make.height.equalTo(50)
+    private func arrangeFooterTotalPriceView() {
+        view.addSubview(footerTotalPriceView)
+        footerTotalPriceView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
         }
     }
     
@@ -154,27 +117,46 @@ class CartViewController: UIViewController {
 
 extension CartViewController: CartViewProtocol {
     
-    // TODO: animate
+    // TODO: animate this func like in checkout
     public func showEmptyCartWithAnimation() {
+        
+        // show gradually
+        cartIsEmptyLabel.alpha = 0
+        continueShoppingButton.alpha = 0
+        
         // show
         cartIsEmptyLabel.isHidden = false
         continueShoppingButton.isHidden = false
+        
+        // show to actual user interaction
+        view.bringSubviewToFront(cartIsEmptyLabel)
+        view.bringSubviewToFront(continueShoppingButton)
+        
         // hide
-        checkoutButton.isHidden = true
-        totalLabel.isHidden = true
-        totalPriceLabel.isHidden = true
-        lineImage.isHidden = true
+        footerTotalPriceView.isHidden = true
+        
+        // animations
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
+            // show
+            self?.cartIsEmptyLabel.alpha = 1
+            self?.continueShoppingButton.alpha = 1
+            // hide
+            self?.footerTotalPriceView.alpha = 0
+        }) { [weak self] _ in
+            // hide
+            self?.footerTotalPriceView.isHidden = true
+        }
     }
     
     public func showFullCart() {
         // show
-        checkoutButton.isHidden = false
-        totalLabel.isHidden = false
-        totalPriceLabel.isHidden = false
-        lineImage.isHidden = false
+        footerTotalPriceView.isHidden = false
         // hide
         cartIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
     }
     
+    func setTotalPrice(price: Decimal) {
+        footerTotalPriceView.setTotalPrice(price: price)
+    }
 }

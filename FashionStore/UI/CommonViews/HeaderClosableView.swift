@@ -10,16 +10,17 @@ import UIKit
 class HeaderClosableView: UIView {
     
     private let closeScreenHandler: () -> Void
-    
-    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreenHandler)
-    
     private let headerTitle: String
     
+    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreenHandler)
     private let headerLabel = UILabel.makeLabel(numberOfLines: 1)
-    
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
 
-    init(closeScreenHandler: @escaping () -> Void, headerTitle: String, frame: CGRect = .zero) {
+    init(
+        closeScreenHandler: @escaping () -> Void,
+        headerTitle: String,
+        frame: CGRect = .zero
+    ) {
         self.closeScreenHandler = closeScreenHandler
         self.headerTitle = headerTitle
         super.init(frame: frame)
@@ -40,7 +41,6 @@ class HeaderClosableView: UIView {
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
         setupUiTexts()
     }
     
