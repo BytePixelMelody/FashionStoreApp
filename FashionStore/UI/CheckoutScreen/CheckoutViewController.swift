@@ -28,48 +28,44 @@ class CheckoutViewController: UIViewController {
     
     private let presenter: CheckoutPresenterProtocol
     
-    private lazy var closeScreen: () -> Void = { [weak self] in
+    private lazy var closeCheckoutAction: () -> Void = { [weak self] in
         self?.presenter.closeScreen()
     }
-    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreen)
-    
-    private lazy var closeCheckoutAndCart: () -> Void = { [weak self] in
+    private lazy var closeCheckoutAndCartAction: () -> Void = { [weak self] in
         self?.presenter.closeCheckoutAndCart()
     }
-    private lazy var closeCheckoutAndCartButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeCheckoutAndCart)
-
-    private var headerLabel = UILabel.makeLabel(numberOfLines: 1)
-
-    private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
-
-    private var shippingAddressLabel = UILabel.makeLabel(numberOfLines: 1)
     
-    private lazy var addAddress: () -> Void = { [weak self] in
+    private lazy var closeCheckoutHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAction, headerTitle: Self.headerTitle)
+    private lazy var closeCheckoutAndCartHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
+
+    private let shippingAddressLabel = UILabel.makeLabel(numberOfLines: 1)
+    
+    private lazy var addAddressAction: () -> Void = { [weak self] in
         self?.presenter.addAddress()
     }
-    private lazy var addAddressButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addAddress)
+    private lazy var addAddressButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addAddressAction)
     
-    private var paymentMethodLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let paymentMethodLabel = UILabel.makeLabel(numberOfLines: 1)
 
-    private lazy var addPaymentCard: () -> Void = { [weak self] in
+    private lazy var addPaymentCardAction: () -> Void = { [weak self] in
         self?.presenter.addPaymentCard()
     }
-    private lazy var addPaymentMethodButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addPaymentCard)
+    private lazy var addPaymentMethodButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addPaymentCardAction)
 
-    private var checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
 
-    private var totalLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let totalLabel = UILabel.makeLabel(numberOfLines: 1)
     
-    private var totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
-    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCart)
+    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCartAction)
     
-    private lazy var placeOrder: () -> Void = { [weak self] in
+    private lazy var placeOrderAction: () -> Void = { [weak self] in
         self?.presenter.placeOrder()
     }
-    private lazy var placeOrderButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: placeOrder)
+    private lazy var placeOrderButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: placeOrderAction)
     
     init(presenter: CheckoutPresenterProtocol) {
         self.presenter = presenter
@@ -96,7 +92,6 @@ class CheckoutViewController: UIViewController {
     }
     
     private func setupUiTexts() {
-        headerLabel.attributedText = Self.headerTitle.uppercased().setStyle(style: .titleLargeAlignCenter)
         shippingAddressLabel.attributedText = Self.shippingAddressLabelTitle.uppercased().setStyle(style: .subHeader)
         addAddressButton.configuration?.attributedTitle = AttributedString(Self.addAddressButtonTitle.setStyle(style: .bodyLarge))
         paymentMethodLabel.attributedText = Self.paymentMethodLabelTitle.uppercased().setStyle(style: .subHeader)
@@ -108,11 +103,16 @@ class CheckoutViewController: UIViewController {
         totalPriceLabel.attributedText = Self.totalPriceLabelTitle.setStyle(style: .priceTotal)
     }
     
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupUiTexts()
+    }
+
     private func arrangeUiElements() {
-        arrangeCloseButton()
-        arrangeCloseCheckoutAndCartButton()
-        arrangeHeaderLabel()
-        arrangeSpacerImage()
+        arrangeCloseCheckoutHeaderView()
+        arrangeCloseCheckoutAndCartHeaderView()
         arrangeShippingAddressLabel()
         arrangeAddAddressButton()
         arrangePaymentMethodLabel()
@@ -125,45 +125,24 @@ class CheckoutViewController: UIViewController {
         arrangeLineImage()
     }
     
-    private func arrangeCloseButton() {
-        view.addSubview(closeButton)
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
-            make.size.equalTo(44)
-        }
-    }
-    
-    private func arrangeCloseCheckoutAndCartButton() {
-        view.addSubview(closeCheckoutAndCartButton)
-        closeCheckoutAndCartButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
-            make.size.equalTo(44)
-        }
-    }
-    
-    private func arrangeHeaderLabel() {
-        view.addSubview(headerLabel)
-        headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).inset(4)
-            make.height.equalTo(32)
-            make.left.right.equalToSuperview().inset(50)
+    private func arrangeCloseCheckoutHeaderView() {
+        view.addSubview(closeCheckoutHeaderView)
+        closeCheckoutHeaderView.snp.makeConstraints { make in
+            make.left.right.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
 
-    private func arrangeSpacerImage() {
-        view.addSubview(spacerImage)
-        spacerImage.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom).offset(3)
-            make.centerX.equalTo(headerLabel)
+    private func arrangeCloseCheckoutAndCartHeaderView() {
+        view.addSubview(closeCheckoutAndCartHeaderView)
+        closeCheckoutAndCartHeaderView.snp.makeConstraints { make in
+            make.left.right.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     private func arrangeShippingAddressLabel() {
         view.addSubview(shippingAddressLabel)
         shippingAddressLabel.snp.makeConstraints { make in
-            make.top.equalTo(spacerImage.snp.bottom).offset(30)
+            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(30)
             make.left.right.equalToSuperview().inset(16)
         }
     }
@@ -197,8 +176,8 @@ class CheckoutViewController: UIViewController {
     private func arrangeCheckoutIsEmptyLabel() {
         view.addSubview(checkoutIsEmptyLabel)
         checkoutIsEmptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(spacerImage.snp.bottom).offset(300)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(300)
+            make.left.right.equalToSuperview().inset(16)
         }
     }
     
@@ -242,13 +221,6 @@ class CheckoutViewController: UIViewController {
         }
     }
 
-    // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        setupUiTexts()
-    }
-
 }
 
 extension CheckoutViewController: CheckoutViewProtocol {
@@ -256,35 +228,35 @@ extension CheckoutViewController: CheckoutViewProtocol {
     public func showEmptyCheckoutWithAnimation() {
         
         // show
-        closeCheckoutAndCartButton.alpha = 0
+        closeCheckoutAndCartHeaderView.alpha = 0
         checkoutIsEmptyLabel.alpha = 0
         continueShoppingButton.alpha = 0
         
         // show
-        closeCheckoutAndCartButton.isHidden = false
+        closeCheckoutAndCartHeaderView.isHidden = false
         checkoutIsEmptyLabel.isHidden = false
         continueShoppingButton.isHidden = false
         
         // show to actual user interaction
-        view.bringSubviewToFront(closeCheckoutAndCartButton)
+        view.bringSubviewToFront(closeCheckoutAndCartHeaderView)
         view.bringSubviewToFront(checkoutIsEmptyLabel)
         view.bringSubviewToFront(continueShoppingButton)
         
         // animations
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
             // show
-            self?.closeCheckoutAndCartButton.alpha = 1
+            self?.closeCheckoutAndCartHeaderView.alpha = 1
             self?.checkoutIsEmptyLabel.alpha = 1
             self?.continueShoppingButton.alpha = 1
             // hide
-            self?.closeButton.alpha = 0
+            self?.closeCheckoutHeaderView.alpha = 0
             self?.placeOrderButton.alpha = 0
             self?.totalLabel.alpha = 0
             self?.totalPriceLabel.alpha = 0
             self?.lineImage.alpha = 0
         }) { [weak self] _ in
             // hide
-            self?.closeButton.isHidden = true
+            self?.closeCheckoutHeaderView.isHidden = true
             self?.placeOrderButton.isHidden = true
             self?.totalLabel.isHidden = true
             self?.totalPriceLabel.isHidden = true
@@ -294,13 +266,13 @@ extension CheckoutViewController: CheckoutViewProtocol {
     
     public func showFullCheckout() {
         // show
-        closeButton.isHidden = false
+        closeCheckoutHeaderView.isHidden = false
         placeOrderButton.isHidden = false
         totalLabel.isHidden = false
         totalPriceLabel.isHidden = false
         lineImage.isHidden = false
         // hide
-        closeCheckoutAndCartButton.isHidden = true
+        closeCheckoutAndCartHeaderView.isHidden = true
         checkoutIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
     }

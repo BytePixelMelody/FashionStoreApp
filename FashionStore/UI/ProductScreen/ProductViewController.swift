@@ -18,24 +18,24 @@ class ProductViewController: UIViewController {
     
     private let presenter: ProductPresenterProtocol
 
-    private lazy var goBack: () -> Void = { [weak self] in
+    private lazy var goBackAction: () -> Void = { [weak self] in
         self?.presenter.backScreen()
     }
-    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.back, handler: goBack)
+    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.back, handler: goBackAction)
 
     private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
     
-    private lazy var goCart: () -> Void = { [weak self] in
+    private lazy var goCartAction: () -> Void = { [weak self] in
         self?.presenter.showCart()
     }
-    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCart)
+    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
     
-    private var screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    private lazy var addToCart: () -> Void = { [weak self] in
+    private lazy var addToCartAction: () -> Void = { [weak self] in
         self?.presenter.addProductToCart()
     }
-    private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: addToCart)
+    private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: addToCartAction)
 
     init(presenter: ProductPresenterProtocol) {
         self.presenter = presenter
@@ -60,6 +60,13 @@ class ProductViewController: UIViewController {
         addToCartButton.configuration?.attributedTitle = AttributedString(Self.addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupUiTexts()
+    }
+
     private func arrangeUiElements() {
         arrangeGoBackButton()
         arrangeLogoImage()
@@ -107,13 +114,6 @@ class ProductViewController: UIViewController {
             make.left.right.bottom.equalToSuperview().inset(34)
             make.height.equalTo(50)
         }
-    }
-    
-    // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        setupUiTexts()
     }
     
 }

@@ -10,6 +10,7 @@ import UIKit
 
 // button factory
 extension UIButton {
+    
     public static func makeDarkButton(imageName: String? = nil,
                                       handler: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
@@ -67,6 +68,5 @@ extension UIButton {
 
         return button
     }
-
 
 }

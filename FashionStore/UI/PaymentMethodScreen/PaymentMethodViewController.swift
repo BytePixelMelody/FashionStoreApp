@@ -23,16 +23,13 @@ class PaymentMethodViewController: UIViewController {
 
     private let presenter: PaymentMethodPresenterProtocol
     
-    private lazy var closeScreen: () -> Void = { [weak self] in
+    private lazy var closeScreenAction: () -> Void = { [weak self] in
         self?.presenter.closeScreen()
     }
-    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreen)
     
-    private var headerLabel = UILabel.makeLabel(numberOfLines: 1)
-    
-    private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
-    
-    private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: closeScreen)
+    private lazy var closableHeaderView = HeaderClosableView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+
+    private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: closeScreenAction)
   
     init(presenter: PaymentMethodPresenterProtocol) {
         self.presenter = presenter
@@ -53,40 +50,25 @@ class PaymentMethodViewController: UIViewController {
     }
     
     private func setupUiTexts() {
-        headerLabel.attributedText = Self.headerTitle.uppercased().setStyle(style: .titleLargeAlignCenter)
         addCardButton.configuration?.attributedTitle = AttributedString(Self.addCardButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupUiTexts()
+    }
+    
     private func arrangeUiElements() {
-        arrangeCloseButton()
-        arrangeHeaderLabel()
-        arrangeSpacerImage()
+        arrangeClosableHeaderView()
         arrangeAddCardButton()
     }
     
-    private func arrangeCloseButton() {
-        view.addSubview(closeButton)
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
-            make.size.equalTo(44)
-        }
-    }
-    
-    private func arrangeHeaderLabel() {
-        view.addSubview(headerLabel)
-        headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).inset(4)
-            make.height.equalTo(32)
-            make.left.right.equalToSuperview().inset(50)
-        }
-    }
-
-    private func arrangeSpacerImage() {
-        view.addSubview(spacerImage)
-        spacerImage.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom).offset(3)
-            make.centerX.equalTo(headerLabel)
+    private func arrangeClosableHeaderView() {
+        view.addSubview(closableHeaderView)
+        closableHeaderView.snp.makeConstraints { make in
+            make.left.right.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -97,6 +79,7 @@ class PaymentMethodViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
+    
 }
 
 extension PaymentMethodViewController: PaymentMethodViewProtocol {

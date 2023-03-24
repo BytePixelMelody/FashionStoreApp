@@ -5,7 +5,7 @@
 //  Created by Vyacheslav on 28.02.2023.
 //
 
-// MARK: subviews: ClosableHeaderView, HeaderView, AddressGroupView, PaymentGroupView, PopUpView, FooterView 
+// MARK: subviews: HeaderClosableView, HeaderView, AddressGroupView, PaymentGroupView, PopUpView, FooterView 
 // MARK: subviews: Collection Views with one presenter on screen, which communicates with subviews via ViewController
 // MARK: stack views: AddressGroupView, PaymentGroupView, Chipping screen, Payment screen
 // MARK: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
@@ -25,18 +25,18 @@ class StoreViewController: UIViewController {
     
     private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
     
-    private lazy var goCart: () -> Void = { [weak self] in
+    private lazy var goCartAction: () -> Void = { [weak self] in
         self?.presenter.showCart()
     }
-    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCart)
+    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
 
-    private var screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    private lazy var goProduct: () -> Void = { [weak self] in
+    private lazy var goProductAction: () -> Void = { [weak self] in
         self?.presenter.showProduct()
     }
     
-    private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, handler: goProduct)
+    private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, handler: goProductAction)
     
     init(presenter: StorePresenterProtocol) {
         self.presenter = presenter
@@ -61,6 +61,13 @@ class StoreViewController: UIViewController {
         productButton.configuration?.attributedTitle = AttributedString(Self.toProductTitle.setStyle(style: .buttonDark))
     }
     
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupUiTexts()
+    }
+
     private func arrangeUiElements() {
         arrangeLogoImage()
         arrangeGoCartButton()
@@ -100,13 +107,6 @@ class StoreViewController: UIViewController {
             make.height.equalTo(50)
             make.width.equalTo(210)
         }
-    }
-
-    // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        setupUiTexts()
     }
     
 }

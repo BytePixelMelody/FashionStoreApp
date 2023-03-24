@@ -13,6 +13,7 @@
 - [x] UIKit
 - [ ] Design moved from Figma
 - [x] UI fully by code
+- [ ] Combine
 - [ ] Collection views
 - [ ] Generics
 - [ ] JSON service
