@@ -9,14 +9,20 @@ import UIKit
 
 class FooterTotalPriceView: UIView {
     
+    // line image
+    private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
+    
+    // total label
     private let totalLabelTitle: String
+    private let totalLabel = UILabel.makeLabel(numberOfLines: 1)
+    
+    // total price label
     private let currencySign: String
+    private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
+    
+    // button
     private let actionHandler: () -> Void
     private let buttonTitle: String
-    
-    private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
-    private let totalLabel = UILabel.makeLabel(numberOfLines: 1)
-    private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     private lazy var button = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: actionHandler)
     
     init(

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
 		117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCheckoutDetailsView.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
 		117CB25529AE13F4006F4192 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		117CB25029AE1206006F4192 /* CheckoutScreen */ = {
 			isa = PBXGroup;
 			children = (
+				11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */,
 				117CB25B29AE142E006F4192 /* CheckoutViewController.swift */,
 				1185D6D029B72C1D00833991 /* CheckoutPresenter.swift */,
 			);
@@ -383,6 +386,7 @@
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,
 				11CF2AFB29CC23DC0065D47F /* UILabelFactory.swift in Sources */,
 				1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */,
+				11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */,
 				1185D6C729B72BD200833991 /* StorePresenter.swift in Sources */,
 				117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */,
 				1185D6C929B72BEE00833991 /* ProductPresenter.swift in Sources */,

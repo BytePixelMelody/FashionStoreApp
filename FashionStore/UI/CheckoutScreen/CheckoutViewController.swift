@@ -40,23 +40,21 @@ class CheckoutViewController: UIViewController {
     
     private lazy var closeCheckoutAndCartHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
 
-    private let shippingAddressLabel = UILabel.makeLabel(numberOfLines: 1)
-    
     private lazy var addAddressAction: () -> Void = { [weak self] in
         self?.presenter.addAddress()
     }
-    private lazy var addAddressButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addAddressAction)
     
-    private let paymentMethodLabel = UILabel.makeLabel(numberOfLines: 1)
-
-    private lazy var addPaymentCardAction: () -> Void = { [weak self] in
+    private lazy var addAddressView = AddCheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: addAddressAction)
+   
+    private lazy var addPaymentMethodAction: () -> Void = { [weak self] in
         self?.presenter.addPaymentCard()
     }
-    private lazy var addPaymentMethodButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addPaymentCardAction)
+    
+    private lazy var addPaymentMethodView = AddCheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: addPaymentMethodAction)
 
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
-   private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCartAction)
+    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCartAction)
     
     private lazy var placeOrderAction: () -> Void = { [weak self] in
         self?.presenter.placeOrder()
@@ -89,10 +87,6 @@ class CheckoutViewController: UIViewController {
     }
     
     private func setupUiTexts() {
-        shippingAddressLabel.attributedText = Self.shippingAddressLabelTitle.uppercased().setStyle(style: .subHeader)
-        addAddressButton.configuration?.attributedTitle = AttributedString(Self.addAddressButtonTitle.setStyle(style: .bodyLarge))
-        paymentMethodLabel.attributedText = Self.paymentMethodLabelTitle.uppercased().setStyle(style: .subHeader)
-        addPaymentMethodButton.configuration?.attributedTitle = AttributedString(Self.addPaymentMethodButtonTitle.setStyle(style: .bodyLarge))
         checkoutIsEmptyLabel.attributedText = Self.checkoutIsEmptyTitle.setStyle(style: .bodyLargeAlignCenter)
         continueShoppingButton.configuration?.attributedTitle = AttributedString(Self.continueShoppingButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
@@ -106,10 +100,8 @@ class CheckoutViewController: UIViewController {
     private func arrangeUiElements() {
         arrangeCloseCheckoutHeaderView()
         arrangeCloseCheckoutAndCartHeaderView()
-        arrangeShippingAddressLabel()
-        arrangeAddAddressButton()
-        arrangePaymentMethodLabel()
-        arrangeAddPaymentMethodButton()
+        arrangeAddAddressView()
+        arrangeAddPaymentMethodView()
         arrangeCheckoutIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
@@ -129,37 +121,19 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-    private func arrangeShippingAddressLabel() {
-        view.addSubview(shippingAddressLabel)
-        shippingAddressLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(30)
-            make.left.right.equalToSuperview().inset(16)
+     private func arrangeAddAddressView() {
+        view.addSubview(addAddressView)
+         addAddressView.snp.makeConstraints { make in
+             make.top.equalTo(closeCheckoutAndCartHeaderView.snp.bottom).offset(10)
+             make.left.right.equalToSuperview()
         }
     }
     
-    private func arrangeAddAddressButton() {
-        view.addSubview(addAddressButton)
-        addAddressButton.snp.makeConstraints { make in
-            make.top.equalTo(shippingAddressLabel.snp.bottom).offset(12)
-            make.left.right.equalToSuperview().inset(16)
-            make.height.equalTo(50)
-        }
-    }
-    
-    private func arrangePaymentMethodLabel() {
-        view.addSubview(paymentMethodLabel)
-        paymentMethodLabel.snp.makeConstraints { make in
-            make.top.equalTo(addAddressButton.snp.bottom).offset(36)
-            make.left.right.equalToSuperview().inset(16)
-        }
-    }
-    
-    private func arrangeAddPaymentMethodButton() {
-        view.addSubview(addPaymentMethodButton)
-        addPaymentMethodButton.snp.makeConstraints { make in
-            make.top.equalTo(paymentMethodLabel.snp.bottom).offset(12)
-            make.left.right.equalToSuperview().inset(16)
-            make.height.equalTo(50)
+     private func arrangeAddPaymentMethodView() {
+        view.addSubview(addPaymentMethodView)
+         addPaymentMethodView.snp.makeConstraints { make in
+             make.top.equalTo(addAddressView.snp.bottom)
+             make.left.right.equalToSuperview()
         }
     }
     

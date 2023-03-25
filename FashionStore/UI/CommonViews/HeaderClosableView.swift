@@ -8,12 +8,16 @@
 import UIKit
 
 class HeaderClosableView: UIView {
-    
+        
+    // button
     private let closeScreenHandler: () -> Void
-    private let headerTitle: String
-    
     private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreenHandler)
+    
+    // header label
+    private let headerTitle: String
     private let headerLabel = UILabel.makeLabel(numberOfLines: 1)
+    
+    // header image
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
 
     init(

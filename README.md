@@ -11,13 +11,13 @@
 
 ## Technologies
 - [x] UIKit
-- [ ] Design moved from Figma
 - [x] UI fully by code
-- [ ] Combine
-- [ ] Collection views
-- [ ] Generics
-- [ ] JSON service
+- [ ] Backend JSON-structured data
 - [ ] Network service
+- [ ] Collection views
+- [ ] JSON service
+- [ ] Combine
+- [ ] Generics
 - [x] Typographic font styles
 - [x] Accessibility font size support
 - [ ] Error handlers
@@ -30,8 +30,6 @@
 - [x] Builder
 - [x] Router
 - [x] Factory
-- [ ] Target-Action
-- [ ] Delegate
 
 <!-- URL's -->
 [platform-image]: https://img.shields.io/badge/Platform-iOS-green.svg
