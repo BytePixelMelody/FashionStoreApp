@@ -8,6 +8,7 @@
 // MARK: subviews: HeaderClosableView, HeaderView, AddressGroupView, PaymentGroupView, PopUpView, FooterView 
 // MARK: subviews: Collection Views with one presenter on screen, which communicates with subviews via ViewController
 // MARK: stack views: AddressGroupView, PaymentGroupView, Chipping screen, Payment screen
+// MARK: subview in scrollView for Chipping screen, Payment screen (keyboard appear support)
 // MARK: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
 
 import UIKit
