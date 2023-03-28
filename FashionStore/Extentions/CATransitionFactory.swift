@@ -1,5 +1,5 @@
 //
-//  CATransition+animationType.swift
+//  CATransitionFactory.swift
 //  Museum
 //
 //  Created by Vyacheslav on 13.03.2023.
@@ -10,7 +10,7 @@ import UIKit
 // making animations for use with setViewControllers
 extension CATransition {
     
-    static var toBottom: CATransition {
+    public static var toBottom: CATransition {
         let caTransition = CATransition()
         caTransition.duration = 0.4
         caTransition.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -19,7 +19,7 @@ extension CATransition {
         return caTransition
     }
     
-    static var toTop: CATransition {
+    public static var toTop: CATransition {
         let caTransition = CATransition()
         caTransition.duration = 0.25
         caTransition.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -28,7 +28,7 @@ extension CATransition {
         return caTransition
     }
     
-    static var systemDefault: CATransition {
+    public static var systemDefault: CATransition {
         CATransition()
     }
 }

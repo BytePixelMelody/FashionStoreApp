@@ -39,6 +39,10 @@ class CheckoutViewController: UIViewController {
     private lazy var closeCheckoutHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAction, headerTitle: Self.headerTitle)
     
     private lazy var closeCheckoutAndCartHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
+    
+    private let detailsAndProductsScrollView = UIScrollView.makeScrollView()
+    
+    private let detailsAndProductsStackView = UIStackView.makeVerticalStackView()
 
     private lazy var addAddressAction: () -> Void = { [weak self] in
         self?.presenter.addAddress()
@@ -100,8 +104,9 @@ class CheckoutViewController: UIViewController {
     private func arrangeUiElements() {
         arrangeCloseCheckoutHeaderView()
         arrangeCloseCheckoutAndCartHeaderView()
-        arrangeAddAddressView()
-        arrangeAddPaymentMethodView()
+        arrangeDetailsAndProductsScrollView()
+        arrangeDetailsAndProductsStackView()
+        fillDetailsAndProductsStackView()
         arrangeCheckoutIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
@@ -121,22 +126,30 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-     private func arrangeAddAddressView() {
-        view.addSubview(addAddressView)
-         addAddressView.snp.makeConstraints { make in
-             make.top.equalTo(closeCheckoutAndCartHeaderView.snp.bottom).offset(10)
-             make.left.right.equalToSuperview()
+    private func arrangeDetailsAndProductsScrollView() {
+        view.addSubview(detailsAndProductsScrollView)
+        detailsAndProductsScrollView.snp.makeConstraints { make in
+            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
+            make.left.right.equalToSuperview()
+            // bottom is in footerTotalPriceView constraints
         }
     }
     
-     private func arrangeAddPaymentMethodView() {
-        view.addSubview(addPaymentMethodView)
-         addPaymentMethodView.snp.makeConstraints { make in
-             make.top.equalTo(addAddressView.snp.bottom)
-             make.left.right.equalToSuperview()
+    private func arrangeDetailsAndProductsStackView() {
+        detailsAndProductsScrollView.addSubview(detailsAndProductsStackView)
+        detailsAndProductsScrollView.contentLayoutGuide.snp.makeConstraints { make in
+            make.edges.equalTo(detailsAndProductsStackView)
+        }
+        detailsAndProductsStackView.snp.makeConstraints { make in
+            make.width.equalTo(detailsAndProductsScrollView.frameLayoutGuide.snp.width)
         }
     }
     
+    private func fillDetailsAndProductsStackView() {
+        detailsAndProductsStackView.addArrangedSubview(addAddressView)
+        detailsAndProductsStackView.addArrangedSubview(addPaymentMethodView)
+    }
+
     private func arrangeCheckoutIsEmptyLabel() {
         view.addSubview(checkoutIsEmptyLabel)
         checkoutIsEmptyLabel.snp.makeConstraints { make in
@@ -156,6 +169,7 @@ class CheckoutViewController: UIViewController {
     private func arrangeFooterTotalPriceView() {
         view.addSubview(footerTotalPriceView)
         footerTotalPriceView.snp.makeConstraints { make in
+            make.top.equalTo(detailsAndProductsScrollView.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview()
         }
     }

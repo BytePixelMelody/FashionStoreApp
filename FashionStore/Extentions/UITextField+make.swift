@@ -10,7 +10,7 @@ import UIKit
 // TODO: make customised UITextField
 extension UITextField {
     
-    public func makeHighUnderlinedTextField() -> UITextField {
+    public static func makeHighUnderlinedTextField() -> UITextField {
         let textField = UITextField(frame: .zero)
         
         return textField

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466C829D2D2B900E504F8 /* UIScrollView+make.swift */; };
+		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
 		11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
@@ -24,7 +26,7 @@
 		1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D229B72C2E00833991 /* TestPresenter.swift */; };
 		1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D729B72D8B00833991 /* ModuleBuilder.swift */; };
 		1185D6DA29B72D9C00833991 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D929B72D9C00833991 /* Router.swift */; };
-		1185D6DC29B7C09500833991 /* UIButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6DB29B7C09500833991 /* UIButtonFactory.swift */; };
+		1185D6DC29B7C09500833991 /* UIButton+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6DB29B7C09500833991 /* UIButton+make.swift */; };
 		1186C931299FFA66002852BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C930299FFA66002852BB /* AppDelegate.swift */; };
 		1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C932299FFA66002852BB /* SceneDelegate.swift */; };
 		1186C935299FFA66002852BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C934299FFA66002852BB /* TestViewController.swift */; };
@@ -33,8 +35,8 @@
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
 		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
-		11CF2AD629C896D50065D47F /* UITextFieldFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextFieldFactory.swift */; };
-		11CF2AFB29CC23DC0065D47F /* UILabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFA29CC23DB0065D47F /* UILabelFactory.swift */; };
+		11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextField+make.swift */; };
+		11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */; };
 		11CF2AFF29CC3FE70065D47F /* HeaderClosableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFE29CC3FE70065D47F /* HeaderClosableView.swift */; };
 		11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */; };
 		11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4A929BDE87200B979B4 /* ImageName.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		114466C829D2D2B900E504F8 /* UIScrollView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+make.swift"; sourceTree = "<group>"; };
+		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCheckoutDetailsView.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +64,7 @@
 		1185D6D229B72C2E00833991 /* TestPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPresenter.swift; sourceTree = "<group>"; };
 		1185D6D729B72D8B00833991 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		1185D6D929B72D9C00833991 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		1185D6DB29B7C09500833991 /* UIButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonFactory.swift; sourceTree = "<group>"; };
+		1185D6DB29B7C09500833991 /* UIButton+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+make.swift"; sourceTree = "<group>"; };
 		1186C92D299FFA66002852BB /* FashionStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FashionStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1186C930299FFA66002852BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1186C932299FFA66002852BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,8 +75,8 @@
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
 		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
-		11CF2AD529C896D50065D47F /* UITextFieldFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldFactory.swift; sourceTree = "<group>"; };
-		11CF2AFA29CC23DB0065D47F /* UILabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelFactory.swift; sourceTree = "<group>"; };
+		11CF2AD529C896D50065D47F /* UITextField+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+make.swift"; sourceTree = "<group>"; };
+		11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+make.swift"; sourceTree = "<group>"; };
 		11CF2AFE29CC3FE70065D47F /* HeaderClosableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderClosableView.swift; sourceTree = "<group>"; };
 		11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTotalPriceView.swift; sourceTree = "<group>"; };
 		11E5F4A929BDE87200B979B4 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
@@ -250,10 +254,12 @@
 			isa = PBXGroup;
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
-				1185D6DB29B7C09500833991 /* UIButtonFactory.swift */,
-				11CF2AD529C896D50065D47F /* UITextFieldFactory.swift */,
+				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
+				11CF2AD529C896D50065D47F /* UITextField+make.swift */,
 				11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */,
-				11CF2AFA29CC23DB0065D47F /* UILabelFactory.swift */,
+				11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */,
+				114466C829D2D2B900E504F8 /* UIScrollView+make.swift */,
+				114466CA29D2D36200E504F8 /* UIStackView+make.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -369,11 +375,12 @@
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
 				117CB25A29AE1415006F4192 /* CartViewController.swift in Sources */,
 				1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */,
+				114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */,
 				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
 				11CF2AFF29CC3FE70065D47F /* HeaderClosableView.swift in Sources */,
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
-				11CF2AD629C896D50065D47F /* UITextFieldFactory.swift in Sources */,
+				11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */,
 				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,
@@ -384,15 +391,16 @@
 				1185D6D129B72C1D00833991 /* CheckoutPresenter.swift in Sources */,
 				11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */,
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,
-				11CF2AFB29CC23DC0065D47F /* UILabelFactory.swift in Sources */,
+				11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */,
 				1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */,
 				11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */,
 				1185D6C729B72BD200833991 /* StorePresenter.swift in Sources */,
+				114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */,
 				117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */,
 				1185D6C929B72BEE00833991 /* ProductPresenter.swift in Sources */,
 				1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */,
 				117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */,
-				1185D6DC29B7C09500833991 /* UIButtonFactory.swift in Sources */,
+				1185D6DC29B7C09500833991 /* UIButton+make.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
