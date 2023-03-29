@@ -31,7 +31,7 @@ class CartPresenter: CartPresenterProtocol {
     }
     
     func cartIsEmptyCheck() {
-        if !cartProducts.isEmpty {
+        if cartProducts.isEmpty {
             view?.showEmptyCartWithAnimation()
         } else {
             view?.showFullCart()

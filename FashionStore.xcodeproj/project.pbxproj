@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466C829D2D2B900E504F8 /* UIScrollView+make.swift */; };
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
+		114466CD29D3039400E504F8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CC29D3039400E504F8 /* HeaderView.swift */; };
 		11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		114466C829D2D2B900E504F8 /* UIScrollView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+make.swift"; sourceTree = "<group>"; };
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
+		114466CC29D3039400E504F8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCheckoutDetailsView.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
@@ -127,9 +129,9 @@
 		117CB25029AE1206006F4192 /* CheckoutScreen */ = {
 			isa = PBXGroup;
 			children = (
-				11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */,
 				117CB25B29AE142E006F4192 /* CheckoutViewController.swift */,
 				1185D6D029B72C1D00833991 /* CheckoutPresenter.swift */,
+				11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */,
 			);
 			path = CheckoutScreen;
 			sourceTree = "<group>";
@@ -269,6 +271,7 @@
 			children = (
 				11CF2AFE29CC3FE70065D47F /* HeaderClosableView.swift */,
 				11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */,
+				114466CC29D3039400E504F8 /* HeaderView.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,
 				1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */,
+				114466CD29D3039400E504F8 /* HeaderView.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */,
 				1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */,

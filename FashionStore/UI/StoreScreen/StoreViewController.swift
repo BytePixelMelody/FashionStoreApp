@@ -5,11 +5,12 @@
 //  Created by Vyacheslav on 28.02.2023.
 //
 
-// MARK: subviews: HeaderClosableView, HeaderView, AddressGroupView, PaymentGroupView, PopUpView, FooterView 
-// MARK: subviews: Collection Views with one presenter on screen, which communicates with subviews via ViewController
-// MARK: stack views: AddressGroupView, PaymentGroupView, Chipping screen, Payment screen
-// MARK: subview in scrollView for Chipping screen, Payment screen (keyboard appear support)
-// MARK: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
+// TODO: subviews: HeaderView, AddressGroupView, PaymentGroupView, PopUpView, FooterView
+// TODO: subviews: Collection Views with one presenter on screen, which communicates with subviews via ViewController
+// TODO: stack views: AddressGroupView, PaymentGroupView, Chipping screen, Payment screen
+// TODO: replaceable views in Cart (header, footer), Checkout (header, footer, address, card)
+// TODO: scrollView with subview for Chipping address screen, Payment screen (keyboard appear support)
+// TODO: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
 
 import UIKit
 import SnapKit
@@ -20,7 +21,7 @@ protocol StoreViewProtocol: AnyObject {
 
 class StoreViewController: UIViewController {
     private static let screenNameTitle = "Fashion\nStore"
-    private static let toProductTitle = "TO PRODUCT"
+    private static let toProductButtonTitle = "TO PRODUCT"
     
     private let presenter: StorePresenterProtocol
     
@@ -29,7 +30,9 @@ class StoreViewController: UIViewController {
     private lazy var goCartAction: () -> Void = { [weak self] in
         self?.presenter.showCart()
     }
-    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
+    private lazy var cartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
+
+    private let productsScrollView = UIScrollView.makeScrollView()
 
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
@@ -59,7 +62,7 @@ class StoreViewController: UIViewController {
     
     private func setupUiTexts() {
         screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLargeAlignLeft)
-        productButton.configuration?.attributedTitle = AttributedString(Self.toProductTitle.setStyle(style: .buttonDark))
+        productButton.configuration?.attributedTitle = AttributedString(Self.toProductButtonTitle.setStyle(style: .buttonDark))
     }
     
     // accessibility settings was changed - scale fonts
@@ -70,7 +73,8 @@ class StoreViewController: UIViewController {
 
     private func arrangeUiElements() {
         arrangeLogoImage()
-        arrangeGoCartButton()
+        arrangeCartButton()
+        arrangeProductsScrollView()
         arrangeScreenNameLabel()
         arrangeToProductButton()
     }
@@ -83,29 +87,44 @@ class StoreViewController: UIViewController {
         }
     }
     
-    private func arrangeGoCartButton() {
-        view.addSubview(goCartButton)
-        goCartButton.snp.makeConstraints { make in
+    private func arrangeCartButton() {
+        view.addSubview(cartButton)
+        cartButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
             make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
             make.size.equalTo(44)
         }
     }
+    
+    private func arrangeProductsScrollView() {
+        view.addSubview(productsScrollView)
+        productsScrollView.snp.makeConstraints { make in
+            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.left.right.bottom.equalToSuperview()
+        }
+        productsScrollView.contentLayoutGuide.snp.makeConstraints { make in
+            make.width.equalTo(productsScrollView.frameLayoutGuide.snp.width)
+        }
+        // contentLayoutGuide must have top and bottom constraints
+    }
 
     private func arrangeScreenNameLabel() {
-        view.addSubview(screenNameLabel)
+        productsScrollView.addSubview(screenNameLabel)
+        
         screenNameLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(300)
+            make.centerX.equalTo(productsScrollView.contentLayoutGuide)
         }
     }
     
     private func arrangeToProductButton() {
-        view.addSubview(productButton)
+        productsScrollView.addSubview(productButton)
         productButton.snp.makeConstraints { make in
             make.top.equalTo(screenNameLabel.snp.bottom).offset(24)
             make.centerX.equalTo(screenNameLabel)
             make.height.equalTo(50)
             make.width.equalTo(210)
+            make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom).inset(50)
         }
     }
     

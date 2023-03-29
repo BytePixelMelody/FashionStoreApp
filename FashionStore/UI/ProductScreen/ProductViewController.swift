@@ -30,6 +30,8 @@ class ProductViewController: UIViewController {
     }
     private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
     
+    private let productScrollView = UIScrollView.makeScrollView()
+
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
     private lazy var addToCartAction: () -> Void = { [weak self] in
@@ -69,7 +71,8 @@ class ProductViewController: UIViewController {
     private func arrangeUiElements() {
         arrangeGoBackButton()
         arrangeLogoImage()
-        arrangeGoCartButton()
+        arrangeCartButton()
+        arrangeProductScrollView()
         arrangeScreenNameLabel()
         arrangeAddToCartButton()
     }
@@ -91,7 +94,7 @@ class ProductViewController: UIViewController {
         }
     }
     
-    private func arrangeGoCartButton() {
+    private func arrangeCartButton() {
         view.addSubview(goCartButton)
         goCartButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
@@ -100,16 +103,32 @@ class ProductViewController: UIViewController {
         }
     }
     
+    private func arrangeProductScrollView() {
+        view.addSubview(productScrollView)
+        productScrollView.snp.makeConstraints { make in
+            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
+            // bottom is in footer constraints
+        }
+        productScrollView.contentLayoutGuide.snp.makeConstraints { make in
+            make.width.equalTo(productScrollView.frameLayoutGuide.snp.width)
+        }
+        // contentLayoutGuide must have top and bottom constraints
+    }
+    
     private func arrangeScreenNameLabel() {
-        view.addSubview(screenNameLabel)
+        productScrollView.addSubview(screenNameLabel)
         screenNameLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.top.equalTo(productScrollView.contentLayoutGuide.snp.top).offset(300)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(productScrollView.contentLayoutGuide.snp.bottom).inset(30)
         }
     }
 
     private func arrangeAddToCartButton() {
         view.addSubview(addToCartButton)
         addToCartButton.snp.makeConstraints { make in
+            make.top.equalTo(productScrollView.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview().inset(34)
             make.height.equalTo(50)
         }

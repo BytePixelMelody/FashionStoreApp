@@ -31,6 +31,8 @@ class CartViewController: UIViewController {
 
     private lazy var closableHeaderView = HeaderClosableView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
 
+    private let productsScrollView = UIScrollView.makeScrollView()
+
     private let cartIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
     private lazy var checkoutAction: () -> Void = { [weak self] in
@@ -78,6 +80,7 @@ class CartViewController: UIViewController {
 
     private func arrangeUiElements() {
         arrangeClosableHeaderView()
+        arrangeProductsScrollView()
         arrangeCartIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
@@ -90,11 +93,25 @@ class CartViewController: UIViewController {
         }
     }
     
+    private func arrangeProductsScrollView() {
+        view.addSubview(productsScrollView)
+        productsScrollView.snp.makeConstraints { make in
+            make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
+            make.left.right.equalToSuperview()
+            // bottom is in footer constraints
+        }
+        productsScrollView.contentLayoutGuide.snp.makeConstraints { make in
+            make.width.equalTo(productsScrollView.frameLayoutGuide.snp.width)
+        }
+        // contentLayoutGuide must have top and bottom constraints
+    }
+    
     private func arrangeCartIsEmptyLabel() {
-        view.addSubview(cartIsEmptyLabel)
+        productsScrollView.addSubview(cartIsEmptyLabel)
         cartIsEmptyLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(300)
+            make.left.right.equalTo(productsScrollView.contentLayoutGuide).inset(16)
+            make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom)
         }
     }
     
@@ -109,6 +126,7 @@ class CartViewController: UIViewController {
     private func arrangeFooterTotalPriceView() {
         view.addSubview(footerTotalPriceView)
         footerTotalPriceView.snp.makeConstraints { make in
+            make.top.equalTo(productsScrollView.frameLayoutGuide.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview()
         }
     }

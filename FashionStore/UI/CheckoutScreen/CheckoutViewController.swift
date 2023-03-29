@@ -131,7 +131,7 @@ class CheckoutViewController: UIViewController {
         detailsAndProductsScrollView.snp.makeConstraints { make in
             make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
-            // bottom is in footerTotalPriceView constraints
+            // bottom is in footer constraints
         }
     }
     
