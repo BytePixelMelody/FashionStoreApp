@@ -17,8 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let rootNavigationController = UINavigationController()
         rootNavigationController.navigationBar.isHidden = true
-        // TODO: use in screen setup navigationItem to individual navigationBar changes 
-        
+ 
         let moduleBuilder = ModuleBuilder()
         let router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
         router.showStoreScreen()

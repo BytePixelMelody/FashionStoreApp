@@ -135,7 +135,6 @@ class CartViewController: UIViewController {
 
 extension CartViewController: CartViewProtocol {
     
-    // TODO: animate this func like in checkout
     public func showEmptyCartWithAnimation() {
         
         // show gradually

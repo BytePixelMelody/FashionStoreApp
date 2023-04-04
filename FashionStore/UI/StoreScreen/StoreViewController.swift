@@ -6,10 +6,10 @@
 //
 
 // TODO: FilledAddressView, FilledCardView
-// TODO: replaceable views in Cart (header, footer), Checkout (header, footer, AddressGroupedView, PaymentGroupedView)
-// TODO: stack views: AddressGroupView, PaymentGroupView, Chipping screen, Payment screen
-// TODO: scrollView with subview for Chipping address screen, Payment screen (keyboard appear support)
 // TODO: PopUpView
+// TODO: replaceable ContainerView for AddressContainerView and PaymentContainerView in Checkout
+// TODO: stack views: AddressGroupView, PaymentGroupView, ProductsView
+// TODO: Chipping screen, Payment screen with stackView in scrollView for keyboard appearing support
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
 // TODO: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
 

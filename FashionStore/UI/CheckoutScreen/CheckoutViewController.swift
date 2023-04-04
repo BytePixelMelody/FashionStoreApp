@@ -82,6 +82,7 @@ class CheckoutViewController: UIViewController {
 
         setupUiTexts()
         arrangeUiElements()
+        fillDetailsAndProductsStackView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +107,6 @@ class CheckoutViewController: UIViewController {
         arrangeCloseCheckoutAndCartHeaderView()
         arrangeDetailsAndProductsScrollView()
         arrangeDetailsAndProductsStackView()
-        fillDetailsAndProductsStackView()
         arrangeCheckoutIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
@@ -145,11 +145,6 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-    private func fillDetailsAndProductsStackView() {
-        detailsAndProductsStackView.addArrangedSubview(addAddressView)
-        detailsAndProductsStackView.addArrangedSubview(addPaymentMethodView)
-    }
-
     private func arrangeCheckoutIsEmptyLabel() {
         view.addSubview(checkoutIsEmptyLabel)
         checkoutIsEmptyLabel.snp.makeConstraints { make in
@@ -172,6 +167,12 @@ class CheckoutViewController: UIViewController {
             make.top.equalTo(detailsAndProductsScrollView.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview()
         }
+    }
+
+    private func fillDetailsAndProductsStackView() {
+        detailsAndProductsStackView.addArrangedSubview(addAddressView)
+        detailsAndProductsStackView.addArrangedSubview(addPaymentMethodView)
+        detailsAndProductsStackView.setCustomSpacing(29.0, after: addPaymentMethodView)
     }
 
 }
