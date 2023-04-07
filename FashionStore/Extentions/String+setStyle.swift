@@ -43,7 +43,7 @@ public struct TextStyle {
     var size: Double
     var color: UIColor
     var lineHeight: Double
-    var letterSpacing: Double
+    var letterSpacing: Double = 0.0
     var fontMetrics: UIFontMetrics
     var alignment: NSTextAlignment = .left
 }
@@ -82,14 +82,12 @@ extension TextStyle {
         size: 16,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let bodyLargeAlignCenter = TextStyle(
         size: 16,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.title1.metrics,
         alignment: .center
     )
@@ -97,28 +95,24 @@ extension TextStyle {
         size: 14,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let bodySmall = TextStyle(
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 18,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let priceLarge = TextStyle(
         size: 18,
         color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 24,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
     static let priceMedium = TextStyle(
         size: 15,
         color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 24,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.subheadline.metrics
     )
     static let priceTotal = TextStyle(
@@ -146,8 +140,19 @@ extension TextStyle {
         size: 15,
         color: UIColor(named: "PlaceholderLight") ?? .gray,
         lineHeight: 18,
-        letterSpacing: 0,
         fontMetrics: UIFont.TextStyle.title2.metrics
+    )
+    static let addressUserName = TextStyle(
+        size: 18,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 22,
+        fontMetrics: UIFont.TextStyle.headline.metrics
+    )
+    static let address = TextStyle(
+        size: 14,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 22,
+        fontMetrics: UIFont.TextStyle.headline.metrics
     )
 }
 

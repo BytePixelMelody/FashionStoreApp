@@ -14,6 +14,7 @@ protocol CheckoutPresenterProtocol {
     func placeOrder()
     func checkoutIsEmptyCheck()
     func closeCheckoutAndCart()
+    func checkoutViewControllerLoaded()
 }
 
 class CheckoutPresenter: CheckoutPresenterProtocol {
@@ -52,4 +53,78 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             view?.showFullCheckout()
         }
     }
+    
+    func checkoutViewControllerLoaded() {
+        checkChippingAddress()
+        checkPaymentMethod()
+    }
+    
+    private func checkChippingAddress() {
+        let chippingAddress: ChippingAddress? = ChippingAddress(
+            firstName: "Iris",
+            lastName: "Watson",
+            address: "606-3727 Ulanocorpenter street",
+            city: "Roseville",
+            state: "NH",
+            zipCode: "11523",
+            phoneNumber: "(786) 713-8616"
+        )
+        
+        if let chippingAddress {
+            let firstAndLastName = "\(chippingAddress.firstName) \(chippingAddress.lastName)"
+            let address = chippingAddress.address
+            let cityStateZip = "\(chippingAddress.city), \(chippingAddress.state), \(chippingAddress.zipCode)"
+            let phone = "\(chippingAddress.phoneNumber)"
+            
+            view?.showFilledAddressView(firstAndLastName: firstAndLastName,
+                                        address: address,
+                                        cityStateZip: cityStateZip,
+                                        phone: phone)
+        } else {
+            view?.showAddAddressView()
+        }
+    }
+    
+    private func checkPaymentMethod() {
+        let paymentMethod: PaymentMethod? = PaymentMethod(
+            nameOnCard: "Iris Watson",
+            cardNumber: "2365 3654 2365 3698",
+            expMonth: 3,
+            expYear: 25,
+            cvv: 342
+        )
+        
+        if let paymentMethod {
+            let cardFirstDigit = String(paymentMethod.cardNumber.prefix(1))
+            var paymentSystemImageName = ""
+            var paymentSystemName = ""
+            switch cardFirstDigit {
+            case "2":
+                paymentSystemImageName = ImageName.mir
+                paymentSystemName = "Mir"
+            case "3":
+                paymentSystemImageName = ImageName.americanExpress
+                paymentSystemName = "American Express"
+            case "5":
+                paymentSystemImageName = ImageName.masterCard
+                paymentSystemName = "Master Card"
+            case "6":
+                paymentSystemImageName = ImageName.unionPay
+                paymentSystemName = "Union Pay"
+            default:
+                paymentSystemImageName = ImageName.visa
+                paymentSystemName = "Visa"
+            }
+            let cardLastDigits = String(paymentMethod.cardNumber.suffix(4))
+                     
+            view?.showFilledPaymentMethodView(
+                paymentSystemImageName: paymentSystemImageName,
+                paymentSystemName: paymentSystemName,
+                cardLastDigits: cardLastDigits
+            )
+        } else {
+            view?.showAddPaymentMethodView()
+        }
+    }
+    
 }

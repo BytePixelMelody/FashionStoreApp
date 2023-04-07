@@ -11,6 +11,7 @@ struct ImageName {
     public static let logo = "Logo"
     public static let spacer = "Spacer"
     public static let back = "Back"
+    public static let forward = "Forward"
     public static let cart = "Cart"
     public static let cartDark = "CartDark"
     public static let close = "Close"
@@ -21,4 +22,9 @@ struct ImageName {
     public static let tag = "Tag"
     public static let tagDark = "TagDark"
     public static let lineGray = "LineGray"
+    public static let americanExpress = "AmericanExpress"
+    public static let masterCard = "MasterCard"
+    public static let mir = "Mir"
+    public static let unionPay = "UnionPay"
+    public static let visa = "Visa"
 }

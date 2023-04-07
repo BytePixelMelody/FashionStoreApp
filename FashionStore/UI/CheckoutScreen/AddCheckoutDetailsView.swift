@@ -58,7 +58,7 @@ class AddCheckoutDetailsView: UIView {
         self.addSubview(infoNameLabel)
         infoNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(25)
-            make.left.right.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview()
         }
     }
     
@@ -66,7 +66,7 @@ class AddCheckoutDetailsView: UIView {
         self.addSubview(addInfoButton)
         addInfoButton.snp.makeConstraints { make in
             make.top.equalTo(infoNameLabel.snp.bottom).offset(12)
-            make.left.right.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview()
             make.height.equalTo(50)
         }
     }

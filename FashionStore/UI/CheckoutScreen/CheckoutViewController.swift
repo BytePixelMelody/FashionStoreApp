@@ -11,6 +11,13 @@ import SnapKit
 protocol CheckoutViewProtocol: AnyObject {
     func showEmptyCheckoutWithAnimation()
     func showFullCheckout()
+    func showAddAddressView()
+    func showFilledAddressView(firstAndLastName: String,
+                               address: String,
+                               cityStateZip: String,
+                               phone: String)
+    func showAddPaymentMethodView()
+    func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String)
     func setTotalPrice(price: Decimal)
 }
 
@@ -44,6 +51,12 @@ class CheckoutViewController: UIViewController {
     
     private let detailsAndProductsStackView = UIStackView.makeVerticalStackView()
 
+    private let addressContainerView = ContainerView(frame: .zero)
+    private let paymentMethodContainerView = ContainerView(frame: .zero)
+    
+    private var filledAddressView: FilledAddressView?
+    private var filledPaymentMethodView: FilledPaymentMethodView?
+    
     private lazy var addAddressAction: () -> Void = { [weak self] in
         self?.presenter.addAddress()
     }
@@ -83,6 +96,8 @@ class CheckoutViewController: UIViewController {
         setupUiTexts()
         arrangeUiElements()
         fillDetailsAndProductsStackView()
+        
+        presenter.checkoutViewControllerLoaded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,17 +146,16 @@ class CheckoutViewController: UIViewController {
         detailsAndProductsScrollView.snp.makeConstraints { make in
             make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
+            make.width.equalTo(detailsAndProductsScrollView.contentLayoutGuide.snp.width)
             // bottom is in footer constraints
         }
     }
     
     private func arrangeDetailsAndProductsStackView() {
         detailsAndProductsScrollView.addSubview(detailsAndProductsStackView)
-        detailsAndProductsScrollView.contentLayoutGuide.snp.makeConstraints { make in
-            make.edges.equalTo(detailsAndProductsStackView)
-        }
         detailsAndProductsStackView.snp.makeConstraints { make in
-            make.width.equalTo(detailsAndProductsScrollView.frameLayoutGuide.snp.width)
+            make.top.bottom.equalTo(detailsAndProductsScrollView.contentLayoutGuide)
+            make.left.right.equalTo(detailsAndProductsScrollView.contentLayoutGuide).inset(16)
         }
     }
     
@@ -170,14 +184,46 @@ class CheckoutViewController: UIViewController {
     }
 
     private func fillDetailsAndProductsStackView() {
-        detailsAndProductsStackView.addArrangedSubview(addAddressView)
-        detailsAndProductsStackView.addArrangedSubview(addPaymentMethodView)
-        detailsAndProductsStackView.setCustomSpacing(29.0, after: addPaymentMethodView)
+        detailsAndProductsStackView.addArrangedSubview(addressContainerView)
+        detailsAndProductsStackView.addArrangedSubview(paymentMethodContainerView)
+        detailsAndProductsStackView.setCustomSpacing(29.0, after: paymentMethodContainerView)
     }
 
 }
 
 extension CheckoutViewController: CheckoutViewProtocol {
+    
+    public func showAddAddressView() {
+        addressContainerView.setSubView(addAddressView)
+    }
+    
+    public func showFilledAddressView(firstAndLastName: String, address: String, cityStateZip: String, phone: String) {
+        
+        filledAddressView = FilledAddressView(
+            firstLastNameLabelText: firstAndLastName,
+            addressLabelText: address,
+            cityStateZipLabelText: cityStateZip,
+            phoneLabelText: phone,
+            editInfoAction: addAddressAction
+        )
+        
+        if let filledAddressView {
+            addressContainerView.setSubView(filledAddressView)
+        }
+    }
+    
+    public func showAddPaymentMethodView() {
+        paymentMethodContainerView.setSubView(addPaymentMethodView)
+    }
+    
+    public func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String) {
+        
+        filledPaymentMethodView = FilledPaymentMethodView()
+        
+        if let filledPaymentMethodView {
+            paymentMethodContainerView.setSubView(filledPaymentMethodView)
+        }
+    }
     
     public func showEmptyCheckoutWithAnimation() {
         
@@ -222,7 +268,7 @@ extension CheckoutViewController: CheckoutViewProtocol {
         continueShoppingButton.isHidden = true
     }
     
-    func setTotalPrice(price: Decimal) {
+    public func setTotalPrice(price: Decimal) {
         footerTotalPriceView.setTotalPrice(price: price)
     }
     
