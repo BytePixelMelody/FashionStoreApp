@@ -86,13 +86,13 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
     
     private func checkPaymentMethod() {
-        let paymentMethod: PaymentMethod? = PaymentMethod(
-            nameOnCard: "Iris Watson",
-            cardNumber: "2365 3654 2365 3698",
-            expMonth: 3,
-            expYear: 25,
-            cvv: 342
-        )
+        let paymentMethod: PaymentMethod? = nil // PaymentMethod(
+//            nameOnCard: "Iris Watson",
+//            cardNumber: "2365 3654 2365 3698",
+//            expMonth: 3,
+//            expYear: 25,
+//            cvv: 342
+//        )
         
         if let paymentMethod {
             let cardFirstDigit = String(paymentMethod.cardNumber.prefix(1))

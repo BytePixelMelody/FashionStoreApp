@@ -186,7 +186,7 @@ class CheckoutViewController: UIViewController {
     private func fillDetailsAndProductsStackView() {
         detailsAndProductsStackView.addArrangedSubview(addressContainerView)
         detailsAndProductsStackView.addArrangedSubview(paymentMethodContainerView)
-        detailsAndProductsStackView.setCustomSpacing(29.0, after: paymentMethodContainerView)
+        detailsAndProductsStackView.setCustomSpacing(29, after: paymentMethodContainerView)
     }
 
 }

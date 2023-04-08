@@ -16,4 +16,11 @@ extension UIStackView {
         return stackView
     }
     
+    public static func makeHorizontalStackView() -> UIStackView {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.spacing = 0.0
+        return stackView
+    }
+    
 }

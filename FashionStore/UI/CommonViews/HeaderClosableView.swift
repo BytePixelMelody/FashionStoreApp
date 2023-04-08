@@ -69,7 +69,6 @@ class HeaderClosableView: UIView {
         self.sendSubviewToBack(headerLabel)
         headerLabel.snp.makeConstraints { make in
             make.top.equalTo(closeButton.snp.bottom).inset(4)
-            make.height.equalTo(32)
             make.left.right.equalToSuperview().inset(16)
         }
     }
