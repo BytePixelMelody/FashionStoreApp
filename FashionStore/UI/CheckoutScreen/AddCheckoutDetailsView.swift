@@ -11,7 +11,7 @@ class AddCheckoutDetailsView: UIView {
     
     // label
     private let infoLabelText: String
-    private let infoNameLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let infoNameLabel = UILabel.makeLabel(numberOfLines: 0)
     // button
     private let addInfoButtonTitle: String
     private let addInfoAction: () -> Void

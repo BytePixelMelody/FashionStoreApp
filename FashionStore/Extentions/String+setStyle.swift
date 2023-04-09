@@ -154,6 +154,12 @@ extension TextStyle {
         lineHeight: 22,
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
+    static let card = TextStyle(
+        size: 14,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 16,
+        fontMetrics: UIFont.TextStyle.headline.metrics
+    )
 }
 
 

@@ -14,11 +14,11 @@ class FooterTotalPriceView: UIView {
     
     // total label
     private let totalLabelTitle: String
-    private let totalLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let totalLabel = UILabel.makeLabel(numberOfLines: 2)
     
     // total price label
     private let currencySign: String
-    private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 2)
     
     // button
     private let actionHandler: () -> Void

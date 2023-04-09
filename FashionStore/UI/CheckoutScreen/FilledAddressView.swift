@@ -9,30 +9,29 @@ import UIKit
 
 class FilledAddressView: UIView {
     
-    // labels texts, from init
+    // labels texts, action from init
     private let firstLastNameLabelText: String
     private let addressLabelText: String
     private let cityStateZipLabelText: String
     private let phoneLabelText: String
-    
-    // action for tap on the view, from init
     private let editInfoAction: () -> Void
+    
     private lazy var editInfoTap = UITapGestureRecognizer(target: self, action: #selector(editInfoSelector))
     
-    // create labels
-    private let firstLastNameLabel = UILabel.makeLabel(numberOfLines: 1)
-    private let addressLabel = UILabel.makeLabel(numberOfLines: 1)
-    private let cityStateZipLabel = UILabel.makeLabel(numberOfLines: 1)
-    private let phoneLabel = UILabel.makeLabel(numberOfLines: 1)
-    
-    // stack views
-    private let horizontalStackView = UIStackView.makeHorizontalStackView()
+    // creating stack views
+    private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12)
     private let verticalStackView = UIStackView.makeVerticalStackView()
     
-    // forward image
+    // creating labels
+    private let firstLastNameLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let addressLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let cityStateZipLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let phoneLabel = UILabel.makeLabel(numberOfLines: 0)
+    
+    // creating a forward image
     private let forwardImage = UIImageView(image: UIImage(named: ImageName.forward))
 
-    // line image
+    // creating a line image
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
     
     init(
@@ -106,9 +105,11 @@ class FilledAddressView: UIView {
         verticalStackView.addArrangedSubview(phoneLabel)
 
         // adding forward image to horizontal stack view
-        horizontalStackView.setCustomSpacing(20, after: verticalStackView)
-        forwardImage.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         horizontalStackView.addArrangedSubview(forwardImage)
+        
+        // disable forward image hugging and compression
+        forwardImage.setContentHuggingPriority(.init(rawValue: 1000), for: .horizontal)
+        forwardImage.setContentCompressionResistancePriority(.init(rawValue: 1000), for: .horizontal)
         
         // adding bottom line to view
         self.addSubview(lineImage)

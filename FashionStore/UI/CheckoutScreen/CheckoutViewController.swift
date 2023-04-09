@@ -57,17 +57,17 @@ class CheckoutViewController: UIViewController {
     private var filledAddressView: FilledAddressView?
     private var filledPaymentMethodView: FilledPaymentMethodView?
     
-    private lazy var addAddressAction: () -> Void = { [weak self] in
-        self?.presenter.addAddress()
+    private lazy var editAddressAction: () -> Void = { [weak self] in
+        self?.presenter.editAddress()
     }
     
-    private lazy var addAddressView = AddCheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: addAddressAction)
+    private lazy var addAddressView = AddCheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
    
-    private lazy var addPaymentMethodAction: () -> Void = { [weak self] in
-        self?.presenter.addPaymentCard()
+    private lazy var editPaymentMethodAction: () -> Void = { [weak self] in
+        self?.presenter.editPaymentCard()
     }
     
-    private lazy var addPaymentMethodView = AddCheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: addPaymentMethodAction)
+    private lazy var addPaymentMethodView = AddCheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
 
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
@@ -204,7 +204,7 @@ extension CheckoutViewController: CheckoutViewProtocol {
             addressLabelText: address,
             cityStateZipLabelText: cityStateZip,
             phoneLabelText: phone,
-            editInfoAction: addAddressAction
+            editInfoAction: editAddressAction
         )
         
         if let filledAddressView {
@@ -218,7 +218,12 @@ extension CheckoutViewController: CheckoutViewProtocol {
     
     public func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String) {
         
-        filledPaymentMethodView = FilledPaymentMethodView()
+        filledPaymentMethodView = FilledPaymentMethodView(
+            paymentSystemImageName: paymentSystemImageName,
+            paymentSystemName: paymentSystemName,
+            cardLastDigits: cardLastDigits,
+            editInfoAction: editPaymentMethodAction
+        )
         
         if let filledPaymentMethodView {
             paymentMethodContainerView.setSubView(filledPaymentMethodView)

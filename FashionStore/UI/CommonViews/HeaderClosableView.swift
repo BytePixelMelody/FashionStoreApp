@@ -15,7 +15,7 @@ class HeaderClosableView: UIView {
     
     // header label
     private let headerTitle: String
-    private let headerLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let headerLabel = UILabel.makeLabel(numberOfLines: 2)
     
     // header image
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))

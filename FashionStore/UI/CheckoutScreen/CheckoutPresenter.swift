@@ -9,8 +9,8 @@ import Foundation
 
 protocol CheckoutPresenterProtocol {
     func closeScreen()
-    func addAddress()
-    func addPaymentCard()
+    func editAddress()
+    func editPaymentCard()
     func placeOrder()
     func checkoutIsEmptyCheck()
     func closeCheckoutAndCart()
@@ -30,11 +30,11 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.popScreenToBottom()
     }
     
-    func addAddress() {
+    func editAddress() {
         router.showAddressScreen()
     }
     
-    func addPaymentCard() {
+    func editPaymentCard() {
         router.showPaymentMethodScreen()
     }
     
@@ -86,13 +86,13 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
     
     private func checkPaymentMethod() {
-        let paymentMethod: PaymentMethod? = nil // PaymentMethod(
-//            nameOnCard: "Iris Watson",
-//            cardNumber: "2365 3654 2365 3698",
-//            expMonth: 3,
-//            expYear: 25,
-//            cvv: 342
-//        )
+        let paymentMethod: PaymentMethod? = PaymentMethod(
+            nameOnCard: "Iris Watson",
+            cardNumber: "5365 3654 2365 3698",
+            expMonth: 3,
+            expYear: 25,
+            cvv: 342
+        )
         
         if let paymentMethod {
             let cardFirstDigit = String(paymentMethod.cardNumber.prefix(1))
