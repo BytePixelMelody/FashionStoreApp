@@ -33,6 +33,7 @@ class Router: RouterProtocol {
         self.moduleBuilder = moduleBuilder
     }
     
+    // TODO: unique methods to every screen with turn on/off navigation swipes
     // close screen
     func popScreen() {
         navigationController.popViewController(animated: true)
@@ -67,6 +68,8 @@ class Router: RouterProtocol {
     func showProductScreen() {
         let viewController = moduleBuilder.createProductModule(router: self)
         navigationController.pushViewController(viewController, animated: true)
+        // turn on navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = true
     }
 
     // screen will be presented with animation like modal
@@ -89,18 +92,16 @@ class Router: RouterProtocol {
     
     func showAddressScreen() {
         let viewController = moduleBuilder.createAddressModule(router: self)
-        navigationController.view.layer.add(CATransition.toTop, forKey: nil)
-        navigationController.pushViewController(viewController, animated: false)
-        // turn off navigation swipes
-        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        navigationController.pushViewController(viewController, animated: true)
+        // turn on navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = true
    }
     
     func showPaymentMethodScreen() {
         let viewController = moduleBuilder.createPaymentMethodModule(router: self)
-        navigationController.view.layer.add(CATransition.toTop, forKey: nil)
-        navigationController.pushViewController(viewController, animated: false)
-        // turn off navigation swipes
-        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        navigationController.pushViewController(viewController, animated: true)
+        // turn on navigation swipes
+        navigationController.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     func showTestScreen() {

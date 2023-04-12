@@ -26,10 +26,10 @@ class AddressViewController: UIViewController {
     private let presenter: AddressPresenterProtocol
     
     private lazy var closeScreenAction: () -> Void = { [weak self] in
-        self?.presenter.closeScreen()
+        self?.presenter.backScreen()
     }
 
-    private lazy var closableHeaderView = HeaderClosableView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(backScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
     
     private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: closeScreenAction)
     

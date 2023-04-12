@@ -29,7 +29,7 @@ class CartViewController: UIViewController {
         self?.presenter.closeScreen()
     }
 
-    private lazy var closableHeaderView = HeaderClosableView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
 
     private let productsScrollView = UIScrollView.makeScrollView()
 

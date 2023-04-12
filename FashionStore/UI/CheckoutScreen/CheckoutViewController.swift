@@ -43,9 +43,9 @@ class CheckoutViewController: UIViewController {
         self?.presenter.closeCheckoutAndCart()
     }
     
-    private lazy var closeCheckoutHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAction, headerTitle: Self.headerTitle)
+    private lazy var closeCheckoutHeaderView = HeaderNamedView(closeScreenHandler: closeCheckoutAction, headerTitle: Self.headerTitle)
     
-    private lazy var closeCheckoutAndCartHeaderView = HeaderClosableView(closeScreenHandler: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
+    private lazy var closeCheckoutAndCartHeaderView = HeaderNamedView(closeScreenHandler: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
     
     private let detailsAndProductsScrollView = UIScrollView.makeScrollView()
     

@@ -21,7 +21,7 @@ class ProductViewController: UIViewController {
     private lazy var goBackAction: () -> Void = { [weak self] in
         self?.presenter.backScreen()
     }
-    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.back, handler: goBackAction)
+    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.backLowered, handler: goBackAction)
 
     private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
     

@@ -10,6 +10,7 @@ import Foundation
 struct ImageName {
     public static let logo = "Logo"
     public static let spacer = "Spacer"
+    public static let backLowered = "BackLowered"
     public static let back = "Back"
     public static let forward = "Forward"
     public static let cart = "Cart"

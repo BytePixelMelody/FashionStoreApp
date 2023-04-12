@@ -1,5 +1,5 @@
 //
-//  HeaderClosableView.swift
+//  HeaderNamedView.swift
 //  FashionStore
 //
 //  Created by Vyacheslav on 23.03.2023.
@@ -7,11 +7,13 @@
 
 import UIKit
 
-class HeaderClosableView: UIView {
+class HeaderNamedView: UIView {
         
-    // button
-    private let closeScreenHandler: () -> Void
+    // buttons: close and back
+    private let closeScreenHandler: (() -> Void)?
+    private let backScreenHandler: (() -> Void)?
     private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreenHandler)
+    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.back, handler: backScreenHandler)
     
     // header label
     private let headerTitle: String
@@ -21,11 +23,13 @@ class HeaderClosableView: UIView {
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
 
     init(
-        closeScreenHandler: @escaping () -> Void,
+        closeScreenHandler: (() -> Void)? = nil,
+        backScreenHandler: (() -> Void)? = nil,
         headerTitle: String,
         frame: CGRect = .zero
     ) {
         self.closeScreenHandler = closeScreenHandler
+        self.backScreenHandler = backScreenHandler
         self.headerTitle = headerTitle
         super.init(frame: frame)
         
@@ -50,12 +54,16 @@ class HeaderClosableView: UIView {
     
     private func arrangeUiElements() {
         arrangeCloseButton()
+        arrangeBackButton()
         arrangeHeaderLabel()
         arrangeSpacerImage()
         setViewHeight()
     }
     
     private func arrangeCloseButton() {
+        // no action - no button
+        guard closeScreenHandler != nil else { return }
+        
         self.addSubview(closeButton)
         closeButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(6)
@@ -64,11 +72,23 @@ class HeaderClosableView: UIView {
         }
     }
     
+    private func arrangeBackButton() {
+        // no action - no button
+        guard backScreenHandler != nil else { return }
+        
+        self.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(6)
+            make.left.equalToSuperview().inset(6)
+            make.size.equalTo(44)
+        }
+    }
+    
     private func arrangeHeaderLabel() {
         self.addSubview(headerLabel)
         self.sendSubviewToBack(headerLabel)
         headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).inset(4)
+            make.top.equalToSuperview().offset(46)
             make.left.right.equalToSuperview().inset(16)
         }
     }

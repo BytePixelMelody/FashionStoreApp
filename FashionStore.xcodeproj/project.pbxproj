@@ -14,7 +14,6 @@
 		111646D529E09513004EEE20 /* FilledPaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */; };
 		114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466C829D2D2B900E504F8 /* UIScrollView+make.swift */; };
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
-		114466CD29D3039400E504F8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CC29D3039400E504F8 /* HeaderView.swift */; };
 		11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
@@ -44,7 +43,7 @@
 		11A8F63D29E195A70048EF2E /* UIImage+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8F63C29E195A70048EF2E /* UIImage+make.swift */; };
 		11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextField+make.swift */; };
 		11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */; };
-		11CF2AFF29CC3FE70065D47F /* HeaderClosableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFE29CC3FE70065D47F /* HeaderClosableView.swift */; };
+		11CF2AFF29CC3FE70065D47F /* HeaderNamedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */; };
 		11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */; };
 		11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4A929BDE87200B979B4 /* ImageName.swift */; };
 		11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AC29BE095200B979B4 /* CartProduct.swift */; };
@@ -60,7 +59,6 @@
 		111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledPaymentMethodView.swift; sourceTree = "<group>"; };
 		114466C829D2D2B900E504F8 /* UIScrollView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+make.swift"; sourceTree = "<group>"; };
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
-		114466CC29D3039400E504F8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCheckoutDetailsView.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +89,7 @@
 		11A8F63C29E195A70048EF2E /* UIImage+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+make.swift"; sourceTree = "<group>"; };
 		11CF2AD529C896D50065D47F /* UITextField+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+make.swift"; sourceTree = "<group>"; };
 		11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+make.swift"; sourceTree = "<group>"; };
-		11CF2AFE29CC3FE70065D47F /* HeaderClosableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderClosableView.swift; sourceTree = "<group>"; };
+		11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNamedView.swift; sourceTree = "<group>"; };
 		11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTotalPriceView.swift; sourceTree = "<group>"; };
 		11E5F4A929BDE87200B979B4 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		11E5F4AC29BE095200B979B4 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
@@ -284,9 +282,8 @@
 		11CF2AFD29CC3FAD0065D47F /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
-				11CF2AFE29CC3FE70065D47F /* HeaderClosableView.swift */,
+				11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */,
 				11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */,
-				114466CC29D3039400E504F8 /* HeaderView.swift */,
 				111646CE29E05DA3004EEE20 /* ContainerView.swift */,
 			);
 			path = CommonViews;
@@ -399,7 +396,7 @@
 				1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */,
 				114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */,
 				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
-				11CF2AFF29CC3FE70065D47F /* HeaderClosableView.swift in Sources */,
+				11CF2AFF29CC3FE70065D47F /* HeaderNamedView.swift in Sources */,
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
 				11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */,
@@ -407,7 +404,6 @@
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,
 				1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */,
-				114466CD29D3039400E504F8 /* HeaderView.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */,
 				1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */,
