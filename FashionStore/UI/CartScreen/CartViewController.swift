@@ -64,9 +64,23 @@ class CartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // turn off navigation swipe, the extension is below
+        // turn navigation swipe back on is in viewWillDisappear
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         presenter.cartIsEmptyCheck()        
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // turn navigation swipe back on
+        if let gestureRecognizer = navigationController?.interactivePopGestureRecognizer,
+           let delegate = navigationController as? any UIGestureRecognizerDelegate {
+            gestureRecognizer.delegate = delegate
+        }
+    }
+   
     private func setupUiTexts() {
         cartIsEmptyLabel.attributedText = Self.cartIsEmptyTitle.setStyle(style: .bodyLargeAlignCenter)
         continueShoppingButton.configuration?.attributedTitle = AttributedString(Self.continueShoppingButtonTitle.uppercased().setStyle(style: .buttonDark))
@@ -175,5 +189,12 @@ extension CartViewController: CartViewProtocol {
     
     func setTotalPrice(price: Decimal) {
         footerTotalPriceView.setTotalPrice(price: price)
+    }
+}
+
+// turn off navigation swipes
+extension CartViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 }

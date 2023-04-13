@@ -90,7 +90,7 @@ class CheckoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
 
         setupUiTexts()
@@ -102,8 +102,22 @@ class CheckoutViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
+        // turn off navigation swipe, the extension is below
+        // turn navigation swipe back on is in viewWillDisappear
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         presenter.checkoutIsEmptyCheck()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // turn navigation swipe back on
+        if let gestureRecognizer = navigationController?.interactivePopGestureRecognizer,
+           let delegate = navigationController as? any UIGestureRecognizerDelegate {
+            gestureRecognizer.delegate = delegate
+        }
     }
     
     private func setupUiTexts() {
@@ -277,4 +291,11 @@ extension CheckoutViewController: CheckoutViewProtocol {
         footerTotalPriceView.setTotalPrice(price: price)
     }
     
+}
+
+// turn off navigation swipes
+extension CheckoutViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
 }
