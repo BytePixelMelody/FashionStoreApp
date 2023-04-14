@@ -12,6 +12,7 @@ struct ImageName {
     public static let spacer = "Spacer"
     public static let backLowered = "BackLowered"
     public static let back = "Back"
+    public static let backDark = "BackDark"
     public static let forward = "Forward"
     public static let cart = "Cart"
     public static let cartDark = "CartDark"
@@ -28,4 +29,5 @@ struct ImageName {
     public static let mir = "Mir"
     public static let unionPay = "UnionPay"
     public static let visa = "Visa"
+    public static let success = "Success"
 }

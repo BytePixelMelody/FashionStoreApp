@@ -19,12 +19,14 @@ protocol RouterProtocol {
     func showAddressScreen()
     func showPaymentMethodScreen()
     func showCheckoutScreen()
+    func showPurchaseResultScreen(receiptNumber: String)
     func showTestScreen()
     
     // close screens
     func popScreen() // close screen with standard pop-animation
     func popScreenToBottom() // close screen with to bottom animation
-    func popTwoScreensToBottom() // close 2 screen with to bottom animation
+    func popTwoScreensToBottom() // close 2 screens with to bottom animation
+    func popToRootScreenToBottom() // close all screens with to bottom animation
     
 }
 
@@ -73,6 +75,13 @@ class Router: RouterProtocol {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func showPurchaseResultScreen(receiptNumber: String) {
+        let viewController = moduleBuilder.createPurchaseResultModule(router: self, receiptNumber: receiptNumber)
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.modalTransitionStyle = .crossDissolve
+        navigationController.viewControllers.last?.present(viewController, animated: true)
+    }
+    
     func showTestScreen() {
         let viewController = moduleBuilder.createTestModule(router: self)
         navigationController.setViewControllers([viewController], animated: true)
@@ -102,4 +111,9 @@ class Router: RouterProtocol {
         navigationController.popViewController(animated: false)
     }
 
+    // close all screens
+    func popToRootScreenToBottom() {
+        navigationController.popToRootViewController(animated: false)
+    }
+    
 }

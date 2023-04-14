@@ -6,7 +6,7 @@
 //
 
 // Backlog:
-// TODO: PopUpView
+// TODO: ErrorView, title.text = "Sorry"
 // TODO: Address screen with stackView in scrollView for keyboard appearing support
 // TODO: Payment Method screen
 // TODO: Database in JSON

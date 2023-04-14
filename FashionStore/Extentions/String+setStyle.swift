@@ -56,7 +56,7 @@ extension TextStyle {
         letterSpacing: 4,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
-    static let titleLargeAlignCenter = TextStyle(
+    static let titleLargeAlignCentered = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 40,
@@ -84,7 +84,7 @@ extension TextStyle {
         lineHeight: 24,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
-    static let bodyLargeAlignCenter = TextStyle(
+    static let bodyLargeAlignCentered = TextStyle(
         size: 16,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 24,
@@ -142,11 +142,18 @@ extension TextStyle {
         lineHeight: 18,
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
-    static let addressUserName = TextStyle(
+    static let infoLarge = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 22,
         fontMetrics: UIFont.TextStyle.headline.metrics
+    )
+    static let infoLargeCentered = TextStyle(
+        size: 18,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 22,
+        fontMetrics: UIFont.TextStyle.headline.metrics,
+        alignment: .center
     )
     static let address = TextStyle(
         size: 14,
@@ -159,6 +166,13 @@ extension TextStyle {
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 16,
         fontMetrics: UIFont.TextStyle.headline.metrics
+    )
+    static let activeMediumCentered = TextStyle(
+        size: 15,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 22,
+        fontMetrics: UIFont.TextStyle.subheadline.metrics,
+        alignment: .center
     )
 }
 

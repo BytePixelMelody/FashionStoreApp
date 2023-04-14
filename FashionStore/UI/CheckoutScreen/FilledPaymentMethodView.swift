@@ -18,7 +18,7 @@ class FilledPaymentMethodView: UIView {
     private lazy var editInfoTap = UITapGestureRecognizer(target: self, action: #selector(editInfoSelector))
     
     // creating stack views
-    private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12)
+    private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12, alignment: .center)
 
     // creating a payment system image
     private lazy var paymentSystemImage = UIImageView.makeImageView(imageName: paymentSystemImageName,
@@ -91,7 +91,6 @@ class FilledPaymentMethodView: UIView {
         }
         
         // adding vertical stack view for labels to horizontal stack view
-        horizontalStackView.alignment = .center
         horizontalStackView.addArrangedSubview(paymentSystemImage)
         horizontalStackView.addArrangedSubview(cardInfoLabel)
         horizontalStackView.addArrangedSubview(forwardImage)

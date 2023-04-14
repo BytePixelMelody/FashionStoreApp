@@ -19,7 +19,7 @@ class FilledAddressView: UIView {
     private lazy var editInfoTap = UITapGestureRecognizer(target: self, action: #selector(editInfoSelector))
     
     // creating stack views
-    private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12)
+    private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12, alignment: .center)
     private let verticalStackView = UIStackView.makeVerticalStackView()
     
     // creating labels
@@ -71,7 +71,7 @@ class FilledAddressView: UIView {
     }
 
     private func setupUiTexts() {
-        firstLastNameLabel.attributedText = firstLastNameLabelText.setStyle(style: .addressUserName)
+        firstLastNameLabel.attributedText = firstLastNameLabelText.setStyle(style: .infoLarge)
         addressLabel.attributedText = addressLabelText.setStyle(style: .address)
         cityStateZipLabel.attributedText = cityStateZipLabelText.setStyle(style: .address)
         phoneLabel.attributedText = phoneLabelText.setStyle(style: .address)
@@ -93,7 +93,6 @@ class FilledAddressView: UIView {
         }
         
         // adding vertical stack view for labels to horizontal stack view
-        horizontalStackView.alignment = .center
         horizontalStackView.addArrangedSubview(verticalStackView)
         
         // adding labels to vertical stack view

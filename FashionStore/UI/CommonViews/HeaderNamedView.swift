@@ -43,7 +43,7 @@ class HeaderNamedView: UIView {
     }
     
     private func setupUiTexts() {
-        headerLabel.attributedText = headerTitle.uppercased().setStyle(style: .titleLargeAlignCenter)
+        headerLabel.attributedText = headerTitle.uppercased().setStyle(style: .titleLargeAlignCentered)
     }
     
     // accessibility settings was changed - scale fonts

@@ -43,7 +43,12 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
     
     func placeOrder() {
+        // TODO: 10% - error with network, 20% - error with card balance, 70% - success
         
+        // fake order placement result
+        let successOrderReceiptNumber = String(Int.random(in: 1_000_000...9_999_999))
+        
+        router.showPurchaseResultScreen(receiptNumber: successOrderReceiptNumber)
     }
     
     func checkoutIsEmptyCheck() {
