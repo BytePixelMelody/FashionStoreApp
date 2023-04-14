@@ -5,12 +5,12 @@
 //  Created by Vyacheslav on 28.02.2023.
 //
 
-// TODO: FilledAddressView, FilledCardView
-// TODO: HeaderView.swift - blank for standard header with Cart and menu/back button
+// Backlog:
 // TODO: PopUpView
-// TODO: replaceable ContainerView for AddressContainerView and PaymentContainerView in Checkout
-// TODO: stack views: AddressGroupView, PaymentGroupView, ProductsView
-// TODO: Chipping screen, Payment screen with stackView in scrollView for keyboard appearing support
+// TODO: Address screen with stackView in scrollView for keyboard appearing support
+// TODO: Payment Method screen
+// TODO: Database in JSON
+// TODO: Database write to CoreData
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
 // TODO: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
 
@@ -27,13 +27,16 @@ class StoreViewController: UIViewController {
     
     private let presenter: StorePresenterProtocol
     
-    private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
-    
     private lazy var goCartAction: () -> Void = { [weak self] in
         self?.presenter.showCart()
     }
-    private lazy var cartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
-
+    
+    private lazy var headerBrandedView = HeaderBrandedView(
+        rightFirstButtonHandler: goCartAction,
+        rightFirstButtonImageName: ImageName.cart,
+        frame: .zero
+    )
+    
     private let productsScrollView = UIScrollView.makeScrollView()
 
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
@@ -74,34 +77,23 @@ class StoreViewController: UIViewController {
     }
 
     private func arrangeUiElements() {
-        arrangeLogoImage()
-        arrangeCartButton()
+        arrangeHeaderBrandedView()
         arrangeProductsScrollView()
         arrangeScreenNameLabel()
-        arrangeToProductButton()
+        arrangeProductButton()
     }
-    
-    private func arrangeLogoImage() {
-        view.addSubview(logoImage)
-        logoImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
-    private func arrangeCartButton() {
-        view.addSubview(cartButton)
-        cartButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
-            make.size.equalTo(44)
+
+    private func arrangeHeaderBrandedView() {
+        view.addSubview(headerBrandedView)
+        headerBrandedView.snp.makeConstraints { make in
+            make.top.right.left.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     private func arrangeProductsScrollView() {
         view.addSubview(productsScrollView)
         productsScrollView.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.top.equalTo(headerBrandedView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
         productsScrollView.contentLayoutGuide.snp.makeConstraints { make in
@@ -119,14 +111,14 @@ class StoreViewController: UIViewController {
         }
     }
     
-    private func arrangeToProductButton() {
+    private func arrangeProductButton() {
         productsScrollView.addSubview(productButton)
         productButton.snp.makeConstraints { make in
             make.top.equalTo(screenNameLabel.snp.bottom).offset(24)
             make.centerX.equalTo(screenNameLabel)
             make.height.equalTo(50)
             make.width.equalTo(210)
-            make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom).inset(50)
+            make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom).inset(500)
         }
     }
     

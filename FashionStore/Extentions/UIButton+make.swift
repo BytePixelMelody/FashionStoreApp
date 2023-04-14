@@ -28,11 +28,13 @@ extension UIButton {
         return button
     }
     
-    public static func makeIconicButton(imageName: String,
+    public static func makeIconicButton(imageName: String? = nil,
                                         handler: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.plain()
         
-        config.image = UIImage(named: imageName)
+        if let imageName {
+            config.image = UIImage(named: imageName)
+        }
         config.contentInsets = .zero
         
         let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in

@@ -21,15 +21,19 @@ class ProductViewController: UIViewController {
     private lazy var goBackAction: () -> Void = { [weak self] in
         self?.presenter.backScreen()
     }
-    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.backLowered, handler: goBackAction)
 
-    private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
-    
     private lazy var goCartAction: () -> Void = { [weak self] in
         self?.presenter.showCart()
     }
-    private lazy var goCartButton = UIButton.makeIconicButton(imageName: ImageName.cart, handler: goCartAction)
     
+    private lazy var headerBrandedView = HeaderBrandedView(
+        leftFirstButtonHandler: goBackAction,
+        leftFirstButtonImageName: ImageName.backLowered,
+        rightFirstButtonHandler: goCartAction,
+        rightFirstButtonImageName: ImageName.cart,
+        frame: .zero
+    )
+
     private let productScrollView = UIScrollView.makeScrollView()
 
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
@@ -69,44 +73,23 @@ class ProductViewController: UIViewController {
     }
 
     private func arrangeUiElements() {
-        arrangeGoBackButton()
-        arrangeLogoImage()
-        arrangeCartButton()
+        arrangeHeaderBrandedView()
         arrangeProductScrollView()
         arrangeScreenNameLabel()
         arrangeAddToCartButton()
     }
     
-    private func arrangeGoBackButton() {
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.size.equalTo(44)
-        }
-    }
-    
-    private func arrangeLogoImage() {
-        view.addSubview(logoImage)
-        logoImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
-    private func arrangeCartButton() {
-        view.addSubview(goCartButton)
-        goCartButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-6)
-            make.size.equalTo(44)
+    private func arrangeHeaderBrandedView() {
+        view.addSubview(headerBrandedView)
+        headerBrandedView.snp.makeConstraints { make in
+            make.top.right.left.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     private func arrangeProductScrollView() {
         view.addSubview(productScrollView)
         productScrollView.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.top.equalTo(headerBrandedView.snp.bottom)
             make.left.right.equalToSuperview()
             // bottom is in footer constraints
         }

@@ -49,6 +49,7 @@
 		11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AC29BE095200B979B4 /* CartProduct.swift */; };
 		11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AE29BE09EA00B979B4 /* Product.swift */; };
 		11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */; };
+		11F0DACA29E85868003ADE45 /* HeaderBrandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		11E5F4AC29BE095200B979B4 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		11E5F4AE29BE09EA00B979B4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransitionFactory.swift; sourceTree = "<group>"; };
+		11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBrandedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 		11CF2AFD29CC3FAD0065D47F /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */,
 				11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */,
 				11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */,
 				111646CE29E05DA3004EEE20 /* ContainerView.swift */,
@@ -400,6 +403,7 @@
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
 				11CF2AD629C896D50065D47F /* UITextField+make.swift in Sources */,
+				11F0DACA29E85868003ADE45 /* HeaderBrandedView.swift in Sources */,
 				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,
