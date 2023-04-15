@@ -12,7 +12,7 @@
 ## Technologies
 - [x] UIKit
 - [x] UI fully by code
-- [ ] Backend JSON-structured data
+- [ ] JSON-structured database
 - [ ] Network service
 - [ ] Collection views
 - [ ] JSON service
@@ -21,7 +21,7 @@
 - [x] Typographic font styles
 - [x] Accessibility font size support
 - [ ] Error handlers
-- [ ] Deep link
+- [x] Deep link
 - [x] Customized animation
 - [ ] Unit tests
 

@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var router: Router?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -19,12 +20,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootNavigationController.navigationBar.isHidden = true
  
         let moduleBuilder = ModuleBuilder()
-        let router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
-        router.showStoreScreen()
+        router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
+        router?.showStoreScreen()
         
         window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()
         self.window = window
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let _ = URLContexts.first else { return }
+        
+        // TODO: open product by id
+        router?.showProductScreen()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

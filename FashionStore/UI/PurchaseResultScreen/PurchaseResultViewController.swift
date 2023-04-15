@@ -28,13 +28,21 @@ class PurchaseResultViewController: UIViewController {
         return view
     }()
     
-    private var verticalStackView = UIStackView.makeVerticalStackView(alignment: .center)
+    private lazy var backgroundView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .black.withAlphaComponent(0.8)
+        view.addGestureRecognizer(backgroundTap)
+        return view
+    }()
     
     private lazy var closeScreenAction: () -> Void = { [weak self] in
         self?.presenter.goStoreScreen()
     }
+    private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(closeScreen))
     
     private lazy var closableHeaderView = HeaderNamedView(closeScreenHandler: closeScreenAction, headerTitle: Self.successHeaderTitle)
+    
+    private var verticalStackView = UIStackView.makeVerticalStackView(alignment: .center)
 
     private let successImage = UIImageView(image: UIImage(named: ImageName.success))
     private let thankYouLabel = UILabel.makeLabel(numberOfLines: 0)
@@ -53,11 +61,14 @@ class PurchaseResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .black.withAlphaComponent(0.8)
         
         setupUiTexts()
         arrangeUiElements()
+    }
+    
+    @objc
+    func closeScreen() {
+        closeScreenAction()
     }
     
     private func setupUiTexts() {
@@ -74,6 +85,11 @@ class PurchaseResultViewController: UIViewController {
     
 
     private func arrangeUiElements() {
+        view.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         view.addSubview(popupView)
         popupView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(24)
