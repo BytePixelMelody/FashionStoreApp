@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let _ = URLContexts.first else { return }
         
-        // TODO: open product by id
+        // TODO: close other screens, also modal, and open product screen by id
         router?.showProductScreen()
     }
 

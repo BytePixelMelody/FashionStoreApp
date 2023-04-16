@@ -16,7 +16,7 @@ class PurchaseResultViewController: UIViewController {
     private static let successHeaderTitle = "Success"
     private static let thankYouLabelText = "Thank you for your purchase"
     private static let receiptLabelText = "Payment receipt: "
-    private static let storeButtonTitle = "Back to store"
+    private static let storeButtonTitle = "To store"
 
     private let presenter: PurchaseResultPresenterProtocol
     private let receiptNumber: String
@@ -24,7 +24,7 @@ class PurchaseResultViewController: UIViewController {
     private var popupView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .white
-        view.layer.cornerRadius = 14
+        view.layer.cornerRadius = 20
         return view
     }()
     
@@ -92,7 +92,7 @@ class PurchaseResultViewController: UIViewController {
         
         view.addSubview(popupView)
         popupView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(24)
+            make.left.right.equalToSuperview().inset(32)
             make.centerY.equalTo(view.safeAreaLayoutGuide)
             make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(24)
             make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(24)
