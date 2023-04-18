@@ -44,11 +44,21 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     
     func placeOrder() {
         // TODO: 10% - error with network, 20% - error with card balance, 70% - success
-        
-        // fake order placement result
-        let successOrderReceiptNumber = String(Int.random(in: 1_000_000...9_999_999))
-        
-        router.showPurchaseResultScreen(receiptNumber: successOrderReceiptNumber)
+        switch Int.random(in: 0..<100) {
+        case 0..<10:
+            router.showErrorMessageScreen(errorLabelText: "Please check your Internet connection",
+                                          errorAction: nil,
+                                          errorButtonTitle: nil)
+        case 10..<90:
+            router.showErrorMessageScreen(errorLabelText: "Payment unsuccessful, please check your card",
+                                          errorAction: nil,
+                                          errorButtonTitle: nil)
+        default:
+            // fake order placement result
+            let successOrderReceiptNumber = String(Int.random(in: 100_000...999_999))
+            
+            router.showPurchaseResultScreen(receiptNumber: successOrderReceiptNumber)
+        }
     }
     
     func checkoutIsEmptyCheck() {

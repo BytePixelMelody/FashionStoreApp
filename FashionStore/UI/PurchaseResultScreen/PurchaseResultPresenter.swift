@@ -20,8 +20,8 @@ class PurchaseResultPresenter: PurchaseResultPresenterProtocol {
     }
 
     func goStoreScreen() {
-        view?.dismissView()
-        router.popToRootScreenToBottom()
+        router.dismissScreen()
+        router.popToRootScreen()
     }
 
 }

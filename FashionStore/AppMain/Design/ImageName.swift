@@ -21,6 +21,7 @@ struct ImageName {
     public static let plus = "Plus"
     public static let plusDark = "PlusDark"
     public static let search = "Search"
+    public static let smileDisappointed = "SmileDisappointed"
     public static let tag = "Tag"
     public static let tagDark = "TagDark"
     public static let lineGray = "LineGray"

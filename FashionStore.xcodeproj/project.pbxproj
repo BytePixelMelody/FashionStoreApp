@@ -16,6 +16,8 @@
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
 		1160A04C29E970BF009AB1C6 /* PurchaseResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04B29E970BF009AB1C6 /* PurchaseResultViewController.swift */; };
 		1160A04E29E970D6009AB1C6 /* PurchaseResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04D29E970D6009AB1C6 /* PurchaseResultPresenter.swift */; };
+		1163019129ED8F810031362C /* ErrorMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019029ED8F810031362C /* ErrorMessageViewController.swift */; };
+		1163019329ED8FA30031362C /* ErrorMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */; };
 		11646EE529CF80AA004C9EC2 /* AddCheckoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
@@ -64,6 +66,8 @@
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
 		1160A04B29E970BF009AB1C6 /* PurchaseResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResultViewController.swift; sourceTree = "<group>"; };
 		1160A04D29E970D6009AB1C6 /* PurchaseResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResultPresenter.swift; sourceTree = "<group>"; };
+		1163019029ED8F810031362C /* ErrorMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageViewController.swift; sourceTree = "<group>"; };
+		1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagePresenter.swift; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* AddCheckoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCheckoutDetailsView.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 				1160A04D29E970D6009AB1C6 /* PurchaseResultPresenter.swift */,
 			);
 			path = PurchaseResultScreen;
+			sourceTree = "<group>";
+		};
+		1163018F29ED8F600031362C /* ErrorMessageScreen */ = {
+			isa = PBXGroup;
+			children = (
+				1163019029ED8F810031362C /* ErrorMessageViewController.swift */,
+				1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */,
+			);
+			path = ErrorMessageScreen;
 			sourceTree = "<group>";
 		};
 		117CB24D29AE11AC006F4192 /* StoreScreen */ = {
@@ -265,6 +278,7 @@
 				117CB25129AE1250006F4192 /* AddressScreen */,
 				117CB25229AE1297006F4192 /* PaymentMethodScreen */,
 				1160A04A29E97064009AB1C6 /* PurchaseResultScreen */,
+				1163018F29ED8F600031362C /* ErrorMessageScreen */,
 				1186C98929A2A324002852BB /* TestScreen */,
 			);
 			path = UI;
@@ -410,6 +424,7 @@
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
 				117CB25A29AE1415006F4192 /* CartViewController.swift in Sources */,
 				111646D129E086B1004EEE20 /* ChippingAddress.swift in Sources */,
+				1163019129ED8F810031362C /* ErrorMessageViewController.swift in Sources */,
 				1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */,
 				114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */,
 				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
@@ -439,6 +454,7 @@
 				111646CF29E05DA3004EEE20 /* ContainerView.swift in Sources */,
 				114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */,
 				117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */,
+				1163019329ED8FA30031362C /* ErrorMessagePresenter.swift in Sources */,
 				1185D6C929B72BEE00833991 /* ProductPresenter.swift in Sources */,
 				1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */,
 				117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */,

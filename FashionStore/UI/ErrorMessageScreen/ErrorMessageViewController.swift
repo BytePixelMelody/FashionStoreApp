@@ -1,26 +1,27 @@
 //
-//  PurchaseResultViewController.swift
+//  ErrorMessageViewController.swift
 //  FashionStore
 //
-//  Created by Vyacheslav on 14.04.2023.
+//  Created by Vyacheslav on 17.04.2023.
 //
 
 import UIKit
 import SnapKit
 
-protocol PurchaseResultViewProtocol: AnyObject {
+protocol ErrorMessageViewProtocol: AnyObject {
     
 }
 
-class PurchaseResultViewController: UIViewController {
-    private static let successHeaderTitle = "Success"
-    private static let thankYouLabelText = "Thank you for your purchase"
-    private static let receiptLabelText = "Payment receipt: "
-    private static let storeButtonTitle = "To store"
+class ErrorMessageViewController: UIViewController {
+    
+    private static let headerTitle = "Sorry"
+    private static let defaultErrorButtonTitle = "OK"
 
     // properties for init
-    private let presenter: PurchaseResultPresenterProtocol
-    private let receiptNumber: String
+    private let presenter: ErrorMessagePresenterProtocol
+    private let errorLabelText: String
+    private var errorAction: (() -> Void)?
+    private var errorButtonTitle: String?
     
     private lazy var backgroundView: UIView = {
         let view = UIView(frame: .zero)
@@ -39,20 +40,29 @@ class PurchaseResultViewController: UIViewController {
     }()
     
     private lazy var closeScreenAction: () -> Void = { [weak self] in
-        self?.presenter.goStoreScreen()
+        self?.presenter.closeErrorMessageScreen()
     }
-    private lazy var closableHeaderView = HeaderNamedView(closeScreenHandler: closeScreenAction, headerTitle: Self.successHeaderTitle)
+    
+    private lazy var closableHeaderView = HeaderNamedView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
     
     private var verticalStackView = UIStackView.makeVerticalStackView(alignment: .center)
 
-    private let successImage = UIImageView(image: UIImage(named: ImageName.success))
-    private let thankYouLabel = UILabel.makeLabel(numberOfLines: 0)
-    private let receiptLabel = UILabel.makeLabel(numberOfLines: 0)
-    private lazy var backToStoreButton = UIButton.makeDarkButton(handler: closeScreenAction)
+    private let smileDisappointedImage = UIImageView.makeImageView(imageName: ImageName.smileDisappointed, width: 35, height: 35, contentMode: .scaleAspectFit)
+    
+    private let errorLabel = UILabel.makeLabel(numberOfLines: 0)
+    
+    private lazy var errorButton = UIButton.makeDarkButton(handler: errorAction)
 
-    init(presenter: PurchaseResultPresenterProtocol, receiptNumber: String) {
+    init(
+        presenter: ErrorMessagePresenterProtocol,
+        errorLabelText: String,
+        errorAction: (() -> Void)?,
+        errorButtonTitle: String?
+    ) {
         self.presenter = presenter
-        self.receiptNumber = receiptNumber
+        self.errorLabelText = errorLabelText
+        self.errorAction = errorAction
+        self.errorButtonTitle = errorButtonTitle
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,6 +73,7 @@ class PurchaseResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkErrorButtonState()
         setupUiTexts()
         arrangeUiElements()
     }
@@ -72,10 +83,22 @@ class PurchaseResultViewController: UIViewController {
         closeScreenAction()
     }
     
+    // default action and text if button has nil values
+    private func checkErrorButtonState() {
+        if errorAction == nil {
+            errorAction = closeScreenAction
+        }
+        
+        if errorButtonTitle == nil {
+            errorButtonTitle = Self.defaultErrorButtonTitle
+        }
+    }
+    
     private func setupUiTexts() {
-        thankYouLabel.attributedText = Self.thankYouLabelText.setStyle(style: .infoLargeCentered)
-        receiptLabel.attributedText = (Self.receiptLabelText + receiptNumber).setStyle(style: .activeMediumCentered)
-        backToStoreButton.configuration?.attributedTitle = AttributedString(Self.storeButtonTitle.uppercased().setStyle(style: .buttonDark))
+        errorLabel.attributedText = errorLabelText.setStyle(style: .infoLargeCentered)
+        if let errorButtonTitle {
+            errorButton.configuration?.attributedTitle = AttributedString(errorButtonTitle.uppercased().setStyle(style: .buttonDark))
+        }
     }
 
     // accessibility settings was changed - scale fonts
@@ -106,20 +129,18 @@ class PurchaseResultViewController: UIViewController {
         
         popupView.addSubview(verticalStackView)
         verticalStackView.snp.makeConstraints { make in
-            make.top.equalTo(closableHeaderView.snp.bottom).offset(24)
+            make.top.equalTo(closableHeaderView.snp.bottom).offset(25)
             make.left.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(34)
         }
         
-        verticalStackView.addArrangedSubview(successImage)
-        verticalStackView.setCustomSpacing(33, after: successImage)
-        verticalStackView.addArrangedSubview(thankYouLabel)
-        verticalStackView.setCustomSpacing(3, after: thankYouLabel)
-        verticalStackView.addArrangedSubview(receiptLabel)
-        verticalStackView.setCustomSpacing(45, after: receiptLabel)
-        verticalStackView.addArrangedSubview(backToStoreButton)
+        verticalStackView.addArrangedSubview(smileDisappointedImage)
+        verticalStackView.setCustomSpacing(29, after: smileDisappointedImage)
+        verticalStackView.addArrangedSubview(errorLabel)
+        verticalStackView.setCustomSpacing(45, after: errorLabel)
+        verticalStackView.addArrangedSubview(errorButton)
         
-        backToStoreButton.snp.makeConstraints { make in
+        errorButton.snp.makeConstraints { make in
             make.width.equalToSuperview().inset(18)
             make.height.equalTo(50)
         }
@@ -127,6 +148,6 @@ class PurchaseResultViewController: UIViewController {
     
 }
 
-extension PurchaseResultViewController: PurchaseResultViewProtocol {
-
+extension ErrorMessageViewController: ErrorMessageViewProtocol {
+    
 }

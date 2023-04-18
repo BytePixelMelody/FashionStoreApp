@@ -16,6 +16,10 @@ protocol ModuleBuilderProtocol {
     func createPaymentMethodModule(router: RouterProtocol) -> PaymentMethodViewController
     func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController
     func createPurchaseResultModule(router: RouterProtocol, receiptNumber: String) -> PurchaseResultViewController
+    func createErrorMessageModule(router: RouterProtocol,
+                                errorLabelText: String,
+                                errorAction: (() -> Void)?,
+                                errorButtonTitle: String?) -> ErrorMessageViewController
     func createTestModule(router: RouterProtocol) -> TestViewController
 }
 
@@ -65,6 +69,19 @@ class ModuleBuilder: ModuleBuilderProtocol {
     func createPurchaseResultModule(router: RouterProtocol, receiptNumber: String) -> PurchaseResultViewController {
         let presenter = PurchaseResultPresenter(router: router)
         let view = PurchaseResultViewController(presenter: presenter, receiptNumber: receiptNumber)
+        presenter.view = view
+        return view
+    }
+    
+    func createErrorMessageModule(router: RouterProtocol,
+                                errorLabelText: String,
+                                errorAction: (() -> Void)?,
+                                errorButtonTitle: String?) -> ErrorMessageViewController {
+        let presenter = ErrorMessagePresenter(router: router)
+        let view = ErrorMessageViewController(presenter: presenter,
+                                       errorLabelText: errorLabelText,
+                                       errorAction: errorAction,
+                                       errorButtonTitle: errorButtonTitle)
         presenter.view = view
         return view
     }

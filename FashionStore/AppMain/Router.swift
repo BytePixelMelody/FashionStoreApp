@@ -20,13 +20,17 @@ protocol RouterProtocol {
     func showPaymentMethodScreen()
     func showCheckoutScreen()
     func showPurchaseResultScreen(receiptNumber: String)
+    func showErrorMessageScreen(errorLabelText: String,
+                                errorAction: (() -> Void)?,
+                                errorButtonTitle: String?)
     func showTestScreen()
     
     // close screens
+    func dismissScreen() // close modal presented ViewController
     func popScreen() // close screen with standard pop-animation
     func popScreenToBottom() // close screen with to bottom animation
     func popTwoScreensToBottom() // close 2 screens with to bottom animation
-    func popToRootScreenToBottom() // close all screens with to bottom animation
+    func popToRootScreen() // close all screens with to bottom animation
     
 }
 
@@ -82,12 +86,31 @@ class Router: RouterProtocol {
         navigationController.viewControllers.last?.present(viewController, animated: true)
     }
     
+    func showErrorMessageScreen(errorLabelText: String,
+                                errorAction: (() -> Void)?,
+                                errorButtonTitle: String?) {
+        let viewController = moduleBuilder.createErrorMessageModule(
+            router: self,
+            errorLabelText: errorLabelText,
+            errorAction: errorAction,
+            errorButtonTitle: errorButtonTitle
+        )
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.modalTransitionStyle = .crossDissolve
+        navigationController.viewControllers.last?.present(viewController, animated: true)
+    }
+    
     func showTestScreen() {
         let viewController = moduleBuilder.createTestModule(router: self)
         navigationController.setViewControllers([viewController], animated: true)
     }
     
     // MARK: close screens
+    
+    // close modal presented ViewController
+    func dismissScreen() {
+        navigationController.viewControllers.last?.dismiss(animated: true)
+    }
     
     // close screen with standard pop-animation
     func popScreen() {
@@ -112,7 +135,7 @@ class Router: RouterProtocol {
     }
 
     // close all screens
-    func popToRootScreenToBottom() {
+    func popToRootScreen() {
         navigationController.popToRootViewController(animated: false)
     }
     
