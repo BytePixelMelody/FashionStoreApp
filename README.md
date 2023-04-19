@@ -33,7 +33,9 @@
 - [x] Factory
 - [x] Singleton
 
-https://user-images.githubusercontent.com/74405334/232993874-d6321b4e-04e1-4ed9-9f56-be14ddb038d6.mov https://user-images.githubusercontent.com/74405334/232993722-ddc8be22-5c84-4d8d-baf2-4326fda97ec3.mov
+https://user-images.githubusercontent.com/74405334/232993874-d6321b4e-04e1-4ed9-9f56-be14ddb038d6.mov
+
+https://user-images.githubusercontent.com/74405334/232993722-ddc8be22-5c84-4d8d-baf2-4326fda97ec3.mov
 
 <!-- URL's -->
 [platform-image]: https://img.shields.io/badge/Platform-iOS-green.svg
