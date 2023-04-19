@@ -12,24 +12,28 @@
 ## Technologies
 - [x] UIKit
 - [x] UI fully by code
-- [ ] JSON-structured database
+- [x] Design from Figma, self-adapted for round screens
+- [ ] JSON service
+- [ ] Self-designed JSON-structured database
 - [ ] Network service
 - [ ] Collection views
-- [ ] JSON service
 - [ ] Combine
 - [ ] Generics
 - [x] Typographic font styles
-- [x] Accessibility font size support
-- [ ] Error handlers
-- [x] Deep link
-- [x] Customized animation
+- [x] Accessibility dynamic font size scaling
+- [x] Errors in a beautiful pop-up ViewController
+- [ ] Deep link
+- [x] Customized animation between screens
 - [ ] Unit tests
 
 ## Code patterns
 - [ ] Async/await
-- [x] Builder
 - [x] Router
+- [x] Builder
 - [x] Factory
+- [x] Singleton
+
+<video src="PresentationMedia/FashionStore.mov" width="360"/> <video src="PresentationMedia/DynamicFontDesign.mov" width="360"/> 
 
 <!-- URL's -->
 [platform-image]: https://img.shields.io/badge/Platform-iOS-green.svg

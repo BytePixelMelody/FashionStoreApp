@@ -21,6 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
  
         let moduleBuilder = ModuleBuilder()
         router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
+        // errors handler singletone
+        Errors.handler.setRouter(router: router)
         router?.showStoreScreen()
         
         window.rootViewController = rootNavigationController
@@ -31,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let _ = URLContexts.first else { return }
         
-        // TODO: close other screens, also modal, and open product screen by id
+        // TODO: close other screens, also modal, and open product screen by id, URLContexts is in connectionOptions in previous func, move logic there
         router?.showProductScreen()
     }
 

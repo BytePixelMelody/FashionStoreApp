@@ -42,22 +42,24 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.popTwoScreensToBottom()
     }
     
+    // fake order placement
     func placeOrder() {
-        // TODO: 10% - error with network, 20% - error with card balance, 70% - success
-        switch Int.random(in: 0..<100) {
-        case 0..<10:
-            router.showErrorMessageScreen(errorLabelText: "Please check your Internet connection",
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
-        case 10..<90:
-            router.showErrorMessageScreen(errorLabelText: "Payment unsuccessful, please check your card",
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
-        default:
-            // fake order placement result
-            let successOrderReceiptNumber = String(Int.random(in: 100_000...999_999))
-            
-            router.showPurchaseResultScreen(receiptNumber: successOrderReceiptNumber)
+        do{
+            switch Int.random(in: 0..<100) {
+            case 0..<15:
+                throw Errors.ErrorType.networkConnectionFail
+            case 15..<20:
+                throw Errors.ErrorType.httpError(statusCode: 418)
+            case 20..<25:
+                throw Errors.ErrorType.httpError(statusCode: 503)
+            case 25..<50:
+                throw Errors.ErrorType.paymentFail
+            default:
+                let successOrderReceiptNumber = String(Int.random(in: 100_000...999_999))
+                router.showPurchaseResultScreen(receiptNumber: successOrderReceiptNumber)
+            }
+        } catch {
+            Errors.handler.checkError(error)
         }
     }
     
