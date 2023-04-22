@@ -21,22 +21,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
  
         let moduleBuilder = ModuleBuilder()
         router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
-        // errors handler singletone
+        // errors handler singleton
         Errors.handler.setRouter(router: router)
         router?.showStoreScreen()
+        
+        // processing deep link if App was closed
+        DeepLinkService.navigateByUrl(url: connectionOptions.urlContexts.first?.url, router: router)
         
         window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()
         self.window = window
     }
     
+    // processing deep link if App was opened 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let _ = URLContexts.first else { return }
-        
-        // TODO: close other screens, also modal, and open product screen by id, URLContexts is in connectionOptions in previous func, move logic there
-        router?.showProductScreen()
+        DeepLinkService.navigateByUrl(url: URLContexts.first?.url, router: router)
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

@@ -6,7 +6,6 @@
 //
 
 // Backlog:
-// TODO: Errors class to display errors
 // TODO: Address screen with stackView in scrollView for keyboard appearing support
 // TODO: Payment Method screen
 // TODO: Database in JSON

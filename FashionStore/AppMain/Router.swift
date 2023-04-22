@@ -15,6 +15,7 @@ protocol RouterProtocol {
     // show screens
     func showStoreScreen()
     func showProductScreen()
+    func showProductScreenInstantly() // for deep link
     func showCartScreen()
     func showAddressScreen()
     func showPaymentMethodScreen()
@@ -53,6 +54,19 @@ class Router: RouterProtocol {
     func showProductScreen() {
         let viewController = moduleBuilder.createProductModule(router: self)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    // show Product screen without animations for deep link use
+    func showProductScreenInstantly() {
+        let storeViewController: UIViewController?
+        if navigationController.viewControllers.count > 0 {
+            storeViewController = navigationController.viewControllers.first
+        } else {
+            storeViewController = moduleBuilder.createStoreModule(router: self)
+        }
+        guard let storeViewController else { return }
+        let productViewController = moduleBuilder.createProductModule(router: self)
+        navigationController.setViewControllers([storeViewController, productViewController], animated: false)
     }
 
     // with animation like modal
@@ -111,7 +125,7 @@ class Router: RouterProtocol {
     func dismissScreen() {
         navigationController.viewControllers.last?.dismiss(animated: true)
     }
-    
+        
     // close screen with standard pop-animation
     func popScreen() {
         navigationController.popViewController(animated: true)
@@ -136,7 +150,9 @@ class Router: RouterProtocol {
 
     // close all screens
     func popToRootScreen() {
-        navigationController.popToRootViewController(animated: false)
+        if navigationController.viewControllers.count > 1 {
+            navigationController.popToRootViewController(animated: false)
+        }
     }
     
 }
