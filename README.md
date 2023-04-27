@@ -8,7 +8,6 @@
 
 ## Frameworks
 - [x] SnapKit
-- [ ] Firebase Crashlytics
 
 ## Technologies
 - [x] UIKit
