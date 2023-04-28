@@ -9,6 +9,7 @@ import Foundation
 
 protocol AddressPresenterProtocol {
     func backScreen()
+    func saveChanges()
 }
 
 class AddressPresenter: AddressPresenterProtocol {
@@ -20,6 +21,10 @@ class AddressPresenter: AddressPresenterProtocol {
     }
     
     func backScreen() {
+        router.popScreen()
+    }
+    
+    func saveChanges() {
         router.popScreen()
     }
 }

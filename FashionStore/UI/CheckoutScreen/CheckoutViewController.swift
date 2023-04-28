@@ -61,13 +61,13 @@ class CheckoutViewController: UIViewController {
         self?.presenter.editAddress()
     }
     
-    private lazy var addAddressView = AddCheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
+    private lazy var addAddressView = CheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
    
     private lazy var editPaymentMethodAction: () -> Void = { [weak self] in
         self?.presenter.editPaymentCard()
     }
     
-    private lazy var addPaymentMethodView = AddCheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
+    private lazy var addPaymentMethodView = CheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
 
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
@@ -94,8 +94,8 @@ class CheckoutViewController: UIViewController {
         view.backgroundColor = .white
 
         setupUiTexts()
-        arrangeUiElements()
         fillDetailsAndProductsStackView()
+        arrangeUiElements()
         
         presenter.checkoutViewControllerLoaded()
     }
@@ -130,7 +130,13 @@ class CheckoutViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         setupUiTexts()
     }
-
+    
+    private func fillDetailsAndProductsStackView() {
+        detailsAndProductsStackView.addArrangedSubview(addressContainerView)
+        detailsAndProductsStackView.addArrangedSubview(paymentMethodContainerView)
+        detailsAndProductsStackView.setCustomSpacing(29, after: paymentMethodContainerView)
+    }
+    
     private func arrangeUiElements() {
         arrangeCloseCheckoutHeaderView()
         arrangeCloseCheckoutAndCartHeaderView()
@@ -195,12 +201,6 @@ class CheckoutViewController: UIViewController {
             make.top.equalTo(detailsAndProductsScrollView.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview()
         }
-    }
-
-    private func fillDetailsAndProductsStackView() {
-        detailsAndProductsStackView.addArrangedSubview(addressContainerView)
-        detailsAndProductsStackView.addArrangedSubview(paymentMethodContainerView)
-        detailsAndProductsStackView.setCustomSpacing(29, after: paymentMethodContainerView)
     }
 
 }

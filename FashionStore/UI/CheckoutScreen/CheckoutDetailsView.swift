@@ -1,5 +1,5 @@
 //
-//  AddCheckoutDetailsView.swift
+//  CheckoutDetailsView.swift
 //  FashionStore
 //
 //  Created by Vyacheslav on 25.03.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddCheckoutDetailsView: UIView {
+class CheckoutDetailsView: UIView {
     
     // label
     private let infoLabelText: String
