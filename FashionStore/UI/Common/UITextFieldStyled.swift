@@ -1,8 +1,8 @@
 //
-//  UITextField+make.swift
+//  UITextFieldStyled.swift
 //  FashionStore
 //
-//  Created by Vyacheslav on 20.03.2023.
+//  Created by Vyacheslav on 28.04.2023.
 //
 
 import UIKit

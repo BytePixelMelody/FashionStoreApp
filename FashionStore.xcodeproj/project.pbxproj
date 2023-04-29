@@ -47,7 +47,7 @@
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
 		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
 		11A8F63D29E195A70048EF2E /* UIImage+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8F63C29E195A70048EF2E /* UIImage+make.swift */; };
-		11CF2AD629C896D50065D47F /* UITextFieldWithInsets+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextFieldWithInsets+make.swift */; };
+		11CF2AD629C896D50065D47F /* UITextFieldStyled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextFieldStyled.swift */; };
 		11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */; };
 		11CF2AFF29CC3FE70065D47F /* HeaderNamedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */; };
 		11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */; };
@@ -100,7 +100,7 @@
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
 		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
 		11A8F63C29E195A70048EF2E /* UIImage+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+make.swift"; sourceTree = "<group>"; };
-		11CF2AD529C896D50065D47F /* UITextFieldWithInsets+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFieldWithInsets+make.swift"; sourceTree = "<group>"; };
+		11CF2AD529C896D50065D47F /* UITextFieldStyled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldStyled.swift; sourceTree = "<group>"; };
 		11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+make.swift"; sourceTree = "<group>"; };
 		11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNamedView.swift; sourceTree = "<group>"; };
 		11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTotalPriceView.swift; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 		1186C98829A2A30E002852BB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				11CF2AFD29CC3FAD0065D47F /* CommonViews */,
+				11CF2AFD29CC3FAD0065D47F /* Common */,
 				117CB24D29AE11AC006F4192 /* StoreScreen */,
 				117CB24E29AE11E4006F4192 /* ProductScreen */,
 				117CB24F29AE11F5006F4192 /* CartScreen */,
@@ -321,7 +321,6 @@
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
 				1185D6DB29B7C09500833991 /* UIButton+make.swift */,
-				11CF2AD529C896D50065D47F /* UITextFieldWithInsets+make.swift */,
 				11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */,
 				11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */,
 				114466C829D2D2B900E504F8 /* UIScrollView+make.swift */,
@@ -331,15 +330,16 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
-		11CF2AFD29CC3FAD0065D47F /* CommonViews */ = {
+		11CF2AFD29CC3FAD0065D47F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				11CF2AD529C896D50065D47F /* UITextFieldStyled.swift */,
 				11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */,
 				11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */,
 				11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */,
 				111646CE29E05DA3004EEE20 /* ContainerView.swift */,
 			);
-			path = CommonViews;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		11E5F4AB29BE093900B979B4 /* Model */ = {
@@ -454,7 +454,7 @@
 				1160A04C29E970BF009AB1C6 /* PurchaseResultViewController.swift in Sources */,
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
-				11CF2AD629C896D50065D47F /* UITextFieldWithInsets+make.swift in Sources */,
+				11CF2AD629C896D50065D47F /* UITextFieldStyled.swift in Sources */,
 				11F0DACA29E85868003ADE45 /* HeaderBrandedView.swift in Sources */,
 				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
 				1163019529EE9D5C0031362C /* Errors.swift in Sources */,

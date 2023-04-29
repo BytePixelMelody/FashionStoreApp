@@ -142,6 +142,12 @@ extension TextStyle {
         lineHeight: 18,
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
+    static let textField = TextStyle(
+        size: 15,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 18,
+        fontMetrics: UIFont.TextStyle.title2.metrics
+    )
     static let infoLarge = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
