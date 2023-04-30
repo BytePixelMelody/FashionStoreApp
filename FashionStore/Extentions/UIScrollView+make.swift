@@ -13,6 +13,8 @@ extension UIScrollView {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        // hide keyboard on any scroll gesture
+        scrollView.keyboardDismissMode = .onDrag
         return scrollView
     }
     

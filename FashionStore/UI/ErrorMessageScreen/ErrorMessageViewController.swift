@@ -24,10 +24,10 @@ class ErrorMessageViewController: UIViewController {
     private var errorButtonTitle: String?
     
     private lazy var backgroundView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .black.withAlphaComponent(0.8)
-        view.addGestureRecognizer(backgroundTap)
-        return view
+        let backgroundView = UIView(frame: .zero)
+        backgroundView.backgroundColor = .black.withAlphaComponent(0.8)
+        backgroundView.addGestureRecognizer(backgroundTap)
+        return backgroundView
     }()
     
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(closeScreen))

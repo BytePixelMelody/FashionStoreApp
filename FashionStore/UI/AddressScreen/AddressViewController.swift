@@ -60,6 +60,8 @@ class AddressViewController: UIViewController {
 
     private lazy var saveAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: saveChangesAction)
     
+    private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+
     init(presenter: AddressPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -72,8 +74,10 @@ class AddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // hide keyboard on background tap
+        view.addGestureRecognizer(backgroundTap)
         view.backgroundColor = .white
-        
+
         setupUiTexts()
         fillStackViews()
         arrangeUiElements()
@@ -145,6 +149,7 @@ class AddressViewController: UIViewController {
         arrangeAddressScrollView()
         arrangeAddressStackView()
         arrangeAddAddressButton()
+        arrangeKeyboardLayoutGuide()
     }
     
     private func arrangeClosableHeaderView() {
@@ -176,11 +181,25 @@ class AddressViewController: UIViewController {
         view.addSubview(saveAddressButton)
         saveAddressButton.snp.makeConstraints { make in
             make.top.equalTo(addressScrollView.snp.bottom).offset(8)
-            make.left.right.bottom.equalToSuperview().inset(34)
+            make.left.right.equalToSuperview().inset(34)
+            // for keyboard support:
+            make.bottom.equalToSuperview().inset(34).priority(.medium)
             make.height.equalTo(50)
         }
     }
+    
+    // using keyboard layout
+    private func arrangeKeyboardLayoutGuide() {
+        saveAddressButton.snp.makeConstraints { make in
+            make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-10).priority(.high)
+        }
+    }
       
+    // hide keyboard
+    @objc
+    func hideKeyboard() {
+        view.endEditing(false)
+    }
 }
 
 extension AddressViewController: AddressViewProtocol {

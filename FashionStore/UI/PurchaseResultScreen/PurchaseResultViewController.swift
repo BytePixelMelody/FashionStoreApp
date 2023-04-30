@@ -23,19 +23,19 @@ class PurchaseResultViewController: UIViewController {
     private let receiptNumber: String
     
     private lazy var backgroundView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .black.withAlphaComponent(0.8)
-        view.addGestureRecognizer(backgroundTap)
-        return view
+        let backgroundView = UIView(frame: .zero)
+        backgroundView.backgroundColor = .black.withAlphaComponent(0.8)
+        backgroundView.addGestureRecognizer(backgroundTap)
+        return backgroundView
     }()
     
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(closeScreen))
     
     private var popupView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 20
-        return view
+        let popupView = UIView(frame: .zero)
+        popupView.backgroundColor = .white
+        popupView.layer.cornerRadius = 20
+        return popupView
     }()
     
     private lazy var closeScreenAction: () -> Void = { [weak self] in

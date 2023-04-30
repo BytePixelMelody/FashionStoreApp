@@ -56,8 +56,8 @@ class UITextFieldStyled: UITextField {
             attributedPlaceholder = NSLocalizedString(placeholder, comment: placeholder)
                 .setStyle(style: placeholderStyle)
         }
-        defaultTextAttributes[.font] = textStyle.fontMetrics.scaledFont(for: textStyle.font)
-        defaultTextAttributes[.foregroundColor] = textStyle.color
+        font = textStyle.fontMetrics.scaledFont(for: textStyle.font)
+        textColor = textStyle.color
     }
     
     // accessibility settings was changed - scale fonts

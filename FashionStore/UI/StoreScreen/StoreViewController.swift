@@ -6,7 +6,10 @@
 //
 
 // Backlog:
-// TODO: Address screen keyboard appearing support
+// TODO: Address screen return button action to Next, for last - close keyboard
+// TODO: Address screen button Add address or Save address
+// TODO: Address screen - save data in keychain - make Service
+// TODO: Address screen - if edited and back - "WE CARE" popup
 // TODO: Payment Method screen
 // TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
