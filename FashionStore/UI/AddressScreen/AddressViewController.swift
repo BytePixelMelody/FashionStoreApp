@@ -46,13 +46,41 @@ class AddressViewController: UIViewController {
     private let stateVerticalStackView = UIStackView.makeVerticalStackView()
     private let zipCodeVerticalStackView = UIStackView.makeVerticalStackView()
 
-    private lazy var firstNameTextField = UITextFieldStyled(placeholder: Self.firstNameTextFieldPlaceholder, frame: .zero)
-    private lazy var lastNameTextField = UITextFieldStyled(placeholder: Self.lastNameTextFieldPlaceholder, frame: .zero)
-    private lazy var addressTextField = UITextFieldStyled(placeholder: Self.addressTextFieldPlaceholder, frame: .zero)
-    private lazy var cityTextField = UITextFieldStyled(placeholder: Self.cityTextFieldPlaceholder, frame: .zero)
-    private lazy var stateTextField = UITextFieldStyled(placeholder: Self.stateTextFieldPlaceholder, frame: .zero)
-    private lazy var zipCodeTextField = UITextFieldStyled(placeholder: Self.zipCodeTextFieldPlaceholder, frame: .zero)
-    private lazy var phoneNumberTextField = UITextFieldStyled(placeholder: Self.phoneNumberTextFieldPlaceholder, frame: .zero)
+    private lazy var firstNameTextField = UITextFieldStyled(
+        placeholder: Self.firstNameTextFieldPlaceholder,
+        returnKeyType: .next,
+        frame: .zero
+    )
+    private lazy var lastNameTextField = UITextFieldStyled(
+        placeholder: Self.lastNameTextFieldPlaceholder,
+        returnKeyType: .next,
+        frame: .zero
+    )
+    private lazy var addressTextField = UITextFieldStyled(
+        placeholder: Self.addressTextFieldPlaceholder,
+        returnKeyType: .next,
+        frame: .zero
+    )
+    private lazy var cityTextField = UITextFieldStyled(
+        placeholder: Self.cityTextFieldPlaceholder,
+        returnKeyType: .next,
+        frame: .zero
+    )
+    private lazy var stateTextField = UITextFieldStyled(
+        placeholder: Self.stateTextFieldPlaceholder,
+        returnKeyType: .next,
+        frame: .zero
+    )
+    private lazy var zipCodeTextField = UITextFieldStyled(
+        placeholder: Self.zipCodeTextFieldPlaceholder,
+        returnKeyType: .next,
+        frame: .zero
+    )
+    private lazy var phoneNumberTextField = UITextFieldStyled(
+        placeholder: Self.phoneNumberTextFieldPlaceholder,
+        keyboardType: .phonePad,
+        frame: .zero
+    )
     
     private lazy var saveChangesAction: () -> Void = { [weak self] in
         self?.presenter.saveChanges()
@@ -81,6 +109,7 @@ class AddressViewController: UIViewController {
         setupUiTexts()
         fillStackViews()
         arrangeUiElements()
+        TextFieldsChaining()
     }
     
     private func setupUiTexts() {
@@ -193,6 +222,16 @@ class AddressViewController: UIViewController {
         saveAddressButton.snp.makeConstraints { make in
             make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-10).priority(.high)
         }
+    }
+    
+    // chaining text fields to move from one to another by "Next" keyboard button
+    private func TextFieldsChaining() {
+        firstNameTextField.addTarget(lastNameTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        lastNameTextField.addTarget(addressTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        addressTextField.addTarget(cityTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        cityTextField.addTarget(stateTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        stateTextField.addTarget(zipCodeTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        zipCodeTextField.addTarget(phoneNumberTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
     }
       
     // hide keyboard

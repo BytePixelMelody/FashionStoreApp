@@ -23,6 +23,8 @@ class UITextFieldStyled: UITextField {
         insets: UIEdgeInsets = UIEdgeInsets(top: 28, left: 0, bottom: 17, right: 0),
         textStyle: TextStyle = .textField,
         placeholderStyle: TextStyle = .placeholder,
+        keyboardType: UIKeyboardType = .default,
+        returnKeyType: UIReturnKeyType = .default,
         frame: CGRect
     ) {
         self.insets = insets
@@ -31,6 +33,8 @@ class UITextFieldStyled: UITextField {
         super.init(frame: frame)
         self.placeholder = placeholder
         self.text = text
+        self.keyboardType = keyboardType
+        self.returnKeyType = returnKeyType
         
         setupUiTexts()
     }
