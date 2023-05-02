@@ -48,38 +48,31 @@ class AddressViewController: UIViewController {
 
     private lazy var firstNameTextField = UITextFieldStyled(
         placeholder: Self.firstNameTextFieldPlaceholder,
-        returnKeyType: .next,
-        frame: .zero
+        returnKeyType: .next
     )
     private lazy var lastNameTextField = UITextFieldStyled(
         placeholder: Self.lastNameTextFieldPlaceholder,
-        returnKeyType: .next,
-        frame: .zero
+        returnKeyType: .next
     )
     private lazy var addressTextField = UITextFieldStyled(
         placeholder: Self.addressTextFieldPlaceholder,
-        returnKeyType: .next,
-        frame: .zero
+        returnKeyType: .next
     )
     private lazy var cityTextField = UITextFieldStyled(
         placeholder: Self.cityTextFieldPlaceholder,
-        returnKeyType: .next,
-        frame: .zero
+        returnKeyType: .next
     )
     private lazy var stateTextField = UITextFieldStyled(
         placeholder: Self.stateTextFieldPlaceholder,
-        returnKeyType: .next,
-        frame: .zero
+        returnKeyType: .next
     )
     private lazy var zipCodeTextField = UITextFieldStyled(
         placeholder: Self.zipCodeTextFieldPlaceholder,
-        returnKeyType: .next,
-        frame: .zero
+        returnKeyType: .next
     )
     private lazy var phoneNumberTextField = UITextFieldStyled(
         placeholder: Self.phoneNumberTextFieldPlaceholder,
-        keyboardType: .phonePad,
-        frame: .zero
+        keyboardType: .phonePad
     )
     
     private lazy var saveChangesAction: () -> Void = { [weak self] in
@@ -209,18 +202,18 @@ class AddressViewController: UIViewController {
     private func arrangeAddAddressButton() {
         view.addSubview(saveAddressButton)
         saveAddressButton.snp.makeConstraints { make in
-            make.top.equalTo(addressScrollView.snp.bottom).offset(8)
+            make.top.equalTo(addressScrollView.snp.bottom).offset(8).priority(.medium)
             make.left.right.equalToSuperview().inset(34)
             // for keyboard support:
-            make.bottom.equalToSuperview().inset(34).priority(.medium)
+            make.bottom.equalToSuperview().inset(34)
             make.height.equalTo(50)
         }
     }
     
     // using keyboard layout
     private func arrangeKeyboardLayoutGuide() {
-        saveAddressButton.snp.makeConstraints { make in
-            make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-10).priority(.high)
+        addressScrollView.snp.makeConstraints { make in
+            make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).priority(.high)
         }
     }
     

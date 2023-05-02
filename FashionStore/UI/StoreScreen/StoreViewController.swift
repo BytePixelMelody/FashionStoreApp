@@ -8,7 +8,7 @@
 // Backlog:
 // TODO: Address screen - button Add address or Save address
 // TODO: Address screen - save data in keychain - make Service
-// TODO: Address screen - if edited and back - "WE CARE" popup
+// TODO: Address screen - if edited and back popup: "WE CARE" "You have unsaved changes" "Discard changes"
 // TODO: Payment Method screen
 // TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
