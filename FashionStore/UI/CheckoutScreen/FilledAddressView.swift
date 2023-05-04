@@ -13,6 +13,7 @@ class FilledAddressView: UIView {
     private let firstLastNameLabelText: String
     private let addressLabelText: String
     private let cityStateZipLabelText: String
+    private let countryLabelText: String
     private let phoneLabelText: String
     private let editInfoAction: () -> Void
     
@@ -26,6 +27,7 @@ class FilledAddressView: UIView {
     private let firstLastNameLabel = UILabel.makeLabel(numberOfLines: 0)
     private let addressLabel = UILabel.makeLabel(numberOfLines: 0)
     private let cityStateZipLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let countryLabel = UILabel.makeLabel(numberOfLines: 0)
     private let phoneLabel = UILabel.makeLabel(numberOfLines: 0)
     
     // creating a forward image
@@ -38,6 +40,7 @@ class FilledAddressView: UIView {
         firstLastNameLabelText: String,
         addressLabelText: String,
         cityStateZipLabelText: String,
+        countryLabelText: String,
         phoneLabelText: String,
         editInfoAction: @escaping () -> Void,
         frame: CGRect = .zero
@@ -45,6 +48,7 @@ class FilledAddressView: UIView {
         self.firstLastNameLabelText = firstLastNameLabelText
         self.addressLabelText = addressLabelText
         self.cityStateZipLabelText = cityStateZipLabelText
+        self.countryLabelText = countryLabelText
         self.phoneLabelText = phoneLabelText
         self.editInfoAction = editInfoAction
         super.init(frame: frame)
@@ -74,6 +78,7 @@ class FilledAddressView: UIView {
         firstLastNameLabel.attributedText = firstLastNameLabelText.setStyle(style: .infoLarge)
         addressLabel.attributedText = addressLabelText.setStyle(style: .address)
         cityStateZipLabel.attributedText = cityStateZipLabelText.setStyle(style: .address)
+        countryLabel.attributedText = countryLabelText.setStyle(style: .address)
         phoneLabel.attributedText = phoneLabelText.setStyle(style: .address)
     }
 
@@ -100,7 +105,8 @@ class FilledAddressView: UIView {
         verticalStackView.setCustomSpacing(3, after: firstLastNameLabel)
         verticalStackView.addArrangedSubview(addressLabel)
         verticalStackView.addArrangedSubview(cityStateZipLabel)
-        verticalStackView.setCustomSpacing(3, after: cityStateZipLabel)
+        verticalStackView.addArrangedSubview(countryLabel)
+        verticalStackView.setCustomSpacing(3, after: countryLabel)
         verticalStackView.addArrangedSubview(phoneLabel)
 
         // adding forward image to horizontal stack view

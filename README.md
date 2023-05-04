@@ -18,7 +18,8 @@
 - [ ] Network service
 - [ ] Collection views
 - [ ] Combine
-- [ ] Generics
+- [x] Keychain service with iCloud sync by native API
+- [x] Generics
 - [x] Typographic font styles
 - [x] Accessibility dynamic font size scaling
 - [x] Errors in a beautiful pop-up ViewController

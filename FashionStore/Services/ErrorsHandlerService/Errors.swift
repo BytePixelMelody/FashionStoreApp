@@ -15,6 +15,10 @@ class Errors {
         case paymentFail
         case networkConnectionFail
         case httpError(statusCode: Int)
+        case keyChainSaveError(errSecCode: Int)
+        case keyChainReadError(errSecCode: Int)
+        case keyChainDeleteError(errSecCode: Int)
+        case keyChainCastError
         
         var errorDescription: String? {
             switch self {
@@ -36,6 +40,23 @@ class Errors {
             // other http error
             case .httpError(let statusCode):
                 return "HTTP error \(statusCode)\n\nPlease try again later"
+                
+            // keychain save error
+            case .keyChainSaveError(let errSecCode):
+                return "Can not save data to keychain, error \(errSecCode)"
+                
+            // keychain read error
+            case .keyChainReadError(let errSecCode):
+                return "Can not read data from keychain, error \(errSecCode)"
+
+            // keychain delete error
+            case .keyChainDeleteError(let errSecCode):
+                return "Can not delete data from keychain, error \(errSecCode)"
+
+           // read cast error
+            case .keyChainCastError:
+                return "Can not convert keychain object to data"
+
             }
         }
     }
@@ -58,25 +79,6 @@ class Errors {
             router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
                                           errorAction: errorAction,
                                           errorButtonTitle: "To payment method")
-        case Errors.ErrorType.networkConnectionFail:
-            router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
-        // client connection error
-        case Errors.ErrorType.httpError(let statusCode) where (400...499).contains(statusCode):
-            router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
-        // server connection error
-        case Errors.ErrorType.httpError(let statusCode) where (500...599).contains(statusCode):
-            router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
-        // other http error
-        case Errors.ErrorType.httpError:
-            router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
         default:
             router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
                                           errorAction: nil,

@@ -12,18 +12,20 @@ protocol CheckoutPresenterProtocol {
     func editAddress()
     func editPaymentCard()
     func placeOrder()
-    func checkoutIsEmptyCheck()
     func closeCheckoutAndCart()
-    func checkoutViewControllerLoaded()
+    func checkoutScreenWillAppear()
 }
 
 class CheckoutPresenter: CheckoutPresenterProtocol {
     weak var view: CheckoutViewProtocol?
     private let router: RouterProtocol
+    private let keychainService: KeychainService
+    
     private var cartProducts: [CartProduct] = []
 
-    init(router: RouterProtocol) {
+    init(router: RouterProtocol, keychainService: KeychainService) {
         self.router = router
+        self.keychainService = keychainService
     }
     
     func closeScreen() {
@@ -63,39 +65,27 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         }
     }
     
-    func checkoutIsEmptyCheck() {
-        if !cartProducts.isEmpty {
-            view?.showEmptyCheckoutWithAnimation()
-        } else {
-            view?.showFullCheckout()
-        }
-    }
-    
-    func checkoutViewControllerLoaded() {
+    func checkoutScreenWillAppear() {
         checkChippingAddress()
         checkPaymentMethod()
+        checkCart()
     }
     
     private func checkChippingAddress() {
-        let chippingAddress: ChippingAddress? = ChippingAddress(
-            firstName: "Iris",
-            lastName: "Watson",
-            address: "606-3727 Ulanocorpenter street",
-            city: "Roseville",
-            state: "NH",
-            zipCode: "11523",
-            phoneNumber: "(786) 713-8616"
-        )
-        
+        var chippingAddress: ChippingAddress? = nil
+        chippingAddress = try? keychainService.read(keychainId: Settings.keychainChippingAddressId)
+
         if let chippingAddress {
             let firstAndLastName = "\(chippingAddress.firstName) \(chippingAddress.lastName)"
             let address = chippingAddress.address
             let cityStateZip = "\(chippingAddress.city), \(chippingAddress.state), \(chippingAddress.zipCode)"
-            let phone = "\(chippingAddress.phoneNumber)"
+            let country = chippingAddress.country
+            let phone = chippingAddress.phoneNumber
             
             view?.showFilledAddressView(firstAndLastName: firstAndLastName,
                                         address: address,
                                         cityStateZip: cityStateZip,
+                                        country: country,
                                         phone: phone)
         } else {
             view?.showAddAddressView()
@@ -141,6 +131,14 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             )
         } else {
             view?.showAddPaymentMethodView()
+        }
+    }
+    
+    private func checkCart() {
+        if !cartProducts.isEmpty {
+            view?.showEmptyCheckoutWithAnimation()
+        } else {
+            view?.showFullCheckout()
         }
     }
     

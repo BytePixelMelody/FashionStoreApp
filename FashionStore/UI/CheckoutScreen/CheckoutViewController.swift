@@ -15,6 +15,7 @@ protocol CheckoutViewProtocol: AnyObject {
     func showFilledAddressView(firstAndLastName: String,
                                address: String,
                                cityStateZip: String,
+                               country: String, 
                                phone: String)
     func showAddPaymentMethodView()
     func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String)
@@ -96,8 +97,6 @@ class CheckoutViewController: UIViewController {
         setupUiTexts()
         fillDetailsAndProductsStackView()
         arrangeUiElements()
-        
-        presenter.checkoutViewControllerLoaded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,7 +106,7 @@ class CheckoutViewController: UIViewController {
         // turn navigation swipe back on is in viewWillDisappear
         navigationController?.interactivePopGestureRecognizer?.delegate = self
 
-        presenter.checkoutIsEmptyCheck()
+        presenter.checkoutScreenWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -211,12 +210,13 @@ extension CheckoutViewController: CheckoutViewProtocol {
         addressContainerView.setSubView(addAddressView)
     }
     
-    public func showFilledAddressView(firstAndLastName: String, address: String, cityStateZip: String, phone: String) {
+    public func showFilledAddressView(firstAndLastName: String, address: String, cityStateZip: String, country: String, phone: String) {
         
         filledAddressView = FilledAddressView(
             firstLastNameLabelText: firstAndLastName,
             addressLabelText: address,
             cityStateZipLabelText: cityStateZip,
+            countryLabelText: country,
             phoneLabelText: phone,
             editInfoAction: editAddressAction
         )

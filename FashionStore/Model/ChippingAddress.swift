@@ -14,5 +14,6 @@ struct ChippingAddress: Codable {
     var city: String
     var state: String
     var zipCode: String
+    var country: String
     var phoneNumber: String
 }

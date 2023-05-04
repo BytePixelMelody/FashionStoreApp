@@ -9,18 +9,31 @@ import UIKit
 import SnapKit
 
 protocol AddressViewProtocol: AnyObject {
-    
+    func showAddAddressButton()
+    func showSaveAddressButton()
+    func fillAddress(
+        firstName: String,
+        lastName: String,
+        address: String,
+        city: String,
+        state: String,
+        zipCode: String,
+        country: String,
+        phoneNumber: String
+    )
 }
 
 class AddressViewController: UIViewController {
     private static let headerTitle = "Shipping Address"
-    private static let firstNameTextFieldPlaceholder = "First name"
-    private static let lastNameTextFieldPlaceholder = "Last name"
-    private static let addressTextFieldPlaceholder = "Address"
-    private static let cityTextFieldPlaceholder = "City"
+    private static let firstNameTextFieldPlaceholder = "First name*"
+    private static let lastNameTextFieldPlaceholder = "Last name*"
+    private static let addressTextFieldPlaceholder = "Address*"
+    private static let cityTextFieldPlaceholder = "City*"
     private static let stateTextFieldPlaceholder = "State"
-    private static let zipCodeTextFieldPlaceholder = "ZIP code"
-    private static let phoneNumberTextFieldPlaceholder = "Phone Number"
+    private static let zipCodeTextFieldPlaceholder = "ZIP code*"
+    private static let countryTextFieldPlaceholder = "Country*"
+    private static let phoneNumberTextFieldPlaceholder = "Phone Number*"
+    private static let addAddressButtonTitle = "Add address"
     private static let saveAddressButtonTitle = "Save address"
     
     private let presenter: AddressPresenterProtocol
@@ -70,16 +83,41 @@ class AddressViewController: UIViewController {
         placeholder: Self.zipCodeTextFieldPlaceholder,
         returnKeyType: .next
     )
+    private lazy var countryTextField = UITextFieldStyled(
+        placeholder: Self.countryTextFieldPlaceholder,
+        returnKeyType: .next
+    )
     private lazy var phoneNumberTextField = UITextFieldStyled(
         placeholder: Self.phoneNumberTextFieldPlaceholder,
         keyboardType: .phonePad
     )
     
     private lazy var saveChangesAction: () -> Void = { [weak self] in
-        self?.presenter.saveChanges()
+        guard
+            let firstName = self?.firstNameTextField.text,
+            let lastName = self?.lastNameTextField.text,
+            let address = self?.addressTextField.text,
+            let city = self?.cityTextField.text,
+            let state = self?.stateTextField.text,
+            let zipCode = self?.zipCodeTextField.text,
+            let country = self?.countryTextField.text,
+            let phoneNumber = self?.phoneNumberTextField.text else {
+            return
+        }
+        self?.presenter.saveChanges(
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            country: country,
+            phoneNumber: phoneNumber
+        )
     }
 
-    private lazy var saveAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: saveChangesAction)
+    private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: saveChangesAction)
+    private lazy var saveAddressButton = UIButton.makeDarkButton(handler: saveChangesAction)
     
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 
@@ -105,8 +143,16 @@ class AddressViewController: UIViewController {
         TextFieldsChaining()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // check address
+        presenter.addressScreenWillAppear()
+    }
+    
     private func setupUiTexts() {
         saveAddressButton.configuration?.attributedTitle = AttributedString(Self.saveAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
+        addAddressButton.configuration?.attributedTitle = AttributedString(Self.addAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
     // accessibility settings was changed - scale fonts
@@ -161,6 +207,13 @@ class AddressViewController: UIViewController {
         // custom spacing
         fullAddressVerticalStackView.setCustomSpacing(5, after: stateZipCodeHorizontalStackView)
 
+        // country row
+        fullAddressVerticalStackView.addArrangedSubview(countryTextField)
+        let countryUnderline = createLineGray()
+        fullAddressVerticalStackView.addArrangedSubview(countryUnderline)
+        // custom spacing
+        fullAddressVerticalStackView.setCustomSpacing(5, after: countryUnderline)
+
         // phone number row
         fullAddressVerticalStackView.addArrangedSubview(phoneNumberTextField)
         fullAddressVerticalStackView.addArrangedSubview(createLineGray())
@@ -171,6 +224,7 @@ class AddressViewController: UIViewController {
         arrangeAddressScrollView()
         arrangeAddressStackView()
         arrangeAddAddressButton()
+        arrangeSaveAddressButton()
         arrangeKeyboardLayoutGuide()
     }
     
@@ -200,11 +254,20 @@ class AddressViewController: UIViewController {
     }
     
     private func arrangeAddAddressButton() {
+        view.addSubview(addAddressButton)
+        addAddressButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(34)
+            make.bottom.equalToSuperview().inset(34)
+            make.height.equalTo(50)
+        }
+    }
+        
+    private func arrangeSaveAddressButton() {
         view.addSubview(saveAddressButton)
         saveAddressButton.snp.makeConstraints { make in
+            // for keyboard appearance support
             make.top.equalTo(addressScrollView.snp.bottom).offset(8).priority(.medium)
             make.left.right.equalToSuperview().inset(34)
-            // for keyboard support:
             make.bottom.equalToSuperview().inset(34)
             make.height.equalTo(50)
         }
@@ -224,7 +287,8 @@ class AddressViewController: UIViewController {
         addressTextField.addTarget(cityTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
         cityTextField.addTarget(stateTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
         stateTextField.addTarget(zipCodeTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
-        zipCodeTextField.addTarget(phoneNumberTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        zipCodeTextField.addTarget(countryTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+        countryTextField.addTarget(phoneNumberTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
     }
       
     // hide keyboard
@@ -236,4 +300,34 @@ class AddressViewController: UIViewController {
 
 extension AddressViewController: AddressViewProtocol {
     
+    func showAddAddressButton() {
+        addAddressButton.isHidden = false
+        saveAddressButton.isHidden = true
+    }
+    
+    func showSaveAddressButton() {
+        saveAddressButton.isHidden = false
+        addAddressButton.isHidden = true
+    }
+    
+    func fillAddress(
+        firstName: String,
+        lastName: String,
+        address: String,
+        city: String,
+        state: String,
+        zipCode: String,
+        country: String,
+        phoneNumber: String
+    ) {
+        firstNameTextField.text = firstName
+        lastNameTextField.text = lastName
+        addressTextField.text = address
+        cityTextField.text = city
+        stateTextField.text = state
+        zipCodeTextField.text = zipCode
+        countryTextField.text = country
+        phoneNumberTextField.text = phoneNumber
+    }
+
 }

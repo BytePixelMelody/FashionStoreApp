@@ -24,6 +24,9 @@ protocol ModuleBuilderProtocol {
 }
 
 class ModuleBuilder: ModuleBuilderProtocol {
+    
+    private let keychainService = KeychainService()
+    
     func createStoreModule(router: RouterProtocol) -> StoreViewController {
         let presenter = StorePresenter(router: router)
         let view = StoreViewController(presenter: presenter)
@@ -46,7 +49,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createAddressModule(router: RouterProtocol) -> AddressViewController {
-        let presenter = AddressPresenter(router: router)
+        let presenter = AddressPresenter(router: router, keychainService: keychainService)
         let view = AddressViewController(presenter: presenter)
         presenter.view = view
         return view
@@ -60,7 +63,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController {
-        let presenter = CheckoutPresenter(router: router)
+        let presenter = CheckoutPresenter(router: router, keychainService: keychainService)
         let view = CheckoutViewController(presenter: presenter)
         presenter.view = view
         return view
