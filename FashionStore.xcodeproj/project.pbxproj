@@ -19,7 +19,7 @@
 		1163019129ED8F810031362C /* ErrorMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019029ED8F810031362C /* ErrorMessageViewController.swift */; };
 		1163019329ED8FA30031362C /* ErrorMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */; };
 		1163019529EE9D5C0031362C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019429EE9D5C0031362C /* Errors.swift */; };
-		11646EE529CF80AA004C9EC2 /* CheckoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* CheckoutDetailsView.swift */; };
+		11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */; };
 		1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171F78229F2E2550011465D /* DeepLinkService.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
@@ -73,7 +73,7 @@
 		1163019029ED8F810031362C /* ErrorMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageViewController.swift; sourceTree = "<group>"; };
 		1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagePresenter.swift; sourceTree = "<group>"; };
 		1163019429EE9D5C0031362C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		11646EE429CF80AA004C9EC2 /* CheckoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutDetailsView.swift; sourceTree = "<group>"; };
+		11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDetailsView.swift; sourceTree = "<group>"; };
 		1171F78229F2E2550011465D /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 			children = (
 				117CB25B29AE142E006F4192 /* CheckoutViewController.swift */,
 				1185D6D029B72C1D00833991 /* CheckoutPresenter.swift */,
-				11646EE429CF80AA004C9EC2 /* CheckoutDetailsView.swift */,
+				11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */,
 				111646CC29DF2767004EEE20 /* FilledAddressView.swift */,
 				111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */,
 			);
@@ -489,7 +489,7 @@
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,
 				11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */,
 				1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */,
-				11646EE529CF80AA004C9EC2 /* CheckoutDetailsView.swift in Sources */,
+				11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */,
 				1185D6C729B72BD200833991 /* StorePresenter.swift in Sources */,
 				111646CF29E05DA3004EEE20 /* ContainerView.swift in Sources */,
 				114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */,

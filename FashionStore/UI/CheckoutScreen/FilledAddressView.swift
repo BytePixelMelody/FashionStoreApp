@@ -95,7 +95,7 @@ class FilledAddressView: UIView {
         horizontalStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
             make.left.equalToSuperview().inset(18)
-            make.right.equalToSuperview().inset(7)
+            make.right.equalToSuperview().inset(8)
         }
         
         // adding vertical stack view for labels to horizontal stack view

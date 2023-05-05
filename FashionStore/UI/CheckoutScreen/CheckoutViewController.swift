@@ -66,7 +66,7 @@ class CheckoutViewController: UIViewController {
         self?.presenter.deleteAddress()
     }
 
-    private lazy var addAddressView = CheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
+    private lazy var addAddressView = EmptyDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
    
     private lazy var editPaymentMethodAction: () -> Void = { [weak self] in
         self?.presenter.editPaymentCard()
@@ -76,7 +76,7 @@ class CheckoutViewController: UIViewController {
         self?.presenter.deletePaymentCard()
     }
     
-    private lazy var addPaymentMethodView = CheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
+    private lazy var addPaymentMethodView = EmptyDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
 
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         

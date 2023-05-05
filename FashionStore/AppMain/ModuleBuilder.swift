@@ -23,7 +23,8 @@ protocol ModuleBuilderProtocol {
         subMessage: String?,
         buttonTitle: String,
         buttonAction: (() -> Void)?,
-        closeAction: (() -> Void)?
+        closeAction: (() -> Void)?,
+        image: UIImageView
     ) -> PopupViewController
     
     func createErrorMessageModule(
@@ -89,7 +90,8 @@ class ModuleBuilder: ModuleBuilderProtocol {
         subMessage: String?,
         buttonTitle: String,
         buttonAction: (() -> Void)?,
-        closeAction: (() -> Void)?
+        closeAction: (() -> Void)?,
+        image: UIImageView
     ) -> PopupViewController {
         let presenter = PopupPresenter(router: router)
         let view = PopupViewController(
@@ -99,7 +101,8 @@ class ModuleBuilder: ModuleBuilderProtocol {
             subMessage: subMessage,
             buttonTitle: buttonTitle,
             buttonAction: buttonAction,
-            closeAction: closeAction
+            closeAction: closeAction,
+            image: image
         )
         presenter.view = view
         return view

@@ -1,5 +1,5 @@
 //
-//  CheckoutDetailsView.swift
+//  EmptyDetailsView.swift
 //  FashionStore
 //
 //  Created by Vyacheslav on 25.03.2023.
@@ -8,7 +8,7 @@
 import UIKit
 
 // view with button like "Add address +"
-class CheckoutDetailsView: UIView {
+class EmptyDetailsView: UIView {
     
     // label
     private let infoLabelText: String
@@ -17,6 +17,8 @@ class CheckoutDetailsView: UIView {
     private let addInfoButtonTitle: String
     private let addInfoAction: () -> Void
     private lazy var addInfoButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, action: addInfoAction)
+    // creating a line image
+    private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
     
     init(
         infoLabelText: String,
@@ -52,7 +54,7 @@ class CheckoutDetailsView: UIView {
     private func arrangeUiElements() {
         arrangeInfoNameLabel()
         arrangeAddInfoButton()
-        setViewHeight()
+        arrangeLineImage()
     }
 
     private func arrangeInfoNameLabel() {
@@ -72,9 +74,12 @@ class CheckoutDetailsView: UIView {
         }
     }
     
-    private func setViewHeight() {
-        self.snp.makeConstraints { make in
-            make.bottom.equalTo(addInfoButton).offset(11)
+    private func arrangeLineImage() {
+        self.addSubview(lineImage)
+        lineImage.snp.makeConstraints { make in
+            make.top.equalTo(addInfoButton.snp.bottom).offset(22)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 

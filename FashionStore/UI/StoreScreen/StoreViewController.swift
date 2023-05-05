@@ -7,7 +7,6 @@
 
 // Backlog:
 // TODO: Cart and Checkout screens - label "Cart is empty" in stack after customSpacing ~50 px
-// TODO: Address screen - save data in keychain - make Service
 // TODO: Address screen - if edited and back popup: "WE CARE" "You have unsaved changes" "Discard changes"
 // TODO: Payment Method screen
 // TODO: All try? remake with "do catch" and logging

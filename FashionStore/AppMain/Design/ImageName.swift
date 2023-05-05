@@ -18,6 +18,7 @@ struct ImageName {
     public static let cartDark = "CartDark"
     public static let close = "Close"
     public static let likeDark = "LikeDark"
+    public static let message = "Message"
     public static let plus = "Plus"
     public static let plusDark = "PlusDark"
     public static let search = "Search"

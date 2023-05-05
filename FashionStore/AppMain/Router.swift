@@ -27,7 +27,8 @@ protocol RouterProtocol {
         subMessage: String?,
         buttonTitle: String,
         buttonAction: (() -> Void)?,
-        closeAction: (() -> Void)?
+        closeAction: (() -> Void)?,
+        image: UIImageView
     )
     
     func showErrorMessageScreen(
@@ -111,7 +112,8 @@ class Router: RouterProtocol {
         subMessage: String?,
         buttonTitle: String,
         buttonAction: (() -> Void)?,
-        closeAction: (() -> Void)?
+        closeAction: (() -> Void)?,
+        image: UIImageView
     ) {
         let viewController = moduleBuilder.createPopupModule(
             router: self,
@@ -120,7 +122,8 @@ class Router: RouterProtocol {
             subMessage: subMessage,
             buttonTitle: buttonTitle,
             buttonAction: buttonAction,
-            closeAction: closeAction
+            closeAction: closeAction,
+            image: image
         )
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.modalTransitionStyle = .crossDissolve

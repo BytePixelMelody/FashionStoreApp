@@ -20,9 +20,10 @@ class PopupViewController: UIViewController {
     private let messageLabelText: String 
     private let subMessageLabelText: String?
     private let footerButtonTitle: String
-    private var footerButtonAction: (() -> Void)?
+    private var initButtonAction: (() -> Void)?
     private var initCloseAction: (() -> Void)?
-    
+    private let image: UIImageView
+
     private lazy var backgroundView: UIView = {
         let backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = .black.withAlphaComponent(0.8)
@@ -30,11 +31,24 @@ class PopupViewController: UIViewController {
         return backgroundView
     }()
     
-    // if no close action passed by init - assign the default close action
-    private lazy var closeAction: () -> Void = initCloseAction ?? { [weak self] in
-        self?.presenter.closePopupScreen()
+    private lazy var closeAction: () -> Void = { [weak self] in
+        guard let self else { return }
+        // close self screen
+        presenter.closePopupScreen()
+        // if no close action passed by init - keep only close self action
+        guard let initCloseAction else { return }
+        initCloseAction()
     }
 
+    private lazy var buttonAction: () -> Void = { [weak self] in
+        guard let self else { return }
+        // close self screen
+        presenter.closePopupScreen()
+        // if no other action passed by init - keep only close self action
+        guard let initButtonAction else { return }
+        initButtonAction()
+    }
+        
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(closeScreen))
     
     private var popupView: UIView = {
@@ -48,12 +62,10 @@ class PopupViewController: UIViewController {
     
     private var verticalStackView = UIStackView.makeVerticalStackView(alignment: .center)
 
-    private let image = UIImageView(image: UIImage(named: ImageName.success))
     private let messageLabel = UILabel.makeLabel(numberOfLines: 0)
     private var subMessageLabel: UILabel? = UILabel.makeLabel(numberOfLines: 0)
     
-    // if no button action passed by init - assign the close action by default
-    private lazy var footerButton = UIButton.makeDarkButton(action: footerButtonAction ?? closeAction)
+    private lazy var footerButton = UIButton.makeDarkButton(action: buttonAction)
 
     init(
         presenter: PopupPresenterProtocol,
@@ -62,15 +74,17 @@ class PopupViewController: UIViewController {
         subMessage: String?,
         buttonTitle: String,
         buttonAction: (() -> Void)?,
-        closeAction: (() -> Void)?
+        closeAction: (() -> Void)?,
+        image: UIImageView // = UIImageView.makeImageView(imageName: ImageName.message)
     ) {
         self.presenter = presenter
         self.headerTitle = headerTitle
         self.messageLabelText = message
         self.subMessageLabelText = subMessage
         self.footerButtonTitle = buttonTitle
-        self.footerButtonAction = buttonAction
+        self.initButtonAction = buttonAction
         self.initCloseAction = closeAction
+        self.image = image
         super.init(nibName: nil, bundle: nil)
     }
     
