@@ -43,7 +43,7 @@ class ErrorMessageViewController: UIViewController {
         self?.presenter.closeErrorMessageScreen()
     }
     
-    private lazy var closableHeaderView = HeaderNamedView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(closeScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
     
     private var verticalStackView = UIStackView.makeVerticalStackView(alignment: .center)
 
@@ -51,7 +51,7 @@ class ErrorMessageViewController: UIViewController {
     
     private let errorLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    private lazy var errorButton = UIButton.makeDarkButton(handler: errorAction)
+    private lazy var errorButton = UIButton.makeDarkButton(action: errorAction)
 
     init(
         presenter: ErrorMessagePresenterProtocol,

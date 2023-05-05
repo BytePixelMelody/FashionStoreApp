@@ -29,7 +29,7 @@ class CartViewController: UIViewController {
         self?.presenter.closeScreen()
     }
 
-    private lazy var closableHeaderView = HeaderNamedView(closeScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(closeScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
 
     private let productsScrollView = UIScrollView.makeScrollView()
 
@@ -39,9 +39,9 @@ class CartViewController: UIViewController {
         self?.presenter.showCheckout()
     }
 
-    private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, actionHandler: checkoutAction, buttonTitle: Self.checkoutButtonTitle)
+    private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, buttonAction: checkoutAction, buttonTitle: Self.checkoutButtonTitle)
     
-    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeScreenAction)
+    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, action: closeScreenAction)
     
     init(presenter: CartPresenterProtocol) {
         self.presenter = presenter

@@ -12,7 +12,7 @@ import UIKit
 extension UIButton {
     
     public static func makeDarkButton(imageName: String? = nil,
-                                      handler: (() -> Void)? = nil) -> UIButton {
+                                      action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
         
         config.background.backgroundColor = UIColor(named: "Active") ?? .black
@@ -23,13 +23,13 @@ extension UIButton {
         config.imagePadding = 24
         
         let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let handler { handler() }
+            if let action { action() }
         }))
         return button
     }
     
     public static func makeIconicButton(imageName: String? = nil,
-                                        handler: (() -> Void)? = nil) -> UIButton {
+                                        action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.plain()
         
         if let imageName {
@@ -38,13 +38,13 @@ extension UIButton {
         config.contentInsets = .zero
         
         let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let handler { handler() }
+            if let action { action() }
         }))
         return button
     }
     
     public static func makeGrayCapsuleButton(imageName: String? = nil,
-                                      handler: (() -> Void)? = nil) -> UIButton {
+                                      action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
 
         config.background.backgroundColor = UIColor(named: "InputBackground") ?? .systemGray6
@@ -58,7 +58,7 @@ extension UIButton {
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
         let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let handler { handler() }
+            if let action { action() }
         }))
 
         button.contentHorizontalAlignment = .leading

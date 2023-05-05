@@ -10,7 +10,9 @@ import Foundation
 protocol CheckoutPresenterProtocol {
     func closeScreen()
     func editAddress()
+    func deleteAddress()
     func editPaymentCard()
+    func deletePaymentCard()
     func placeOrder()
     func closeCheckoutAndCart()
     func checkoutScreenWillAppear()
@@ -20,6 +22,17 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     weak var view: CheckoutViewProtocol?
     private let router: RouterProtocol
     private let keychainService: KeychainService
+    
+    // popup screen info
+    private let popupTitle = "Success"
+    private let popupMessageText = "Thank you for your purchase"
+    private var popupSubMessageText = "Payment receipt: "
+    private let popupButtonTitle = "To store"
+    private lazy var goToStoreAction = { [weak self] in
+        guard let self else { return }
+        self.router.dismissScreen()
+        self.router.popToRootScreen()
+    }
     
     private var cartProducts: [CartProduct] = []
 
@@ -57,8 +70,15 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             case 25..<50:
                 throw Errors.ErrorType.paymentFail
             default:
-                let successOrderReceiptNumber = String(Int.random(in: 100_000...999_999))
-                router.showPurchaseResultScreen(receiptNumber: successOrderReceiptNumber)
+                popupSubMessageText = popupSubMessageText + String(Int.random(in: 100_000...999_999))
+                router.showPopupScreen(
+                    headerTitle: popupTitle,
+                    message: popupMessageText,
+                    subMessage: popupSubMessageText,
+                    buttonTitle: popupButtonTitle,
+                    buttonAction: goToStoreAction,
+                    closeAction: goToStoreAction
+                )
             }
         } catch {
             Errors.handler.checkError(error)
@@ -89,6 +109,16 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
                                         phone: phone)
         } else {
             view?.showAddAddressView()
+        }
+    }
+    
+    // delete chipping address info from keychain and from application
+    func deleteAddress() {
+        do {
+            try keychainService.delete(keychainId: Settings.keychainChippingAddressId)
+            view?.showAddAddressView()
+        } catch {
+            Errors.handler.checkError(error)
         }
     }
     
@@ -131,6 +161,16 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             )
         } else {
             view?.showAddPaymentMethodView()
+        }
+    }
+    
+    // delete bank card info from keychain and from application
+    func deletePaymentCard() {
+        do {
+            try keychainService.delete(keychainId: Settings.keychainPaymentMethodId)
+            view?.showAddPaymentMethodView()
+        } catch {
+            Errors.handler.checkError(error)
         }
     }
     

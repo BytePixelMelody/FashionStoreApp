@@ -10,6 +10,7 @@
 // TODO: Address screen - save data in keychain - make Service
 // TODO: Address screen - if edited and back popup: "WE CARE" "You have unsaved changes" "Discard changes"
 // TODO: Payment Method screen
+// TODO: All try? remake with "do catch" and logging
 // TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
@@ -33,7 +34,7 @@ class StoreViewController: UIViewController {
     }
     
     private lazy var headerBrandedView = HeaderBrandedView(
-        rightFirstButtonHandler: goCartAction,
+        rightFirstButtonAction: goCartAction,
         rightFirstButtonImageName: ImageName.cart,
         frame: .zero
     )
@@ -46,7 +47,7 @@ class StoreViewController: UIViewController {
         self?.presenter.showProduct()
     }
     
-    private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, handler: goProductAction)
+    private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, action: goProductAction)
     
     init(presenter: StorePresenterProtocol) {
         self.presenter = presenter

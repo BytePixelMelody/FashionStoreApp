@@ -44,9 +44,9 @@ class CheckoutViewController: UIViewController {
         self?.presenter.closeCheckoutAndCart()
     }
     
-    private lazy var closeCheckoutHeaderView = HeaderNamedView(closeScreenHandler: closeCheckoutAction, headerTitle: Self.headerTitle)
+    private lazy var closeCheckoutHeaderView = HeaderNamedView(closeScreenAction: closeCheckoutAction, headerTitle: Self.headerTitle)
     
-    private lazy var closeCheckoutAndCartHeaderView = HeaderNamedView(closeScreenHandler: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
+    private lazy var closeCheckoutAndCartHeaderView = HeaderNamedView(closeScreenAction: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
     
     private let detailsAndProductsScrollView = UIScrollView.makeScrollView()
     
@@ -61,24 +61,32 @@ class CheckoutViewController: UIViewController {
     private lazy var editAddressAction: () -> Void = { [weak self] in
         self?.presenter.editAddress()
     }
-    
+
+    private lazy var deleteAddressAction: () -> Void = { [weak self] in
+        self?.presenter.deleteAddress()
+    }
+
     private lazy var addAddressView = CheckoutDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
    
     private lazy var editPaymentMethodAction: () -> Void = { [weak self] in
         self?.presenter.editPaymentCard()
     }
     
+    private lazy var deletePaymentMethodAction: () -> Void = { [weak self] in
+        self?.presenter.deletePaymentCard()
+    }
+    
     private lazy var addPaymentMethodView = CheckoutDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
 
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
-    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: closeCheckoutAndCartAction)
+    private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, action: closeCheckoutAndCartAction)
     
     private lazy var placeOrderAction: () -> Void = { [weak self] in
         self?.presenter.placeOrder()
     }
 
-    private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, actionHandler: placeOrderAction, buttonTitle: Self.placeOrderButtonTitle)
+    private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, buttonAction: placeOrderAction, buttonTitle: Self.placeOrderButtonTitle)
 
     init(presenter: CheckoutPresenterProtocol) {
         self.presenter = presenter
@@ -218,7 +226,8 @@ extension CheckoutViewController: CheckoutViewProtocol {
             cityStateZipLabelText: cityStateZip,
             countryLabelText: country,
             phoneLabelText: phone,
-            editInfoAction: editAddressAction
+            editInfoAction: editAddressAction,
+            deleteInfoAction: deleteAddressAction
         )
         
         if let filledAddressView {
@@ -236,7 +245,8 @@ extension CheckoutViewController: CheckoutViewProtocol {
             paymentSystemImageName: paymentSystemImageName,
             paymentSystemName: paymentSystemName,
             cardLastDigits: cardLastDigits,
-            editInfoAction: editPaymentMethodAction
+            editInfoAction: editPaymentMethodAction,
+            deleteInfoAction: deletePaymentMethodAction
         )
         
         if let filledPaymentMethodView {

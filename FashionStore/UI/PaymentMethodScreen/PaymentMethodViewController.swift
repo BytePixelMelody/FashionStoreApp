@@ -27,9 +27,9 @@ class PaymentMethodViewController: UIViewController {
         self?.presenter.backScreen()
     }
     
-    private lazy var closableHeaderView = HeaderNamedView(backScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(backScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
 
-    private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: closeScreenAction)
+    private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: closeScreenAction)
   
     init(presenter: PaymentMethodPresenterProtocol) {
         self.presenter = presenter

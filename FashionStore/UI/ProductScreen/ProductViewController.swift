@@ -27,9 +27,9 @@ class ProductViewController: UIViewController {
     }
     
     private lazy var headerBrandedView = HeaderBrandedView(
-        leftFirstButtonHandler: goBackAction,
+        leftFirstButtonAction: goBackAction,
         leftFirstButtonImageName: ImageName.backLowered,
-        rightFirstButtonHandler: goCartAction,
+        rightFirstButtonAction: goCartAction,
         rightFirstButtonImageName: ImageName.cart,
         frame: .zero
     )
@@ -41,7 +41,7 @@ class ProductViewController: UIViewController {
     private lazy var addToCartAction: () -> Void = { [weak self] in
         self?.presenter.addProductToCart()
     }
-    private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: addToCartAction)
+    private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: addToCartAction)
 
     init(presenter: ProductPresenterProtocol) {
         self.presenter = presenter

@@ -10,10 +10,10 @@ import UIKit
 class HeaderNamedView: UIView {
         
     // buttons: close and back
-    private let closeScreenHandler: (() -> Void)?
-    private let backScreenHandler: (() -> Void)?
-    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, handler: closeScreenHandler)
-    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.back, handler: backScreenHandler)
+    private let closeScreenAction: (() -> Void)?
+    private let backScreenAction: (() -> Void)?
+    private lazy var closeButton = UIButton.makeIconicButton(imageName: ImageName.close, action: closeScreenAction)
+    private lazy var backButton = UIButton.makeIconicButton(imageName: ImageName.back, action: backScreenAction)
     
     // header label
     private let headerTitle: String
@@ -23,13 +23,13 @@ class HeaderNamedView: UIView {
     private let spacerImage = UIImageView(image: UIImage(named: ImageName.spacer))
 
     init(
-        closeScreenHandler: (() -> Void)? = nil,
-        backScreenHandler: (() -> Void)? = nil,
+        closeScreenAction: (() -> Void)? = nil,
+        backScreenAction: (() -> Void)? = nil,
         headerTitle: String,
         frame: CGRect = .zero
     ) {
-        self.closeScreenHandler = closeScreenHandler
-        self.backScreenHandler = backScreenHandler
+        self.closeScreenAction = closeScreenAction
+        self.backScreenAction = backScreenAction
         self.headerTitle = headerTitle
         super.init(frame: frame)
         
@@ -62,7 +62,7 @@ class HeaderNamedView: UIView {
     
     private func arrangeCloseButton() {
         // no action - no button
-        guard closeScreenHandler != nil else { return }
+        guard closeScreenAction != nil else { return }
         
         self.addSubview(closeButton)
         closeButton.snp.makeConstraints { make in
@@ -74,7 +74,7 @@ class HeaderNamedView: UIView {
     
     private func arrangeBackButton() {
         // no action - no button
-        guard backScreenHandler != nil else { return }
+        guard backScreenAction != nil else { return }
         
         self.addSubview(backButton)
         backButton.snp.makeConstraints { make in

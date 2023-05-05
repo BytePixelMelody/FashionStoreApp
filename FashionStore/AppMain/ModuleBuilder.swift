@@ -15,11 +15,24 @@ protocol ModuleBuilderProtocol {
     func createAddressModule(router: RouterProtocol) -> AddressViewController
     func createPaymentMethodModule(router: RouterProtocol) -> PaymentMethodViewController
     func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController
-    func createPurchaseResultModule(router: RouterProtocol, receiptNumber: String) -> PurchaseResultViewController
-    func createErrorMessageModule(router: RouterProtocol,
-                                errorLabelText: String,
-                                errorAction: (() -> Void)?,
-                                errorButtonTitle: String?) -> ErrorMessageViewController
+    
+    func createPopupModule(
+        router: RouterProtocol,
+        headerTitle: String,
+        message: String,
+        subMessage: String?,
+        buttonTitle: String,
+        buttonAction: (() -> Void)?,
+        closeAction: (() -> Void)?
+    ) -> PopupViewController
+    
+    func createErrorMessageModule(
+        router: RouterProtocol,
+        errorLabelText: String,
+        errorAction: (() -> Void)?,
+        errorButtonTitle: String?
+    ) -> ErrorMessageViewController
+    
     func createTestModule(router: RouterProtocol) -> TestViewController
 }
 
@@ -69,17 +82,33 @@ class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    func createPurchaseResultModule(router: RouterProtocol, receiptNumber: String) -> PurchaseResultViewController {
-        let presenter = PurchaseResultPresenter(router: router)
-        let view = PurchaseResultViewController(presenter: presenter, receiptNumber: receiptNumber)
+    func createPopupModule(
+        router: RouterProtocol,
+        headerTitle: String,
+        message: String,
+        subMessage: String?,
+        buttonTitle: String,
+        buttonAction: (() -> Void)?,
+        closeAction: (() -> Void)?
+    ) -> PopupViewController {
+        let presenter = PopupPresenter(router: router)
+        let view = PopupViewController(
+            presenter: presenter,
+            headerTitle: headerTitle,
+            message: message,
+            subMessage: subMessage,
+            buttonTitle: buttonTitle,
+            buttonAction: buttonAction,
+            closeAction: closeAction
+        )
         presenter.view = view
         return view
     }
     
     func createErrorMessageModule(router: RouterProtocol,
-                                errorLabelText: String,
-                                errorAction: (() -> Void)?,
-                                errorButtonTitle: String?) -> ErrorMessageViewController {
+                                  errorLabelText: String,
+                                  errorAction: (() -> Void)?,
+                                  errorButtonTitle: String?) -> ErrorMessageViewController {
         let presenter = ErrorMessagePresenter(router: router)
         let view = ErrorMessageViewController(presenter: presenter,
                                        errorLabelText: errorLabelText,

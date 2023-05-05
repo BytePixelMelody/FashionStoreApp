@@ -42,7 +42,7 @@ class AddressViewController: UIViewController {
         self?.presenter.backScreen()
     }
 
-    private lazy var closableHeaderView = HeaderNamedView(backScreenHandler: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(backScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
     
     private let addressScrollView = UIScrollView.makeScrollView()
     
@@ -116,8 +116,8 @@ class AddressViewController: UIViewController {
         )
     }
 
-    private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, handler: saveChangesAction)
-    private lazy var saveAddressButton = UIButton.makeDarkButton(handler: saveChangesAction)
+    private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: saveChangesAction)
+    private lazy var saveAddressButton = UIButton.makeDarkButton(action: saveChangesAction)
     
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 

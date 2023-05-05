@@ -21,20 +21,20 @@ class FooterTotalPriceView: UIView {
     private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 2)
     
     // button
-    private let actionHandler: () -> Void
+    private let buttonAction: () -> Void
     private let buttonTitle: String
-    private lazy var button = UIButton.makeDarkButton(imageName: ImageName.cartDark, handler: actionHandler)
+    private lazy var button = UIButton.makeDarkButton(imageName: ImageName.cartDark, action: buttonAction)
     
     init(
         totalLabelTitle: String,
         currencySign: String,
-        actionHandler: @escaping () -> Void,
+        buttonAction: @escaping () -> Void,
         buttonTitle: String,
         frame: CGRect = .zero
     ) {
         self.totalLabelTitle = totalLabelTitle
         self.currencySign = currencySign
-        self.actionHandler = actionHandler
+        self.buttonAction = buttonAction
         self.buttonTitle = buttonTitle
         super.init(frame: frame)
         

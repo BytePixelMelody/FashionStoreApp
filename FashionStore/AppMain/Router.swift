@@ -20,10 +20,22 @@ protocol RouterProtocol {
     func showAddressScreen()
     func showPaymentMethodScreen()
     func showCheckoutScreen()
-    func showPurchaseResultScreen(receiptNumber: String)
-    func showErrorMessageScreen(errorLabelText: String,
-                                errorAction: (() -> Void)?,
-                                errorButtonTitle: String?)
+    
+    func showPopupScreen(
+        headerTitle: String,
+        message: String,
+        subMessage: String?,
+        buttonTitle: String,
+        buttonAction: (() -> Void)?,
+        closeAction: (() -> Void)?
+    )
+    
+    func showErrorMessageScreen(
+        errorLabelText: String,
+        errorAction: (() -> Void)?,
+        errorButtonTitle: String?
+    )
+    
     func showTestScreen()
     
     // close screens
@@ -93,8 +105,23 @@ class Router: RouterProtocol {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showPurchaseResultScreen(receiptNumber: String) {
-        let viewController = moduleBuilder.createPurchaseResultModule(router: self, receiptNumber: receiptNumber)
+    func showPopupScreen(
+        headerTitle: String,
+        message: String,
+        subMessage: String?,
+        buttonTitle: String,
+        buttonAction: (() -> Void)?,
+        closeAction: (() -> Void)?
+    ) {
+        let viewController = moduleBuilder.createPopupModule(
+            router: self,
+            headerTitle: headerTitle,
+            message: message,
+            subMessage: subMessage,
+            buttonTitle: buttonTitle,
+            buttonAction: buttonAction,
+            closeAction: closeAction
+        )
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.modalTransitionStyle = .crossDissolve
         navigationController.viewControllers.last?.present(viewController, animated: true)

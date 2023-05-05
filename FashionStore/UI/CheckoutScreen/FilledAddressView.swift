@@ -16,9 +16,11 @@ class FilledAddressView: UIView {
     private let countryLabelText: String
     private let phoneLabelText: String
     private let editInfoAction: () -> Void
+    private let deleteInfoAction: () -> Void
     
     private lazy var editInfoTap = UITapGestureRecognizer(target: self, action: #selector(editInfoSelector))
-    
+    private lazy var deleteInfoButton = UIButton.makeIconicButton(imageName: ImageName.trash, action: deleteInfoAction)
+
     // creating stack views
     private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12, alignment: .center)
     private let verticalStackView = UIStackView.makeVerticalStackView()
@@ -30,9 +32,6 @@ class FilledAddressView: UIView {
     private let countryLabel = UILabel.makeLabel(numberOfLines: 0)
     private let phoneLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    // creating a forward image
-    private let forwardImage = UIImageView(image: UIImage(named: ImageName.forward))
-
     // creating a line image
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
     
@@ -43,6 +42,7 @@ class FilledAddressView: UIView {
         countryLabelText: String,
         phoneLabelText: String,
         editInfoAction: @escaping () -> Void,
+        deleteInfoAction: @escaping () -> Void,
         frame: CGRect = .zero
     ) {
         self.firstLastNameLabelText = firstLastNameLabelText
@@ -51,6 +51,7 @@ class FilledAddressView: UIView {
         self.countryLabelText = countryLabelText
         self.phoneLabelText = phoneLabelText
         self.editInfoAction = editInfoAction
+        self.deleteInfoAction = deleteInfoAction
         super.init(frame: frame)
         
         // adding tap
@@ -94,7 +95,7 @@ class FilledAddressView: UIView {
         horizontalStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
             make.left.equalToSuperview().inset(18)
-            make.right.equalToSuperview().inset(17)
+            make.right.equalToSuperview().inset(7)
         }
         
         // adding vertical stack view for labels to horizontal stack view
@@ -110,11 +111,11 @@ class FilledAddressView: UIView {
         verticalStackView.addArrangedSubview(phoneLabel)
 
         // adding forward image to horizontal stack view
-        horizontalStackView.addArrangedSubview(forwardImage)
+        horizontalStackView.addArrangedSubview(deleteInfoButton)
         
-        // disable forward image hugging and compression
-        forwardImage.setContentHuggingPriority(.init(rawValue: 1000), for: .horizontal)
-        forwardImage.setContentCompressionResistancePriority(.init(rawValue: 1000), for: .horizontal)
+        deleteInfoButton.snp.makeConstraints { make in
+            make.size.equalTo(44)
+        }
         
         // adding bottom line to view
         self.addSubview(lineImage)

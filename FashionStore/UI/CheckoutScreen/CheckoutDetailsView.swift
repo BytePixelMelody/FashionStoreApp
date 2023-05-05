@@ -7,6 +7,7 @@
 
 import UIKit
 
+// view with button like "Add address +"
 class CheckoutDetailsView: UIView {
     
     // label
@@ -15,7 +16,7 @@ class CheckoutDetailsView: UIView {
     // button
     private let addInfoButtonTitle: String
     private let addInfoAction: () -> Void
-    private lazy var addInfoButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, handler: addInfoAction)
+    private lazy var addInfoButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, action: addInfoAction)
     
     init(
         infoLabelText: String,

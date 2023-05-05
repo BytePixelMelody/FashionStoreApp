@@ -14,8 +14,8 @@
 		111646D529E09513004EEE20 /* FilledPaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */; };
 		114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466C829D2D2B900E504F8 /* UIScrollView+make.swift */; };
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
-		1160A04C29E970BF009AB1C6 /* PurchaseResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04B29E970BF009AB1C6 /* PurchaseResultViewController.swift */; };
-		1160A04E29E970D6009AB1C6 /* PurchaseResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04D29E970D6009AB1C6 /* PurchaseResultPresenter.swift */; };
+		1160A04C29E970BF009AB1C6 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04B29E970BF009AB1C6 /* PopupViewController.swift */; };
+		1160A04E29E970D6009AB1C6 /* PopupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04D29E970D6009AB1C6 /* PopupPresenter.swift */; };
 		1163019129ED8F810031362C /* ErrorMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019029ED8F810031362C /* ErrorMessageViewController.swift */; };
 		1163019329ED8FA30031362C /* ErrorMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */; };
 		1163019529EE9D5C0031362C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019429EE9D5C0031362C /* Errors.swift */; };
@@ -46,7 +46,7 @@
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
 		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
-		11A8F63D29E195A70048EF2E /* UIImage+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8F63C29E195A70048EF2E /* UIImage+make.swift */; };
+		11A8F63D29E195A70048EF2E /* UIImageView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8F63C29E195A70048EF2E /* UIImageView+make.swift */; };
 		11CF2AD629C896D50065D47F /* UITextFieldStyled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AD529C896D50065D47F /* UITextFieldStyled.swift */; };
 		11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */; };
 		11CF2AFF29CC3FE70065D47F /* HeaderNamedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */; };
@@ -68,8 +68,8 @@
 		111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledPaymentMethodView.swift; sourceTree = "<group>"; };
 		114466C829D2D2B900E504F8 /* UIScrollView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+make.swift"; sourceTree = "<group>"; };
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
-		1160A04B29E970BF009AB1C6 /* PurchaseResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResultViewController.swift; sourceTree = "<group>"; };
-		1160A04D29E970D6009AB1C6 /* PurchaseResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResultPresenter.swift; sourceTree = "<group>"; };
+		1160A04B29E970BF009AB1C6 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		1160A04D29E970D6009AB1C6 /* PopupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupPresenter.swift; sourceTree = "<group>"; };
 		1163019029ED8F810031362C /* ErrorMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageViewController.swift; sourceTree = "<group>"; };
 		1163019229ED8FA30031362C /* ErrorMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagePresenter.swift; sourceTree = "<group>"; };
 		1163019429EE9D5C0031362C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
 		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
-		11A8F63C29E195A70048EF2E /* UIImage+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+make.swift"; sourceTree = "<group>"; };
+		11A8F63C29E195A70048EF2E /* UIImageView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+make.swift"; sourceTree = "<group>"; };
 		11CF2AD529C896D50065D47F /* UITextFieldStyled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldStyled.swift; sourceTree = "<group>"; };
 		11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+make.swift"; sourceTree = "<group>"; };
 		11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNamedView.swift; sourceTree = "<group>"; };
@@ -127,13 +127,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1160A04A29E97064009AB1C6 /* PurchaseResultScreen */ = {
+		1160A04A29E97064009AB1C6 /* PopupScreen */ = {
 			isa = PBXGroup;
 			children = (
-				1160A04B29E970BF009AB1C6 /* PurchaseResultViewController.swift */,
-				1160A04D29E970D6009AB1C6 /* PurchaseResultPresenter.swift */,
+				1160A04B29E970BF009AB1C6 /* PopupViewController.swift */,
+				1160A04D29E970D6009AB1C6 /* PopupPresenter.swift */,
 			);
-			path = PurchaseResultScreen;
+			path = PopupScreen;
 			sourceTree = "<group>";
 		};
 		1163018F29ED8F600031362C /* ErrorMessageScreen */ = {
@@ -305,7 +305,7 @@
 				117CB25029AE1206006F4192 /* CheckoutScreen */,
 				117CB25129AE1250006F4192 /* AddressScreen */,
 				117CB25229AE1297006F4192 /* PaymentMethodScreen */,
-				1160A04A29E97064009AB1C6 /* PurchaseResultScreen */,
+				1160A04A29E97064009AB1C6 /* PopupScreen */,
 				1163018F29ED8F600031362C /* ErrorMessageScreen */,
 				1186C98929A2A324002852BB /* TestScreen */,
 			);
@@ -331,7 +331,7 @@
 				11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */,
 				114466C829D2D2B900E504F8 /* UIScrollView+make.swift */,
 				114466CA29D2D36200E504F8 /* UIStackView+make.swift */,
-				11A8F63C29E195A70048EF2E /* UIImage+make.swift */,
+				11A8F63C29E195A70048EF2E /* UIImageView+make.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -466,7 +466,7 @@
 				11E2C9D42A02784D00BDED92 /* Settings.swift in Sources */,
 				117CB25629AE13F4006F4192 /* AddressViewController.swift in Sources */,
 				11CF2AFF29CC3FE70065D47F /* HeaderNamedView.swift in Sources */,
-				1160A04C29E970BF009AB1C6 /* PurchaseResultViewController.swift in Sources */,
+				1160A04C29E970BF009AB1C6 /* PopupViewController.swift in Sources */,
 				117CB25C29AE142E006F4192 /* CheckoutViewController.swift in Sources */,
 				1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */,
 				11CF2AD629C896D50065D47F /* UITextFieldStyled.swift in Sources */,
@@ -476,14 +476,14 @@
 				11E5F4AD29BE095200B979B4 /* CartProduct.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,
 				1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */,
-				1160A04E29E970D6009AB1C6 /* PurchaseResultPresenter.swift in Sources */,
+				1160A04E29E970D6009AB1C6 /* PopupPresenter.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */,
 				11E2C9D22A02213400BDED92 /* KeychainService.swift in Sources */,
 				11E5F4AF29BE09EA00B979B4 /* Product.swift in Sources */,
 				1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */,
 				1185D6D129B72C1D00833991 /* CheckoutPresenter.swift in Sources */,
-				11A8F63D29E195A70048EF2E /* UIImage+make.swift in Sources */,
+				11A8F63D29E195A70048EF2E /* UIImageView+make.swift in Sources */,
 				111646D529E09513004EEE20 /* FilledPaymentMethodView.swift in Sources */,
 				11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */,
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,

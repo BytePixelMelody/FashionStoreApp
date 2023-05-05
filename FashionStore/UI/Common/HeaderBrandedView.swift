@@ -10,40 +10,40 @@ import UIKit
 class HeaderBrandedView: UIView {
     
     // buttons
-    private let leftFirstButtonHandler: (() -> Void)?
-    private let rightFirstButtonHandler: (() -> Void)?
-    private let rightSecondButtonHandler: (() -> Void)?
+    private let leftFirstButtonAction: (() -> Void)?
+    private let rightFirstButtonAction: (() -> Void)?
+    private let rightSecondButtonAction: (() -> Void)?
     
     private let leftFirstButtonImageName: String?
     private let rightFirstButtonImageName: String?
     private let rightSecondButtonImageName: String?
     
-    private lazy var leftFirstButton = UIButton.makeIconicButton(imageName: leftFirstButtonImageName, handler: leftFirstButtonHandler)
-    private lazy var rightFirstButton = UIButton.makeIconicButton(imageName: rightFirstButtonImageName, handler: rightFirstButtonHandler)
-    private lazy var rightSecondButton = UIButton.makeIconicButton(imageName: rightSecondButtonImageName, handler: rightSecondButtonHandler)
+    private lazy var leftFirstButton = UIButton.makeIconicButton(imageName: leftFirstButtonImageName, action: leftFirstButtonAction)
+    private lazy var rightFirstButton = UIButton.makeIconicButton(imageName: rightFirstButtonImageName, action: rightFirstButtonAction)
+    private lazy var rightSecondButton = UIButton.makeIconicButton(imageName: rightSecondButtonImageName, action: rightSecondButtonAction)
     
     // logo image
     private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
 
     init(
-        leftFirstButtonHandler: (() -> Void)? = nil,
+        leftFirstButtonAction: (() -> Void)? = nil,
         leftFirstButtonImageName: String? = nil,
         
-        rightFirstButtonHandler: (() -> Void)? = nil,
+        rightFirstButtonAction: (() -> Void)? = nil,
         rightFirstButtonImageName: String? = nil,
         
-        rightSecondButtonHandler: (() -> Void)? = nil,
+        rightSecondButtonAction: (() -> Void)? = nil,
         rightSecondButtonImageName: String? = nil,
         
         frame: CGRect = .zero
     ) {
-        self.leftFirstButtonHandler = leftFirstButtonHandler
+        self.leftFirstButtonAction = leftFirstButtonAction
         self.leftFirstButtonImageName = leftFirstButtonImageName
         
-        self.rightFirstButtonHandler = rightFirstButtonHandler
+        self.rightFirstButtonAction = rightFirstButtonAction
         self.rightFirstButtonImageName = rightFirstButtonImageName
         
-        self.rightSecondButtonHandler = rightSecondButtonHandler
+        self.rightSecondButtonAction = rightSecondButtonAction
         self.rightSecondButtonImageName = rightSecondButtonImageName
         
         super.init(frame: frame)
@@ -66,7 +66,7 @@ class HeaderBrandedView: UIView {
     
     private func arrangeLeftFirstButton() {
         // no action - no button
-        guard leftFirstButtonHandler != nil else { return }
+        guard leftFirstButtonAction != nil else { return }
         
         self.addSubview(leftFirstButton)
         leftFirstButton.snp.makeConstraints { make in
@@ -78,7 +78,7 @@ class HeaderBrandedView: UIView {
     
     private func arrangeRightFirstButton() {
         // no action - no button
-        guard rightFirstButtonHandler != nil else { return }
+        guard rightFirstButtonAction != nil else { return }
         
         self.addSubview(rightFirstButton)
         rightFirstButton.snp.makeConstraints { make in
@@ -90,7 +90,7 @@ class HeaderBrandedView: UIView {
     
     private func arrangeRightSecondButton() {
         // no action - no button
-        guard rightSecondButtonHandler != nil else { return }
+        guard rightSecondButtonAction != nil else { return }
         
         self.addSubview(rightSecondButton)
         rightSecondButton.snp.makeConstraints { make in

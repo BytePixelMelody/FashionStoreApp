@@ -14,6 +14,7 @@ class FilledPaymentMethodView: UIView {
     private let paymentSystemName: String
     private let cardLastDigits: String
     private let editInfoAction: () -> Void
+    private let deleteInfoAction: () -> Void
     
     private lazy var editInfoTap = UITapGestureRecognizer(target: self, action: #selector(editInfoSelector))
     
@@ -30,7 +31,7 @@ class FilledPaymentMethodView: UIView {
     private let cardInfoLabel = UILabel.makeLabel(numberOfLines: 0)
 
     // creating a forward image
-    private let forwardImage = UIImageView(image: UIImage(named: ImageName.forward))
+    private let forwardImage = UIImageView(image: UIImage(named: ImageName.trash))
 
     // creating a line image
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
@@ -40,12 +41,14 @@ class FilledPaymentMethodView: UIView {
         paymentSystemName: String,
         cardLastDigits: String,
         editInfoAction: @escaping () -> Void,
+        deleteInfoAction: @escaping () -> Void,
         frame: CGRect = .zero
     ) {
         self.paymentSystemImageName = paymentSystemImageName
         self.paymentSystemName = paymentSystemName
         self.cardLastDigits = cardLastDigits
         self.editInfoAction = editInfoAction
+        self.deleteInfoAction = deleteInfoAction
         super.init(frame: frame)
         
         // adding tap
