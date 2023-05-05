@@ -22,7 +22,8 @@
 - [x] Generics
 - [x] Typographic font styles
 - [x] Accessibility dynamic font size scaling
-- [x] Errors in a beautiful pop-up ViewController
+- [x] Errors handler service 
+- [x] Universal pop-up ViewController
 - [x] Deep link
 - [x] Customized animation between screens
 - [ ] Unit tests

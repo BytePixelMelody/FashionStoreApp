@@ -26,14 +26,7 @@ protocol ModuleBuilderProtocol {
         closeAction: (() -> Void)?,
         image: UIImageView
     ) -> PopupViewController
-    
-    func createErrorMessageModule(
-        router: RouterProtocol,
-        errorLabelText: String,
-        errorAction: (() -> Void)?,
-        errorButtonTitle: String?
-    ) -> ErrorMessageViewController
-    
+        
     func createTestModule(router: RouterProtocol) -> TestViewController
 }
 
@@ -104,19 +97,6 @@ class ModuleBuilder: ModuleBuilderProtocol {
             closeAction: closeAction,
             image: image
         )
-        presenter.view = view
-        return view
-    }
-    
-    func createErrorMessageModule(router: RouterProtocol,
-                                  errorLabelText: String,
-                                  errorAction: (() -> Void)?,
-                                  errorButtonTitle: String?) -> ErrorMessageViewController {
-        let presenter = ErrorMessagePresenter(router: router)
-        let view = ErrorMessageViewController(presenter: presenter,
-                                       errorLabelText: errorLabelText,
-                                       errorAction: errorAction,
-                                       errorButtonTitle: errorButtonTitle)
         presenter.view = view
         return view
     }

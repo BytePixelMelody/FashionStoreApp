@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Errors {
     
@@ -63,6 +64,7 @@ class Errors {
     
     private var router: RouterProtocol?
     
+
     public func setRouter(router: RouterProtocol?) {
         self.router = router
     }
@@ -70,20 +72,34 @@ class Errors {
     public func checkError(_ checkingError: Error) {
         guard let router else { return }
         
+        // default popup message values
+        let headerTitle = "Sorry"
+        let errorMessage = checkingError.localizedDescription
+        let errorSubMessage: String? = nil
+        var buttonTitle = "OK"
+        var buttonAction: (() -> Void)? = nil
+        let closeAction: (() -> Void)? = nil
+        let image = UIImageView.makeImageView(imageName: ImageName.smileDisappointed, width: 35, height: 35, contentMode: .scaleAspectFit)
+        
+        // сhanging default values if necessary
         switch checkingError {
         case Errors.ErrorType.paymentFail:
-            let errorAction: () -> Void = {
-                router.dismissScreen()
-                router.showPaymentMethodScreen()
-            }
-            router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
-                                          errorAction: errorAction,
-                                          errorButtonTitle: "To payment method")
+            buttonTitle = "To payment method"
+            buttonAction = { router.showPaymentMethodScreen() }
         default:
-            router.showErrorMessageScreen(errorLabelText: checkingError.localizedDescription,
-                                          errorAction: nil,
-                                          errorButtonTitle: nil)
+            break
         }
+        
+        // show popup screen with error message and actions
+        router.showPopupScreen(
+            headerTitle: headerTitle,
+            message: errorMessage,
+            subMessage: errorSubMessage,
+            buttonTitle: buttonTitle,
+            buttonAction: buttonAction,
+            closeAction: closeAction,
+            image: image
+        )
     }
     
 }

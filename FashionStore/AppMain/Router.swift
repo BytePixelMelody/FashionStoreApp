@@ -31,12 +31,6 @@ protocol RouterProtocol {
         image: UIImageView
     )
     
-    func showErrorMessageScreen(
-        errorLabelText: String,
-        errorAction: (() -> Void)?,
-        errorButtonTitle: String?
-    )
-    
     func showTestScreen()
     
     // close screens
@@ -124,20 +118,6 @@ class Router: RouterProtocol {
             buttonAction: buttonAction,
             closeAction: closeAction,
             image: image
-        )
-        viewController.modalPresentationStyle = .overCurrentContext
-        viewController.modalTransitionStyle = .crossDissolve
-        navigationController.viewControllers.last?.present(viewController, animated: true)
-    }
-    
-    func showErrorMessageScreen(errorLabelText: String,
-                                errorAction: (() -> Void)?,
-                                errorButtonTitle: String?) {
-        let viewController = moduleBuilder.createErrorMessageModule(
-            router: self,
-            errorLabelText: errorLabelText,
-            errorAction: errorAction,
-            errorButtonTitle: errorButtonTitle
         )
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.modalTransitionStyle = .crossDissolve
