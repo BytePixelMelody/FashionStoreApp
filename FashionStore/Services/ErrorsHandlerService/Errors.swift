@@ -11,7 +11,8 @@ import UIKit
 class Errors {
     
     public static let handler = Errors()
-    
+    public var router: RouterProtocol?
+
     public enum ErrorType: LocalizedError {
         case paymentFail
         case networkConnectionFail
@@ -61,14 +62,7 @@ class Errors {
             }
         }
     }
-    
-    private var router: RouterProtocol?
-    
-
-    public func setRouter(router: RouterProtocol?) {
-        self.router = router
-    }
-    
+        
     public func checkError(_ checkingError: Error) {
         guard let router else { return }
         

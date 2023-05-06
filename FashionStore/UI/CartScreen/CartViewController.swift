@@ -98,6 +98,7 @@ class CartViewController: UIViewController {
         arrangeCartIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
+        arrangeProductsScrollViewBottom()
     }
     
     private func arrangeClosableHeaderView() {
@@ -120,10 +121,11 @@ class CartViewController: UIViewController {
         // contentLayoutGuide must have top and bottom constraints
     }
     
+    // TODO: after adding Collection View - remake productsScrollView.contentLayoutGuide to it, add put label on view with constraint header.offset(100)
     private func arrangeCartIsEmptyLabel() {
         productsScrollView.addSubview(cartIsEmptyLabel)
         cartIsEmptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(300)
+            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(100)
             make.left.right.equalTo(productsScrollView.contentLayoutGuide).inset(16)
             make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom)
         }
@@ -140,11 +142,16 @@ class CartViewController: UIViewController {
     private func arrangeFooterTotalPriceView() {
         view.addSubview(footerTotalPriceView)
         footerTotalPriceView.snp.makeConstraints { make in
-            make.top.equalTo(productsScrollView.frameLayoutGuide.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview()
         }
     }
     
+    private func arrangeProductsScrollViewBottom() {
+        productsScrollView.snp.makeConstraints { make in
+            make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
+        }
+    }
+
 }
 
 extension CartViewController: CartViewProtocol {
@@ -168,14 +175,25 @@ extension CartViewController: CartViewProtocol {
         
         // animations
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
+            guard let self else { return }
             // show
-            self?.cartIsEmptyLabel.alpha = 1
-            self?.continueShoppingButton.alpha = 1
+            cartIsEmptyLabel.alpha = 1
+            continueShoppingButton.alpha = 1
             // hide
-            self?.footerTotalPriceView.alpha = 0
+            footerTotalPriceView.alpha = 0
+            // remake scrollView constraints
+            productsScrollView.snp.remakeConstraints { [weak self] make in
+                guard let self else { return }
+                make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
+                make.left.right.equalToSuperview()
+                make.width.equalTo(productsScrollView.contentLayoutGuide.snp.width)
+                make.bottom.equalTo(continueShoppingButton.snp.top).offset(-8)
+            }
+
         }) { [weak self] _ in
+            guard let self else { return }
             // hide
-            self?.footerTotalPriceView.isHidden = true
+            footerTotalPriceView.isHidden = true
         }
     }
     
@@ -185,6 +203,14 @@ extension CartViewController: CartViewProtocol {
         // hide
         cartIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
+        // remake scrollView constraints
+        productsScrollView.snp.remakeConstraints { [weak self] make in
+            guard let self else { return }
+            make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
+            make.left.right.equalToSuperview()
+            make.width.equalTo(productsScrollView.contentLayoutGuide.snp.width)
+            make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
+        }
     }
     
     func setTotalPrice(price: Decimal) {

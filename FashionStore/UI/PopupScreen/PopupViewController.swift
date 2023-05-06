@@ -143,7 +143,7 @@ class PopupViewController: UIViewController {
         popupView.addSubview(verticalStackView)
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(closableHeaderView.snp.bottom).offset(24)
-            make.left.right.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview().inset(18)
             make.bottom.equalToSuperview().inset(34)
         }
         

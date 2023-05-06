@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let moduleBuilder = ModuleBuilder()
         router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
         // errors handler singleton
-        Errors.handler.setRouter(router: router)
+        Errors.handler.router = router
         router?.showStoreScreen()
         
         // processing deep link if App was closed

@@ -149,9 +149,9 @@ class CheckoutViewController: UIViewController {
         arrangeCloseCheckoutAndCartHeaderView()
         arrangeDetailsAndProductsScrollView()
         arrangeDetailsAndProductsStackView()
-        arrangeCheckoutIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
+        arrangeDetailsAndProductsScrollViewBottom()
     }
     
     private func arrangeCloseCheckoutHeaderView() {
@@ -186,14 +186,6 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-    private func arrangeCheckoutIsEmptyLabel() {
-        view.addSubview(checkoutIsEmptyLabel)
-        checkoutIsEmptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(300)
-            make.left.right.equalToSuperview().inset(16)
-        }
-    }
-    
     private func arrangeContinueShoppingButton() {
         view.addSubview(continueShoppingButton)
         continueShoppingButton.snp.makeConstraints { make in
@@ -205,8 +197,13 @@ class CheckoutViewController: UIViewController {
     private func arrangeFooterTotalPriceView() {
         view.addSubview(footerTotalPriceView)
         footerTotalPriceView.snp.makeConstraints { make in
-            make.top.equalTo(detailsAndProductsScrollView.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    private func arrangeDetailsAndProductsScrollViewBottom() {
+        detailsAndProductsScrollView.snp.makeConstraints { make in
+            make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
         }
     }
 
@@ -256,6 +253,10 @@ extension CheckoutViewController: CheckoutViewProtocol {
     
     public func showEmptyCheckoutWithAnimation() {
         
+        // adding checkoutIsEmptyLabel to stackView
+        detailsAndProductsStackView.addArrangedSubview(checkoutIsEmptyLabel)
+        detailsAndProductsStackView.setCustomSpacing(60, after: paymentMethodContainerView)
+        
         // show gradually
         closeCheckoutAndCartHeaderView.alpha = 0
         checkoutIsEmptyLabel.alpha = 0
@@ -273,21 +274,35 @@ extension CheckoutViewController: CheckoutViewProtocol {
         
         // animations
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
+            guard let self else { return }
             // show
-            self?.closeCheckoutAndCartHeaderView.alpha = 1
-            self?.checkoutIsEmptyLabel.alpha = 1
-            self?.continueShoppingButton.alpha = 1
+            closeCheckoutAndCartHeaderView.alpha = 1
+            checkoutIsEmptyLabel.alpha = 1
+            continueShoppingButton.alpha = 1
             // hide
-            self?.closeCheckoutHeaderView.alpha = 0
-            self?.footerTotalPriceView.alpha = 0
+            closeCheckoutHeaderView.alpha = 0
+            footerTotalPriceView.alpha = 0
+            // remake scrollView constraints
+            detailsAndProductsScrollView.snp.remakeConstraints { [weak self] make in
+                guard let self else { return }
+                make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
+                make.left.right.equalToSuperview()
+                make.width.equalTo(detailsAndProductsScrollView.contentLayoutGuide.snp.width)
+                make.bottom.equalTo(continueShoppingButton.snp.top).offset(-8)
+            }
         }) { [weak self] _ in
+            guard let self else { return }
             // hide
-            self?.closeCheckoutHeaderView.isHidden = true
-            self?.footerTotalPriceView.isHidden = true
+            closeCheckoutHeaderView.isHidden = true
+            footerTotalPriceView.isHidden = true
         }
     }
     
     public func showFullCheckout() {
+        // deleting checkoutIsEmptyLabel from stackView
+        detailsAndProductsStackView.removeArrangedSubview(checkoutIsEmptyLabel)
+        detailsAndProductsStackView.setCustomSpacing(29, after: paymentMethodContainerView)
+
         // show
         closeCheckoutHeaderView.isHidden = false
         footerTotalPriceView.isHidden = false
@@ -295,6 +310,14 @@ extension CheckoutViewController: CheckoutViewProtocol {
         closeCheckoutAndCartHeaderView.isHidden = true
         checkoutIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
+        // remake scrollView constraints
+        detailsAndProductsScrollView.snp.remakeConstraints { [weak self] make in
+            guard let self else { return }
+            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
+            make.left.right.equalToSuperview()
+            make.width.equalTo(detailsAndProductsScrollView.contentLayoutGuide.snp.width)
+            make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
+        }
     }
     
     public func setTotalPrice(price: Decimal) {
