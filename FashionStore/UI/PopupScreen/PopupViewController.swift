@@ -36,8 +36,9 @@ class PopupViewController: UIViewController {
         // close self screen
         presenter.closePopupScreen()
         // if no close action passed by init - keep only close self action
-        guard let initCloseAction else { return }
-        initCloseAction()
+        if let initCloseAction  {
+            initCloseAction()
+        }
     }
 
     private lazy var buttonAction: () -> Void = { [weak self] in
@@ -45,8 +46,9 @@ class PopupViewController: UIViewController {
         // close self screen
         presenter.closePopupScreen()
         // if no other action passed by init - keep only close self action
-        guard let initButtonAction else { return }
-        initButtonAction()
+        if let initButtonAction {
+            initButtonAction()
+        }
     }
         
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(closeScreen))

@@ -13,7 +13,6 @@ class ContainerView: UIView {
     private var subView: UIView?
     
     public func setSubView(_ newView: UIView) {
-        
         // removing an old view
         if let oldView = subView {
             oldView.removeFromSuperview()

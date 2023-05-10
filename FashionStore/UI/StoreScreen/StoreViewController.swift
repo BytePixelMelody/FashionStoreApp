@@ -6,7 +6,6 @@
 //
 
 // Backlog:
-// TODO: Combine: Address screen - if edited and back popup: "WE CARE" "You have unsaved changes" "Discard changes", if not all fields filled - throw error message
 // TODO: Payment Method screen
 // TODO: All try? remake with "do catch" and logging
 // TODO: Database in JSON

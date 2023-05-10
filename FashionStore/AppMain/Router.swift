@@ -35,11 +35,18 @@ protocol RouterProtocol {
     
     // close screens
     func dismissScreen() // close modal presented ViewController
-    func popScreen() // close screen with standard pop-animation
+    func popScreen(animated: Bool) // close screen with pop-animation or without
     func popScreenToBottom() // close screen with to bottom animation
     func popTwoScreensToBottom() // close 2 screens with to bottom animation
     func popToRootScreen() // close all screens with to bottom animation
     
+}
+
+extension RouterProtocol {
+    // close screen with standard pop-animation
+    func popScreen(animated: Bool = true) {
+        navigationController.popViewController(animated: true)
+    }
 }
 
 class Router: RouterProtocol {
@@ -135,10 +142,10 @@ class Router: RouterProtocol {
     func dismissScreen() {
         navigationController.viewControllers.last?.dismiss(animated: true)
     }
-        
-    // close screen with standard pop-animation
-    func popScreen() {
-        navigationController.popViewController(animated: true)
+    
+    // close screen with defined animation
+    func popScreen(animated: Bool) {
+        navigationController.popViewController(animated: animated)
     }
 
     // close screen with "to bottom" animation

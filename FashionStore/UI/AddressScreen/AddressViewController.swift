@@ -23,16 +23,6 @@ protocol AddressViewProtocol: AnyObject {
         country: String,
         phoneNumber: String
     )
-    func textFieldsPublisher(
-        firstName: String,
-        lastName: String,
-        address: String,
-        city: String,
-        state: String,
-        zipCode: String,
-        country: String,
-        phoneNumber: String
-    )
 }
 
 class AddressViewController: UIViewController {
@@ -52,8 +42,11 @@ class AddressViewController: UIViewController {
     
     private var cancellables: Set<AnyCancellable> = []
     
+    private var someTextFieldEditedFlag = false
+    
     private lazy var backScreenAction: () -> Void = { [weak self] in
-        self?.presenter.backScreen()
+        guard let self else { return }
+        presenter.backScreen(someTextFieldEdited: someTextFieldEditedFlag)
     }
 
     private lazy var closableHeaderView = HeaderNamedView(backScreenAction: backScreenAction, headerTitle: Self.headerTitle)
@@ -131,14 +124,17 @@ class AddressViewController: UIViewController {
         fillStackViews()
         arrangeUiElements()
         textFieldsChaining()
-        addOrSaveButtonPublisher()
+        makeAddOrSaveButtonPublisher()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // check address
+        // check address and fill
         presenter.addressScreenWillAppear()
+        
+        // making publisher to check if there are any changes
+        makeTextFieldsPublisher()
     }
     
     private func setupUiTexts() {
@@ -289,7 +285,7 @@ class AddressViewController: UIViewController {
     }
     
     // configure publishers using framework CombineCocoa
-    private func addOrSaveButtonPublisher() {
+    private func makeAddOrSaveButtonPublisher() {
         // saveAddressButton or addAddressButton tapped
         let addOrSaveTapped = Publishers.Merge(
             saveAddressButton.controlEventPublisher(for: .primaryActionTriggered),
@@ -301,15 +297,96 @@ class AddressViewController: UIViewController {
             .sink { [weak self] in
                 guard let self else { return }
                 presenter.saveChanges(
-                    firstName: firstNameTextField.text,
-                    lastName: lastNameTextField.text,
-                    address: addressTextField.text,
-                    city: cityTextField.text,
-                    state: stateTextField.text,
-                    zipCode: zipCodeTextField.text,
-                    country: countryTextField.text,
+                    someTextFieldEdited: someTextFieldEditedFlag,
+                    firstName:   firstNameTextField.text,
+                    lastName:    lastNameTextField.text,
+                    address:     addressTextField.text,
+                    city:        cityTextField.text,
+                    state:       stateTextField.text,
+                    zipCode:     zipCodeTextField.text,
+                    country:     countryTextField.text,
                     phoneNumber: phoneNumberTextField.text
                 )
+            }
+            .store(in: &cancellables)
+    }
+    
+    // make publisher to check if there are any edits in text fields
+    private func makeTextFieldsPublisher() {
+        // initial values of text fields
+        guard let firstName = firstNameTextField.text,
+              let lastName = lastNameTextField.text,
+              let address = addressTextField.text,
+              let city = cityTextField.text,
+              let state = stateTextField.text,
+              let zipCode = zipCodeTextField.text,
+              let country = countryTextField.text,
+              let phoneNumber = phoneNumberTextField.text
+        else {
+            return
+        }
+        
+        // flag - if text field was edited
+        var firstNameEdited   = false
+        var lastNameEdited    = false
+        var addressEdited     = false
+        var cityEdited        = false
+        var stateEdited       = false
+        var zipCodeEdited     = false
+        var countryEdited     = false
+        var phoneNumberEdited = false
+        
+        // if the entered value differs from the initial one than edited flag = true
+        firstNameTextField.textPublisher
+            .map { firstName != $0 }
+            .sink { firstNameEdited = $0 }
+            .store(in: &cancellables)
+        lastNameTextField.textPublisher
+            .map { lastName != $0 }
+            .sink { lastNameEdited = $0 }
+            .store(in: &cancellables)
+        addressTextField.textPublisher
+            .map { address != $0 }
+            .sink { addressEdited = $0 }
+            .store(in: &cancellables)
+        cityTextField.textPublisher
+            .map { city != $0 }
+            .sink { cityEdited = $0 }
+            .store(in: &cancellables)
+        stateTextField.textPublisher
+            .map { state != $0 }
+            .sink { stateEdited = $0 }
+            .store(in: &cancellables)
+        zipCodeTextField.textPublisher
+            .map { zipCode != $0 }
+            .sink { zipCodeEdited = $0 }
+            .store(in: &cancellables)
+        countryTextField.textPublisher
+            .map { country != $0 }
+            .sink { countryEdited = $0 }
+            .store(in: &cancellables)
+        phoneNumberTextField.textPublisher
+            .map { phoneNumber != $0 }
+            .sink { phoneNumberEdited = $0 }
+            .store(in: &cancellables)
+
+        // any text field edit
+        let anyEdits = Publishers.Merge8(
+            firstNameTextField.textPublisher,
+            lastNameTextField.textPublisher,
+            addressTextField.textPublisher,
+            cityTextField.textPublisher,
+            stateTextField.textPublisher,
+            zipCodeTextField.textPublisher,
+            countryTextField.textPublisher,
+            phoneNumberTextField.textPublisher
+        )
+        
+        // if any text field was edited, than self edited flag = true
+        anyEdits
+            .sink { [weak self] _ in
+                guard let self else { return }
+                someTextFieldEditedFlag = (firstNameEdited || lastNameEdited || addressEdited || cityEdited || stateEdited || zipCodeEdited || countryEdited || phoneNumberEdited)
             }
             .store(in: &cancellables)
     }
@@ -328,6 +405,7 @@ extension AddressViewController: AddressViewProtocol {
         addAddressButton.isHidden = true
     }
     
+    // filling text fields by text
     func fillAddress(
         firstName: String,
         lastName: String,
@@ -348,74 +426,4 @@ extension AddressViewController: AddressViewProtocol {
         phoneNumberTextField.text = phoneNumber
     }
     
-    // make publisher to check if there are any edits
-    func textFieldsPublisher(
-        // initial values of text fields from
-        firstName: String,
-        lastName: String,
-        address: String,
-        city: String,
-        state: String,
-        zipCode: String,
-        country: String,
-        phoneNumber: String
-    ) {
-        var firstNameEdited = false
-        var lastNameEdited = false
-        
-        firstNameTextField.textPublisher
-            .map { newValue in
-                newValue != firstName
-            }
-            .sink { edited in
-                firstNameEdited = edited
-            }
-            .store(in: &cancellables)
-        lastNameTextField.textPublisher
-            .map { newValue in
-                newValue != lastName
-            }
-            .sink { edited in
-                lastNameEdited = edited
-            }
-            .store(in: &cancellables)
-        
-//        let firstNameState = CurrentValueSubject<Bool, Never>(false)
-//            .merge(with: firstNameChanged)
-//        let lastNameState = CurrentValueSubject<Bool, Never>(false)
-//            .merge(with: lastNameChanged)
-//
-//        firstNameState
-//            .sink { edited in
-//                print("\(edited ? "edited" : "not edited")")
-//                nameEdited = edited
-//            }
-//            .store(in: &cancellables)
-        
-        let anyEdits = Publishers.Merge(firstNameTextField.textPublisher, lastNameTextField.textPublisher)
-        
-        anyEdits
-            .sink { _ in
-                print("First name or last name was edited:", firstNameEdited || lastNameEdited)
-            }
-            .store(in: &cancellables)
-        
-//        lastNameTextField.textPublisher
-//        addressTextField.textPublisher
-//        cityTextField.textPublisher
-//        stateTextField.textPublisher
-//        zipCodeTextField.textPublisher
-//        countryTextField.textPublisher
-//        phoneNumberTextField.textPublisher
-        
-//        firstNameTextField.text     = firstName
-//        lastNameTextField.text      = lastName
-//        addressTextField.text       = address
-//        cityTextField.text          = city
-//        stateTextField.text         = state
-//        zipCodeTextField.text       = zipCode
-//        countryTextField.text       = country
-//        phoneNumberTextField.text   = phoneNumber
-    }
-
 }
