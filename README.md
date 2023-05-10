@@ -17,7 +17,7 @@
 - [ ] Self-designed JSON-structured database
 - [ ] Network service
 - [ ] Collection views
-- [ ] Combine
+- [x] Combine
 - [x] Keychain service with iCloud sync by native API
 - [x] Generics
 - [x] Typographic font styles

@@ -7,11 +7,23 @@
 
 import UIKit
 import SnapKit
+import Combine
+import CombineCocoa
 
 protocol AddressViewProtocol: AnyObject {
     func showAddAddressButton()
     func showSaveAddressButton()
     func fillAddress(
+        firstName: String,
+        lastName: String,
+        address: String,
+        city: String,
+        state: String,
+        zipCode: String,
+        country: String,
+        phoneNumber: String
+    )
+    func textFieldsPublisher(
         firstName: String,
         lastName: String,
         address: String,
@@ -38,11 +50,13 @@ class AddressViewController: UIViewController {
     
     private let presenter: AddressPresenterProtocol
     
-    private lazy var closeScreenAction: () -> Void = { [weak self] in
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private lazy var backScreenAction: () -> Void = { [weak self] in
         self?.presenter.backScreen()
     }
 
-    private lazy var closableHeaderView = HeaderNamedView(backScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(backScreenAction: backScreenAction, headerTitle: Self.headerTitle)
     
     private let addressScrollView = UIScrollView.makeScrollView()
     
@@ -91,33 +105,9 @@ class AddressViewController: UIViewController {
         placeholder: Self.phoneNumberTextFieldPlaceholder,
         keyboardType: .phonePad
     )
-    
-    private lazy var saveChangesAction: () -> Void = { [weak self] in
-        guard
-            let firstName = self?.firstNameTextField.text,
-            let lastName = self?.lastNameTextField.text,
-            let address = self?.addressTextField.text,
-            let city = self?.cityTextField.text,
-            let state = self?.stateTextField.text,
-            let zipCode = self?.zipCodeTextField.text,
-            let country = self?.countryTextField.text,
-            let phoneNumber = self?.phoneNumberTextField.text else {
-            return
-        }
-        self?.presenter.saveChanges(
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            city: city,
-            state: state,
-            zipCode: zipCode,
-            country: country,
-            phoneNumber: phoneNumber
-        )
-    }
 
-    private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: saveChangesAction)
-    private lazy var saveAddressButton = UIButton.makeDarkButton(action: saveChangesAction)
+    private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine
+    private lazy var saveAddressButton = UIButton.makeDarkButton() // action by Combine 
     
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 
@@ -140,7 +130,8 @@ class AddressViewController: UIViewController {
         setupUiTexts()
         fillStackViews()
         arrangeUiElements()
-        TextFieldsChaining()
+        textFieldsChaining()
+        addOrSaveButtonPublisher()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -281,7 +272,7 @@ class AddressViewController: UIViewController {
     }
     
     // chaining text fields to move from one to another by "Next" keyboard button
-    private func TextFieldsChaining() {
+    private func textFieldsChaining() {
         firstNameTextField.addTarget(lastNameTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
         lastNameTextField.addTarget(addressTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
         addressTextField.addTarget(cityTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
@@ -293,9 +284,36 @@ class AddressViewController: UIViewController {
       
     // hide keyboard
     @objc
-    func hideKeyboard() {
+    private func hideKeyboard() {
         view.endEditing(false)
     }
+    
+    // configure publishers using framework CombineCocoa
+    private func addOrSaveButtonPublisher() {
+        // saveAddressButton or addAddressButton tapped
+        let addOrSaveTapped = Publishers.Merge(
+            saveAddressButton.controlEventPublisher(for: .primaryActionTriggered),
+            addAddressButton.controlEventPublisher(for: .primaryActionTriggered)
+        )
+        
+        // call presenter.saveChanges
+        addOrSaveTapped
+            .sink { [weak self] in
+                guard let self else { return }
+                presenter.saveChanges(
+                    firstName: firstNameTextField.text,
+                    lastName: lastNameTextField.text,
+                    address: addressTextField.text,
+                    city: cityTextField.text,
+                    state: stateTextField.text,
+                    zipCode: zipCodeTextField.text,
+                    country: countryTextField.text,
+                    phoneNumber: phoneNumberTextField.text
+                )
+            }
+            .store(in: &cancellables)
+    }
+    
 }
 
 extension AddressViewController: AddressViewProtocol {
@@ -328,6 +346,76 @@ extension AddressViewController: AddressViewProtocol {
         zipCodeTextField.text = zipCode
         countryTextField.text = country
         phoneNumberTextField.text = phoneNumber
+    }
+    
+    // make publisher to check if there are any edits
+    func textFieldsPublisher(
+        // initial values of text fields from
+        firstName: String,
+        lastName: String,
+        address: String,
+        city: String,
+        state: String,
+        zipCode: String,
+        country: String,
+        phoneNumber: String
+    ) {
+        var firstNameEdited = false
+        var lastNameEdited = false
+        
+        firstNameTextField.textPublisher
+            .map { newValue in
+                newValue != firstName
+            }
+            .sink { edited in
+                firstNameEdited = edited
+            }
+            .store(in: &cancellables)
+        lastNameTextField.textPublisher
+            .map { newValue in
+                newValue != lastName
+            }
+            .sink { edited in
+                lastNameEdited = edited
+            }
+            .store(in: &cancellables)
+        
+//        let firstNameState = CurrentValueSubject<Bool, Never>(false)
+//            .merge(with: firstNameChanged)
+//        let lastNameState = CurrentValueSubject<Bool, Never>(false)
+//            .merge(with: lastNameChanged)
+//
+//        firstNameState
+//            .sink { edited in
+//                print("\(edited ? "edited" : "not edited")")
+//                nameEdited = edited
+//            }
+//            .store(in: &cancellables)
+        
+        let anyEdits = Publishers.Merge(firstNameTextField.textPublisher, lastNameTextField.textPublisher)
+        
+        anyEdits
+            .sink { _ in
+                print("First name or last name was edited:", firstNameEdited || lastNameEdited)
+            }
+            .store(in: &cancellables)
+        
+//        lastNameTextField.textPublisher
+//        addressTextField.textPublisher
+//        cityTextField.textPublisher
+//        stateTextField.textPublisher
+//        zipCodeTextField.textPublisher
+//        countryTextField.textPublisher
+//        phoneNumberTextField.textPublisher
+        
+//        firstNameTextField.text     = firstName
+//        lastNameTextField.text      = lastName
+//        addressTextField.text       = address
+//        cityTextField.text          = city
+//        stateTextField.text         = state
+//        zipCodeTextField.text       = zipCode
+//        countryTextField.text       = country
+//        phoneNumberTextField.text   = phoneNumber
     }
 
 }

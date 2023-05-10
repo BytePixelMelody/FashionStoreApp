@@ -129,7 +129,9 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         if let chippingAddress {
             let firstAndLastName = "\(chippingAddress.firstName) \(chippingAddress.lastName)"
             let address = chippingAddress.address
-            let cityStateZip = "\(chippingAddress.city), \(chippingAddress.state), \(chippingAddress.zipCode)"
+            let city = chippingAddress.city.isEmpty ? "" : "\(chippingAddress.city), "
+            let state = chippingAddress.state.isEmpty ? "" : "\(chippingAddress.state), "
+            let cityStateZip = "\(city)\(state)\(chippingAddress.zipCode)"
             let country = chippingAddress.country
             let phone = chippingAddress.phoneNumber
             

@@ -21,6 +21,7 @@ class Errors {
         case keyChainReadError(errSecCode: Int)
         case keyChainDeleteError(errSecCode: Int)
         case keyChainCastError
+        case emptyTextFieldError
         
         var errorDescription: String? {
             switch self {
@@ -58,6 +59,10 @@ class Errors {
            // read cast error
             case .keyChainCastError:
                 return "Can not convert keychain object to data"
+
+           // read cast error
+            case .emptyTextFieldError:
+                return "Please fill all required text fields marked with *"
 
             }
         }
