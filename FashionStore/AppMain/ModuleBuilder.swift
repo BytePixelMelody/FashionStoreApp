@@ -63,7 +63,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createPaymentMethodModule(router: RouterProtocol) -> PaymentMethodViewController {
-        let presenter = PaymentMethodPresenter(router: router)
+        let presenter = PaymentMethodPresenter(router: router, keychainService: keychainService)
         let view = PaymentMethodViewController(presenter: presenter)
         presenter.view = view
         return view

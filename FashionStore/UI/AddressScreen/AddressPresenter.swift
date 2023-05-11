@@ -73,14 +73,8 @@ class AddressPresenter: AddressPresenterProtocol {
         country: String?,
         phoneNumber: String?
     ) {
-        guard someTextFieldEdited == true else {
-            // nothing was edited, just closing the screen
-            router.popScreen()
-            return
-        }
-        
-        // something was edited, saving data...
         do {
+            // check empty fields
             guard
                 let firstName,   !firstName.isEmpty,
                 let lastName,    !lastName.isEmpty,
@@ -94,6 +88,14 @@ class AddressPresenter: AddressPresenterProtocol {
                 throw Errors.ErrorType.emptyTextFieldError
             }
             
+            // checking if fields was edited
+            guard someTextFieldEdited == true else {
+                // nothing was edited, just closing the screen
+                router.popScreen()
+                return
+            }
+            
+            // something was edited, saving data...
             let chippingAddress = ChippingAddress(
                 firstName: firstName,
                 lastName: lastName,

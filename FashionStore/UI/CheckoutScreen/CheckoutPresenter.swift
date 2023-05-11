@@ -146,16 +146,11 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
 
     private func checkPaymentMethod() {
-        let paymentMethod: PaymentMethod? = PaymentMethod(
-            nameOnCard: "Iris Watson",
-            cardNumber: "5365 3654 2365 3698",
-            expMonth: 3,
-            expYear: 25,
-            cvv: 342
-        )
+        var paymentMethod: PaymentMethod? = nil
+        paymentMethod = try? keychainService.read(keychainId: Settings.keychainPaymentMethodId)
         
         if let paymentMethod {
-            let cardFirstDigit = String(paymentMethod.cardNumber.prefix(1))
+            let cardFirstDigit = String(paymentMethod.cardNumber).prefix(1)
             var paymentSystemImageName = ""
             var paymentSystemName = ""
             switch cardFirstDigit {
@@ -175,7 +170,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
                 paymentSystemImageName = ImageName.visa
                 paymentSystemName = "Visa"
             }
-            let cardLastDigits = String(paymentMethod.cardNumber.suffix(4))
+            let cardLastDigits = String(paymentMethod.cardNumber % 10_000) // last 4 digits
                      
             view?.showFilledPaymentMethodView(
                 paymentSystemImageName: paymentSystemImageName,

@@ -7,30 +7,80 @@
 
 import UIKit
 import SnapKit
+import Combine
+import CombineCocoa
 
 protocol PaymentMethodViewProtocol: AnyObject {
-    
+    func showAddPaymentMethodButton()
+    func showSavePaymentMethodButton()
+    func fillPaymentMethod(
+        nameOnCard: String,
+        cardNumber: String,
+        expMonth: String,
+        expYear: String,
+        cvv: String
+    )
 }
 
 class PaymentMethodViewController: UIViewController {
     private static let headerTitle = "Payment method"
-    private static let nameOnCardTextFieldPlaceholder = "Name On Card"
-    private static let cardNumberTextFieldPlaceholder = "Card Number"
-    private static let expMonthTextFieldPlaceholder = "Exp Month"
-    private static let expYearTextFieldPlaceholder = "Exp Year"
-    private static let cvvTextFieldPlaceholder = "CVV"
+    private static let nameOnCardTextFieldPlaceholder = "Name On Card*"
+    private static let cardNumberTextFieldPlaceholder = "Card Number*"
+    private static let expMonthTextFieldPlaceholder = "Exp Month*"
+    private static let expYearTextFieldPlaceholder = "Exp Year*"
+    private static let cvvTextFieldPlaceholder = "CVV*"
     private static let addCardButtonTitle = "Add card"
+    private static let saveCardButtonTitle = "Save card"
 
     private let presenter: PaymentMethodPresenterProtocol
     
-    private lazy var closeScreenAction: () -> Void = { [weak self] in
-        self?.presenter.backScreen()
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private var someTextFieldEditedFlag = false
+
+    private lazy var backScreenAction: () -> Void = { [weak self] in
+        guard let self else { return }
+        presenter.backScreen(someTextFieldEdited: someTextFieldEditedFlag)
     }
     
-    private lazy var closableHeaderView = HeaderNamedView(backScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
+    private lazy var closableHeaderView = HeaderNamedView(backScreenAction: backScreenAction, headerTitle: Self.headerTitle)
+    
+    private let paymentMethodScrollView = UIScrollView.makeScrollView()
 
-    private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: closeScreenAction)
+    // stack view
+    private let paymentMethodVerticalStackView = UIStackView.makeVerticalStackView()
+
+    // 2 columns: Exp Month, Exp Year
+    private let cardValidHorizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12.0, distribution: .fillEqually)
+    private let expMonthVerticalStackView = UIStackView.makeVerticalStackView()
+    private let expYearVerticalStackView = UIStackView.makeVerticalStackView()
+ 
+    private lazy var nameOnCardTextField = UITextFieldStyled(
+        placeholder: Self.nameOnCardTextFieldPlaceholder,
+        returnKeyType: .next
+    )
+    private lazy var cardNumberTextField = UITextFieldStyled(
+        placeholder: Self.cardNumberTextFieldPlaceholder,
+        keyboardType: .numberPad
+    )
+    private lazy var expMonthTextField = UITextFieldStyled(
+        placeholder: Self.expMonthTextFieldPlaceholder,
+        keyboardType: .numberPad
+    )
+    private lazy var expYearTextField = UITextFieldStyled(
+        placeholder: Self.expYearTextFieldPlaceholder,
+        keyboardType: .numberPad
+    )
+    private lazy var cvvTextField = UITextFieldStyled(
+        placeholder: Self.cvvTextFieldPlaceholder,
+        keyboardType: .numberPad
+    )
+
+    private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine
+    private lazy var saveCardButton = UIButton.makeDarkButton() // action by Combine
   
+    private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+
     init(presenter: PaymentMethodPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -43,14 +93,30 @@ class PaymentMethodViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // hide keyboard on background tap
+        view.addGestureRecognizer(backgroundTap)
         view.backgroundColor = .white
         
         setupUiTexts()
+        fillStackViews()
         arrangeUiElements()
+        textFieldsChaining()
+        makeAddOrSaveButtonPublisher()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // check address and fill
+        presenter.paymentMethodWillAppear()
+        
+        // making publisher to check if there are any changes
+        makeTextFieldsPublisher()
+    }
+
     private func setupUiTexts() {
         addCardButton.configuration?.attributedTitle = AttributedString(Self.addCardButtonTitle.uppercased().setStyle(style: .buttonDark))
+        saveCardButton.configuration?.attributedTitle = AttributedString(Self.saveCardButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
     // accessibility settings was changed - scale fonts
@@ -59,15 +125,75 @@ class PaymentMethodViewController: UIViewController {
         setupUiTexts()
     }
     
+    // creating a line image
+    private func createLineGray() -> UIImageView {
+       UIImageView(image: UIImage(named: ImageName.lineGray))
+    }
+    
+    private func fillStackViews() {
+        // name on card row
+        paymentMethodVerticalStackView.addArrangedSubview(nameOnCardTextField)
+        let nameOnCardUnderline = createLineGray()
+        paymentMethodVerticalStackView.addArrangedSubview(nameOnCardUnderline)
+        // custom spacing
+        paymentMethodVerticalStackView.setCustomSpacing(5, after: nameOnCardUnderline)
+        
+        // card number row
+        paymentMethodVerticalStackView.addArrangedSubview(cardNumberTextField)
+        let cardNumberUnderline = createLineGray()
+        paymentMethodVerticalStackView.addArrangedSubview(cardNumberUnderline)
+        // custom spacing
+        paymentMethodVerticalStackView.setCustomSpacing(5, after: cardNumberUnderline)
+
+        // 2 columns row: state, zip
+        paymentMethodVerticalStackView.addArrangedSubview(cardValidHorizontalStackView)
+        // state column
+        cardValidHorizontalStackView.addArrangedSubview(expMonthVerticalStackView)
+        expMonthVerticalStackView.addArrangedSubview(expMonthTextField)
+        expMonthVerticalStackView.addArrangedSubview(createLineGray())
+        // zip column
+        cardValidHorizontalStackView.addArrangedSubview(expYearVerticalStackView)
+        expYearVerticalStackView.addArrangedSubview(expYearTextField)
+        expYearVerticalStackView.addArrangedSubview(createLineGray())
+        // custom spacing
+        cardValidHorizontalStackView.setCustomSpacing(5, after: cardValidHorizontalStackView)
+
+        // phone number row
+        paymentMethodVerticalStackView.addArrangedSubview(cvvTextField)
+        paymentMethodVerticalStackView.addArrangedSubview(createLineGray())
+    }
+    
     private func arrangeUiElements() {
         arrangeClosableHeaderView()
+        arrangePaymentMethodScrollView()
+        arrangePaymentMethodStackView()
         arrangeAddCardButton()
+        arrangeSaveCardButton()
+        arrangeKeyboardLayoutGuide()
     }
     
     private func arrangeClosableHeaderView() {
         view.addSubview(closableHeaderView)
         closableHeaderView.snp.makeConstraints { make in
             make.left.right.top.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func arrangePaymentMethodScrollView() {
+        view.addSubview(paymentMethodScrollView)
+        paymentMethodScrollView.snp.makeConstraints { make in
+            make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
+            make.left.right.equalToSuperview()
+            make.width.equalTo(paymentMethodScrollView.contentLayoutGuide.snp.width)
+            // bottom is in button constraints
+        }
+    }
+    
+    private func arrangePaymentMethodStackView() {
+        paymentMethodScrollView.addSubview(paymentMethodVerticalStackView)
+        paymentMethodVerticalStackView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(paymentMethodScrollView.contentLayoutGuide)
+            make.left.right.equalTo(paymentMethodScrollView.contentLayoutGuide).inset(16)
         }
     }
     
@@ -78,9 +204,145 @@ class PaymentMethodViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
+
+    private func arrangeSaveCardButton() {
+        view.addSubview(saveCardButton)
+        saveCardButton.snp.makeConstraints { make in
+            // medium - for keyboard appearance priority
+            make.top.equalTo(paymentMethodScrollView.snp.bottom).offset(8).priority(.medium)
+            make.left.right.bottom.equalToSuperview().inset(34)
+            make.height.equalTo(50)
+        }
+    }
+    
+    // using keyboard layout
+    private func arrangeKeyboardLayoutGuide() {
+        paymentMethodScrollView.snp.makeConstraints { make in
+            make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).priority(.high)
+        }
+    }
+    
+    // chaining text fields to move from one to another by "Next" keyboard button
+    private func textFieldsChaining() {
+        nameOnCardTextField.addTarget(cardNumberTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
+    }
+    
+    // hide keyboard
+    @objc
+    private func hideKeyboard() {
+        view.endEditing(false)
+    }
+    
+    // configure publishers using framework CombineCocoa
+    private func makeAddOrSaveButtonPublisher() {
+        // saveAddressButton or addAddressButton tapped
+        let addOrSaveTapped = Publishers.Merge(
+            saveCardButton.controlEventPublisher(for: .primaryActionTriggered),
+            addCardButton.controlEventPublisher(for: .primaryActionTriggered)
+        )
+        
+        // call presenter.saveChanges
+        addOrSaveTapped
+            .sink { [weak self] in
+                guard let self else { return }
+                presenter.saveChanges(
+                    someTextFieldEdited: someTextFieldEditedFlag,
+                    nameOnCard:          nameOnCardTextField.text,
+                    cardNumber:          cardNumberTextField.text,
+                    expMonth:            expMonthTextField.text,
+                    expYear:             expYearTextField.text,
+                    cvv:                 cvvTextField.text
+                )
+            }
+            .store(in: &cancellables)
+    }
+    
+    // make publisher to check if there are any edits in text fields
+    private func makeTextFieldsPublisher() {
+        // unwrapped initial values of text fields
+        guard let nameOnCard = nameOnCardTextField.text,
+              let cardNumber = cardNumberTextField.text,
+              let expMonth = expMonthTextField.text,
+              let expYear = expYearTextField.text,
+              let cvv = cvvTextField.text
+        else {
+            return
+        }
+        
+        // flag - if text field was edited
+        var nameOnCardEdited = false
+        var cardNumberEdited = false
+        var expMonthEdited   = false
+        var expYearEdited    = false
+        var cvvEdited        = false
+        
+        // if the entered value differs from the initial one than edited flag = true
+        nameOnCardTextField.textPublisher
+            .map { nameOnCard != $0 }
+            .sink { nameOnCardEdited = $0 }
+            .store(in: &cancellables)
+        cardNumberTextField.textPublisher
+            .map { cardNumber != $0 }
+            .sink { cardNumberEdited = $0 }
+            .store(in: &cancellables)
+        expMonthTextField.textPublisher
+            .map { expMonth != $0 }
+            .sink { expMonthEdited = $0 }
+            .store(in: &cancellables)
+        expYearTextField.textPublisher
+            .map { expYear != $0 }
+            .sink { expYearEdited = $0 }
+            .store(in: &cancellables)
+        cvvTextField.textPublisher
+            .map { cvv != $0 }
+            .sink { cvvEdited = $0 }
+            .store(in: &cancellables)
+
+        // any text field edit
+        let anyEdits = Publishers.Merge5(
+            nameOnCardTextField.textPublisher,
+            cardNumberTextField.textPublisher,
+            expMonthTextField.textPublisher,
+            expYearTextField.textPublisher,
+            cvvTextField.textPublisher
+        )
+        
+        // if any text field was edited, than self edited flag = true
+        anyEdits
+            .sink { [weak self] _ in
+                guard let self else { return }
+                someTextFieldEditedFlag = (nameOnCardEdited || cardNumberEdited || expMonthEdited || expYearEdited || cvvEdited)
+            }
+            .store(in: &cancellables)
+    }
     
 }
 
 extension PaymentMethodViewController: PaymentMethodViewProtocol {
     
+    func showAddPaymentMethodButton() {
+        addCardButton.isHidden = false
+        saveCardButton.isHidden = true
+    }
+    
+    func showSavePaymentMethodButton() {
+        addCardButton.isHidden = true
+        saveCardButton.isHidden = false
+    }
+
+    // filling text fields by text
+    func fillPaymentMethod(
+        nameOnCard: String,
+        cardNumber: String,
+        expMonth: String,
+        expYear: String,
+        cvv: String
+    ) {
+        nameOnCardTextField.text = nameOnCard
+        cardNumberTextField.text = cardNumber
+        expMonthTextField.text = expMonth
+        expYearTextField.text = expYear
+        cvvTextField.text = cvv
+    }
+
 }

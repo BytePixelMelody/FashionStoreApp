@@ -22,6 +22,7 @@ class Errors {
         case keyChainDeleteError(errSecCode: Int)
         case keyChainCastError
         case emptyTextFieldError
+        case notIntegerInputError(errorMessage: String)
         
         var errorDescription: String? {
             switch self {
@@ -63,6 +64,10 @@ class Errors {
            // read cast error
             case .emptyTextFieldError:
                 return "Please fill all required text fields marked with *"
+
+           // read cast error
+            case .notIntegerInputError (let errorMessage):
+                return errorMessage
 
             }
         }

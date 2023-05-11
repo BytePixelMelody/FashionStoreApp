@@ -8,6 +8,7 @@
 
 ## Frameworks
 - [x] SnapKit
+- [x] CombineCocoa
 
 ## Technologies
 - [x] UIKit

@@ -53,7 +53,7 @@ class AddressViewController: UIViewController {
     
     private let addressScrollView = UIScrollView.makeScrollView()
     
-    // full stack
+    // stack view
     private let fullAddressVerticalStackView = UIStackView.makeVerticalStackView()
     
     // 2 columns: first name, last name
@@ -100,7 +100,7 @@ class AddressViewController: UIViewController {
     )
 
     private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine
-    private lazy var saveAddressButton = UIButton.makeDarkButton() // action by Combine 
+    private lazy var saveAddressButton = UIButton.makeDarkButton() // action by Combine
     
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 
@@ -138,8 +138,8 @@ class AddressViewController: UIViewController {
     }
     
     private func setupUiTexts() {
-        saveAddressButton.configuration?.attributedTitle = AttributedString(Self.saveAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
         addAddressButton.configuration?.attributedTitle = AttributedString(Self.addAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
+        saveAddressButton.configuration?.attributedTitle = AttributedString(Self.saveAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
     // accessibility settings was changed - scale fonts
@@ -243,8 +243,7 @@ class AddressViewController: UIViewController {
     private func arrangeAddAddressButton() {
         view.addSubview(addAddressButton)
         addAddressButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(34)
-            make.bottom.equalToSuperview().inset(34)
+            make.left.right.bottom.equalToSuperview().inset(34)
             make.height.equalTo(50)
         }
     }
@@ -252,10 +251,9 @@ class AddressViewController: UIViewController {
     private func arrangeSaveAddressButton() {
         view.addSubview(saveAddressButton)
         saveAddressButton.snp.makeConstraints { make in
-            // for keyboard appearance support
+            // medium - for keyboard appearance priority
             make.top.equalTo(addressScrollView.snp.bottom).offset(8).priority(.medium)
-            make.left.right.equalToSuperview().inset(34)
-            make.bottom.equalToSuperview().inset(34)
+            make.left.right.bottom.equalToSuperview().inset(34)
             make.height.equalTo(50)
         }
     }
@@ -277,7 +275,7 @@ class AddressViewController: UIViewController {
         zipCodeTextField.addTarget(countryTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
         countryTextField.addTarget(phoneNumberTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
     }
-      
+    
     // hide keyboard
     @objc
     private func hideKeyboard() {
@@ -401,8 +399,8 @@ extension AddressViewController: AddressViewProtocol {
     }
     
     func showSaveAddressButton() {
-        saveAddressButton.isHidden = false
         addAddressButton.isHidden = true
+        saveAddressButton.isHidden = false
     }
     
     // filling text fields by text

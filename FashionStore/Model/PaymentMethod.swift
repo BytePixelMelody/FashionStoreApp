@@ -9,7 +9,7 @@ import Foundation
 
 struct PaymentMethod: Codable {
     var nameOnCard: String
-    var cardNumber: String
+    var cardNumber: Int
     var expMonth: Int
     var expYear: Int
     var cvv: Int
