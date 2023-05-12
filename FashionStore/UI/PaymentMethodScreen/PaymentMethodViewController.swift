@@ -73,7 +73,8 @@ class PaymentMethodViewController: UIViewController {
     )
     private lazy var cvvTextField = UITextFieldStyled(
         placeholder: Self.cvvTextFieldPlaceholder,
-        keyboardType: .numberPad
+        keyboardType: .numberPad,
+        isSecureTextEntry: true
     )
 
     private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine
@@ -101,7 +102,10 @@ class PaymentMethodViewController: UIViewController {
         fillStackViews()
         arrangeUiElements()
         textFieldsChaining()
-        makeAddOrSaveButtonPublisher()
+        // publisher to react on buttons tap
+        addOrSaveButtonTapPublisher()
+        // publisher check input format
+        checkTextFieldsFormatsPublisher()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,8 +114,8 @@ class PaymentMethodViewController: UIViewController {
         // check address and fill
         presenter.paymentMethodWillAppear()
         
-        // making publisher to check if there are any changes
-        makeTextFieldsPublisher()
+        // publisher to check any future text fields changes that are filled after previous method
+        checkTextFieldsEditsPublisher()
     }
 
     private func setupUiTexts() {
@@ -234,7 +238,7 @@ class PaymentMethodViewController: UIViewController {
     }
     
     // configure publishers using framework CombineCocoa
-    private func makeAddOrSaveButtonPublisher() {
+    private func addOrSaveButtonTapPublisher() {
         // saveAddressButton or addAddressButton tapped
         let addOrSaveTapped = Publishers.Merge(
             saveCardButton.controlEventPublisher(for: .primaryActionTriggered),
@@ -258,7 +262,7 @@ class PaymentMethodViewController: UIViewController {
     }
     
     // make publisher to check if there are any edits in text fields
-    private func makeTextFieldsPublisher() {
+    private func checkTextFieldsEditsPublisher() {
         // unwrapped initial values of text fields
         guard let nameOnCard = nameOnCardTextField.text,
               let cardNumber = cardNumberTextField.text,
@@ -313,6 +317,64 @@ class PaymentMethodViewController: UIViewController {
                 guard let self else { return }
                 someTextFieldEditedFlag = (nameOnCardEdited || cardNumberEdited || expMonthEdited || expYearEdited || cvvEdited)
             }
+            .store(in: &cancellables)
+    }
+    
+    // make publisher to check correct input format in text fields
+    private func checkTextFieldsFormatsPublisher() {
+        // correct card number
+        cardNumberTextField.textPublisher
+            .compactMap { $0 } // nil is not streaming
+            .map { text in // leave only digit characters from the string
+                text.filter { character in
+                    character.isNumber
+                }
+            }
+            .compactMap { String($0.prefix(19)) } // only 19 first digits, China UnionPay have 16-19 digits
+            .assign(to: \.text, on: cardNumberTextField) // cardNumberTextField.text = up to 19 digits
+            .store(in: &cancellables)
+        
+        // correct month
+        expMonthTextField.textPublisher
+            .compactMap { $0 } // nil is not streaming
+            .map { text in // leave only digit characters from the string
+                text.filter { character in
+                    character.isNumber
+                }
+            }
+            .compactMap { String($0.prefix(2)) } // only 2 first digits
+            .map { text in // not allow to input number > 12
+                if let monthNumber = Int(text), monthNumber > 12 {
+                    return String(text.dropLast()) // 12 -> 12, 13 -> 1, 95 -> 9
+                } else {
+                    return text
+                }
+            }
+            .assign(to: \.text, on: expMonthTextField) // expYearTextField.text = 2 digits
+            .store(in: &cancellables)
+        
+        // correct year
+        expYearTextField.textPublisher
+            .compactMap { $0 } // nil is not streaming
+            .map { text in // leave only digit characters from the string
+                text.filter { character in
+                    character.isNumber
+                }
+            }
+            .compactMap { String($0.prefix(2)) } // only 2 first digits
+            .assign(to: \.text, on: expYearTextField) // expYearTextField.text = 2 digits
+            .store(in: &cancellables)
+    
+        // correct cvv code
+        cvvTextField.textPublisher
+            .compactMap { $0 } // nil is not streaming
+            .map { text in // leave only digit characters from the string
+                text.filter { character in
+                    character.isNumber
+                }
+            }
+            .compactMap { String($0.prefix(4)) } // only 4 first digits
+            .assign(to: \.text, on: cvvTextField) // cvvTextField.text = 4 digits
             .store(in: &cancellables)
     }
     

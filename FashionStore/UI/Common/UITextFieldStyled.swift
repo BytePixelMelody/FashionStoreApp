@@ -25,6 +25,7 @@ class UITextFieldStyled: UITextField {
         placeholderStyle: TextStyle = .placeholder,
         keyboardType: UIKeyboardType = .default,
         returnKeyType: UIReturnKeyType = .default,
+        isSecureTextEntry: Bool = false,
         frame: CGRect = .zero
     ) {
         self.insets = insets
@@ -35,6 +36,7 @@ class UITextFieldStyled: UITextField {
         self.text = text
         self.keyboardType = keyboardType
         self.returnKeyType = returnKeyType
+        self.isSecureTextEntry = isSecureTextEntry
         
         setupUiTexts()
     }

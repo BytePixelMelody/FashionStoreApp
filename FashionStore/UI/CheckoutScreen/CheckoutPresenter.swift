@@ -170,7 +170,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
                 paymentSystemImageName = ImageName.visa
                 paymentSystemName = "Visa"
             }
-            let cardLastDigits = String(paymentMethod.cardNumber % 10_000) // last 4 digits
+            let cardLastDigits = String(paymentMethod.cardNumber.suffix(4)) // last 4 digits
                      
             view?.showFilledPaymentMethodView(
                 paymentSystemImageName: paymentSystemImageName,

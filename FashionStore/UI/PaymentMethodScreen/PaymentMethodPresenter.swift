@@ -91,7 +91,6 @@ class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             // something was edited, checking types and saving data
             guard
                 // type conversion
-                let cardNumberInt = Int(cardNumber.replacingOccurrences(of: " ", with: "")),
                 let expMonthInt = Int(expMonth.replacingOccurrences(of: " ", with: "")),
                 let expYearInt = Int(expYear.replacingOccurrences(of: " ", with: "").suffix(2)),
                 let cvvInt = Int(cvv.replacingOccurrences(of: " ", with: ""))
@@ -101,7 +100,7 @@ class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             
             let paymentMethod = PaymentMethod(
                 nameOnCard: nameOnCard,
-                cardNumber: cardNumberInt,
+                cardNumber: cardNumber,
                 expMonth: expMonthInt,
                 expYear: expYearInt,
                 cvv: cvvInt
