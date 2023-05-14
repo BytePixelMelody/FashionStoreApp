@@ -19,6 +19,7 @@
 		1163019529EE9D5C0031362C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019429EE9D5C0031362C /* Errors.swift */; };
 		11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */; };
 		1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171F78229F2E2550011465D /* DeepLinkService.swift */; };
+		117C0BE02A116DCD00138CA9 /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = 117C0BDF2A116DCD00138CA9 /* products.json */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
 		117CB24C29AE1185006F4192 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 117CB24B29AE1185006F4192 /* SnapKit */; };
 		117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */; };
@@ -72,6 +73,7 @@
 		1163019429EE9D5C0031362C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDetailsView.swift; sourceTree = "<group>"; };
 		1171F78229F2E2550011465D /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
+		117C0BDF2A116DCD00138CA9 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		117CB25329AE13DE006F4192 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
 		117CB25529AE13F4006F4192 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,14 @@
 				1163019429EE9D5C0031362C /* Errors.swift */,
 			);
 			path = ErrorsHandlerService;
+			sourceTree = "<group>";
+		};
+		117C0BDE2A1165C100138CA9 /* Website */ = {
+			isa = PBXGroup;
+			children = (
+				117C0BDF2A116DCD00138CA9 /* products.json */,
+			);
+			path = Website;
 			sourceTree = "<group>";
 		};
 		117CB24D29AE11AC006F4192 /* StoreScreen */ = {
@@ -237,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				1186C92F299FFA66002852BB /* FashionStore */,
+				117C0BDE2A1165C100138CA9 /* Website */,
 				1186C92E299FFA66002852BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -431,6 +442,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				117C0BE02A116DCD00138CA9 /* products.json in Resources */,
 				1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */,
 				1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */,
 				1186C93A299FFA66002852BB /* Assets.xcassets in Resources */,

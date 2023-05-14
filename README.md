@@ -17,6 +17,7 @@
 - [ ] JSON service
 - [ ] Self-designed JSON-structured database
 - [ ] Network service
+- [ ] Core data
 - [ ] Collection views
 - [x] Combine
 - [x] Keychain service with iCloud sync by native API
