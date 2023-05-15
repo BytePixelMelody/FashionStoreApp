@@ -16,6 +16,7 @@
 - [x] Design from Figma, self-adapted for round screens
 - [ ] JSON service
 - [ ] Self-designed JSON-structured database
+- [x] GitHub Pages mock Web-server
 - [ ] Network service
 - [ ] Core data
 - [ ] Collection views

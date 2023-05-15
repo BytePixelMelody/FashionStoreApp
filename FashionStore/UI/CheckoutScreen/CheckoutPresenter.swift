@@ -22,7 +22,7 @@ protocol CheckoutPresenterProtocol {
 class CheckoutPresenter: CheckoutPresenterProtocol {
     weak var view: CheckoutViewProtocol?
     private let router: RouterProtocol
-    private let keychainService: KeychainService
+    private let keychainService: KeychainServiceProtocol
     
     // success purchase popup
     private let successPurchasePopupTitle = "Success"
@@ -66,7 +66,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
 
     private var cartProducts: [CartProduct] = []
 
-    init(router: RouterProtocol, keychainService: KeychainService) {
+    init(router: RouterProtocol, keychainService: KeychainServiceProtocol) {
         self.router = router
         self.keychainService = keychainService
     }

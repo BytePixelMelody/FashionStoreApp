@@ -27,7 +27,7 @@ protocol AddressPresenterProtocol {
 class AddressPresenter: AddressPresenterProtocol {
     weak var view: AddressViewProtocol?
     private let router: RouterProtocol
-    private let keychainService: KeychainService
+    private let keychainService: KeychainServiceProtocol
     
     // popup when back button tapped, but there is any edits
     private let discardChangesPopupTitle = "We care"
@@ -39,7 +39,7 @@ class AddressPresenter: AddressPresenterProtocol {
     }
     private let discardChangesImage = UIImageView.makeImageView(imageName: ImageName.message)
 
-    init(router: RouterProtocol, keychainService: KeychainService) {
+    init(router: RouterProtocol, keychainService: KeychainServiceProtocol) {
         self.router = router
         self.keychainService = keychainService
     }
