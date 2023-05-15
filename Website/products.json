@@ -1,14 +1,4 @@
-{
-  "messages": {
-    "E07lRAbsFyNmQlMP67hmT7mZf482": {
-      "4FF57E09-EAE7-44F1-911D-741246FE5AE0": {
-        "content": "Message text",
-        "date": 700992468.483976,
-        "from": "vnazimko@gmail.com",
-        "id": "4FF57E09-EAE7-44F1-911D-741246FE5AE0",
-        "to": "test4@test.com"
-      }
-    },
+[
     "IbE6AUuYjvhndcnwbs11fSlKSi23": {
       "138CBFC5-AF69-460D-9B7E-108E6647EE95": {
         "content": "Message text",
@@ -101,5 +91,4 @@
         "to": "test@test.com"
       }
     }
-  }
-}
+]
