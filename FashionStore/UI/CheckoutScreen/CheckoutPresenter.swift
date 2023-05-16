@@ -124,8 +124,12 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     
     private func checkChippingAddress() {
         var chippingAddress: ChippingAddress? = nil
-        chippingAddress = try? keychainService.read(keychainId: Settings.keychainChippingAddressId)
-
+        do {
+            chippingAddress = try keychainService.read(keychainId: Settings.keychainChippingAddressId)
+        } catch {
+            Errors.handler.checkError(error)
+        }
+        
         if let chippingAddress {
             let firstAndLastName = "\(chippingAddress.firstName) \(chippingAddress.lastName)"
             let address = chippingAddress.address
@@ -147,7 +151,11 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
 
     private func checkPaymentMethod() {
         var paymentMethod: PaymentMethod? = nil
-        paymentMethod = try? keychainService.read(keychainId: Settings.keychainPaymentMethodId)
+        do {
+            paymentMethod = try keychainService.read(keychainId: Settings.keychainPaymentMethodId)
+        } catch {
+            Errors.handler.checkError(error)
+        }
         
         if let paymentMethod {
             let cardFirstDigit = String(paymentMethod.cardNumber).prefix(1)

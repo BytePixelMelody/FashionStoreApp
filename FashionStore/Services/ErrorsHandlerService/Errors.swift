@@ -23,6 +23,8 @@ class Errors {
         case keyChainCastError
         case emptyTextFieldError
         case notIntegerInputError(errorMessage: String)
+        case invalidUrlStringError
+        case urlResponseCastError
         
         var errorDescription: String? {
             switch self {
@@ -61,13 +63,21 @@ class Errors {
             case .keyChainCastError:
                 return "Can not convert keychain object to data"
 
-           // read cast error
+           // text field is empty error
             case .emptyTextFieldError:
                 return "Please fill all required text fields marked with *"
 
-           // read cast error
+           // text is not integer
             case .notIntegerInputError (let errorMessage):
                 return errorMessage
+
+           // invalid URL string error
+            case .invalidUrlStringError:
+                return "URL string is invalid"
+                
+           // invalid URL string error
+            case .urlResponseCastError:
+                return "URLResponse casting to HTTPURLResponse finished with error"
 
             }
         }
@@ -90,6 +100,17 @@ class Errors {
         case Errors.ErrorType.paymentFail:
             buttonTitle = "To payment method"
             buttonAction = { router.showPaymentMethodScreen() }
+        // do not show this errors massages, just print and return
+        // TODO: remake debugPrint to logging
+        case is DecodingError:
+            debugPrint(checkingError.localizedDescription)
+            return
+        case Errors.ErrorType.keyChainReadError:
+            debugPrint(checkingError.localizedDescription)
+            return
+        case Errors.ErrorType.urlResponseCastError:
+            debugPrint(checkingError.localizedDescription)
+            return
         default:
             break
         }

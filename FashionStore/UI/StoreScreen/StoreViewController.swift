@@ -6,8 +6,6 @@
 //
 
 // Backlog:
-// TODO: Payment Method screen
-// TODO: All try? remake with "do catch" and logging
 // TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController

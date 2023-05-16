@@ -121,7 +121,11 @@ class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
     
     private func checkPaymentMethod() {
         var paymentMethod: PaymentMethod? = nil
-        paymentMethod = try? keychainService.read(keychainId: Settings.keychainPaymentMethodId)
+        do {
+            paymentMethod = try keychainService.read(keychainId: Settings.keychainPaymentMethodId)
+        } catch {
+            Errors.handler.checkError(error)
+        }
 
         if let paymentMethod {
             view?.showSavePaymentMethodButton()

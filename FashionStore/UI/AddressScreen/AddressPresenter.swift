@@ -121,7 +121,11 @@ class AddressPresenter: AddressPresenterProtocol {
     
     private func checkAddress() {
         var chippingAddress: ChippingAddress? = nil
-        chippingAddress = try? keychainService.read(keychainId: Settings.keychainChippingAddressId)
+        do {
+            chippingAddress = try keychainService.read(keychainId: Settings.keychainChippingAddressId)
+        } catch {
+            Errors.handler.checkError(error)
+        }
 
         if let chippingAddress { 
             view?.showSaveAddressButton()

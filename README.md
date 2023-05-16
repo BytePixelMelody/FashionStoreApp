@@ -16,7 +16,7 @@
 - [x] Design from Figma, self-adapted for round screens
 - [ ] JSON service
 - [ ] Self-designed JSON-structured database
-- [x] GitHub Pages mock Web-server
+- [x] GitHub Pages based mock Web-server
 - [ ] Network service
 - [ ] Core data
 - [ ] Collection views
@@ -25,7 +25,7 @@
 - [x] Generics
 - [x] Typographic font styles
 - [x] Accessibility dynamic font size scaling
-- [x] Errors handler service 
+- [ ] Errors handler service with logging
 - [x] Universal pop-up ViewController
 - [x] Deep link
 - [x] Customized animation between screens
