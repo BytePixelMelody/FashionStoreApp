@@ -7,12 +7,20 @@
 
 import Foundation
 import UIKit
+import OSLog
 
 class Errors {
     
+    // singletone
     public static let handler = Errors()
+    
+    // for router injection
     public var router: RouterProtocol?
+    
+    // logger, use Console to view logs
+    let logger = Logger(subsystem: "Error handler", category: "Errors")
 
+    // error types
     public enum ErrorType: LocalizedError {
         case paymentFail
         case networkConnectionFail
@@ -26,6 +34,7 @@ class Errors {
         case invalidUrlStringError
         case urlResponseCastError
         
+        // errors localized descriptions
         var errorDescription: String? {
             switch self {
                 
@@ -83,6 +92,7 @@ class Errors {
         }
     }
         
+    // handling errors
     public func checkError(_ checkingError: Error) {
         guard let router else { return }
         
@@ -95,21 +105,14 @@ class Errors {
         let closeAction: (() -> Void)? = nil
         let image = UIImageView.makeImageView(imageName: ImageName.smileDisappointed, width: 35, height: 35, contentMode: .scaleAspectFit)
         
-        // сhanging default values if necessary
         switch checkingError {
+        // сhanging popup values
         case Errors.ErrorType.paymentFail:
             buttonTitle = "To payment method"
             buttonAction = { router.showPaymentMethodScreen() }
-        // do not show this errors massages, just print and return
-        // TODO: remake debugPrint to logging
-        case is DecodingError:
-            debugPrint(checkingError.localizedDescription)
-            return
-        case Errors.ErrorType.keyChainReadError:
-            debugPrint(checkingError.localizedDescription)
-            return
-        case Errors.ErrorType.urlResponseCastError:
-            debugPrint(checkingError.localizedDescription)
+        // no error popup, log and return
+        case is DecodingError, Errors.ErrorType.keyChainReadError, Errors.ErrorType.urlResponseCastError:
+            logger.error("\(checkingError.localizedDescription)")
             return
         default:
             break
@@ -125,6 +128,9 @@ class Errors {
             closeAction: closeAction,
             image: image
         )
+        
+        // log error
+        logger.error("\(checkingError.localizedDescription)")
     }
     
 }

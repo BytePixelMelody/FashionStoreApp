@@ -20,15 +20,14 @@
 - [ ] Network service
 - [ ] Core data
 - [ ] Collection views
-- [x] Combine
+- [x] Combine for input check
 - [x] Keychain service with iCloud sync by native API
 - [x] Generics
-- [x] Typographic font styles
-- [x] Accessibility dynamic font size scaling
-- [ ] Errors handler service with logging
-- [x] Universal pop-up ViewController
-- [x] Deep link
+- [x] Typographic font styles with dynamic font scaling
 - [x] Customized animation between screens
+- [x] Logging errors
+- [x] Styled pop-up for errors and warnings
+- [x] Deep link
 - [ ] Unit tests
 
 ## Code patterns
