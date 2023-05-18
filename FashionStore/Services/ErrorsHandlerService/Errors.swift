@@ -112,7 +112,7 @@ class Errors {
             buttonAction = { router.showPaymentMethodScreen() }
         // no error popup, log and return
         case is DecodingError, Errors.ErrorType.keyChainReadError, Errors.ErrorType.urlResponseCastError:
-            logger.error("\(checkingError.localizedDescription)")
+            logger.error("\(checkingError.localizedDescription, privacy: .public)")
             return
         default:
             break
@@ -130,7 +130,7 @@ class Errors {
         )
         
         // log error
-        logger.error("\(checkingError.localizedDescription)")
+        logger.error("\(checkingError.localizedDescription, privacy: .public)")
     }
     
 }

@@ -13,7 +13,7 @@
 ## Technologies
 - [x] UIKit
 - [x] UI fully by code
-- [x] Design from Figma, self-adapted for round screens
+- [x] Design from Figma, adapted for rounded screens
 - [ ] JSON service
 - [ ] Self-designed JSON-structured database
 - [x] GitHub Pages based mock Web-server
@@ -21,7 +21,7 @@
 - [ ] Core data
 - [ ] Collection views
 - [x] Combine for input check
-- [x] Keychain service with iCloud sync by native API
+- [x] Keychain service with iCloud sync by native API for sensitive data
 - [x] Generics
 - [x] Typographic font styles with dynamic font scaling
 - [x] Customized animation between screens
