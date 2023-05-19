@@ -67,6 +67,17 @@ class StoreViewController: UIViewController {
         arrangeUiElements()
     }
     
+    // TODO: Delete this
+    private func loadJson() {
+        let webService = WebService()
+        
+        var audience: [Audience]? = nil
+        Task {
+            audience = await webService.getData(urlString: "")
+        }
+        print(audience ?? "")
+    }
+    
     private func setupUiTexts() {
         screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLargeAlignLeft)
         productButton.configuration?.attributedTitle = AttributedString(Self.toProductButtonTitle.setStyle(style: .buttonDark))
