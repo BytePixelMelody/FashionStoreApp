@@ -78,7 +78,7 @@ class StoreViewController: UIViewController {
         
         Task.detached {
             var catalog: Catalog? = nil
-            catalog = await webService.getData(urlString: Settings.catalogUrl, urlCache: nil)
+            catalog = await webService.getData(urlString: Settings.catalogUrl)
             print(catalog ?? "")
         }
     }
