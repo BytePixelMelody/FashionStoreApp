@@ -78,7 +78,7 @@ class StoreViewController: UIViewController {
         
         Task.detached {
             var catalog: Catalog? = nil
-            catalog = await webService.getData(urlString: Settings.catalogUrl)
+            catalog = await webService.getData(urlString: Settings.catalogUrl, urlCache: .shared)
             print(catalog ?? "")
         }
     }
@@ -88,13 +88,13 @@ class StoreViewController: UIViewController {
         let audienceMen = Audience(id: UUID(), name: "Men", categories: [])
         let audienceWomen = Audience(id: UUID(), name: "Women", categories: [])
         
-        let dataObject = [audienceMen, audienceWomen]
+        let catalog: Catalog = Catalog(audiences: [audienceMen, audienceWomen])
         
         do {
             let jsonEncoder = JSONEncoder()
             jsonEncoder.outputFormatting = .prettyPrinted
-            let data = try jsonEncoder.encode(dataObject)
-            let jsonUrl = try getAppSupportUrl(fileName: "audiences.json")
+            let data = try jsonEncoder.encode(catalog)
+            let jsonUrl = try getAppSupportUrl(fileName: "catalog.json")
             try data.write(to: jsonUrl)
             print("Written to file:\n\(jsonUrl.absoluteString)")
         } catch {

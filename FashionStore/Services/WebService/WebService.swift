@@ -8,13 +8,15 @@
 import Foundation
 
 protocol WebServiceProtocol {
-    func getData<T: Codable>(urlString: String) async -> T?
+    func getData<T: Codable>(urlString: String, urlCache: URLCache?) async -> T?
 }
  
 // web service that used to obtain decoded JSON-data by URL string
-class WebService: WebServiceProtocol {
+// extension is used here to set default param URLCache? = .shared
+extension WebServiceProtocol {
     
-    public func getData<T: Codable>(urlString: String) async -> T? {
+    // to turn off caching set urlCache = nil
+    public func getData<T: Codable>(urlString: String, urlCache: URLCache? = .shared) async -> T? {
         do {
             // urlString check
             guard let url = URL(string: urlString) else {
@@ -49,5 +51,9 @@ class WebService: WebServiceProtocol {
             return nil
         }
     }
+    
+}
+
+class WebService: WebServiceProtocol {
     
 }
