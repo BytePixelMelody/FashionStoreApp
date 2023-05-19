@@ -23,8 +23,12 @@ extension WebServiceProtocol {
                 throw Errors.ErrorType.invalidUrlStringError
             }
             
+            let urlSessionConfiguration = URLSessionConfiguration.default
+            urlSessionConfiguration.urlCache = urlCache
+            let urlSession = URLSession(configuration: urlSessionConfiguration)
+            
             // try to get data from url
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await urlSession.data(from: url)
             
             // urlResponse typecasting check
             guard let urlResponse = response as? HTTPURLResponse else {
