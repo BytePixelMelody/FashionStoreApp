@@ -16,7 +16,7 @@ protocol CartPresenterProtocol {
 class CartPresenter: CartPresenterProtocol {
     weak var view: CartViewProtocol?
     private let router: RouterProtocol
-    private var cartProducts: [CartProduct] = []
+    private var cartProducts: [Cart] = []
 
     init(router: RouterProtocol) {
         self.router = router

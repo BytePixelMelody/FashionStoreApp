@@ -64,7 +64,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         }
     }
 
-    private var cartProducts: [CartProduct] = []
+    private var cartProducts: [Cart] = []
 
     init(router: RouterProtocol, keychainService: KeychainServiceProtocol) {
         self.router = router

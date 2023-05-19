@@ -5,6 +5,11 @@
 //  Created by Vyacheslav on 28.02.2023.
 //
 
+// Interesting implementations:
+// 1. Font styles with dynamic scaling
+// 2. Keychain service with iCloud support
+// 3. Router with custom routing and custom animations
+
 // Backlog:
 // TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
