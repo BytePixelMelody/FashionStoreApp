@@ -56,7 +56,7 @@
 		11E2C9D42A02784D00BDED92 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2C9D32A02784C00BDED92 /* Settings.swift */; };
 		11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4A929BDE87200B979B4 /* ImageName.swift */; };
 		11E5F4AD29BE095200B979B4 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AC29BE095200B979B4 /* Cart.swift */; };
-		11E5F4AF29BE09EA00B979B4 /* ProductStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AE29BE09EA00B979B4 /* ProductStructure.swift */; };
+		11E5F4AF29BE09EA00B979B4 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4AE29BE09EA00B979B4 /* Catalog.swift */; };
 		11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */; };
 		11F0DACA29E85868003ADE45 /* HeaderBrandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */; };
 /* End PBXBuildFile section */
@@ -111,7 +111,7 @@
 		11E2C9D32A02784C00BDED92 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		11E5F4A929BDE87200B979B4 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		11E5F4AC29BE095200B979B4 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
-		11E5F4AE29BE09EA00B979B4 /* ProductStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStructure.swift; sourceTree = "<group>"; };
+		11E5F4AE29BE09EA00B979B4 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransitionFactory.swift; sourceTree = "<group>"; };
 		11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBrandedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -361,7 +361,7 @@
 		11E5F4AB29BE093900B979B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				11E5F4AE29BE09EA00B979B4 /* ProductStructure.swift */,
+				11E5F4AE29BE09EA00B979B4 /* Catalog.swift */,
 				11E5F4AC29BE095200B979B4 /* Cart.swift */,
 				111646D029E086B1004EEE20 /* ChippingAddress.swift */,
 				111646D229E0877F004EEE20 /* PaymentMethod.swift */,
@@ -485,7 +485,7 @@
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */,
 				11E2C9D22A02213400BDED92 /* KeychainService.swift in Sources */,
-				11E5F4AF29BE09EA00B979B4 /* ProductStructure.swift in Sources */,
+				11E5F4AF29BE09EA00B979B4 /* Catalog.swift in Sources */,
 				1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */,
 				1185D6D129B72C1D00833991 /* CheckoutPresenter.swift in Sources */,
 				11A8F63D29E195A70048EF2E /* UIImageView+make.swift in Sources */,

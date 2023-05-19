@@ -69,17 +69,17 @@ class StoreViewController: UIViewController {
         setupUiTexts()
         arrangeUiElements()
         
-        writeToJson()
+        loadJson()
     }
     
     // TODO: Delete this
     private func loadJson() {
         let webService = WebService()
         
-        Task {
-            var audience: [Audience]? = nil
-            audience = await webService.getData(urlString: Settings.catalogUrl)
-            print(audience ?? "")
+        Task.detached {
+            var catalog: Catalog? = nil
+            catalog = await webService.getData(urlString: Settings.catalogUrl)
+            print(catalog ?? "")
         }
     }
     

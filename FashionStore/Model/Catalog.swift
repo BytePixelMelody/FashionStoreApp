@@ -1,11 +1,16 @@
 //
-//  Product.swift
+//  Catalog.swift
 //  FashionStore
 //
-//  Created by Vyacheslav on 12.03.2023.
+//  Created by Vyacheslav on 19.05.2023.
 //
 
 import Foundation
+
+// JSON array
+struct Catalog: Codable {
+    var audiences: [Audience]
+}
 
 struct Audience: Codable {
     var id: UUID
