@@ -27,8 +27,10 @@ extension WebServiceProtocol {
             urlSessionConfiguration.urlCache = urlCache
             let urlSession = URLSession(configuration: urlSessionConfiguration)
             
+            let urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy)
+            
             // try to get data from url
-            let (data, response) = try await urlSession.data(from: url)
+            let (data, response) = try await urlSession.data(for: urlRequest)
             
             // urlResponse typecasting check
             guard let urlResponse = response as? HTTPURLResponse else {
