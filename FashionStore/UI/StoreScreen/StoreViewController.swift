@@ -10,6 +10,9 @@
 // 2. Keychain service with iCloud support
 // 3. Router with custom routing and custom animations
 
+// Interesting but not implemented:
+// 1. Custom UINavigationBar - using undocumented methods
+
 // Backlog:
 // TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
@@ -66,7 +69,7 @@ class StoreViewController: UIViewController {
         setupUiTexts()
         arrangeUiElements()
         
-        loadJson()
+        writeToJson()
     }
     
     // TODO: Delete this
@@ -78,6 +81,38 @@ class StoreViewController: UIViewController {
             audience = await webService.getData(urlString: Settings.catalogUrl)
             print(audience ?? "")
         }
+    }
+    
+    // TODO: Delete this
+    func writeToJson() {
+        let audienceMen = Audience(id: UUID(), name: "Men", categories: [])
+        let audienceWomen = Audience(id: UUID(), name: "Women", categories: [])
+        
+        let dataObject = [audienceMen, audienceWomen]
+        
+        do {
+            let jsonEncoder = JSONEncoder()
+            jsonEncoder.outputFormatting = .prettyPrinted
+            let data = try jsonEncoder.encode(dataObject)
+            let jsonUrl = try getAppSupportUrl(fileName: "audiences.json")
+            try data.write(to: jsonUrl)
+            print("Written to file:\n\(jsonUrl.absoluteString)")
+        } catch {
+            debugPrint("Error to write to JSON:\n\(error.localizedDescription)")
+            return
+        }
+    }
+    
+    // TODO: Delete this
+    private func getAppSupportUrl(fileName: String) throws -> URL {
+        var url = try FileManager.default.url(
+            for: .applicationSupportDirectory,
+            in: .allDomainsMask,
+            appropriateFor: nil,
+            create: true
+        )
+        url.append(path: fileName)
+        return url
     }
     
     private func setupUiTexts() {
