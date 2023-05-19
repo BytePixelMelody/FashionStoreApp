@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WebServiceProtocol {
-    func getData<T: Codable>(urlString: String, urlCache: URLCache?) async -> T?
+    func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy) async -> T?
 }
  
 // web service that used to obtain decoded JSON-data by URL string
@@ -16,21 +16,17 @@ protocol WebServiceProtocol {
 extension WebServiceProtocol {
     
     // to turn off caching set urlCache = nil
-    public func getData<T: Codable>(urlString: String, urlCache: URLCache? = .shared) async -> T? {
+    public func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy) async -> T? {
         do {
             // urlString check
             guard let url = URL(string: urlString) else {
                 throw Errors.ErrorType.invalidUrlStringError
             }
-            
-            let urlSessionConfiguration = URLSessionConfiguration.default
-            urlSessionConfiguration.urlCache = urlCache
-            let urlSession = URLSession(configuration: urlSessionConfiguration)
-            
-            let urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
+                        
+            let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy)
             
             // try to get data from url
-            let (data, response) = try await urlSession.data(for: urlRequest)
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
             // urlResponse typecasting check
             guard let urlResponse = response as? HTTPURLResponse else {
