@@ -1,315 +1,317 @@
-{
-  "id": "5c257c94-1573-4db0-b90e-81c54bc9a8e1",
-  "name": "Women",
-  "categories": [
+"audiences": [
     {
-      "id": "1b48f85a-1d1b-4f5b-95f7-cfe50e4e2492",
-      "name": "Apparel",
-      "models": [
-        {
-          "id": "a21801fe-27c9-4c3f-8830-299d75cb1c7b",
-          "name": "Jacket with tuxedo collar",
-          "brand": "MOHAN",
-          "price": 45.00,
-          "images": [
-            "108903",
-            "789060",
-            "879120"
-          ],
-          "seasons": [
-            "Spring",
-            "Autumn"
-          ],
-          "styles": [
-            "Business",
-            "Smart casual"
-          ],
-          "material": "Cotton",
-          "description": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
-          "colors": [
+        "id": "5c257c94-1573-4db0-b90e-81c54bc9a8e1",
+        "name": "Women",
+        "categories": [
             {
-              "id": "f8d7a7ed-635f-47c9-ae48-93d71eac614d",
-              "name": "black",
-              "hex": "#000000",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "4f9013af-5ab2-48d2-9a7e-c3a0d8b76c63",
-                  "size": "S",
-                  "quantityAvailable": 3
-                },
-                {
-                  "id": "7c504c9a-8c43-453b-b127-2e2a3d70c9a1",
-                  "size": "M",
-                  "quantityAvailable": 10
-                },
-                {
-                  "id": "2bba83ab-57db-45df-9c4d-ccdb43305d42",
-                  "size": "L",
-                  "quantityAvailable": 5
-                }
-              ]
+                "id": "1b48f85a-1d1b-4f5b-95f7-cfe50e4e2492",
+                "name": "Apparel",
+                "models": [
+                    {
+                        "id": "a21801fe-27c9-4c3f-8830-299d75cb1c7b",
+                        "name": "Jacket with tuxedo collar",
+                        "brand": "MOHAN",
+                        "price": 45.00,
+                        "images": [
+                            "108903",
+                            "789060",
+                            "879120"
+                        ],
+                        "seasons": [
+                            "Spring",
+                            "Autumn"
+                        ],
+                        "styles": [
+                            "Business",
+                            "Smart casual"
+                        ],
+                        "material": "Cotton",
+                        "description": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
+                        "colors": [
+                            {
+                                "id": "f8d7a7ed-635f-47c9-ae48-93d71eac614d",
+                                "name": "black",
+                                "hex": "#000000",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "4f9013af-5ab2-48d2-9a7e-c3a0d8b76c63",
+                                        "size": "S",
+                                        "quantityAvailable": 3
+                                    },
+                                    {
+                                        "id": "7c504c9a-8c43-453b-b127-2e2a3d70c9a1",
+                                        "size": "M",
+                                        "quantityAvailable": 10
+                                    },
+                                    {
+                                        "id": "2bba83ab-57db-45df-9c4d-ccdb43305d42",
+                                        "size": "L",
+                                        "quantityAvailable": 5
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "536c84a6-12a5-44c1-baf4-44ae6f0510ad",
+                                "name": "pink",
+                                "hex": "#FFC0CB",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "fe1ff0a2-0b6e-4a19-957f-6a8e5d2d678b",
+                                        "size": "S",
+                                        "quantityAvailable": 7
+                                    },
+                                    {
+                                        "id": "5f2f43af-157e-4ac2-95fc-2991a8ea42cc",
+                                        "size": "M",
+                                        "quantityAvailable": 8
+                                    },
+                                    {
+                                        "id": "32fd27ad-6144-44a6-a46b-8e3d65b10b9e",
+                                        "size": "L",
+                                        "quantityAvailable": 2
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "d98ef431-d4f7-4827-a8d6-0fb098e946dd",
+                        "name": "Dot print corset dress",
+                        "brand": "Jodio",
+                        "price": 90.00,
+                        "images": [
+                            "789060",
+                            "879120"
+                        ],
+                        "seasons": [
+                            "Spring",
+                            "Summer"
+                        ],
+                        "styles": [
+                            "Smart casual"
+                        ],
+                        "material": "Wool",
+                        "description": "Dot print corset dress with adjustable straps and concealed zip fastening in the back.",
+                        "colors": [
+                            {
+                                "id": "2ed508fe-7eb9-4dd4-972c-3f4aef39b0ab",
+                                "name": "navy",
+                                "hex": "#000080",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "2a740774-7ff7-4c6c-9e0f-b9a6a1671d45",
+                                        "size": "M",
+                                        "quantityAvailable": 15
+                                    },
+                                    {
+                                        "id": "aa0d2543-1053-4e2b-8190-0761374335f4",
+                                        "size": "L",
+                                        "quantityAvailable": 10
+                                    },
+                                    {
+                                        "id": "14d4d7cc-ba72-43f1-9b4f-c3c1be1b96c3",
+                                        "size": "XL",
+                                        "quantityAvailable": 5
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             },
             {
-              "id": "536c84a6-12a5-44c1-baf4-44ae6f0510ad",
-              "name": "pink",
-              "hex": "#FFC0CB",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "fe1ff0a2-0b6e-4a19-957f-6a8e5d2d678b",
-                  "size": "S",
-                  "quantityAvailable": 7
-                },
-                {
-                  "id": "5f2f43af-157e-4ac2-95fc-2991a8ea42cc",
-                  "size": "M",
-                  "quantityAvailable": 8
-                },
-                {
-                  "id": "32fd27ad-6144-44a6-a46b-8e3d65b10b9e",
-                  "size": "L",
-                  "quantityAvailable": 2
-                }
-              ]
+                "id": "24d58842-50cc-44b6-bf8d-30f372ad0972",
+                "name": "Shoes",
+                "models": [
+                    {
+                        "id": "1c57a83f-9e3a-422f-94ef-019a6aeb1f0e",
+                        "name": "Casual sneakers",
+                        "brand": "XYZ",
+                        "price": 59.99,
+                        "images": [
+                            "789060",
+                            "879120"
+                        ],
+                        "seasons": [
+                            "Spring",
+                            "Summer",
+                            "Autumn"
+                        ],
+                        "styles": [
+                            "Casual"
+                        ],
+                        "material": "Leather",
+                        "description": "Comfortable casual sneakers with lace-up closure and rubber sole.",
+                        "colors": [
+                            {
+                                "id": "c6f25c3c-4915-4b8d-9505-6a8b6be7915a",
+                                "name": "white",
+                                "hex": "#FFFFFF",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "c67f2061-4e6a-4f8b-a2c9-53a5b5e2fbd1",
+                                        "size": "US 9",
+                                        "quantityAvailable": 8
+                                    },
+                                    {
+                                        "id": "76d40ff4-d373-434d-a383-ff88e7a9f58e",
+                                        "size": "US 10",
+                                        "quantityAvailable": 12
+                                    },
+                                    {
+                                        "id": "db3b8dbf-dedc-4f3b-a3e4-222d0f9e05a3",
+                                        "size": "US 11",
+                                        "quantityAvailable": 5
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "ef8e3db9-3f7f-47c7-b0f3-f4e6d827e69a",
+                                "name": "black",
+                                "hex": "#000000",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "4a05802f-9f9d-44e0-80c7-01416d2f1b8f",
+                                        "size": "US 9",
+                                        "quantityAvailable": 5
+                                    },
+                                    {
+                                        "id": "c77e61f7-78f3-44a4-bb54-14eefb34fba9",
+                                        "size": "US 10",
+                                        "quantityAvailable": 3
+                                    },
+                                    {
+                                        "id": "b8815671-d87b-4fde-a9d9-4e7d7051812c",
+                                        "size": "US 11",
+                                        "quantityAvailable": 10
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
-          ]
-        },
-        {
-          "id": "d98ef431-d4f7-4827-a8d6-0fb098e946dd",
-          "name": "Dot print corset dress",
-          "brand": "Jodio",
-          "price": 90.00,
-          "images": [
-            "789060",
-            "879120"
-          ],
-          "seasons": [
-            "Spring",
-            "Summer"
-          ],
-          "styles": [
-            "Smart casual"
-          ],
-          "material": "Wool",
-          "description": "Dot print corset dress with adjustable straps and concealed zip fastening in the back.",
-          "colors": [
-            {
-              "id": "2ed508fe-7eb9-4dd4-972c-3f4aef39b0ab",
-              "name": "navy",
-              "hex": "#000080",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "2a740774-7ff7-4c6c-9e0f-b9a6a1671d45",
-                  "size": "M",
-                  "quantityAvailable": 15
-                },
-                {
-                  "id": "aa0d2543-1053-4e2b-8190-0761374335f4",
-                  "size": "L",
-                  "quantityAvailable": 10
-                },
-                {
-                  "id": "14d4d7cc-ba72-43f1-9b4f-c3c1be1b96c3",
-                  "size": "XL",
-                  "quantityAvailable": 5
-                }
-              ]
-            }
-          ]
-        }
-      ]
+        ]
     },
     {
-      "id": "24d58842-50cc-44b6-bf8d-30f372ad0972",
-      "name": "Shoes",
-      "models": [
-        {
-          "id": "1c57a83f-9e3a-422f-94ef-019a6aeb1f0e",
-          "name": "Casual sneakers",
-          "brand": "XYZ",
-          "price": 59.99,
-          "images": [
-            "789060",
-            "879120"
-          ],
-          "seasons": [
-            "Spring",
-            "Summer",
-            "Autumn"
-          ],
-          "styles": [
-            "Casual"
-          ],
-          "material": "Leather",
-          "description": "Comfortable casual sneakers with lace-up closure and rubber sole.",
-          "colors": [
+        "id": "7c72b541-0ea3-45ef-8e8b-85a7fe66be7a",
+        "name": "Man",
+        "categories": [
             {
-              "id": "c6f25c3c-4915-4b8d-9505-6a8b6be7915a",
-              "name": "white",
-              "hex": "#FFFFFF",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "c67f2061-4e6a-4f8b-a2c9-53a5b5e2fbd1",
-                  "size": "US 9",
-                  "quantityAvailable": 8
-                },
-                {
-                  "id": "76d40ff4-d373-434d-a383-ff88e7a9f58e",
-                  "size": "US 10",
-                  "quantityAvailable": 12
-                },
-                {
-                  "id": "db3b8dbf-dedc-4f3b-a3e4-222d0f9e05a3",
-                  "size": "US 11",
-                  "quantityAvailable": 5
-                }
-              ]
-            },
-            {
-              "id": "ef8e3db9-3f7f-47c7-b0f3-f4e6d827e69a",
-              "name": "black",
-              "hex": "#000000",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "4a05802f-9f9d-44e0-80c7-01416d2f1b8f",
-                  "size": "US 9",
-                  "quantityAvailable": 5
-                },
-                {
-                  "id": "c77e61f7-78f3-44a4-bb54-14eefb34fba9",
-                  "size": "US 10",
-                  "quantityAvailable": 3
-                },
-                {
-                  "id": "b8815671-d87b-4fde-a9d9-4e7d7051812c",
-                  "size": "US 11",
-                  "quantityAvailable": 10
-                }
-              ]
+                "id": "0c5a6dc1-346e-40a4-b933-842cda052cbe",
+                "name": "Apparel",
+                "models": [
+                    {
+                        "id": "61543c33-35e0-49b2-8ae9-ba5e3ed51d76",
+                        "name": "Classic Blazer",
+                        "brand": "XYZ",
+                        "price": 120.00,
+                        "images": [
+                            "789060",
+                            "879120"
+                        ],
+                        "seasons": [
+                            "Spring",
+                            "Autumn",
+                            "Winter"
+                        ],
+                        "styles": [
+                            "Business",
+                            "Formal"
+                        ],
+                        "material": "Wool",
+                        "description": "Classic wool blazer with notched lapels and two-button closure.",
+                        "colors": [
+                            {
+                                "id": "d2d92af3-5f7b-47a1-993e-8ac0f8a1ccf6",
+                                "name": "navy",
+                                "hex": "#000080",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "c61e34b6-bbb2-4e79-b0d9-87ac6145c4ef",
+                                        "size": "M",
+                                        "quantityAvailable": 10
+                                    },
+                                    {
+                                        "id": "03f184e7-9e43-4826-9f52-c3be6b4e9601",
+                                        "size": "L",
+                                        "quantityAvailable": 8
+                                    },
+                                    {
+                                        "id": "15fc6229-02a4-4bfa-bbe0-1d888519dd32",
+                                        "size": "XL",
+                                        "quantityAvailable": 5
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "b454d4a2-758b-48f3-a35b-2620da0f166f",
+                                "name": "gray",
+                                "hex": "#808080",
+                                "images": [
+                                    "108903",
+                                    "108904",
+                                    "108905",
+                                    "108906"
+                                ],
+                                "products": [
+                                    {
+                                        "id": "5eafad3d-0d61-4a6a-8d14-5b7b4f2fb10e",
+                                        "size": "M",
+                                        "quantityAvailable": 5
+                                    },
+                                    {
+                                        "id": "25f5487b-0b4d-4eb9-af35-4f6793b41629",
+                                        "size": "L",
+                                        "quantityAvailable": 3
+                                    },
+                                    {
+                                        "id": "f9eab7dd-d622-4130-8a70-d6a38c6e5b6f",
+                                        "size": "XL",
+                                        "quantityAvailable": 7
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
-          ]
-        }
-      ]
+        ]
     }
-  ]
-},
-{
-  "id": "7c72b541-0ea3-45ef-8e8b-85a7fe66be7a",
-  "name": "Man",
-  "categories": [
-    {
-      "id": "0c5a6dc1-346e-40a4-b933-842cda052cbe",
-      "name": "Apparel",
-      "models": [
-        {
-          "id": "61543c33-35e0-49b2-8ae9-ba5e3ed51d76",
-          "name": "Classic Blazer",
-          "brand": "XYZ",
-          "price": 120.00,
-          "images": [
-            "789060",
-            "879120"
-          ],
-          "seasons": [
-            "Spring",
-            "Autumn",
-            "Winter"
-          ],
-          "styles": [
-            "Business",
-            "Formal"
-          ],
-          "material": "Wool",
-          "description": "Classic wool blazer with notched lapels and two-button closure.",
-          "colors": [
-            {
-              "id": "d2d92af3-5f7b-47a1-993e-8ac0f8a1ccf6",
-              "name": "navy",
-              "hex": "#000080",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "c61e34b6-bbb2-4e79-b0d9-87ac6145c4ef",
-                  "size": "M",
-                  "quantityAvailable": 10
-                },
-                {
-                  "id": "03f184e7-9e43-4826-9f52-c3be6b4e9601",
-                  "size": "L",
-                  "quantityAvailable": 8
-                },
-                {
-                  "id": "15fc6229-02a4-4bfa-bbe0-1d888519dd32",
-                  "size": "XL",
-                  "quantityAvailable": 5
-                }
-              ]
-            },
-            {
-              "id": "b454d4a2-758b-48f3-a35b-2620da0f166f",
-              "name": "gray",
-              "hex": "#808080",
-              "images": [
-                "108903",
-                "108904",
-                "108905",
-                "108906"
-              ],
-              "products": [
-                {
-                  "id": "5eafad3d-0d61-4a6a-8d14-5b7b4f2fb10e",
-                  "size": "M",
-                  "quantityAvailable": 5
-                },
-                {
-                  "id": "25f5487b-0b4d-4eb9-af35-4f6793b41629",
-                  "size": "L",
-                  "quantityAvailable": 3
-                },
-                {
-                  "id": "f9eab7dd-d622-4130-8a70-d6a38c6e5b6f",
-                  "size": "XL",
-                  "quantityAvailable": 7
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+]
