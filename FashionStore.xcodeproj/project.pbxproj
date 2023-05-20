@@ -12,6 +12,7 @@
 		111646D129E086B1004EEE20 /* ChippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D029E086B1004EEE20 /* ChippingAddress.swift */; };
 		111646D329E0877F004EEE20 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D229E0877F004EEE20 /* PaymentMethod.swift */; };
 		111646D529E09513004EEE20 /* FilledPaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */; };
+		112B524C2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 112B524A2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld */; };
 		114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466C829D2D2B900E504F8 /* UIScrollView+make.swift */; };
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
 		1160A04C29E970BF009AB1C6 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04B29E970BF009AB1C6 /* PopupViewController.swift */; };
@@ -67,6 +68,7 @@
 		111646D029E086B1004EEE20 /* ChippingAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChippingAddress.swift; sourceTree = "<group>"; };
 		111646D229E0877F004EEE20 /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
 		111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledPaymentMethodView.swift; sourceTree = "<group>"; };
+		112B524B2A18CA7800C08146 /* FashionStoreDb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FashionStoreDb.xcdatamodel; sourceTree = "<group>"; };
 		114466C829D2D2B900E504F8 /* UIScrollView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+make.swift"; sourceTree = "<group>"; };
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
 		1160A04B29E970BF009AB1C6 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		11E5F4AB29BE093900B979B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				112B524A2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld */,
 				11E5F4AE29BE09EA00B979B4 /* Catalog.swift */,
 				11E5F4AC29BE095200B979B4 /* Cart.swift */,
 				111646D029E086B1004EEE20 /* ChippingAddress.swift */,
@@ -462,6 +465,7 @@
 			files = (
 				1185D6CB29B72BF800833991 /* CartPresenter.swift in Sources */,
 				1186C935299FFA66002852BB /* TestViewController.swift in Sources */,
+				112B524C2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld in Sources */,
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
 				117CB25A29AE1415006F4192 /* CartViewController.swift in Sources */,
 				111646D129E086B1004EEE20 /* ChippingAddress.swift in Sources */,
@@ -762,6 +766,19 @@
 			productName = CombineCocoa;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		112B524A2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				112B524B2A18CA7800C08146 /* FashionStoreDb.xcdatamodel */,
+			);
+			currentVersion = 112B524B2A18CA7800C08146 /* FashionStoreDb.xcdatamodel */;
+			path = FashionStoreDb.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1186C925299FFA66002852BB /* Project object */;
 }

@@ -18,7 +18,8 @@
 - [x] GitHub Pages based mock Web-server
 - [x] Web service
 - [x] Async/await, Tasks
-- [ ] Core data
+- [ ] Core data for offline use
+- [ ] FileManager images storage for offline use
 - [ ] Collection views
 - [x] Combine for text input check
 - [x] Keychain service with iCloud sync by native API for sensitive data

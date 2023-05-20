@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol StorePresenterProtocol {
     func showProduct()
@@ -19,7 +20,7 @@ class StorePresenter: StorePresenterProtocol {
     private let router: RouterProtocol
     private let webService: WebServiceProtocol
     
-    // store task to cancel it on willDisappear()
+    // storing task to cancel it on willDisappear()
     private var loadCatalogTask: Task<(), Never>?
     
     init(router: RouterProtocol, webService: WebServiceProtocol) {
@@ -36,18 +37,21 @@ class StorePresenter: StorePresenterProtocol {
     }
     
     func storeWillAppear() {
-        
+//        let product = ProductModel()
+//        product.si
+
         loadCatalogTask = Task {
             do {
                 // check, if task was cancelled then it will throw CancellationError
                 try Task.checkCancellation()
                 
                 let catalog: Catalog = try await webService.getData(urlString: Settings.catalogUrl)
+                _ = catalog
                 
                 // another check, before hard work, if task was cancelled then it will throw CancellationError
                 try Task.checkCancellation()
                 
-                print(catalog)
+//                print(catalog)
             } catch {
                 await MainActor.run {
                     Errors.handler.checkError(error)

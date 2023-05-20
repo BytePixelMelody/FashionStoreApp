@@ -18,7 +18,7 @@ class Errors {
     public var router: RouterProtocol?
     
     // logger, use Console to view logs
-    let logger = Logger(subsystem: "Error handler", category: "Errors")
+    private let logger = Logger(subsystem: #file, category: "Errors handler")
 
     // error types
     public enum ErrorType: LocalizedError {
