@@ -26,27 +26,31 @@ struct Category: Codable {
 
 struct Model: Codable {
     var id: UUID
-    var name: String // "Jacket with tuxedo collar", "Dot print corset dress", "Blazer with tuxedo collar"
-    var brand: String // "MOHAN", "Jodio", "Loriani"
-    var price: Decimal // 45.00, 90.00 ... 250.00
-    var images: [String] // ["108903", "789060", "879120"]
-    var seasons: [String] // ["Spring", "Autumn"], ["Summer"]
-    var styles: [String] // ["Business", "Smart casual"]
-    var material: String // "Cotton", "Wool", "Linum"
-    var description: String // "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure."
+    var name: String // "Dot print corset dress", "Blazer with tuxedo collar" etc
+    var brand: String // "Mohani", "Diolo", "Loriani", "Totto", "Jole" etc
+    var price: Decimal // 45.00...950.00
+    var images: [String] // ["100001", "200001", "300001" etc]
+    var material: String // "Cotton", "Wool", "Linum" etc
+    var description: String // "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure." etc
+    var styles: [Style]
     var colors: [Color]
+}
+
+struct Style: Codable {
+    var id: UUID
+    var name: String // "Business", "Smart casual", "Casual" etc
 }
 
 struct Color: Codable {
     var id: UUID
-    var name: String // "black", "pink", "navy"
-    var hex: String // "#000000", "#FFC0CB", "#000080"
-    var images: [String] // ["108903", "108904", "108905", "108906"]
+    var name: String // "black", "pink", "navy" etc
+    var hex: String // "#000000", "#FFC0CB", "#000080" ect
+    var images: [String] // ["100001", "100002", "100002", "100004" etc]
     var products: [Product]
 }
 
 struct Product: Codable {
     var id: UUID
-    var size: String // "S", "M", "L", "XL"
-    var quantityAvailable: Int // 3, 20, 150
+    var size: String // "XS", "S", "M", "L", "XL", "XXL"
+    var quantityAvailable: Int // 1...1000
 }

@@ -1,311 +1,682 @@
 {
     "audiences": [
         {
-            "id": "5c257c94-1573-4db0-b90e-81c54bc9a8e1",
+            "id": "ba3d3f60-2e2e-4c5e-aa5e-3ff2061a7d1a",
             "name": "Women",
             "categories": [
                 {
-                    "id": "1b48f85a-1d1b-4f5b-95f7-cfe50e4e2492",
+                    "id": "c7818ebd-189e-42e4-8b32-cc5b4e16da46",
                     "name": "Apparel",
                     "models": [
                         {
-                            "id": "a21801fe-27c9-4c3f-8830-299d75cb1c7b",
-                            "name": "Jacket with tuxedo collar",
-                            "brand": "MOHAN",
-                            "price": 45.00,
-                            "images": [
-                                "108903",
-                                "789060",
-                                "879120"
-                            ],
-                            "seasons": [
-                                "Spring",
-                                "Autumn"
-                            ],
-                            "styles": [
-                                "Business",
-                                "Smart casual"
-                            ],
+                            "id": "b07b22e6-0a4c-4a5a-92c2-3b4e17e87822",
+                            "name": "Dot print corset dress",
+                            "brand": "Mohani",
+                            "price": 89.99,
+                            "images": ["100001", "100002", "100003"],
                             "material": "Cotton",
                             "description": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
+                            "styles": [
+                                {
+                                    "id": "2ebdfe33-bfb7-4f0a-869f-3e0a8cc7f6cd",
+                                    "name": "Business"
+                                },
+                                {
+                                    "id": "381c84d9-ee8e-4a86-93b1-f60e6fc9307a",
+                                    "name": "Smart casual"
+                                }
+                            ],
                             "colors": [
                                 {
-                                    "id": "f8d7a7ed-635f-47c9-ae48-93d71eac614d",
-                                    "name": "black",
+                                    "id": "fcf2bb54-23d1-4bea-bf3e-2efcc4d3e0ae",
+                                    "name": "Black",
                                     "hex": "#000000",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "images": ["200001", "200002", "200003"],
                                     "products": [
                                         {
-                                            "id": "4f9013af-5ab2-48d2-9a7e-c3a0d8b76c63",
-                                            "size": "S",
-                                            "quantityAvailable": 3
-                                        },
-                                        {
-                                            "id": "7c504c9a-8c43-453b-b127-2e2a3d70c9a1",
-                                            "size": "M",
+                                            "id": "1e8d8c7d-1ff1-4c7a-a5f6-9319d10f5831",
+                                            "size": "XS",
                                             "quantityAvailable": 10
                                         },
                                         {
-                                            "id": "2bba83ab-57db-45df-9c4d-ccdb43305d42",
-                                            "size": "L",
-                                            "quantityAvailable": 5
+                                            "id": "12f7f81c-348d-4591-a74e-4e11a078b72c",
+                                            "size": "S",
+                                            "quantityAvailable": 20
+                                        },
+                                        {
+                                            "id": "8d3ad1b4-8857-4c8e-894a-2d5d3a4b8b30",
+                                            "size": "M",
+                                            "quantityAvailable": 15
                                         }
                                     ]
                                 },
                                 {
-                                    "id": "536c84a6-12a5-44c1-baf4-44ae6f0510ad",
-                                    "name": "pink",
+                                    "id": "b42c33e2-9186-4e6d-9dcd-55c2a3f4a4d9",
+                                    "name": "Pink",
                                     "hex": "#FFC0CB",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "images": ["200004", "200005", "200006"],
                                     "products": [
                                         {
-                                            "id": "fe1ff0a2-0b6e-4a19-957f-6a8e5d2d678b",
+                                            "id": "d6d0fda3-8e6f-4d03-857f-bdab1742c020",
                                             "size": "S",
-                                            "quantityAvailable": 7
+                                            "quantityAvailable": 5
                                         },
                                         {
-                                            "id": "5f2f43af-157e-4ac2-95fc-2991a8ea42cc",
+                                            "id": "2686a616-b548-47dd-9e5d-79094e93fb68",
                                             "size": "M",
-                                            "quantityAvailable": 8
+                                            "quantityAvailable": 10
                                         },
                                         {
-                                            "id": "32fd27ad-6144-44a6-a46b-8e3d65b10b9e",
+                                            "id": "cc64636e-f1ce-4012-9ce0-6c54c4e59171",
                                             "size": "L",
-                                            "quantityAvailable": 2
+                                            
+                                            
+                                            "quantityAvailable": 8
                                         }
                                     ]
                                 }
                             ]
                         },
                         {
-                            "id": "d98ef431-d4f7-4827-a8d6-0fb098e946dd",
-                            "name": "Dot print corset dress",
-                            "brand": "Jodio",
-                            "price": 90.00,
-                            "images": [
-                                "789060",
-                                "879120"
-                            ],
-                            "seasons": [
-                                "Spring",
-                                "Summer"
-                            ],
-                            "styles": [
-                                "Smart casual"
-                            ],
+                            "id": "c305f1ce-2b34-4a8e-b0b4-34e738eeab7e",
+                            "name": "Blazer with tuxedo collar",
+                            "brand": "Diolo",
+                            "price": 120.50,
+                            "images": ["100004", "100005", "100006"],
                             "material": "Wool",
-                            "description": "Dot print corset dress with adjustable straps and concealed zip fastening in the back.",
+                            "description": "Double-breasted blazer with tuxedo collar. Front welt pockets and chest pocket. Satin lining. Front button closure.",
+                            "styles": [
+                                {
+                                    "id": "9b6958fe-5be5-4b2b-9e8c-77a5a68bc0fd",
+                                    "name": "Business"
+                                },
+                                {
+                                    "id": "a34e9b3c-3584-4b94-bcc2-514237e9d87c",
+                                    "name": "Formal"
+                                }
+                            ],
                             "colors": [
                                 {
-                                    "id": "2ed508fe-7eb9-4dd4-972c-3f4aef39b0ab",
-                                    "name": "navy",
+                                    "id": "8c27f0dd-3f0e-44b0-8d4e-1d4b682b20f2",
+                                    "name": "Navy",
                                     "hex": "#000080",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "images": ["200007", "200008", "200009"],
                                     "products": [
                                         {
-                                            "id": "2a740774-7ff7-4c6c-9e0f-b9a6a1671d45",
+                                            "id": "5ab2c3b5-56f9-4461-9c77-45a4a8e930ae",
+                                            "size": "S",
+                                            "quantityAvailable": 12
+                                        },
+                                        {
+                                            "id": "86a40c92-6112-4d44-b9bc-032ae7cbb884",
+                                            "size": "M",
+                                            "quantityAvailable": 18
+                                        },
+                                        {
+                                            "id": "d6f7875c-82e0-47b6-80ab-7e91f605c27b",
+                                            "size": "L",
+                                            "quantityAvailable": 15
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "e8e4ed8a-b5e0-46e5-89be-24374a8f3e3e",
+                                    "name": "Gray",
+                                    "hex": "#808080",
+                                    "images": ["200010", "200011", "200012"],
+                                    "products": [
+                                        {
+                                            "id": "3c678d3d-6c7a-4e66-9974-f7aefbc9e9b7",
+                                            "size": "S",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "4f4a1ab7-1a11-43d7-bd8a-5c59ea6d7c3b",
+                                            "size": "M",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "3a26b03a-fa17-4dd5-b134-f5ef82a0c4ce",
+                                            "size": "L",
+                                            "quantityAvailable": 5
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "8360f942-9cbb-4195-9a9d-43780d58e0c1",
+                            "name": "Floral maxi dress",
+                            "brand": "Loriani",
+                            "price": 79.99,
+                            "images": ["100007", "100008", "100009"],
+                            "material": "Polyester",
+                            "description": "Floral print maxi dress with short sleeves and V-neckline. Elastic waistband and flowy skirt. Lined.",
+                            "styles": [
+                                {
+                                    "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
+                                    "name": "Boho"
+                                }
+                            ],
+                            "colors": [
+                                {
+                                    "id": "d1ef68a1-99ad-4576-9466-1b9e94d9325f",
+                                    "name": "Red",
+                                    "hex": "#FF0000",
+                                    "images": ["200013", "200014", "200015"],
+                                    "products": [
+                                        {
+                                            "id": "e0ad7c63-37d5-41c7-9976-9ed05f27445c",
+                                            "size": "S",
+                                            "quantityAvailable": 15
+                                        },
+                                        {
+                                            "id": "e3ee2a70-9dd2-4b82-b9d6-2b1f5ad0815f",
+                                            "size": "M",
+                                            "quantityAvailable": 20
+                                        },
+                                        {
+                                            "id": "754d6b69-2013-4778-b82d-95a1be50e38f",
+                                            "size": "L",
+                                            "quantityAvailable": 10
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "90c6fbf6-354f-4f54-9f57-cc33eb9d4f85",
+                                    "name": "Blue",
+                                    "hex": "#0000FF",
+                                    "images": ["200016", "200017", "200018"],
+                                    "products": [
+                                        {
+                                            "id": "5b8bb57b-b6d0-4fe4-b66e-0753b704e6d4",
+                                            "size": "S",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "bc3c5a20-0a6f-4ce1-8daa-7c0c70438f9a",
+                                            "size": "M",
+                                            "quantityAvailable": 12
+                                        },
+                                        {
+                                            "id": "b9516bb0-4a7a-481a-91f7-d1a79b1a1469",
+                                            "size": "L",
+                                            "quantityAvailable": 6
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "e409a15f-8bb9-43e2-a289-02b8692a1029",
+                            "name": "Tweed blazer",
+                            "brand": "Totto",
+                            "price": 149.00,
+                            "images": ["100010", "100011", "100012"],
+                            "material": "Wool blend",
+                            "description": "Classic tweed blazer with notch lapels. Front patch pockets and chest welt pocket. Button cuffs. Single-breasted button closure.",
+                            "styles": [
+                                {
+                                    "id": "e772d954-4df9-4d85-a960-2e7f15352549",
+                                    "name": "Business"
+                                },
+                                
+                                
+                                {
+                                    "id": "a34e9b3c-3584-4b94-bcc2-514237e9d87c",
+                                    "name": "Formal"
+                                }
+                            ],
+                            "colors": [
+                                {
+                                    "id": "5639e7d6-2e34-46f9-82e3-702df5d4629c",
+                                    "name": "Gray",
+                                    "hex": "#808080",
+                                    "images": ["200019", "200020", "200021"],
+                                    "products": [
+                                        {
+                                            "id": "83be9b9d-b156-448b-bf9e-8544d6e74a5c",
+                                            "size": "S",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "f0b53171-1b77-4b2f-a157-0a84c23b22fd",
                                             "size": "M",
                                             "quantityAvailable": 15
                                         },
                                         {
-                                            "id": "aa0d2543-1053-4e2b-8190-0761374335f4",
+                                            "id": "e6753da5-8966-40e0-8d8f-3f9bc1e816b7",
                                             "size": "L",
-                                            "quantityAvailable": 10
+                                            "quantityAvailable": 12
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "f6b0fbdc-23ac-4945-8af4-825798c4b73f",
+                                    "name": "Beige",
+                                    "hex": "#F5F5DC",
+                                    "images": ["200022", "200023", "200024"],
+                                    "products": [
+                                        {
+                                            "id": "b9ff5990-74e4-4f34-8822-109cc9b4b79f",
+                                            "size": "S",
+                                            "quantityAvailable": 5
                                         },
                                         {
-                                            "id": "14d4d7cc-ba72-43f1-9b4f-c3c1be1b96c3",
-                                            "size": "XL",
-                                            "quantityAvailable": 5
+                                            "id": "29cda8b4-31af-4d1a-a7cd-692b2d8e8c7a",
+                                            "size": "M",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "1190e35e-bcc9-4d99-bb59-41e7a698c97a",
+                                            "size": "L",
+                                            "quantityAvailable": 3
                                         }
                                     ]
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "id": "24d58842-50cc-44b6-bf8d-30f372ad0972",
-                    "name": "Shoes",
-                    "models": [
+                        },
                         {
-                            "id": "1c57a83f-9e3a-422f-94ef-019a6aeb1f0e",
-                            "name": "Casual sneakers",
-                            "brand": "XYZ",
-                            "price": 59.99,
-                            "images": [
-                                "789060",
-                                "879120"
-                            ],
-                            "seasons": [
-                                "Spring",
-                                "Summer",
-                                "Autumn"
-                            ],
+                            "id": "f0eb86b9-d30b-4be4-903a-82ae8e15f5a5",
+                            "name": "Striped sweater",
+                            "brand": "Jole",
+                            "price": 55.00,
+                            "images": ["100013", "100014", "100015"],
+                            "material": "Cashmere",
+                            "description": "Classic striped sweater with crew neckline. Ribbed cuffs, neckline, and hem. Soft and cozy.",
                             "styles": [
-                                "Casual"
+                                {
+                                    "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "90d5f520-3dcf-4d15-a8b4-6a93e7de256e",
+                                    "name": "Preppy"
+                                }
                             ],
-                            "material": "Leather",
-                            "description": "Comfortable casual sneakers with lace-up closure and rubber sole.",
                             "colors": [
                                 {
-                                    "id": "c6f25c3c-4915-4b8d-9505-6a8b6be7915a",
-                                    "name": "white",
-                                    "hex": "#FFFFFF",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "id": "3b32f246-8f97-4d3e-af7d-dcc2521de313",
+                                    "name": "Navy",
+                                    "hex": "#000080",
+                                    "images":["200025", "200026", "200027"],
                                     "products": [
                                         {
-                                            "id": "c67f2061-4e6a-4f8b-a2c9-53a5b5e2fbd1",
-                                            "size": "US 9",
+                                            "id": "11f6c3a5-152e-41e0-b3cd-ccbaa2571b91",
+                                            "size": "XS",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "4c34af3e-5505-40c2-b5e6-27669d07e24c",
+                                            "size": "S",
+                                            "quantityAvailable": 15
+                                        },
+                                        {
+                                            "id": "2ea94e75-6a8f-405f-92b2-bb15f83076ab",
+                                            "size": "M",
+                                            "quantityAvailable": 12
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "52b3d17e-10cd-4a0b-a2b7-9c73c80f96a3",
+                                    "name": "Gray",
+                                    "hex": "#808080",
+                                    "images": ["200028", "200029", "200030"],
+                                    "products": [
+                                        {
+                                            "id": "82a3d5e6-b0e3-42f4-ba1c-5c9d2f89ebee",
+                                            "size": "S",
                                             "quantityAvailable": 8
                                         },
                                         {
-                                            "id": "76d40ff4-d373-434d-a383-ff88e7a9f58e",
-                                            "size": "US 10",
+                                            "id": "d12907c7-27a1-405d-8b1a-9d8a2d232a4f",
+                                            "size": "M",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "e84b46ea-27f3-4c0c-b0ae-2e26c0c8c04b",
+                                            "size": "L",
+                                            "quantityAvailable": 6
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "563aa46e-b422-4082-bbaf-ff4b17932b42",
+                            "name": "Ruffled blouse",
+                            "brand": "Floria",
+                            "price": 45.99,
+                            "images": ["100016", "100017", "100018"],
+                            "material": "Silk",
+                            "description": "Flowy ruffled blouse with V-neckline and long sleeves. Elastic cuffs. Button front closure.",
+                            "styles": [
+                                {
+                                    "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "cf10b2de-11b2-4a53-9879-0f76f5c6ce02",
+                                    "name": "Feminine"
+                                }
+                            ],
+                            "colors": [
+                                {
+                                    "id": "d3daac2f-0e0d-4b46-9a23-9fbdf1b38a0e",
+                                    "name": "White",
+                                    "hex": "#FFFFFF",
+                                    "images": ["200031", "200032", "200033"],
+                                    "products": [
+                                        {
+                                            "id": "4b97ebe3-b8d0-4b02-9d57-2e7185ef1a97",
+                                            "size": "XS",
                                             "quantityAvailable": 12
                                         },
                                         {
-                                            "id": "db3b8dbf-dedc-4f3b-a3e4-222d0f9e05a3",
-                                            "size": "US 11",
-                                            "quantityAvailable": 5
+                                            "id": "a7419573-6229-4978-8a5a-3db282a6c0f7",
+                                            "size": "S",
+                                            "quantityAvailable": 18
+                                        },
+                                        {
+                                            "id": "44c4fd2c-9a88-4cc7-8f0d-1e9c5e3c59a9",
+                                            "size": "M",
+                                            "quantityAvailable": 15
                                         }
                                     ]
                                 },
                                 {
-                                    "id": "ef8e3db9-3f7f-47c7-b0f3-f4e6d827e69a",
-                                    "name": "black",
-                                    "hex": "#000000",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "id": "85a96b27-c1f3-4741-8a8b-aece139b1e25",
+                                    "name": "Blush",
+                                    "hex": "#FFC0CB",
+                                    "images": ["200034", "200035", "200036"],
                                     "products": [
                                         {
-                                            "id": "4a05802f-9f9d-44e0-80c7-01416d2f1b8f",
-                                            "size": "US 9",
-                                            "quantityAvailable": 5
+                                            "id": "6c1336d1-8d13-4a5d-8490-7ee3c25064b0",
+                                            "size": "XS",
+                                            "quantityAvailable": 8
                                         },
                                         {
-                                            "id": "c77e61f7-78f3-44a4-bb54-14eefb34fba9",
-                                            "size": "US 10",
-                                            "quantityAvailable": 3
-                                        },
-                                        {
-                                            "id": "b8815671-d87b-4fde-a9d9-4e7d7051812c",
-                                            "size": "US 11",
+                                            "id": "c1f19d61-2e19-4ccf-8c5d-9ad6a636dfe7",
+                                            "size": "S",
                                             "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "4a2c1447-4a9e-4e8e-8f35-1a54a5c6ee5a",
+                                            "size": "M",
+                                            "quantityAvailable": 5
                                         }
                                     ]
                                 }
                             ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "7c72b541-0ea3-45ef-8e8b-85a7fe66be7a",
-            "name": "Man",
-            "categories": [
-                {
-                    "id": "0c5a6dc1-346e-40a4-b933-842cda052cbe",
-                    "name": "Apparel",
-                    "models": [
+                        },
                         {
-                            "id": "61543c33-35e0-49b2-8ae9-ba5e3ed51d76",
-                            "name": "Classic Blazer",
-                            "brand": "XYZ",
-                            "price": 120.00,
-                            "images": [
-                                "789060",
-                                "879120"
-                            ],
-                            "seasons": [
-                                "Spring",
-                                "Autumn",
-                                "Winter"
-                            ],
+                            "id": "af276c60-309f-4d5b-bf3f-8ef79f8be758",
+                            "name": "Denim jacket",
+                            "brand": "DenimCo",
+                            "price": 69.90,
+                            "images": ["100019", "100020", "100021"],
+                            "material": "Denim",
+                            "description": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
                             "styles": [
-                                "Business",
-                                "Formal"
+                                {
+                                    "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "e098ce19-5e70-4e61-8e4b-6e7ce17fc097",
+                                    "name": "Street"
+                                }
                             ],
-                            "material": "Wool",
-                            "description": "Classic wool blazer with notched lapels and two-button closure.",
                             "colors": [
                                 {
-                                    "id": "d2d92af3-5f7b-47a1-993e-8ac0f8a1ccf6",
-                                    "name": "navy",
-                                    "hex": "#000080",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "id": "e8e4ed8a-b5e0-46e5-89be-24374a8f3e3e",
+                                    "name": "Gray",
+                                    "hex": "#808080",
+                                    "images": ["200037", "200038", "200039"],
                                     "products": [
                                         {
-                                            "id": "c61e34b6-bbb2-4e79-b0d9-87ac6145c4ef",
-                                            "size": "M",
+                                            "id": "11a020fc-fb19-4ea1-9df5-ddeab0e69d4a",
+                                            "size": "XS",
                                             "quantityAvailable": 10
                                         },
                                         {
-                                            "id": "03f184e7-9e43-4826-9f52-c3be6b4e9601",
-                                            "size": "L",
-                                            "quantityAvailable": 8
+                                            "id": "e4d94d6e-5f5e-4ff6-a9bc-dc7f08bc83d4",
+                                            "size": "S",
+                                            "quantityAvailable": 15
                                         },
                                         {
-                                            "id": "15fc6229-02a4-4bfa-bbe0-1d888519dd32",
-                                            "size": "XL",
-                                            "quantityAvailable": 5
+                                            "id": "a7dbdb12-ae8d-441e-ae3a-6e9a40675f16",
+                                            "size": "M",
+                                            "quantityAvailable": 12
                                         }
                                     ]
                                 },
                                 {
-                                    "id": "b454d4a2-758b-48f3-a35b-2620da0f166f",
-                                    "name": "gray",
-                                    "hex": "#808080",
-                                    "images": [
-                                        "108903",
-                                        "108904",
-                                        "108905",
-                                        "108906"
-                                    ],
+                                    "id": "b0fb19c1-7593-4f33-9e85-9860f7544849",
+                                    "name": "Black",
+                                    "hex": "#000000",
+                                    "images": ["200040", "200041", "200042"],
                                     "products": [
                                         {
-                                            "id": "5eafad3d-0d61-4a6a-8d14-5b7b4f2fb10e",
+                                            "id": "149edcb5-b6de-4bcb-9400-d54c62bc09a3",
+                                            "size": "S",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "a1ab8a16-95c3-4ce2-aae3-cbfa63b866f3",
+                                            "size": "M",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "179deded-98bf-41ea-94ea-598c623ddf75",
+                                            "size": "L",
+                                            "quantityAvailable": 6
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "383cc439-7b76-4089-9a32-90e8e37a0377",
+                            "name": "Pleated skirt",
+                            "brand": "Luna",
+                            "price": 39.99,
+                            "images": ["100022", "100023", "100024"],
+                            "material": "Cotton blend",
+                            "description": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
+                            "styles": [
+                                {
+                                    "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "f431e714-3507-45e6-ba54-1f812df1c089",
+                                    "name": "Girly"
+                                }
+                            ],
+                            "colors": [
+                                {
+                                    "id": "d3daac2f-0e0d-4b46-9a23-9fbdf1b38a0e",
+                                    "name": "White",
+                                    "hex": "#FFFFFF",
+                                    "images": ["200043", "200044", "200045"],
+                                    "products": [
+                                        {
+                                            "id": "14cfce5a-6342-4f11-8943-32dfef9e023d",
+                                            "size": "XS",
+                                            "quantityAvailable": 12
+                                        },
+                                        {
+                                            "id": "ecbd8847-9a5a-4a12-9069-fa56ae3e41fd",
+                                            "size": "S",
+                                            "quantityAvailable": 18
+                                        },
+                                        {
+                                            "id": "0148996e-b61b-464f-bb64-0724a2888f22",
+                                            "size": "M",
+                                            "quantityAvailable": 15
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "cfe4b2db-1bc0-4753-8be0-c6b6bcf38df2",
+                                    "name": "Pink",
+                                    "hex": "#FFC0CB",
+                                    "images": ["200046", "200047", "200048"],
+                                    "products": [
+                                        {
+                                            "id": "16ae858f-4b5d-428f-9fcf-19567b7507ff",
+                                            "size": "XS",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "aa83967a-0f5e-4b46-9b02-b7b54fd48316",
+                                            "size": "S",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "24c1ff6c-8da2-45a2-8a2b-fc221c33e160",
                                             "size": "M",
                                             "quantityAvailable": 5
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "d61f4df1-1319-4b47-bfa2-1429b789441c",
+                            "name": "Leather boots",
+                            "brand": "Aurelia",
+                            "price": 99.90,
+                            "images": ["100025", "100026", "100027"],
+                            "material": "Leather",
+                            "description": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
+                            "styles": [
+                                {
+                                    "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "ff88070f-9696-42fd-bac4-582956ae65bf",
+                                    "name": "Edgy"
+                                }
+                            ],
+                            "colors": [
+                                {
+                                    "id": "A8765257-9C09-40CF-949D-053AC9303750",
+                                    "name": "Black",
+                                    "hex": "#000000",
+                                    "images": ["200049", "200050", "200051"],
+                                    "products": [
+                                        {
+                                            "id": "d6c51446-7f9d-4f78-b8e4-b2372eae6a06",
+                                            "size": "35",
+                                            "quantityAvailable": 10
                                         },
                                         {
-                                            "id": "25f5487b-0b4d-4eb9-af35-4f6793b41629",
-                                            "size": "L",
-                                            "quantityAvailable": 3
+                                            "id": "d97de3ab-7e6d-4c26-94c8-49d80b850fcd",
+                                            "size": "36",
+                                            "quantityAvailable": 15
                                         },
                                         {
-                                            "id": "f9eab7dd-d622-4130-8a70-d6a38c6e5b6f",
-                                            "size": "XL",
-                                            "quantityAvailable": 13
+                                            "id": "67271f73-7589-4b11-bf17-f63c99417a8b",
+                                            "size": "37",
+                                            "quantityAvailable": 12
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "5325E931-8FCA-4504-AB57-5464A1B13D09",
+                                    "name": "Brown",
+                                    "hex": "#A52A2A",
+                                    "images": ["200052", "200053", "200054"],
+                                    "products": [
+                                        {
+                                            "id": "ac1f8a2c-8f39-4bb6-bb4a-8d695ab9f3c4",
+                                            "size": "35",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "d577a551-6e19-47f4-aeb5-7b3f0e343b6d",
+                                            "size": "36",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "b7b471d3-9d4e-4d81-932a-6c1c9baf1b1e",
+                                            "size": "37",
+                                            "quantityAvailable": 6
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "be3a39d3-9379-4864-aee4-8fc2c4f526cd",
+                            "name": "Striped T-shirt",
+                            "brand": "Nautical",
+                            "price": 24.99,
+                            "images": ["100028", "100029", "100030"],
+                            "material": "Cotton",
+                            "description": "Classic striped T-shirt with round neckline and short sleeves.",
+                            "styles": [
+                                {
+                                    "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
+                                    "name": "Casual"
+                                },
+                                {
+                                    "id": "01354f2d-0a36-41cd-8c3f-f1cbcece8608",
+                                    "name": "Preppy"
+                                }
+                            ],
+                            "colors": [
+                                {
+                                    "id": "d3daac2f-0e0d-4b46-9a23-9fbdf1b38a0e",
+                                    "name": "White",
+                                    "hex": "#FFFFFF",
+                                    "images": ["200055", "200056", "200057"],
+                                    "products": [
+                                        {
+                                            "id": "045e7221-2063-43ce-90c2-dc5ebaa0f4fd",
+                                            "size": "XS",
+                                            "quantityAvailable": 12
+                                        },
+                                        {
+                                            "id": "7f93ce8c-3ce5-4a72-8e29-f63c20c4969d",
+                                            "size": "S",
+                                            "quantityAvailable": 18
+                                        },
+                                        {
+                                            "id": "63e3f61e-bae2-4965-a78a-7aee9191eaf7",
+                                            "size": "M",
+                                            "quantityAvailable": 15
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "DF9756EF-F926-4B0B-860E-7D59596B40FD",
+                                    "name": "Black",
+                                    "hex": "#000000",
+                                    "images": ["200058", "200059", "200060"],
+                                    "products": [
+                                        {
+                                            "id": "2f3455fb-8f39-4b5a-a5b4-f1244fe9bba8",
+                                            "size": "XS",
+                                            "quantityAvailable": 8
+                                        },
+                                        {
+                                            "id": "7ef5b96d-ef94-4b96-b8e3-b4937ef40919",
+                                            "size": "S",
+                                            "quantityAvailable": 10
+                                        },
+                                        {
+                                            "id": "5d87885d-d205-439f-9071-5ea306c3888e",
+                                            "size": "M",
+                                            "quantityAvailable": 5
                                         }
                                     ]
                                 }
