@@ -33,23 +33,24 @@ protocol ModuleBuilderProtocol {
 class ModuleBuilder: ModuleBuilderProtocol {
     
     private let keychainService = KeychainService()
+    private let webService = WebService()
     
     func createStoreModule(router: RouterProtocol) -> StoreViewController {
-        let presenter = StorePresenter(router: router)
+        let presenter = StorePresenter(router: router, webService: webService)
         let view = StoreViewController(presenter: presenter)
         presenter.view = view
         return view
     }
     
     func createProductModule(router: RouterProtocol) -> ProductViewController {
-        let presenter = ProductPresenter(router: router)
+        let presenter = ProductPresenter(router: router, webService: webService)
         let view = ProductViewController(presenter: presenter)
         presenter.view = view
         return view
     }
     
     func createCartModule(router: RouterProtocol) -> CartViewController {
-        let presenter = CartPresenter(router: router)
+        let presenter = CartPresenter(router: router, webService: webService)
         let view = CartViewController(presenter: presenter)
         presenter.view = view
         return view
@@ -70,7 +71,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController {
-        let presenter = CheckoutPresenter(router: router, keychainService: keychainService)
+        let presenter = CheckoutPresenter(router: router, keychainService: keychainService, webService: webService)
         let view = CheckoutViewController(presenter: presenter)
         presenter.view = view
         return view

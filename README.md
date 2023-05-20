@@ -14,14 +14,15 @@
 - [x] UIKit
 - [x] UI fully by code
 - [x] Design from Figma, adapted for rounded screens
-- [ ] JSON service
-- [ ] Self-designed JSON-structured database
+- [x] Self-designed JSON-structured database
 - [x] GitHub Pages based mock Web-server
-- [ ] Network service
+- [x] Web service
+- [x] Async/await, Tasks
 - [ ] Core data
 - [ ] Collection views
-- [x] Combine for input check
+- [x] Combine for text input check
 - [x] Keychain service with iCloud sync by native API for sensitive data
+- [ ] JSON service
 - [x] Generics
 - [x] Typographic font styles with dynamic font scaling
 - [x] Customized animation between screens
@@ -31,7 +32,6 @@
 - [ ] Unit tests
 
 ## Code patterns
-- [ ] Async/await
 - [x] Builder
 - [x] Factory
 - [x] Singleton

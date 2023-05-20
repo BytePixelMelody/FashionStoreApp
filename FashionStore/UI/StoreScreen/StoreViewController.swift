@@ -14,7 +14,6 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
-// TODO: Database in JSON
 // TODO: Database write to CoreData after loading from backend
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
 // TODO: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
@@ -68,51 +67,18 @@ class StoreViewController: UIViewController {
         
         setupUiTexts()
         arrangeUiElements()
-        
-        loadJson()
     }
     
-    // TODO: Delete this
-    private func loadJson() {
-        let webService = WebService()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        Task.detached {
-            var catalog: Catalog? = nil
-            catalog = await webService.getData(urlString: Settings.catalogUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
-            print(catalog ?? "")
-        }
+        presenter.storeWillAppear()
     }
     
-    // TODO: Delete this
-    func writeToJson() {
-        let audienceMen = Audience(id: UUID(), name: "Men", categories: [])
-        let audienceWomen = Audience(id: UUID(), name: "Women", categories: [])
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        let catalog: Catalog = Catalog(audiences: [audienceMen, audienceWomen])
-        
-        do {
-            let jsonEncoder = JSONEncoder()
-            jsonEncoder.outputFormatting = .prettyPrinted
-            let data = try jsonEncoder.encode(catalog)
-            let jsonUrl = try getAppSupportUrl(fileName: "catalog.json")
-            try data.write(to: jsonUrl)
-            print("Written to file:\n\(jsonUrl.absoluteString)")
-        } catch {
-            debugPrint("Error to write to JSON:\n\(error.localizedDescription)")
-            return
-        }
-    }
-    
-    // TODO: Delete this
-    private func getAppSupportUrl(fileName: String) throws -> URL {
-        var url = try FileManager.default.url(
-            for: .applicationSupportDirectory,
-            in: .allDomainsMask,
-            appropriateFor: nil,
-            create: true
-        )
-        url.append(path: fileName)
-        return url
+        presenter.storeWillDisappear()
     }
     
     private func setupUiTexts() {

@@ -98,7 +98,7 @@ class Errors {
         
         // default popup message values
         let headerTitle = "Sorry"
-        let errorMessage = checkingError.localizedDescription
+        var errorMessage = checkingError.localizedDescription
         let errorSubMessage: String? = nil
         var buttonTitle = "OK"
         var buttonAction: (() -> Void)? = nil
@@ -114,6 +114,15 @@ class Errors {
         case is DecodingError, Errors.ErrorType.keyChainReadError, Errors.ErrorType.urlResponseCastError:
             logger.error("\(checkingError.localizedDescription, privacy: .public)")
             return
+        // Task was cancelled, no error popup, log and return
+        case is CancellationError:
+            logger.error("Task was cancelled. \(checkingError.localizedDescription, privacy: .public)")
+            return
+        // no Internet connection error
+        case let error as NSError where
+            error.domain == NSURLErrorDomain &&
+            error.code == NSURLErrorNotConnectedToInternet:
+            errorMessage = Errors.ErrorType.networkConnectionFail.localizedDescription
         default:
             break
         }

@@ -8,50 +8,39 @@
 import Foundation
 
 protocol WebServiceProtocol {
-    func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy) async -> T?
+    func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy) async throws -> T
 }
  
 // web service that used to obtain decoded JSON-data by URL string
-// extension is used here to set default param URLCache? = .shared
+// extension is used here to set default param to cachePolicy
 extension WebServiceProtocol {
     
     // to turn off caching set urlCache = nil
-    public func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy) async -> T? {
-        do {
-            // urlString check
-            guard let url = URL(string: urlString) else {
-                throw Errors.ErrorType.invalidUrlStringError
-            }
-                        
-            let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy)
-            
-            // try to get data from url
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            
-            // urlResponse typecasting check
-            guard let urlResponse = response as? HTTPURLResponse else {
-                throw Errors.ErrorType.urlResponseCastError
-            }
-            
-            // status code check
-            guard urlResponse.statusCode < 400 else {
-                throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode)
-            }
-            
-            // try decode data to T type
-            let decodedData = try JSONDecoder().decode(T.self, from: data)
-            
-            return decodedData
-            
-        } catch let error as NSError where // no Internet connection
-                    error.domain == NSURLErrorDomain &&
-                    error.code == NSURLErrorNotConnectedToInternet {
-            Errors.handler.checkError(Errors.ErrorType.networkConnectionFail)
-            return nil
-        } catch { // any other error
-            Errors.handler.checkError(error)
-            return nil
+    public func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy) async throws -> T {
+        // urlString check
+        guard let url = URL(string: urlString) else {
+            throw Errors.ErrorType.invalidUrlStringError
         }
+        
+        let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: 5.0)
+        
+        // try to get data from url
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        // urlResponse typecasting check
+        guard let urlResponse = response as? HTTPURLResponse else {
+            throw Errors.ErrorType.urlResponseCastError
+        }
+        
+        // status code check
+        guard urlResponse.statusCode < 400 else {
+            throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode)
+        }
+        
+        // try decode data to T type
+        let decodedData = try JSONDecoder().decode(T.self, from: data)
+        
+        return decodedData
     }
     
 }
@@ -59,3 +48,6 @@ extension WebServiceProtocol {
 class WebService: WebServiceProtocol {
     
 }
+
+// usage example:
+// var catalog: Catalog = try await WebService().getData(urlString: Settings.catalogUrl)

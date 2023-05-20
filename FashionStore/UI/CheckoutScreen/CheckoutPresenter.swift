@@ -23,6 +23,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     weak var view: CheckoutViewProtocol?
     private let router: RouterProtocol
     private let keychainService: KeychainServiceProtocol
+    private let webService: WebServiceProtocol
     
     // success purchase popup
     private let successPurchasePopupTitle = "Success"
@@ -64,11 +65,12 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         }
     }
 
-    private var cartProducts: [Cart] = []
+    private var cartProducts: [CartItem] = []
 
-    init(router: RouterProtocol, keychainService: KeychainServiceProtocol) {
+    init(router: RouterProtocol, keychainService: KeychainServiceProtocol, webService: WebServiceProtocol) {
         self.router = router
         self.keychainService = keychainService
+        self.webService = webService
     }
     
     func closeScreen() {

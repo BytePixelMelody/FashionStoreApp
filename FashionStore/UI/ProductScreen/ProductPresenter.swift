@@ -16,9 +16,11 @@ protocol ProductPresenterProtocol {
 class ProductPresenter: ProductPresenterProtocol {
     weak var view: ProductViewProtocol?
     private let router: RouterProtocol
+    private let webService: WebServiceProtocol
     
-    init(router: RouterProtocol) {
+    init(router: RouterProtocol, webService: WebServiceProtocol) {
         self.router = router
+        self.webService = webService
     }
     
     func backScreen() {

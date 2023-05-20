@@ -16,10 +16,12 @@ protocol CartPresenterProtocol {
 class CartPresenter: CartPresenterProtocol {
     weak var view: CartViewProtocol?
     private let router: RouterProtocol
-    private var cartProducts: [Cart] = []
+    private let webService: WebServiceProtocol
+    private var cartProducts: [CartItem] = []
 
-    init(router: RouterProtocol) {
+    init(router: RouterProtocol, webService: WebServiceProtocol) {
         self.router = router
+        self.webService = webService
     }
     
     func closeScreen() {
