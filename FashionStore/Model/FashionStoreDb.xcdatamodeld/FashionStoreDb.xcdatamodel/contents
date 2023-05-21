@@ -17,7 +17,7 @@
     </entity>
     <entity name="ItemModel" representedClassName="ItemModel" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="quantityAvailable" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="inStock" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="size" attributeType="String" defaultValueString=""/>
     </entity>
     <entity name="ProductModel" representedClassName="ProductModel" syncable="YES" codeGenerationType="class">

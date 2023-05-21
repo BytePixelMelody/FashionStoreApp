@@ -36,17 +36,17 @@
                                         {
                                             "id": "1e8d8c7d-1ff1-4c7a-a5f6-9319d10f5831",
                                             "size": "XS",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "12f7f81c-348d-4591-a74e-4e11a078b72c",
                                             "size": "S",
-                                            "quantityAvailable": 20
+                                            "inStock": 20
                                         },
                                         {
                                             "id": "8d3ad1b4-8857-4c8e-894a-2d5d3a4b8b30",
                                             "size": "M",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -59,17 +59,17 @@
                                         {
                                             "id": "d6d0fda3-8e6f-4d03-857f-bdab1742c020",
                                             "size": "S",
-                                            "quantityAvailable": 5
+                                            "inStock": 5
                                         },
                                         {
                                             "id": "2686a616-b548-47dd-9e5d-79094e93fb68",
                                             "size": "M",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "cc64636e-f1ce-4012-9ce0-6c54c4e59171",
                                             "size": "L",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         }
                                     ]
                                 }
@@ -103,17 +103,17 @@
                                         {
                                             "id": "5ab2c3b5-56f9-4461-9c77-45a4a8e930ae",
                                             "size": "S",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "86a40c92-6112-4d44-b9bc-032ae7cbb884",
                                             "size": "M",
-                                            "quantityAvailable": 18
+                                            "inStock": 18
                                         },
                                         {
                                             "id": "d6f7875c-82e0-47b6-80ab-7e91f605c27b",
                                             "size": "L",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -126,17 +126,17 @@
                                         {
                                             "id": "3c678d3d-6c7a-4e66-9974-f7aefbc9e9b7",
                                             "size": "S",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "4f4a1ab7-1a11-43d7-bd8a-5c59ea6d7c3b",
                                             "size": "M",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "3a26b03a-fa17-4dd5-b134-f5ef82a0c4ce",
                                             "size": "L",
-                                            "quantityAvailable": 5
+                                            "inStock": 5
                                         }
                                     ]
                                 }
@@ -170,17 +170,17 @@
                                         {
                                             "id": "e0ad7c63-37d5-41c7-9976-9ed05f27445c",
                                             "size": "S",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         },
                                         {
                                             "id": "e3ee2a70-9dd2-4b82-b9d6-2b1f5ad0815f",
                                             "size": "M",
-                                            "quantityAvailable": 20
+                                            "inStock": 20
                                         },
                                         {
                                             "id": "754d6b69-2013-4778-b82d-95a1be50e38f",
                                             "size": "L",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         }
                                     ]
                                 },
@@ -193,17 +193,17 @@
                                         {
                                             "id": "5b8bb57b-b6d0-4fe4-b66e-0753b704e6d4",
                                             "size": "S",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "bc3c5a20-0a6f-4ce1-8daa-7c0c70438f9a",
                                             "size": "M",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "b9516bb0-4a7a-481a-91f7-d1a79b1a1469",
                                             "size": "L",
-                                            "quantityAvailable": 6
+                                            "inStock": 6
                                         }
                                     ]
                                 }
@@ -239,17 +239,17 @@
                                         {
                                             "id": "83be9b9d-b156-448b-bf9e-8544d6e74a5c",
                                             "size": "S",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "f0b53171-1b77-4b2f-a157-0a84c23b22fd",
                                             "size": "M",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         },
                                         {
                                             "id": "e6753da5-8966-40e0-8d8f-3f9bc1e816b7",
                                             "size": "L",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         }
                                     ]
                                 },
@@ -262,17 +262,17 @@
                                         {
                                             "id": "b9ff5990-74e4-4f34-8822-109cc9b4b79f",
                                             "size": "S",
-                                            "quantityAvailable": 5
+                                            "inStock": 5
                                         },
                                         {
                                             "id": "29cda8b4-31af-4d1a-a7cd-692b2d8e8c7a",
                                             "size": "M",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "1190e35e-bcc9-4d99-bb59-41e7a698c97a",
                                             "size": "L",
-                                            "quantityAvailable": 3
+                                            "inStock": 3
                                         }
                                     ]
                                 }
@@ -306,17 +306,17 @@
                                         {
                                             "id": "11f6c3a5-152e-41e0-b3cd-ccbaa2571b91",
                                             "size": "XS",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "4c34af3e-5505-40c2-b5e6-27669d07e24c",
                                             "size": "S",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         },
                                         {
                                             "id": "2ea94e75-6a8f-405f-92b2-bb15f83076ab",
                                             "size": "M",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         }
                                     ]
                                 },
@@ -329,17 +329,17 @@
                                         {
                                             "id": "82a3d5e6-b0e3-42f4-ba1c-5c9d2f89ebee",
                                             "size": "S",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "d12907c7-27a1-405d-8b1a-9d8a2d232a4f",
                                             "size": "M",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "e84b46ea-27f3-4c0c-b0ae-2e26c0c8c04b",
                                             "size": "L",
-                                            "quantityAvailable": 6
+                                            "inStock": 6
                                         }
                                     ]
                                 }
@@ -373,17 +373,17 @@
                                         {
                                             "id": "4b97ebe3-b8d0-4b02-9d57-2e7185ef1a97",
                                             "size": "XS",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "a7419573-6229-4978-8a5a-3db282a6c0f7",
                                             "size": "S",
-                                            "quantityAvailable": 18
+                                            "inStock": 18
                                         },
                                         {
                                             "id": "44c4fd2c-9a88-4cc7-8f0d-1e9c5e3c59a9",
                                             "size": "M",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -396,17 +396,17 @@
                                         {
                                             "id": "6c1336d1-8d13-4a5d-8490-7ee3c25064b0",
                                             "size": "XS",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "c1f19d61-2e19-4ccf-8c5d-9ad6a636dfe7",
                                             "size": "S",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "4a2c1447-4a9e-4e8e-8f35-1a54a5c6ee5a",
                                             "size": "M",
-                                            "quantityAvailable": 5
+                                            "inStock": 5
                                         }
                                     ]
                                 }
@@ -440,17 +440,17 @@
                                         {
                                             "id": "11a020fc-fb19-4ea1-9df5-ddeab0e69d4a",
                                             "size": "XS",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "e4d94d6e-5f5e-4ff6-a9bc-dc7f08bc83d4",
                                             "size": "S",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         },
                                         {
                                             "id": "a7dbdb12-ae8d-441e-ae3a-6e9a40675f16",
                                             "size": "M",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         }
                                     ]
                                 },
@@ -463,17 +463,17 @@
                                         {
                                             "id": "149edcb5-b6de-4bcb-9400-d54c62bc09a3",
                                             "size": "S",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "a1ab8a16-95c3-4ce2-aae3-cbfa63b866f3",
                                             "size": "M",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "179deded-98bf-41ea-94ea-598c623ddf75",
                                             "size": "L",
-                                            "quantityAvailable": 6
+                                            "inStock": 6
                                         }
                                     ]
                                 }
@@ -507,17 +507,17 @@
                                         {
                                             "id": "14cfce5a-6342-4f11-8943-32dfef9e023d",
                                             "size": "XS",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "ecbd8847-9a5a-4a12-9069-fa56ae3e41fd",
                                             "size": "S",
-                                            "quantityAvailable": 18
+                                            "inStock": 18
                                         },
                                         {
                                             "id": "0148996e-b61b-464f-bb64-0724a2888f22",
                                             "size": "M",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -530,17 +530,17 @@
                                         {
                                             "id": "16ae858f-4b5d-428f-9fcf-19567b7507ff",
                                             "size": "XS",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "aa83967a-0f5e-4b46-9b02-b7b54fd48316",
                                             "size": "S",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "24c1ff6c-8da2-45a2-8a2b-fc221c33e160",
                                             "size": "M",
-                                            "quantityAvailable": 5
+                                            "inStock": 5
                                         }
                                     ]
                                 }
@@ -574,17 +574,17 @@
                                         {
                                             "id": "d6c51446-7f9d-4f78-b8e4-b2372eae6a06",
                                             "size": "35",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "d97de3ab-7e6d-4c26-94c8-49d80b850fcd",
                                             "size": "36",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         },
                                         {
                                             "id": "67271f73-7589-4b11-bf17-f63c99417a8b",
                                             "size": "37",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         }
                                     ]
                                 },
@@ -597,17 +597,17 @@
                                         {
                                             "id": "ac1f8a2c-8f39-4bb6-bb4a-8d695ab9f3c4",
                                             "size": "35",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "d577a551-6e19-47f4-aeb5-7b3f0e343b6d",
                                             "size": "36",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "b7b471d3-9d4e-4d81-932a-6c1c9baf1b1e",
                                             "size": "37",
-                                            "quantityAvailable": 6
+                                            "inStock": 6
                                         }
                                     ]
                                 }
@@ -641,17 +641,17 @@
                                         {
                                             "id": "045e7221-2063-43ce-90c2-dc5ebaa0f4fd",
                                             "size": "XS",
-                                            "quantityAvailable": 12
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "7f93ce8c-3ce5-4a72-8e29-f63c20c4969d",
                                             "size": "S",
-                                            "quantityAvailable": 18
+                                            "inStock": 18
                                         },
                                         {
                                             "id": "63e3f61e-bae2-4965-a78a-7aee9191eaf7",
                                             "size": "M",
-                                            "quantityAvailable": 15
+                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -664,17 +664,17 @@
                                         {
                                             "id": "2f3455fb-8f39-4b5a-a5b4-f1244fe9bba8",
                                             "size": "XS",
-                                            "quantityAvailable": 8
+                                            "inStock": 8
                                         },
                                         {
                                             "id": "7ef5b96d-ef94-4b96-b8e3-b4937ef40919",
                                             "size": "S",
-                                            "quantityAvailable": 10
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "5d87885d-d205-439f-9071-5ea306c3888e",
                                             "size": "M",
-                                            "quantityAvailable": 5
+                                            "inStock": 5
                                         }
                                     ]
                                 }

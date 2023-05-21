@@ -52,5 +52,5 @@ struct Color: Codable {
 struct Item: Codable {
     var id: UUID
     var size: String // "XS", "S", "M", "L", "XL", "XXL"
-    var quantityAvailable: Int // 1...1000
+    var inStock: Int // 1...1000
 }
