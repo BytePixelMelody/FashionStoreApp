@@ -21,17 +21,17 @@ struct Audience: Codable {
 struct Category: Codable {
     var id: UUID
     var name: String // "Apparel", "Shoes", "Bags", "Accessoires"
-    var models: [Model]
+    var products: [Product]
 }
 
-struct Model: Codable {
+struct Product: Codable {
     var id: UUID
     var name: String // "Dot print corset dress", "Blazer with tuxedo collar" etc
     var brand: String // "Mohani", "Diolo", "Loriani", "Totto", "Jole" etc
     var price: Decimal // 45.00...950.00
     var images: [String] // ["100001", "200001", "300001" etc]
     var material: String // "Cotton", "Wool", "Linum" etc
-    var modelDescription: String // "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure." etc
+    var information: String // "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure." etc
     var styles: [Style]
     var colors: [Color]
 }
@@ -46,10 +46,10 @@ struct Color: Codable {
     var name: String // "black", "pink", "navy" etc
     var hex: String // "#000000", "#FFC0CB", "#000080" ect
     var images: [String] // ["100001", "100002", "100002", "100004" etc]
-    var products: [Product]
+    var items: [Item]
 }
 
-struct Product: Codable {
+struct Item: Codable {
     var id: UUID
     var size: String // "XS", "S", "M", "L", "XL", "XXL"
     var quantityAvailable: Int // 1...1000

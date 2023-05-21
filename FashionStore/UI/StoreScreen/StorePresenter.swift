@@ -51,7 +51,7 @@ class StorePresenter: StorePresenterProtocol {
                 // another check, before hard work, if task was cancelled then it will throw CancellationError
                 try Task.checkCancellation()
                 
-//                print(catalog)
+                print(catalog)
             } catch {
                 await MainActor.run {
                     Errors.handler.checkError(error)

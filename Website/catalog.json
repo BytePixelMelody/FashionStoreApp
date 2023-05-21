@@ -7,7 +7,7 @@
                 {
                     "id": "c7818ebd-189e-42e4-8b32-cc5b4e16da46",
                     "name": "Apparel",
-                    "models": [
+                    "products": [
                         {
                             "id": "b07b22e6-0a4c-4a5a-92c2-3b4e17e87822",
                             "name": "Dot print corset dress",
@@ -15,7 +15,7 @@
                             "price": 89.99,
                             "images": ["100001", "100002", "100003"],
                             "material": "Cotton",
-                            "modelDescription": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
+                            "information": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
                             "styles": [
                                 {
                                     "id": "2ebdfe33-bfb7-4f0a-869f-3e0a8cc7f6cd",
@@ -32,7 +32,7 @@
                                     "name": "Black",
                                     "hex": "#000000",
                                     "images": ["200001", "200002", "200003"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "1e8d8c7d-1ff1-4c7a-a5f6-9319d10f5831",
                                             "size": "XS",
@@ -55,7 +55,7 @@
                                     "name": "Pink",
                                     "hex": "#FFC0CB",
                                     "images": ["200004", "200005", "200006"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "d6d0fda3-8e6f-4d03-857f-bdab1742c020",
                                             "size": "S",
@@ -82,7 +82,7 @@
                             "price": 120.50,
                             "images": ["100004", "100005", "100006"],
                             "material": "Wool",
-                            "modelDescription": "Double-breasted blazer with tuxedo collar. Front welt pockets and chest pocket. Satin lining. Front button closure.",
+                            "information": "Double-breasted blazer with tuxedo collar. Front welt pockets and chest pocket. Satin lining. Front button closure.",
                             "styles": [
                                 {
                                     "id": "9b6958fe-5be5-4b2b-9e8c-77a5a68bc0fd",
@@ -99,7 +99,7 @@
                                     "name": "Navy",
                                     "hex": "#000080",
                                     "images": ["200007", "200008", "200009"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "5ab2c3b5-56f9-4461-9c77-45a4a8e930ae",
                                             "size": "S",
@@ -122,7 +122,7 @@
                                     "name": "Gray",
                                     "hex": "#808080",
                                     "images": ["200010", "200011", "200012"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "3c678d3d-6c7a-4e66-9974-f7aefbc9e9b7",
                                             "size": "S",
@@ -149,7 +149,7 @@
                             "price": 79.99,
                             "images": ["100007", "100008", "100009"],
                             "material": "Polyester",
-                            "modelDescription": "Floral print maxi dress with short sleeves and V-neckline. Elastic waistband and flowy skirt. Lined.",
+                            "information": "Floral print maxi dress with short sleeves and V-neckline. Elastic waistband and flowy skirt. Lined.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -166,7 +166,7 @@
                                     "name": "Red",
                                     "hex": "#FF0000",
                                     "images": ["200013", "200014", "200015"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "e0ad7c63-37d5-41c7-9976-9ed05f27445c",
                                             "size": "S",
@@ -189,7 +189,7 @@
                                     "name": "Blue",
                                     "hex": "#0000FF",
                                     "images": ["200016", "200017", "200018"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "5b8bb57b-b6d0-4fe4-b66e-0753b704e6d4",
                                             "size": "S",
@@ -216,7 +216,7 @@
                             "price": 149.00,
                             "images": ["100010", "100011", "100012"],
                             "material": "Wool blend",
-                            "modelDescription": "Classic tweed blazer with notch lapels. Front patch pockets and chest welt pocket. Button cuffs. Single-breasted button closure.",
+                            "information": "Classic tweed blazer with notch lapels. Front patch pockets and chest welt pocket. Button cuffs. Single-breasted button closure.",
                             "styles": [
                                 {
                                     "id": "e772d954-4df9-4d85-a960-2e7f15352549",
@@ -235,7 +235,7 @@
                                     "name": "Gray",
                                     "hex": "#808080",
                                     "images": ["200019", "200020", "200021"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "83be9b9d-b156-448b-bf9e-8544d6e74a5c",
                                             "size": "S",
@@ -258,7 +258,7 @@
                                     "name": "Beige",
                                     "hex": "#F5F5DC",
                                     "images": ["200022", "200023", "200024"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "b9ff5990-74e4-4f34-8822-109cc9b4b79f",
                                             "size": "S",
@@ -285,7 +285,7 @@
                             "price": 55.00,
                             "images": ["100013", "100014", "100015"],
                             "material": "Cashmere",
-                            "modelDescription": "Classic striped sweater with crew neckline. Ribbed cuffs, neckline, and hem. Soft and cozy.",
+                            "information": "Classic striped sweater with crew neckline. Ribbed cuffs, neckline, and hem. Soft and cozy.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -302,7 +302,7 @@
                                     "name": "Navy",
                                     "hex": "#000080",
                                     "images":["200025", "200026", "200027"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "11f6c3a5-152e-41e0-b3cd-ccbaa2571b91",
                                             "size": "XS",
@@ -325,7 +325,7 @@
                                     "name": "Gray",
                                     "hex": "#808080",
                                     "images": ["200028", "200029", "200030"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "82a3d5e6-b0e3-42f4-ba1c-5c9d2f89ebee",
                                             "size": "S",
@@ -352,7 +352,7 @@
                             "price": 45.99,
                             "images": ["100016", "100017", "100018"],
                             "material": "Silk",
-                            "modelDescription": "Flowy ruffled blouse with V-neckline and long sleeves. Elastic cuffs. Button front closure.",
+                            "information": "Flowy ruffled blouse with V-neckline and long sleeves. Elastic cuffs. Button front closure.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -369,7 +369,7 @@
                                     "name": "White",
                                     "hex": "#FFFFFF",
                                     "images": ["200031", "200032", "200033"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "4b97ebe3-b8d0-4b02-9d57-2e7185ef1a97",
                                             "size": "XS",
@@ -392,7 +392,7 @@
                                     "name": "Blush",
                                     "hex": "#FFC0CB",
                                     "images": ["200034", "200035", "200036"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "6c1336d1-8d13-4a5d-8490-7ee3c25064b0",
                                             "size": "XS",
@@ -419,7 +419,7 @@
                             "price": 69.90,
                             "images": ["100019", "100020", "100021"],
                             "material": "Denim",
-                            "modelDescription": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
+                            "information": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -436,7 +436,7 @@
                                     "name": "Gray",
                                     "hex": "#808080",
                                     "images": ["200037", "200038", "200039"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "11a020fc-fb19-4ea1-9df5-ddeab0e69d4a",
                                             "size": "XS",
@@ -459,7 +459,7 @@
                                     "name": "Black",
                                     "hex": "#000000",
                                     "images": ["200040", "200041", "200042"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "149edcb5-b6de-4bcb-9400-d54c62bc09a3",
                                             "size": "S",
@@ -486,7 +486,7 @@
                             "price": 39.99,
                             "images": ["100022", "100023", "100024"],
                             "material": "Cotton blend",
-                            "modelDescription": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
+                            "information": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -503,7 +503,7 @@
                                     "name": "White",
                                     "hex": "#FFFFFF",
                                     "images": ["200043", "200044", "200045"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "14cfce5a-6342-4f11-8943-32dfef9e023d",
                                             "size": "XS",
@@ -526,7 +526,7 @@
                                     "name": "Pink",
                                     "hex": "#FFC0CB",
                                     "images": ["200046", "200047", "200048"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "16ae858f-4b5d-428f-9fcf-19567b7507ff",
                                             "size": "XS",
@@ -553,7 +553,7 @@
                             "price": 99.90,
                             "images": ["100025", "100026", "100027"],
                             "material": "Leather",
-                            "modelDescription": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
+                            "information": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -570,7 +570,7 @@
                                     "name": "Black",
                                     "hex": "#000000",
                                     "images": ["200049", "200050", "200051"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "d6c51446-7f9d-4f78-b8e4-b2372eae6a06",
                                             "size": "35",
@@ -593,7 +593,7 @@
                                     "name": "Brown",
                                     "hex": "#A52A2A",
                                     "images": ["200052", "200053", "200054"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "ac1f8a2c-8f39-4bb6-bb4a-8d695ab9f3c4",
                                             "size": "35",
@@ -620,7 +620,7 @@
                             "price": 24.99,
                             "images": ["100028", "100029", "100030"],
                             "material": "Cotton",
-                            "modelDescription": "Classic striped T-shirt with round neckline and short sleeves.",
+                            "information": "Classic striped T-shirt with round neckline and short sleeves.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -637,7 +637,7 @@
                                     "name": "White",
                                     "hex": "#FFFFFF",
                                     "images": ["200055", "200056", "200057"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "045e7221-2063-43ce-90c2-dc5ebaa0f4fd",
                                             "size": "XS",
@@ -660,7 +660,7 @@
                                     "name": "Black",
                                     "hex": "#000000",
                                     "images": ["200058", "200059", "200060"],
-                                    "products": [
+                                    "items": [
                                         {
                                             "id": "2f3455fb-8f39-4b5a-a5b4-f1244fe9bba8",
                                             "size": "XS",
