@@ -15,7 +15,7 @@
                             "price": 89.99,
                             "images": ["100001", "100002", "100003"],
                             "material": "Cotton",
-                            "description": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
+                            "modelDescription": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
                             "styles": [
                                 {
                                     "id": "2ebdfe33-bfb7-4f0a-869f-3e0a8cc7f6cd",
@@ -82,7 +82,7 @@
                             "price": 120.50,
                             "images": ["100004", "100005", "100006"],
                             "material": "Wool",
-                            "description": "Double-breasted blazer with tuxedo collar. Front welt pockets and chest pocket. Satin lining. Front button closure.",
+                            "modelDescription": "Double-breasted blazer with tuxedo collar. Front welt pockets and chest pocket. Satin lining. Front button closure.",
                             "styles": [
                                 {
                                     "id": "9b6958fe-5be5-4b2b-9e8c-77a5a68bc0fd",
@@ -149,7 +149,7 @@
                             "price": 79.99,
                             "images": ["100007", "100008", "100009"],
                             "material": "Polyester",
-                            "description": "Floral print maxi dress with short sleeves and V-neckline. Elastic waistband and flowy skirt. Lined.",
+                            "modelDescription": "Floral print maxi dress with short sleeves and V-neckline. Elastic waistband and flowy skirt. Lined.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -216,7 +216,7 @@
                             "price": 149.00,
                             "images": ["100010", "100011", "100012"],
                             "material": "Wool blend",
-                            "description": "Classic tweed blazer with notch lapels. Front patch pockets and chest welt pocket. Button cuffs. Single-breasted button closure.",
+                            "modelDescription": "Classic tweed blazer with notch lapels. Front patch pockets and chest welt pocket. Button cuffs. Single-breasted button closure.",
                             "styles": [
                                 {
                                     "id": "e772d954-4df9-4d85-a960-2e7f15352549",
@@ -285,7 +285,7 @@
                             "price": 55.00,
                             "images": ["100013", "100014", "100015"],
                             "material": "Cashmere",
-                            "description": "Classic striped sweater with crew neckline. Ribbed cuffs, neckline, and hem. Soft and cozy.",
+                            "modelDescription": "Classic striped sweater with crew neckline. Ribbed cuffs, neckline, and hem. Soft and cozy.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -352,7 +352,7 @@
                             "price": 45.99,
                             "images": ["100016", "100017", "100018"],
                             "material": "Silk",
-                            "description": "Flowy ruffled blouse with V-neckline and long sleeves. Elastic cuffs. Button front closure.",
+                            "modelDescription": "Flowy ruffled blouse with V-neckline and long sleeves. Elastic cuffs. Button front closure.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -419,7 +419,7 @@
                             "price": 69.90,
                             "images": ["100019", "100020", "100021"],
                             "material": "Denim",
-                            "description": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
+                            "modelDescription": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -486,7 +486,7 @@
                             "price": 39.99,
                             "images": ["100022", "100023", "100024"],
                             "material": "Cotton blend",
-                            "description": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
+                            "modelDescription": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -553,7 +553,7 @@
                             "price": 99.90,
                             "images": ["100025", "100026", "100027"],
                             "material": "Leather",
-                            "description": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
+                            "modelDescription": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -620,7 +620,7 @@
                             "price": 24.99,
                             "images": ["100028", "100029", "100030"],
                             "material": "Cotton",
-                            "description": "Classic striped T-shirt with round neckline and short sleeves.",
+                            "modelDescription": "Classic striped T-shirt with round neckline and short sleeves.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
