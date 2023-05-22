@@ -11,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private var router: Router?
+    private let coreDataService = CoreDataService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -19,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootNavigationController = UINavigationController()
         rootNavigationController.navigationBar.isHidden = true
  
-        let moduleBuilder = ModuleBuilder()
+        let moduleBuilder = ModuleBuilder(coreDataService: coreDataService)
         router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
         // errors handler singleton
         Errors.handler.router = router

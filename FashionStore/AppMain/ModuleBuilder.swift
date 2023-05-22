@@ -34,9 +34,14 @@ class ModuleBuilder: ModuleBuilderProtocol {
     
     private let keychainService = KeychainService()
     private let webService = WebService()
+    private let coreDataService: CoreDataServiceProtocol
+    
+    init(coreDataService: CoreDataServiceProtocol) {
+        self.coreDataService = coreDataService
+    }
     
     func createStoreModule(router: RouterProtocol) -> StoreViewController {
-        let presenter = StorePresenter(router: router, webService: webService)
+        let presenter = StorePresenter(router: router, webService: webService, coreDataService: coreDataService)
         let view = StoreViewController(presenter: presenter)
         presenter.view = view
         return view

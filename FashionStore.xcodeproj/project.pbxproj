@@ -20,6 +20,7 @@
 		1163019529EE9D5C0031362C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019429EE9D5C0031362C /* Errors.swift */; };
 		11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */; };
 		1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171F78229F2E2550011465D /* DeepLinkService.swift */; };
+		11726FE82A1AB4FD00C88716 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11726FE72A1AB4FD00C88716 /* CoreDataService.swift */; };
 		117C0BE02A116DCD00138CA9 /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 117C0BDF2A116DCD00138CA9 /* catalog.json */; };
 		117C0BE22A1230E300138CA9 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117C0BE12A1230E300138CA9 /* WebService.swift */; };
 		117CB24929AE10C6006F4192 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB24829AE10C6006F4192 /* StoreViewController.swift */; };
@@ -76,6 +77,7 @@
 		1163019429EE9D5C0031362C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDetailsView.swift; sourceTree = "<group>"; };
 		1171F78229F2E2550011465D /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
+		11726FE72A1AB4FD00C88716 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		117C0BDF2A116DCD00138CA9 /* catalog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
 		117C0BE12A1230E300138CA9 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		117CB24829AE10C6006F4192 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,14 @@
 			path = ErrorsHandlerService;
 			sourceTree = "<group>";
 		};
+		11726FE62A1AB4DF00C88716 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				11726FE72A1AB4FD00C88716 /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
 		117C0BDE2A1165C100138CA9 /* Website */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +234,7 @@
 		1185D6D429B72C5700833991 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				11726FE62A1AB4DF00C88716 /* CoreDataService */,
 				11E2C9D02A02211000BDED92 /* KeychainService */,
 				1171F78529F300F90011465D /* ErrorsHandlerService */,
 				1171F78429F300EC0011465D /* DeepLinkService */,
@@ -488,6 +499,7 @@
 				1160A04E29E970D6009AB1C6 /* PopupPresenter.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */,
+				11726FE82A1AB4FD00C88716 /* CoreDataService.swift in Sources */,
 				11E2C9D22A02213400BDED92 /* KeychainService.swift in Sources */,
 				11E5F4AF29BE09EA00B979B4 /* Catalog.swift in Sources */,
 				1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */,

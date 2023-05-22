@@ -3,22 +3,31 @@
     <entity name="AudienceModel" representedClassName="AudienceModel" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <relationship name="audience_categories" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryModel" inverseName="categories_audience" inverseEntity="CategoryModel"/>
+        <relationship name="audiences_catalog" maxCount="1" deletionRule="Nullify" destinationEntity="CatalogModel" inverseName="catalog_audiences" inverseEntity="CatalogModel"/>
     </entity>
-    <entity name="CatalogModel" representedClassName="CatalogModel" syncable="YES" codeGenerationType="class"/>
+    <entity name="CatalogModel" representedClassName="CatalogModel" syncable="YES" codeGenerationType="class">
+        <relationship name="catalog_audiences" toMany="YES" deletionRule="Cascade" destinationEntity="AudienceModel" inverseName="audiences_catalog" inverseEntity="AudienceModel"/>
+    </entity>
     <entity name="CategoryModel" representedClassName="CategoryModel" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <relationship name="categories_audience" maxCount="1" deletionRule="Nullify" destinationEntity="AudienceModel" inverseName="audience_categories" inverseEntity="AudienceModel"/>
+        <relationship name="category_products" toMany="YES" deletionRule="Cascade" destinationEntity="ProductModel" inverseName="products_category" inverseEntity="ProductModel"/>
     </entity>
     <entity name="ColorModel" representedClassName="ColorModel" syncable="YES" codeGenerationType="class">
         <attribute name="hex" attributeType="String" defaultValueString=""/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="images" attributeType="Transformable" valueTransformerName="Transformer" customClassName="[String]"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <relationship name="color_items" toMany="YES" deletionRule="Cascade" destinationEntity="ItemModel" inverseName="items_color" inverseEntity="ItemModel"/>
+        <relationship name="colors_product" maxCount="1" deletionRule="Nullify" destinationEntity="ProductModel" inverseName="product_colors" inverseEntity="ProductModel"/>
     </entity>
     <entity name="ItemModel" representedClassName="ItemModel" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="inStock" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="size" attributeType="String" defaultValueString=""/>
+        <relationship name="items_color" maxCount="1" deletionRule="Nullify" destinationEntity="ColorModel" inverseName="color_items" inverseEntity="ColorModel"/>
     </entity>
     <entity name="ProductModel" representedClassName="ProductModel" syncable="YES" codeGenerationType="class">
         <attribute name="brand" attributeType="String" defaultValueString=""/>
@@ -28,9 +37,13 @@
         <attribute name="material" attributeType="String" defaultValueString=""/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="price" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="product_colors" toMany="YES" deletionRule="Cascade" destinationEntity="ColorModel" inverseName="colors_product" inverseEntity="ColorModel"/>
+        <relationship name="products_category" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryModel" inverseName="category_products" inverseEntity="CategoryModel"/>
+        <relationship name="products_styles" toMany="YES" deletionRule="Nullify" destinationEntity="StyleModel" inverseName="styles_products" inverseEntity="StyleModel"/>
     </entity>
     <entity name="StyleModel" representedClassName="StyleModel" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <relationship name="styles_products" toMany="YES" deletionRule="Nullify" destinationEntity="ProductModel" inverseName="products_styles" inverseEntity="ProductModel"/>
     </entity>
 </model>

@@ -19,13 +19,15 @@ class StorePresenter: StorePresenterProtocol {
     weak var view: StoreViewProtocol?
     private let router: RouterProtocol
     private let webService: WebServiceProtocol
+    private let coreDataService: CoreDataServiceProtocol
     
     // storing task to cancel it on willDisappear()
     private var loadCatalogTask: Task<(), Never>?
     
-    init(router: RouterProtocol, webService: WebServiceProtocol) {
+    init(router: RouterProtocol, webService: WebServiceProtocol, coreDataService: CoreDataServiceProtocol) {
         self.router = router
         self.webService = webService
+        self.coreDataService = coreDataService
     }
     
     func showProduct() {
@@ -37,8 +39,6 @@ class StorePresenter: StorePresenterProtocol {
     }
     
     func storeWillAppear() {
-//        let color = ColorModel()
-//        color.images
 
         loadCatalogTask = Task {
             do {
@@ -58,6 +58,9 @@ class StorePresenter: StorePresenterProtocol {
                 }
             }
         }
+        
+        //        let color = ColorModel()
+        //        color.image
     }
     
     func storeWillDisappear() {

@@ -17,7 +17,7 @@ class TestViewController: UIViewController {
     
     @IBOutlet private var label: UILabel!
     
-    var presenter: TestPresenterProtocol!
+    var presenter: TestPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
