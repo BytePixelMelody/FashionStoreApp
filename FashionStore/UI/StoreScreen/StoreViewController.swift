@@ -72,13 +72,13 @@ class StoreViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        presenter.storeWillAppear()
+        presenter.storeScreenWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        presenter.storeWillDisappear()
+        presenter.storeScreenWillDisappear()
     }
     
     private func setupUiTexts() {

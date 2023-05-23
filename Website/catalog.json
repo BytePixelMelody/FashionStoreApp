@@ -13,7 +13,7 @@
                             "name": "Dot print corset dress",
                             "brand": "Mohani",
                             "price": 89.99,
-                            "images": ["100001", "100002", "100003"],
+                            "images": ["1001", "1002", "1003"],
                             "material": "Cotton",
                             "information": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
                             "styles": [
@@ -31,7 +31,7 @@
                                     "id": "fcf2bb54-23d1-4bea-bf3e-2efcc4d3e0ae",
                                     "name": "Black",
                                     "hex": "#000000",
-                                    "images": ["200001", "200002", "200003"],
+                                    "images": ["1001", "1002", "1003"],
                                     "items": [
                                         {
                                             "id": "1e8d8c7d-1ff1-4c7a-a5f6-9319d10f5831",
@@ -54,7 +54,7 @@
                                     "id": "b42c33e2-9186-4e6d-9dcd-55c2a3f4a4d9",
                                     "name": "Pink",
                                     "hex": "#FFC0CB",
-                                    "images": ["200004", "200005", "200006"],
+                                    "images": ["1004", "1005", "1006"],
                                     "items": [
                                         {
                                             "id": "d6d0fda3-8e6f-4d03-857f-bdab1742c020",
@@ -80,7 +80,7 @@
                             "name": "Blazer with tuxedo collar",
                             "brand": "Diolo",
                             "price": 120.50,
-                            "images": ["100004", "100005", "100006"],
+                            "images": ["1004", "1005", "1006"],
                             "material": "Wool",
                             "information": "Double-breasted blazer with tuxedo collar. Front welt pockets and chest pocket. Satin lining. Front button closure.",
                             "styles": [
@@ -98,7 +98,7 @@
                                     "id": "8c27f0dd-3f0e-44b0-8d4e-1d4b682b20f2",
                                     "name": "Navy",
                                     "hex": "#000080",
-                                    "images": ["200007", "200008", "200009"],
+                                    "images": ["1007", "1008", "1009"],
                                     "items": [
                                         {
                                             "id": "5ab2c3b5-56f9-4461-9c77-45a4a8e930ae",
@@ -121,7 +121,7 @@
                                     "id": "e8e4ed8a-b5e0-46e5-89be-24374a8f3e3e",
                                     "name": "Gray",
                                     "hex": "#808080",
-                                    "images": ["200010", "200011", "200012"],
+                                    "images": ["1010", "1011", "1012"],
                                     "items": [
                                         {
                                             "id": "3c678d3d-6c7a-4e66-9974-f7aefbc9e9b7",
@@ -147,7 +147,7 @@
                             "name": "Floral maxi dress",
                             "brand": "Loriani",
                             "price": 79.99,
-                            "images": ["100007", "100008", "100009"],
+                            "images": ["1007", "1008", "1009"],
                             "material": "Polyester",
                             "information": "Floral print maxi dress with short sleeves and V-neckline. Elastic waistband and flowy skirt. Lined.",
                             "styles": [
@@ -165,7 +165,7 @@
                                     "id": "d1ef68a1-99ad-4576-9466-1b9e94d9325f",
                                     "name": "Red",
                                     "hex": "#FF0000",
-                                    "images": ["200013", "200014", "200015"],
+                                    "images": ["1013", "1014", "1015"],
                                     "items": [
                                         {
                                             "id": "e0ad7c63-37d5-41c7-9976-9ed05f27445c",
@@ -188,7 +188,7 @@
                                     "id": "90c6fbf6-354f-4f54-9f57-cc33eb9d4f85",
                                     "name": "Blue",
                                     "hex": "#0000FF",
-                                    "images": ["200016", "200017", "200018"],
+                                    "images": ["1016", "1017", "1018"],
                                     "items": [
                                         {
                                             "id": "5b8bb57b-b6d0-4fe4-b66e-0753b704e6d4",
@@ -214,7 +214,7 @@
                             "name": "Tweed blazer",
                             "brand": "Totto",
                             "price": 149.00,
-                            "images": ["100010", "100011", "100012"],
+                            "images": ["1010", "1011", "1012"],
                             "material": "Wool blend",
                             "information": "Classic tweed blazer with notch lapels. Front patch pockets and chest welt pocket. Button cuffs. Single-breasted button closure.",
                             "styles": [
@@ -234,7 +234,7 @@
                                     "id": "5639e7d6-2e34-46f9-82e3-702df5d4629c",
                                     "name": "Gray",
                                     "hex": "#808080",
-                                    "images": ["200019", "200020", "200021"],
+                                    "images": ["1019", "1020", "1021"],
                                     "items": [
                                         {
                                             "id": "83be9b9d-b156-448b-bf9e-8544d6e74a5c",
@@ -257,7 +257,7 @@
                                     "id": "f6b0fbdc-23ac-4945-8af4-825798c4b73f",
                                     "name": "Beige",
                                     "hex": "#F5F5DC",
-                                    "images": ["200022", "200023", "200024"],
+                                    "images": ["1022", "1023", "1024"],
                                     "items": [
                                         {
                                             "id": "b9ff5990-74e4-4f34-8822-109cc9b4b79f",
@@ -283,7 +283,7 @@
                             "name": "Striped sweater",
                             "brand": "Jole",
                             "price": 55.00,
-                            "images": ["100013", "100014", "100015"],
+                            "images": ["1013", "1014", "1015"],
                             "material": "Cashmere",
                             "information": "Classic striped sweater with crew neckline. Ribbed cuffs, neckline, and hem. Soft and cozy.",
                             "styles": [
@@ -301,7 +301,7 @@
                                     "id": "3b32f246-8f97-4d3e-af7d-dcc2521de313",
                                     "name": "Navy",
                                     "hex": "#000080",
-                                    "images":["200025", "200026", "200027"],
+                                    "images":["1025", "1026", "1027"],
                                     "items": [
                                         {
                                             "id": "11f6c3a5-152e-41e0-b3cd-ccbaa2571b91",
@@ -324,7 +324,7 @@
                                     "id": "52b3d17e-10cd-4a0b-a2b7-9c73c80f96a3",
                                     "name": "Gray",
                                     "hex": "#808080",
-                                    "images": ["200028", "200029", "200030"],
+                                    "images": ["1028", "1029", "1030"],
                                     "items": [
                                         {
                                             "id": "82a3d5e6-b0e3-42f4-ba1c-5c9d2f89ebee",
@@ -350,7 +350,7 @@
                             "name": "Ruffled blouse",
                             "brand": "Floria",
                             "price": 45.99,
-                            "images": ["100016", "100017", "100018"],
+                            "images": ["1016", "1017", "1018"],
                             "material": "Silk",
                             "information": "Flowy ruffled blouse with V-neckline and long sleeves. Elastic cuffs. Button front closure.",
                             "styles": [
@@ -368,7 +368,7 @@
                                     "id": "d3daac2f-0e0d-4b46-9a23-9fbdf1b38a0e",
                                     "name": "White",
                                     "hex": "#FFFFFF",
-                                    "images": ["200031", "200032", "200033"],
+                                    "images": ["1031", "1032", "1033"],
                                     "items": [
                                         {
                                             "id": "4b97ebe3-b8d0-4b02-9d57-2e7185ef1a97",
@@ -391,7 +391,7 @@
                                     "id": "85a96b27-c1f3-4741-8a8b-aece139b1e25",
                                     "name": "Blush",
                                     "hex": "#FFC0CB",
-                                    "images": ["200034", "200035", "200036"],
+                                    "images": ["1034", "1035", "1036"],
                                     "items": [
                                         {
                                             "id": "6c1336d1-8d13-4a5d-8490-7ee3c25064b0",
@@ -417,7 +417,7 @@
                             "name": "Denim jacket",
                             "brand": "DenimCo",
                             "price": 69.90,
-                            "images": ["100019", "100020", "100021"],
+                            "images": ["1019", "1020", "1021"],
                             "material": "Denim",
                             "information": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
                             "styles": [
@@ -435,7 +435,7 @@
                                     "id": "e8e4ed8a-b5e0-46e5-89be-24374a8f3e3e",
                                     "name": "Gray",
                                     "hex": "#808080",
-                                    "images": ["200037", "200038", "200039"],
+                                    "images": ["1037", "1038", "1039"],
                                     "items": [
                                         {
                                             "id": "11a020fc-fb19-4ea1-9df5-ddeab0e69d4a",
@@ -458,7 +458,7 @@
                                     "id": "b0fb19c1-7593-4f33-9e85-9860f7544849",
                                     "name": "Black",
                                     "hex": "#000000",
-                                    "images": ["200040", "200041", "200042"],
+                                    "images": ["1040", "1041", "1042"],
                                     "items": [
                                         {
                                             "id": "149edcb5-b6de-4bcb-9400-d54c62bc09a3",
@@ -484,7 +484,7 @@
                             "name": "Pleated skirt",
                             "brand": "Luna",
                             "price": 39.99,
-                            "images": ["100022", "100023", "100024"],
+                            "images": ["1022", "1023", "1024"],
                             "material": "Cotton blend",
                             "information": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
                             "styles": [
@@ -502,7 +502,7 @@
                                     "id": "d3daac2f-0e0d-4b46-9a23-9fbdf1b38a0e",
                                     "name": "White",
                                     "hex": "#FFFFFF",
-                                    "images": ["200043", "200044", "200045"],
+                                    "images": ["1043", "1044", "1045"],
                                     "items": [
                                         {
                                             "id": "14cfce5a-6342-4f11-8943-32dfef9e023d",
@@ -525,7 +525,7 @@
                                     "id": "cfe4b2db-1bc0-4753-8be0-c6b6bcf38df2",
                                     "name": "Pink",
                                     "hex": "#FFC0CB",
-                                    "images": ["200046", "200047", "200048"],
+                                    "images": ["1046", "1047", "1048"],
                                     "items": [
                                         {
                                             "id": "16ae858f-4b5d-428f-9fcf-19567b7507ff",
@@ -551,7 +551,7 @@
                             "name": "Leather boots",
                             "brand": "Aurelia",
                             "price": 99.90,
-                            "images": ["100025", "100026", "100027"],
+                            "images": ["1025", "1026", "1027"],
                             "material": "Leather",
                             "information": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
                             "styles": [
@@ -569,7 +569,7 @@
                                     "id": "A8765257-9C09-40CF-949D-053AC9303750",
                                     "name": "Black",
                                     "hex": "#000000",
-                                    "images": ["200049", "200050", "200051"],
+                                    "images": ["1049", "1050", "1051"],
                                     "items": [
                                         {
                                             "id": "d6c51446-7f9d-4f78-b8e4-b2372eae6a06",
@@ -592,7 +592,7 @@
                                     "id": "5325E931-8FCA-4504-AB57-5464A1B13D09",
                                     "name": "Brown",
                                     "hex": "#A52A2A",
-                                    "images": ["200052", "200053", "200054"],
+                                    "images": ["1052", "1053", "1054"],
                                     "items": [
                                         {
                                             "id": "ac1f8a2c-8f39-4bb6-bb4a-8d695ab9f3c4",
@@ -618,7 +618,7 @@
                             "name": "Striped T-shirt",
                             "brand": "Nautical",
                             "price": 24.99,
-                            "images": ["100028", "100029", "100030"],
+                            "images": ["1028", "1029", "1030"],
                             "material": "Cotton",
                             "information": "Classic striped T-shirt with round neckline and short sleeves.",
                             "styles": [
@@ -636,7 +636,7 @@
                                     "id": "d3daac2f-0e0d-4b46-9a23-9fbdf1b38a0e",
                                     "name": "White",
                                     "hex": "#FFFFFF",
-                                    "images": ["200055", "200056", "200057"],
+                                    "images": ["1055", "1056", "1057"],
                                     "items": [
                                         {
                                             "id": "045e7221-2063-43ce-90c2-dc5ebaa0f4fd",
@@ -659,7 +659,7 @@
                                     "id": "DF9756EF-F926-4B0B-860E-7D59596B40FD",
                                     "name": "Black",
                                     "hex": "#000000",
-                                    "images": ["200058", "200059", "200060"],
+                                    "images": ["1058", "1059", "1060"],
                                     "items": [
                                         {
                                             "id": "2f3455fb-8f39-4b5a-a5b4-f1244fe9bba8",

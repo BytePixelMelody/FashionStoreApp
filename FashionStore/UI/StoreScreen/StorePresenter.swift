@@ -11,8 +11,8 @@ import CoreData
 protocol StorePresenterProtocol {
     func showProduct()
     func showCart()
-    func storeWillAppear()
-    func storeWillDisappear()
+    func storeScreenWillAppear()
+    func storeScreenWillDisappear()
 }
 
 class StorePresenter: StorePresenterProtocol {
@@ -20,9 +20,10 @@ class StorePresenter: StorePresenterProtocol {
     private let router: RouterProtocol
     private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol
-    
+    private var catalog: Catalog?
+
     // storing task to cancel it on willDisappear()
-    private var loadCatalogTask: Task<(), Never>?
+    private var loadCatalogTask: Task<Void, Never>?
     
     init(router: RouterProtocol, webService: WebServiceProtocol, coreDataService: CoreDataServiceProtocol) {
         self.router = router
@@ -38,32 +39,42 @@ class StorePresenter: StorePresenterProtocol {
         router.showCartScreen()
     }
     
-    func storeWillAppear() {
-
+    func storeScreenWillAppear() {        
         loadCatalogTask = Task {
             do {
-                // check, if task was cancelled then it will throw CancellationError
-                try Task.checkCancellation()
+                // check task cancellation
+                if Task.isCancelled { return }
                 
-                let catalog: Catalog = try await webService.getData(urlString: Settings.catalogUrl)
-                _ = catalog
+                catalog = try await webService.getData(urlString: Settings.catalogUrl)
                 
-                // another check, before hard work, if task was cancelled then it will throw CancellationError
-                try Task.checkCancellation()
-                
-                print(catalog)
+                print(catalog ?? "")
             } catch {
                 await MainActor.run {
                     Errors.handler.checkError(error)
                 }
             }
         }
-        
-        //        let color = ColorModel()
-        //        color.image
     }
     
-    func storeWillDisappear() {
+    private func saveInCoreData(catalog: Catalog) {
+        let mainContext = coreDataService.mainContext
+        
+//        let casualStyle = StyleModel(context: mainContext)
+//        casualStyle.id = UUID()
+//        casualStyle.name = "Casual"
+//
+//        let styleFetchRequest = StyleModel.fetchRequest()
+//        do {
+//            let readStyle = try mainContext.fetch(styleFetchRequest)
+//            print(readStyle.first?.name ?? "readStyle.first?.name = nil")
+//        } catch {
+//            Errors.handler.checkError(error)
+//        }
+                
+        coreDataService.saveMainContext()
+    }
+    
+    func storeScreenWillDisappear() {
         loadCatalogTask?.cancel()
     }
 

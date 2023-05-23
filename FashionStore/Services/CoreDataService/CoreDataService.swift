@@ -10,8 +10,8 @@ import CoreData
 
 protocol CoreDataServiceProtocol {
     var persistentContainer: NSPersistentContainer { get }
-    var context: NSManagedObjectContext { get }
-    func saveContext ()
+    var mainContext: NSManagedObjectContext { get }
+    func saveMainContext()
 }
 
 class CoreDataService: CoreDataServiceProtocol {
@@ -43,16 +43,15 @@ class CoreDataService: CoreDataServiceProtocol {
     }()
 
     // Main queue Core Data context. Not for long operations(!)
-    var context: NSManagedObjectContext {
+    var mainContext: NSManagedObjectContext {
         persistentContainer.viewContext
     }
     
-    // Core Data Saving support
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+    // Core Data check changes and try to save mainContext
+    func saveMainContext() {
+        if mainContext.hasChanges {
             do {
-                try context.save()
+                try mainContext.save()
             } catch {
                 Errors.handler.checkError(error)
             }
