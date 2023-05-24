@@ -13,7 +13,7 @@
                             "name": "Dot print corset dress",
                             "brand": "Mohani",
                             "price": 89.99,
-                            "images": ["1001.png", "1002.png", "1003.png"],
+                            "images": ["1002.png", "1001.png", "1003.png"],
                             "material": "Cotton",
                             "information": "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure.",
                             "styles": [
@@ -551,7 +551,7 @@
                             "name": "Leather boots",
                             "brand": "Aurelia",
                             "price": 99.90,
-                            "images": ["1025.png", "1026.png", "1027.png"],
+                            "images": ["1007.png", "1026.png", "1027.png"],
                             "material": "Leather",
                             "information": "Classic leather boots with round toe and block heel. Side zipper closure. Ankle height.",
                             "styles": [

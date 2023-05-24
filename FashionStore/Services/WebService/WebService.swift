@@ -17,7 +17,8 @@ protocol WebServiceProtocol {
 // extension is used here to set default param to cachePolicy
 extension WebServiceProtocol {
     
-    // to turn off caching set urlCache = nil
+    // usage example:
+    // let catalog: Catalog = try await WebService().getData(urlString: Settings.catalogUrl)
     public func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy) async throws -> T {
         // urlString check
         guard let url = URL(string: urlString) else {
@@ -91,6 +92,3 @@ class WebService: WebServiceProtocol {
     }
     
 }
-
-// usage example:
-// var catalog: Catalog = try await WebService().getData(urlString: Settings.catalogUrl)

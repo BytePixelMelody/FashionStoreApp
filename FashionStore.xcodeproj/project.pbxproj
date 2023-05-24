@@ -13,6 +13,7 @@
 		111646D329E0877F004EEE20 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D229E0877F004EEE20 /* PaymentMethod.swift */; };
 		111646D529E09513004EEE20 /* FilledPaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */; };
 		112B524C2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 112B524A2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld */; };
+		112D63DC2A1E6BFE00EF1B19 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 112D63DB2A1E6BFE00EF1B19 /* images */; };
 		114466C929D2D2B900E504F8 /* UIScrollView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466C829D2D2B900E504F8 /* UIScrollView+make.swift */; };
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
 		1160A04C29E970BF009AB1C6 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04B29E970BF009AB1C6 /* PopupViewController.swift */; };
@@ -70,6 +71,7 @@
 		111646D229E0877F004EEE20 /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
 		111646D429E09513004EEE20 /* FilledPaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledPaymentMethodView.swift; sourceTree = "<group>"; };
 		112B524B2A18CA7800C08146 /* FashionStoreDb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FashionStoreDb.xcdatamodel; sourceTree = "<group>"; };
+		112D63DB2A1E6BFE00EF1B19 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		114466C829D2D2B900E504F8 /* UIScrollView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+make.swift"; sourceTree = "<group>"; };
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
 		1160A04B29E970BF009AB1C6 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		117C0BDE2A1165C100138CA9 /* Website */ = {
 			isa = PBXGroup;
 			children = (
+				112D63DB2A1E6BFE00EF1B19 /* images */,
 				117C0BDF2A116DCD00138CA9 /* catalog.json */,
 			);
 			path = Website;
@@ -459,6 +462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112D63DC2A1E6BFE00EF1B19 /* images in Resources */,
 				117C0BE02A116DCD00138CA9 /* catalog.json in Resources */,
 				1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */,
 				1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */,
