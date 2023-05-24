@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreData
+import UIKit
 
 protocol StorePresenterProtocol {
     func showProduct()
@@ -32,7 +32,12 @@ class StorePresenter: StorePresenterProtocol {
     }
     
     func showProduct() {
-        router.showProductScreen()
+        guard let product = catalog?.audiences.first?.categories.first?.products.first else {
+            return
+        }
+        let image = UIImage(named: ImageName.startBackground)
+        
+        router.showProductScreen(product: product, image: image)
     }
     
     func showCart() {
@@ -47,31 +52,13 @@ class StorePresenter: StorePresenterProtocol {
                 
                 catalog = try await webService.getData(urlString: Settings.catalogUrl)
                 
-                print(catalog ?? "")
+//                print(catalog ?? "")
             } catch {
                 await MainActor.run {
                     Errors.handler.checkError(error)
                 }
             }
         }
-    }
-    
-    private func saveInCoreData(catalog: Catalog) {
-        let mainContext = coreDataService.mainContext
-        
-//        let casualStyle = StyleModel(context: mainContext)
-//        casualStyle.id = UUID()
-//        casualStyle.name = "Casual"
-//
-//        let styleFetchRequest = StyleModel.fetchRequest()
-//        do {
-//            let readStyle = try mainContext.fetch(styleFetchRequest)
-//            print(readStyle.first?.name ?? "readStyle.first?.name = nil")
-//        } catch {
-//            Errors.handler.checkError(error)
-//        }
-                
-        coreDataService.saveMainContext()
     }
     
     func storeScreenWillDisappear() {

@@ -19,7 +19,7 @@ class FilledPaymentMethodView: UIView {
     private lazy var editInfoTap = UITapGestureRecognizer(target: self, action: #selector(editInfoSelector))
     private lazy var deleteInfoButton = UIButton.makeIconicButton(imageName: ImageName.trash, action: deleteInfoAction)
 
-    // creating stack views
+    // creating stack view
     private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12, alignment: .center)
 
     // creating a payment system image

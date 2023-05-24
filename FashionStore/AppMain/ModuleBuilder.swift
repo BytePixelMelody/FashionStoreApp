@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModuleBuilderProtocol {
     func createStoreModule(router: RouterProtocol) -> StoreViewController
-    func createProductModule(router: RouterProtocol) -> ProductViewController
+    func createProductModule(router: RouterProtocol, product: Product, image: UIImage?) -> ProductViewController
     func createCartModule(router: RouterProtocol) -> CartViewController
     func createAddressModule(router: RouterProtocol) -> AddressViewController
     func createPaymentMethodModule(router: RouterProtocol) -> PaymentMethodViewController
@@ -33,11 +33,12 @@ protocol ModuleBuilderProtocol {
 class ModuleBuilder: ModuleBuilderProtocol {
     
     private let keychainService = KeychainService()
-    private let webService = WebService()
+    private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol
     
-    init(coreDataService: CoreDataServiceProtocol) {
+    init(coreDataService: CoreDataServiceProtocol, webService: WebServiceProtocol) {
         self.coreDataService = coreDataService
+        self.webService = webService
     }
     
     func createStoreModule(router: RouterProtocol) -> StoreViewController {
@@ -47,8 +48,17 @@ class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    func createProductModule(router: RouterProtocol) -> ProductViewController {
-        let presenter = ProductPresenter(router: router, webService: webService)
+    func createProductModule(
+        router: RouterProtocol,
+        product: Product,
+        image: UIImage?
+    ) -> ProductViewController {
+        let presenter = ProductPresenter(
+            router: router,
+            webService: webService,
+            product: product,
+            image: image
+        )
         let view = ProductViewController(presenter: presenter)
         presenter.view = view
         return view

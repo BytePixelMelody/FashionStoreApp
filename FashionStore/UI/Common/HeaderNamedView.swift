@@ -88,7 +88,7 @@ class HeaderNamedView: UIView {
         self.addSubview(headerLabel)
         self.sendSubviewToBack(headerLabel)
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(46)
+            make.top.equalToSuperview().offset(54)
             make.left.right.equalToSuperview().inset(16)
         }
     }
@@ -96,7 +96,7 @@ class HeaderNamedView: UIView {
     private func arrangeSpacerImage() {
         self.addSubview(spacerImage)
         spacerImage.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom).offset(3)
+            make.top.equalTo(headerLabel.snp.bottom).offset(11)
             make.centerX.equalToSuperview()
         }
     }

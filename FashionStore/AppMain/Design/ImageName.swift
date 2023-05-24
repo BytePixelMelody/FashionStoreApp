@@ -33,4 +33,5 @@ struct ImageName {
     public static let unionPay = "UnionPay"
     public static let visa = "Visa"
     public static let success = "Success"
+    public static let startBackground = "StartBackground"
 }

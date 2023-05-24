@@ -14,8 +14,8 @@ protocol RouterProtocol {
     
     // show screens
     func showStoreScreen()
-    func showProductScreen()
-    func showProductScreenInstantly() // for deep link
+    func showProductScreen(product: Product, image: UIImage?)
+    func showProductScreenInstantly(product: Product, image: UIImage?) // for deep link
     func showCartScreen()
     func showAddressScreen()
     func showPaymentMethodScreen()
@@ -65,13 +65,13 @@ class Router: RouterProtocol {
         navigationController.setViewControllers([viewController], animated: true)
     }
     
-    func showProductScreen() {
-        let viewController = moduleBuilder.createProductModule(router: self)
+    func showProductScreen(product: Product, image: UIImage?) {
+        let viewController = moduleBuilder.createProductModule(router: self, product: product, image: image)
         navigationController.pushViewController(viewController, animated: true)
     }
     
     // show Product screen without animations for deep link use
-    func showProductScreenInstantly() {
+    func showProductScreenInstantly(product: Product, image: UIImage?) {
         let storeViewController: UIViewController?
         if navigationController.viewControllers.count > 0 {
             storeViewController = navigationController.viewControllers.first
@@ -79,7 +79,7 @@ class Router: RouterProtocol {
             storeViewController = moduleBuilder.createStoreModule(router: self)
         }
         guard let storeViewController else { return }
-        let productViewController = moduleBuilder.createProductModule(router: self)
+        let productViewController = moduleBuilder.createProductModule(router: self, product: product, image: image)
         navigationController.setViewControllers([storeViewController, productViewController], animated: false)
     }
 

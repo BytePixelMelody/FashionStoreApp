@@ -52,14 +52,14 @@ extension TextStyle {
     static let titleLargeAlignLeft = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
-        lineHeight: 40,
+        lineHeight: 24,
         letterSpacing: 4,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let titleLargeAlignCentered = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
-        lineHeight: 40,
+        lineHeight: 24,
         letterSpacing: 4,
         fontMetrics: UIFont.TextStyle.title1.metrics,
         alignment: .center
@@ -67,21 +67,21 @@ extension TextStyle {
     static let titleMedium = TextStyle(
         size: 16,
         color: UIColor(named: "Active") ?? .black,
-        lineHeight: 24,
+        lineHeight: 19,
         letterSpacing: 3,
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let titleSmall = TextStyle(
         size: 14,
         color: UIColor(named: "Active") ?? .black,
-        lineHeight: 20,
+        lineHeight: 16,
         letterSpacing: 2,
         fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let bodyLarge = TextStyle(
         size: 16,
         color: UIColor(named: "Label") ?? .black,
-        lineHeight: 24,
+        lineHeight: 19,
         fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let bodyLargeAlignCentered = TextStyle(
@@ -106,7 +106,7 @@ extension TextStyle {
     static let priceLarge = TextStyle(
         size: 18,
         color: UIColor(named: "Secondary") ?? .brown,
-        lineHeight: 24,
+        lineHeight: 21,
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
     static let priceMedium = TextStyle(

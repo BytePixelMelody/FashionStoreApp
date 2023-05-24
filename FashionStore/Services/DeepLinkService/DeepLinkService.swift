@@ -8,13 +8,12 @@
 import Foundation
 
 struct DeepLinkService {
+    // deep link:
+    // fstore://store/product?id=B07B22E6-0A4C-4A5A-92C2-3B4E17E87822
     
-    // fstore://store/product?uid=114098 - full deep link
-    static func navigateByUrl(url: URL?, router: RouterProtocol?) {
-        guard let router, let url else { return }
-        
-        // dismiss modal screen if presented
-        router.dismissScreen()
+    // return productId if found in URL
+    static func fetchProductId(url: URL?) -> String? {
+        guard let url else { return  nil }
         
         let urlComponents = URLComponents(string: url.absoluteString)
         let host = urlComponents?.host
@@ -22,15 +21,12 @@ struct DeepLinkService {
         
         switch (host, path) {
         case ("store", "/product"):
-            // productId
-            if let _ = urlComponents?.queryItems?.first(where: { $0.name == "uid" })?.value {
-                // TODO: open Product screen by productId
-                router.showProductScreenInstantly()
-            } else {
-                fallthrough // switch to default:
+            guard let id = urlComponents?.queryItems?.first(where: { $0.name == "id" })?.value else {
+                return nil
             }
+            return id
         default:
-            router.popToRootScreen()
+            return nil
         }
     }
     

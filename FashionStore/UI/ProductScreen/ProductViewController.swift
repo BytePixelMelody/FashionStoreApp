@@ -10,11 +10,29 @@ import SnapKit
 
 protocol ProductViewProtocol: AnyObject {
     
+    func fillProduct(
+        productBrandLabelTitle: String,
+        productNameLabelTitle: String,
+        productPriceLabelTitle: String,
+        productDescriptionLabelTitle: String,
+        image: UIImage?
+    )
+        
 }
 
 class ProductViewController: UIViewController {
-    private static let screenNameTitle = "Product\nDescription"
+    
     private static let addToCartButtonTitle = "Add to cart"
+    
+    private let productImageView = UIImageView.makeImageView(
+        contentMode: .scaleAspectFill,
+        cornerRadius: 6.0
+    )
+    private var productBrandLabelTitle: String?
+    private var productNameLabelTitle: String?
+    private var productPriceLabelTitle: String?
+    private let descriptionLabelTitle = "Description"
+    private var productDescriptionLabelTitle: String?
     
     private let presenter: ProductPresenterProtocol
 
@@ -36,7 +54,14 @@ class ProductViewController: UIViewController {
 
     private let productScrollView = UIScrollView.makeScrollView()
 
-    private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
+    // creating stack view
+    private let productStackView = UIStackView.makeVerticalStackView(spacing: 8)
+
+    private let productBrandLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let productNameLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let productPriceLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let descriptionLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let productDescriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     
     private lazy var addToCartAction: () -> Void = { [weak self] in
         self?.presenter.addProductToCart()
@@ -57,12 +82,24 @@ class ProductViewController: UIViewController {
         
         view.backgroundColor = .white
         
+        presenter.screenDidLoad()
         setupUiTexts()
+        fillProductStackView()
         arrangeUiElements()
     }
     
     private func setupUiTexts() {
-        screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLargeAlignLeft)
+        if let productBrandLabelTitle,
+            let productNameLabelTitle,
+            let productPriceLabelTitle,
+            let productDescriptionLabelTitle
+        {
+            productBrandLabel.attributedText = productBrandLabelTitle.uppercased().setStyle(style: .titleMedium)
+            productNameLabel.attributedText = productNameLabelTitle.setStyle(style: .bodyLarge)
+            productPriceLabel.attributedText = productPriceLabelTitle.setStyle(style: .priceLarge)
+            descriptionLabel.attributedText = descriptionLabelTitle.uppercased().setStyle(style: .titleSmall)
+            productDescriptionLabel.attributedText = productDescriptionLabelTitle.setStyle(style: .bodyMedium)
+        }
         addToCartButton.configuration?.attributedTitle = AttributedString(Self.addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
@@ -72,10 +109,23 @@ class ProductViewController: UIViewController {
         setupUiTexts()
     }
 
+    private func fillProductStackView() {
+        productStackView.addArrangedSubview(productImageView)
+        productStackView.setCustomSpacing(29, after: productImageView)
+        productStackView.addArrangedSubview(productBrandLabel)
+        productStackView.addArrangedSubview(productNameLabel)
+        productStackView.addArrangedSubview(productPriceLabel)
+        productStackView.setCustomSpacing(25, after: productPriceLabel)
+        productStackView.addArrangedSubview(descriptionLabel)
+        productStackView.setCustomSpacing(5, after: descriptionLabel)
+        productStackView.addArrangedSubview(productDescriptionLabel)
+    }
+
     private func arrangeUiElements() {
         arrangeHeaderBrandedView()
         arrangeProductScrollView()
-        arrangeScreenNameLabel()
+        arrangeProductStackView()
+        arrangeProductImageView()
         arrangeAddToCartButton()
     }
     
@@ -99,12 +149,19 @@ class ProductViewController: UIViewController {
         // contentLayoutGuide must have top and bottom constraints
     }
     
-    private func arrangeScreenNameLabel() {
-        productScrollView.addSubview(screenNameLabel)
-        screenNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(productScrollView.contentLayoutGuide.snp.top).offset(300)
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(productScrollView.contentLayoutGuide.snp.bottom).inset(30)
+    private func arrangeProductStackView() {
+        productScrollView.addSubview(productStackView)
+        productStackView.snp.makeConstraints { make in
+            make.top.equalTo(productScrollView.contentLayoutGuide).offset(19)
+            make.bottom.equalTo(productScrollView.contentLayoutGuide).offset(-20)
+            make.left.right.equalTo(productScrollView.contentLayoutGuide).inset(16)
+        }
+    }
+    
+    private func arrangeProductImageView() {
+        productImageView.clipsToBounds = true
+        productImageView.snp.makeConstraints { make in
+            make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
         }
     }
 
@@ -121,4 +178,18 @@ class ProductViewController: UIViewController {
 
 extension ProductViewController: ProductViewProtocol {
     
+    func fillProduct(
+        productBrandLabelTitle: String,
+        productNameLabelTitle: String,
+        productPriceLabelTitle: String,
+        productDescriptionLabelTitle: String,
+        image: UIImage?
+    ) {
+        self.productBrandLabelTitle = productBrandLabelTitle
+        self.productNameLabelTitle = productNameLabelTitle
+        self.productPriceLabelTitle = productPriceLabelTitle
+        self.productDescriptionLabelTitle = productDescriptionLabelTitle
+        self.productImageView.image = image
+    }
+
 }

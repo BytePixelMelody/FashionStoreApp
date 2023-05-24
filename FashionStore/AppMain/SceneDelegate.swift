@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var router: Router?
     private let coreDataService = CoreDataService()
+    private let webService = WebService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -20,14 +21,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootNavigationController = UINavigationController()
         rootNavigationController.navigationBar.isHidden = true
  
-        let moduleBuilder = ModuleBuilder(coreDataService: coreDataService)
+        let moduleBuilder = ModuleBuilder(coreDataService: coreDataService, webService: webService)
         router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
         // errors handler singleton
         Errors.handler.router = router
         router?.showStoreScreen()
         
         // processing deep link if App was closed
-        DeepLinkService.navigateByUrl(url: connectionOptions.urlContexts.first?.url, router: router)
+        // if product id found - show product screen
+        if let productId = DeepLinkService.fetchProductId(url: connectionOptions.urlContexts.first?.url) {
+            switchToProduct(id: productId)
+        }
         
         window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()
@@ -36,7 +40,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // processing deep link if App was opened 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        DeepLinkService.navigateByUrl(url: URLContexts.first?.url, router: router)
+        // if product id found - show product screen
+        if let productId = DeepLinkService.fetchProductId(url: URLContexts.first?.url) {
+            switchToProduct(id: productId)
+        }
+    }
+    
+    private func switchToProduct(id: String) {
+        Task {
+            do {
+                let catalog: Catalog = try await webService.getData(urlString: Settings.catalogUrl)
+                guard let product = catalog.audiences.first?.categories.first?.products.first else { return }
+                // dismiss modal screen if presented
+                router?.dismissScreen()
+                router?.showProductScreenInstantly(product: product, image: nil)
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

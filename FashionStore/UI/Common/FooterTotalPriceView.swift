@@ -94,7 +94,7 @@ class FooterTotalPriceView: UIView {
     private func arrangeLineImage() {
         self.addSubview(lineImage)
         lineImage.snp.makeConstraints { make in
-            make.bottom.equalTo(totalLabel.snp.top).offset(-15)
+            make.bottom.equalTo(totalLabel.snp.top).offset(-17)
             make.left.right.equalToSuperview().inset(16)
         }
     }
