@@ -12,7 +12,8 @@ protocol ProductPresenterProtocol {
     func backScreen()
     func showCart()
     func addProductToCart()
-    func screenDidLoad()
+    func didLoadHandler()
+    func willDisappearHandler()
 }
 
 class ProductPresenter: ProductPresenterProtocol {
@@ -22,6 +23,9 @@ class ProductPresenter: ProductPresenterProtocol {
     private let product: Product
     private let image: UIImage?
     
+    // storing task to cancel it on willDisappearHandler()
+    private var faceImageTask: Task<Void, Never>?
+    
     init(router: RouterProtocol, webService: WebServiceProtocol, product: Product, image: UIImage?) {
         self.router = router
         self.webService = webService
@@ -29,7 +33,7 @@ class ProductPresenter: ProductPresenterProtocol {
         self.image = image
     }
     
-    func screenDidLoad() {
+    func didLoadHandler() {
         view?.fillProduct(
             productBrandLabelTitle: product.brand,
             productNameLabelTitle: product.name,
@@ -37,6 +41,28 @@ class ProductPresenter: ProductPresenterProtocol {
             productDescriptionLabelTitle: product.information,
             image: image
         )
+        
+        // if image == nil, than load image
+        guard image == nil else { return }
+        
+        faceImageTask = Task {
+            // check task cancellation
+            guard
+                !Task.isCancelled,
+                let imageName = product.images.first
+            else {
+                return
+            }
+            
+            guard let image = await webService.getImage(imageName: imageName) else { return }
+            
+            // switching run on main queue by calling func fillFaceImage on @MainActor UIViewController
+            await view?.fillFaceImage(image: image)
+        }
+    }
+    
+    func willDisappearHandler() {
+        faceImageTask?.cancel()
     }
     
     func backScreen() {

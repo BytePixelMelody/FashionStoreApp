@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol WebServiceProtocol {
     func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy) async throws -> T
+    func getImage(imageName: String) async -> UIImage?
 }
  
 // web service that used to obtain decoded JSON-data by URL string
@@ -46,6 +48,47 @@ extension WebServiceProtocol {
 }
 
 class WebService: WebServiceProtocol {
+    // image loading
+    func getImage(imageName: String) async -> UIImage? {
+        
+        let urlString = Settings.imagesUrl + imageName
+        
+        do {
+            // urlString check
+            guard let url = URL(string: urlString) else {
+                throw Errors.ErrorType.invalidUrlStringError
+            }
+            
+            let urlRequest = URLRequest(url: url)
+            
+            // try to get data from url
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            
+            // urlResponse typecasting check
+            guard let urlResponse = response as? HTTPURLResponse else {
+                throw Errors.ErrorType.urlResponseCastError
+            }
+            
+            // status code check
+            guard urlResponse.statusCode < 400 else {
+                throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode)
+            }
+            
+            // try decode image to T type
+            guard let image = UIImage(data: data) else {
+                throw Errors.ErrorType.unsupportedImageFormat
+            }
+            
+            return image
+            
+        } catch {
+            // switch on main queue for work with UI
+            await MainActor.run() {
+                Errors.handler.checkError(error)
+            }
+            return nil
+        }
+    }
     
 }
 

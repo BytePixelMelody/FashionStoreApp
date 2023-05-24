@@ -8,8 +8,9 @@
 import Foundation
 
 struct DeepLinkService {
-    // deep link:
+    // deep link examples:
     // fstore://store/product?id=B07B22E6-0A4C-4A5A-92C2-3B4E17E87822
+    // fstore://store/product?id=d61f4df1-1319-4b47-bfa2-1429b789441c
     
     // return productId if found in URL
     static func fetchProductId(url: URL?) -> String? {

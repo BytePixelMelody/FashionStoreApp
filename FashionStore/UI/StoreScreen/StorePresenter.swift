@@ -35,16 +35,15 @@ class StorePresenter: StorePresenterProtocol {
         guard let product = catalog?.audiences.first?.categories.first?.products.first else {
             return
         }
-        let image = UIImage(named: ImageName.startBackground)
         
-        router.showProductScreen(product: product, image: image)
+        router.showProductScreen(product: product, image: nil)
     }
     
     func showCart() {
         router.showCartScreen()
     }
     
-    func storeScreenWillAppear() {        
+    func storeScreenWillAppear() {
         loadCatalogTask = Task {
             do {
                 // check task cancellation

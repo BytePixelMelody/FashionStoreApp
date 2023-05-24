@@ -13,7 +13,9 @@ class Settings {
     public static let keychainChippingAddressId = "com.vnazimko.fashion.store.chipping.address"
     public static let keychainPaymentMethodId = "com.vnazimko.fashion.store.payment.method"
     
-    // webserver url
-    public static let catalogUrl = "https://brolenso.github.io/FashionStoreApp/Website/catalog.json"
+    // webserver urls
+    public static let fashionStoreUrl = "https://brolenso.github.io/FashionStoreApp/Website/"
+    public static var catalogUrl: String { fashionStoreUrl.appending("catalog.json") }
+    public static var imagesUrl: String { fashionStoreUrl.appending("images/") }
     
 }

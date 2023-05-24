@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // processing deep link if App was closed
         // if product id found - show product screen
         if let productId = DeepLinkService.fetchProductId(url: connectionOptions.urlContexts.first?.url) {
-            switchToProduct(id: productId)
+            switchToProduct(productId: productId)
         }
         
         window.rootViewController = rootNavigationController
@@ -42,15 +42,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // if product id found - show product screen
         if let productId = DeepLinkService.fetchProductId(url: URLContexts.first?.url) {
-            switchToProduct(id: productId)
+            switchToProduct(productId: productId)
         }
     }
     
-    private func switchToProduct(id: String) {
+    private func switchToProduct(productId: String) {
         Task {
             do {
                 let catalog: Catalog = try await webService.getData(urlString: Settings.catalogUrl)
-                guard let product = catalog.audiences.first?.categories.first?.products.first else { return }
+                guard
+                    let products = catalog.audiences.first?.categories.first?.products,
+                    let product = products.first(where: { $0.id == UUID(uuidString: productId) }) else {
+                    return
+                }
                 // dismiss modal screen if presented
                 router?.dismissScreen()
                 router?.showProductScreenInstantly(product: product, image: nil)

@@ -33,6 +33,7 @@ class Errors {
         case notIntegerInputError(errorMessage: String)
         case invalidUrlStringError
         case urlResponseCastError
+        case unsupportedImageFormat
         
         // errors localized descriptions
         var errorDescription: String? {
@@ -88,6 +89,10 @@ class Errors {
             case .urlResponseCastError:
                 return "URLResponse casting to HTTPURLResponse finished with error"
 
+           // invalid URL string error
+            case .unsupportedImageFormat:
+                return "Loaded image has unsupported format for using in UIImage"
+
             }
         }
     }
@@ -123,6 +128,9 @@ class Errors {
             error.domain == NSURLErrorDomain &&
             error.code == NSURLErrorNotConnectedToInternet:
             errorMessage = Errors.ErrorType.networkConnectionFail.localizedDescription
+        case ErrorType.unsupportedImageFormat:
+            logger.error("\(checkingError.localizedDescription, privacy: .public)")
+            return
         default:
             break
         }

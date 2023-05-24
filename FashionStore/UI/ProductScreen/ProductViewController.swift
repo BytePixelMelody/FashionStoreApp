@@ -18,6 +18,8 @@ protocol ProductViewProtocol: AnyObject {
         image: UIImage?
     )
         
+    func fillFaceImage(image: UIImage) async
+    
 }
 
 class ProductViewController: UIViewController {
@@ -82,10 +84,16 @@ class ProductViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        presenter.screenDidLoad()
+        presenter.didLoadHandler()
         setupUiTexts()
         fillProductStackView()
         arrangeUiElements()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        presenter.willDisappearHandler()
     }
     
     private func setupUiTexts() {
@@ -189,6 +197,10 @@ extension ProductViewController: ProductViewProtocol {
         self.productNameLabelTitle = productNameLabelTitle
         self.productPriceLabelTitle = productPriceLabelTitle
         self.productDescriptionLabelTitle = productDescriptionLabelTitle
+        self.productImageView.image = image
+    }
+    
+    func fillFaceImage(image: UIImage) async {
         self.productImageView.image = image
     }
 
