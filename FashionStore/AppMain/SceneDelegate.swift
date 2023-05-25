@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var router: Router?
     private let coreDataService = CoreDataService()
     private let webService = WebService()
+    private let deepLinkService: DeepLinkServiceProtocol = DeepLinkService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -29,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // processing deep link if App was closed
         // if product id found - show product screen
-        if let productId = DeepLinkService.fetchProductId(url: connectionOptions.urlContexts.first?.url) {
+        if let productId = deepLinkService.fetchProductId(url: connectionOptions.urlContexts.first?.url) {
             switchToProduct(productId: productId)
         }
         
@@ -41,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // processing deep link if App was opened 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // if product id found - show product screen
-        if let productId = DeepLinkService.fetchProductId(url: URLContexts.first?.url) {
+        if let productId = deepLinkService.fetchProductId(url: URLContexts.first?.url) {
             switchToProduct(productId: productId)
         }
     }

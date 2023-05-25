@@ -96,9 +96,9 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             case 0..<15:
                 throw Errors.ErrorType.networkConnectionFail
             case 15..<20:
-                throw Errors.ErrorType.httpError(statusCode: 418)
+                throw Errors.ErrorType.httpError(statusCode: 418, urlString: "https://mock.place.order")
             case 20..<25:
-                throw Errors.ErrorType.httpError(statusCode: 503)
+                throw Errors.ErrorType.httpError(statusCode: 503, urlString: "https://mock.place.order")
             case 25..<50:
                 throw Errors.ErrorType.paymentFail
             default:

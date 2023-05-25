@@ -13,6 +13,6 @@ struct Cart: Codable {
 
 struct CartItem: Codable {
     var id: UUID
-    var productId: UUID
+    var itemId: UUID
     var count: Int
 }

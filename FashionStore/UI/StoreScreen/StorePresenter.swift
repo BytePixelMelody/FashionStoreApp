@@ -19,7 +19,7 @@ class StorePresenter: StorePresenterProtocol {
     weak var view: StoreViewProtocol?
     private let router: RouterProtocol
     private let webService: WebServiceProtocol
-    private let coreDataService: CoreDataServiceProtocol
+    private let coreDataService: CoreDataServiceProtocol // load catalog to Core Data
     private var catalog: Catalog?
 
     // storing task to cancel it on willDisappear()

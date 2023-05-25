@@ -74,6 +74,12 @@ class ProductPresenter: ProductPresenterProtocol {
     }
     
     func addProductToCart() {
-        
+        let coreDataService = CoreDataService()
+        guard let item = product.colors.first?.items.first else { return }
+        Task {
+            await coreDataService.addCartItemToCart(item: item)
+            let cart = coreDataService.fetchCart()
+            print(cart ?? "cart is nul")
+        }
     }
 }

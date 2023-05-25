@@ -37,7 +37,7 @@ extension WebServiceProtocol {
         
         // status code check
         guard urlResponse.statusCode < 400 else {
-            throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode)
+            throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode, urlString: urlString)
         }
         
         // try decode data to T type
@@ -72,7 +72,7 @@ class WebService: WebServiceProtocol {
             
             // status code check
             guard urlResponse.statusCode < 400 else {
-                throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode)
+                throw Errors.ErrorType.httpError(statusCode: urlResponse.statusCode, urlString: urlString)
             }
             
             // try decode image to T type

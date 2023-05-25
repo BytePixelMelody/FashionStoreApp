@@ -24,7 +24,7 @@ class Errors {
     public enum ErrorType: LocalizedError {
         case paymentFail
         case networkConnectionFail
-        case httpError(statusCode: Int)
+        case httpError(statusCode: Int, urlString: String)
         case keyChainSaveError(errSecCode: Int)
         case keyChainReadError(errSecCode: Int)
         case keyChainDeleteError(errSecCode: Int)
@@ -46,16 +46,16 @@ class Errors {
                 return "Please check your Internet connection"
             
             // client connection error
-            case .httpError(let statusCode) where (400...499).contains(statusCode):
-                return "HTTP error \(statusCode)\n\nPlease try again later"
+            case .httpError(let statusCode, let urlString) where (400...499).contains(statusCode):
+                return "HTTP error \(statusCode) for URL \(urlString)"
                 
             // server connection error
-            case .httpError(let statusCode) where (500...599).contains(statusCode):
+            case .httpError(let statusCode, _) where (500...599).contains(statusCode):
                 return "HTTP error \(statusCode)\n\nServer is not available, please try again later"
                 
             // other http error
-            case .httpError(let statusCode):
-                return "HTTP error \(statusCode)\n\nPlease try again later"
+            case .httpError(let statusCode, let urlString):
+                return "HTTP error \(statusCode) for URL \(urlString)\n\nPlease try again later"
                 
             // keychain save error
             case .keyChainSaveError(let errSecCode):
@@ -115,6 +115,10 @@ class Errors {
         case Errors.ErrorType.paymentFail:
             buttonTitle = "To payment method"
             buttonAction = { router.showPaymentMethodScreen() }
+        case let error as NSError where
+            error.domain == NSURLErrorDomain &&
+            error.code == NSURLErrorNotConnectedToInternet:
+            errorMessage = Errors.ErrorType.networkConnectionFail.localizedDescription
         // no error popup, log and return
         case is DecodingError, Errors.ErrorType.keyChainReadError, Errors.ErrorType.urlResponseCastError:
             logger.error("\(checkingError.localizedDescription, privacy: .public)")
@@ -124,11 +128,11 @@ class Errors {
             logger.error("Task was cancelled. \(checkingError.localizedDescription, privacy: .public)")
             return
         // no Internet connection error
-        case let error as NSError where
-            error.domain == NSURLErrorDomain &&
-            error.code == NSURLErrorNotConnectedToInternet:
-            errorMessage = Errors.ErrorType.networkConnectionFail.localizedDescription
         case ErrorType.unsupportedImageFormat:
+            logger.error("\(checkingError.localizedDescription, privacy: .public)")
+            return
+        // log 404 errors
+        case ErrorType.httpError(let statusCode, _) where (400...499).contains(statusCode):
             logger.error("\(checkingError.localizedDescription, privacy: .public)")
             return
         default:

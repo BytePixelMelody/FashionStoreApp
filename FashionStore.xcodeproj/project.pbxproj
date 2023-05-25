@@ -18,7 +18,7 @@
 		114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114466CA29D2D36200E504F8 /* UIStackView+make.swift */; };
 		1160A04C29E970BF009AB1C6 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04B29E970BF009AB1C6 /* PopupViewController.swift */; };
 		1160A04E29E970D6009AB1C6 /* PopupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160A04D29E970D6009AB1C6 /* PopupPresenter.swift */; };
-		1163019529EE9D5C0031362C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019429EE9D5C0031362C /* Errors.swift */; };
+		1163019529EE9D5C0031362C /* ErrorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163019429EE9D5C0031362C /* ErrorsService.swift */; };
 		11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */; };
 		1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171F78229F2E2550011465D /* DeepLinkService.swift */; };
 		11726FE82A1AB4FD00C88716 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11726FE72A1AB4FD00C88716 /* CoreDataService.swift */; };
@@ -76,7 +76,7 @@
 		114466CA29D2D36200E504F8 /* UIStackView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+make.swift"; sourceTree = "<group>"; };
 		1160A04B29E970BF009AB1C6 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		1160A04D29E970D6009AB1C6 /* PopupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupPresenter.swift; sourceTree = "<group>"; };
-		1163019429EE9D5C0031362C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		1163019429EE9D5C0031362C /* ErrorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsService.swift; sourceTree = "<group>"; };
 		11646EE429CF80AA004C9EC2 /* EmptyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDetailsView.swift; sourceTree = "<group>"; };
 		1171F78229F2E2550011465D /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
 		11726FE72A1AB4FD00C88716 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -142,30 +142,6 @@
 				1160A04D29E970D6009AB1C6 /* PopupPresenter.swift */,
 			);
 			path = PopupScreen;
-			sourceTree = "<group>";
-		};
-		1171F78429F300EC0011465D /* DeepLinkService */ = {
-			isa = PBXGroup;
-			children = (
-				1171F78229F2E2550011465D /* DeepLinkService.swift */,
-			);
-			path = DeepLinkService;
-			sourceTree = "<group>";
-		};
-		1171F78529F300F90011465D /* ErrorsHandlerService */ = {
-			isa = PBXGroup;
-			children = (
-				1163019429EE9D5C0031362C /* Errors.swift */,
-			);
-			path = ErrorsHandlerService;
-			sourceTree = "<group>";
-		};
-		11726FE62A1AB4DF00C88716 /* CoreDataService */ = {
-			isa = PBXGroup;
-			children = (
-				11726FE72A1AB4FD00C88716 /* CoreDataService.swift */,
-			);
-			path = CoreDataService;
 			sourceTree = "<group>";
 		};
 		117C0BDE2A1165C100138CA9 /* Website */ = {
@@ -237,29 +213,13 @@
 		1185D6D429B72C5700833991 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				11726FE62A1AB4DF00C88716 /* CoreDataService */,
-				11E2C9D02A02211000BDED92 /* KeychainService */,
-				1171F78529F300F90011465D /* ErrorsHandlerService */,
-				1171F78429F300EC0011465D /* DeepLinkService */,
-				1185D6D529B72C7B00833991 /* JsonService */,
-				1185D6D629B72CA100833991 /* WebService */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		1185D6D529B72C7B00833991 /* JsonService */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = JsonService;
-			sourceTree = "<group>";
-		};
-		1185D6D629B72CA100833991 /* WebService */ = {
-			isa = PBXGroup;
-			children = (
+				11726FE72A1AB4FD00C88716 /* CoreDataService.swift */,
+				11E2C9D12A02213400BDED92 /* KeychainService.swift */,
+				1163019429EE9D5C0031362C /* ErrorsService.swift */,
+				1171F78229F2E2550011465D /* DeepLinkService.swift */,
 				117C0BE12A1230E300138CA9 /* WebService.swift */,
 			);
-			path = WebService;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		1186C924299FFA66002852BB = {
@@ -364,14 +324,6 @@
 				111646CE29E05DA3004EEE20 /* ContainerView.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		11E2C9D02A02211000BDED92 /* KeychainService */ = {
-			isa = PBXGroup;
-			children = (
-				11E2C9D12A02213400BDED92 /* KeychainService.swift */,
-			);
-			path = KeychainService;
 			sourceTree = "<group>";
 		};
 		11E5F4AB29BE093900B979B4 /* Model */ = {
@@ -495,7 +447,7 @@
 				11CF2AD629C896D50065D47F /* UITextFieldStyled.swift in Sources */,
 				11F0DACA29E85868003ADE45 /* HeaderBrandedView.swift in Sources */,
 				11E5F4AA29BDE87200B979B4 /* ImageName.swift in Sources */,
-				1163019529EE9D5C0031362C /* Errors.swift in Sources */,
+				1163019529EE9D5C0031362C /* ErrorsService.swift in Sources */,
 				11E5F4AD29BE095200B979B4 /* Cart.swift in Sources */,
 				117C0BE22A1230E300138CA9 /* WebService.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,

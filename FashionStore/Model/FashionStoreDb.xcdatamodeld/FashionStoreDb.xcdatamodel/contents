@@ -6,6 +6,11 @@
         <relationship name="audience_categories" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryModel" inverseName="categories_audience" inverseEntity="CategoryModel"/>
         <relationship name="audiences_catalog" maxCount="1" deletionRule="Nullify" destinationEntity="CatalogModel" inverseName="catalog_audiences" inverseEntity="CatalogModel"/>
     </entity>
+    <entity name="CartItemModel" representedClassName="CartItemModel" syncable="YES" codeGenerationType="class">
+        <attribute name="count" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="itemId" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="CatalogModel" representedClassName="CatalogModel" syncable="YES" codeGenerationType="class">
         <relationship name="catalog_audiences" toMany="YES" deletionRule="Cascade" destinationEntity="AudienceModel" inverseName="audiences_catalog" inverseEntity="AudienceModel"/>
     </entity>
