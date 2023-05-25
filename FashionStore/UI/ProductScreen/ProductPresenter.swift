@@ -77,8 +77,9 @@ class ProductPresenter: ProductPresenterProtocol {
         let coreDataService = CoreDataService()
         guard let item = product.colors.first?.items.first else { return }
         Task {
+            print(item.id)
             await coreDataService.addCartItemToCart(item: item)
-            let cart = coreDataService.fetchCart()
+            let cart = await coreDataService.fetchCart()
             print(cart ?? "cart is nul")
         }
     }

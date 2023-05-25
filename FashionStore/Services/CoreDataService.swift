@@ -13,7 +13,7 @@ protocol CoreDataServiceProtocol {
     var mainContext: NSManagedObjectContext { get }
     func saveMainContext()
     func addCartItemToCart(item: Item) async
-    func fetchCart() -> Cart?
+    func fetchCart() async -> Cart?
     func editCartItemCount(item: Item, newCount: Int)
     func removeCartItemFromCart(item: Item)
 }
@@ -107,36 +107,39 @@ class CoreDataService: CoreDataServiceProtocol {
     }
     
     // return all cart items
-    func fetchCart() -> Cart? {
-        let fetchRequest = CartItemModel.fetchRequest()
-        // Core Data result of request SELECT * FROM CartItemModel
-        let cartItemsModel: [CartItemModel]
-        do {
-            cartItemsModel = try mainContext.fetch(fetchRequest)
-        } catch {
-            Errors.handler.checkError(error)
-            return nil
-        }
-        
-        // struct Result of request SELECT * FROM CartItemModel
-        var cartItems: [CartItem] = []
-        for cartItemModel in cartItemsModel {
-            guard
-                let id = cartItemModel.id,
-                let itemId = cartItemModel.itemId
-            else {
+    func fetchCart() async -> Cart? {
+        return await backgroundContext.perform { [weak self] in
+            guard let self else { return nil }
+            let fetchRequest = CartItemModel.fetchRequest()
+            // Core Data result of request SELECT * FROM CartItemModel
+            let cartItemsModel: [CartItemModel]
+            do {
+                cartItemsModel = try backgroundContext.fetch(fetchRequest)
+            } catch {
+                Errors.handler.checkError(error)
                 return nil
             }
-            // creating item by item
-            let cartItem = CartItem(
-                id: id,
-                itemId: itemId,
-                count: Int(cartItemModel.count)
-            )
-            cartItems.append(cartItem)
+            
+            // struct Result of request SELECT * FROM CartItemModel
+            var cartItems: [CartItem] = []
+            for cartItemModel in cartItemsModel {
+                guard
+                    let id = cartItemModel.id,
+                    let itemId = cartItemModel.itemId
+                else {
+                    return nil
+                }
+                // creating item by item
+                let cartItem = CartItem(
+                    id: id,
+                    itemId: itemId,
+                    count: Int(cartItemModel.count)
+                )
+                cartItems.append(cartItem)
+            }
+            let cart = Cart(cartItems: cartItems)
+            return cart
         }
-        let cart = Cart(cartItems: cartItems)
-        return cart
     }
     
     func editCartItemCount(item: Item, newCount: Int) {
