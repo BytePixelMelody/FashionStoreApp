@@ -65,14 +65,20 @@ class ProductViewController: UIViewController {
     private let descriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     private let productDescriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    private lazy var addToCartAction: () -> Void = { [weak self] in
-        Task { [weak self] in
-            guard let self else { return }
-//            try await presenter.addProductToCart()
-            try await withThrowingTaskGroup(of: <#T##Sendable.Protocol#>, body: <#T##(inout ThrowingTaskGroup<Sendable, Error>) async throws -> GroupResult#>)
+    private lazy var addToCartAction: () -> Void = {
+        Task<Void, Never> { [weak self] in
+            do {
+                try await self?.presenter.addProductToCart()
+            } catch {
+                Errors.handler.checkError(error)
+            }
         }
     }
+    
     private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: addToCartAction)
+    
+    // storing task to cancel it on willDisappearHandler()
+    private var checkAndLoadFaceImageTask: Task<Void, Never>?
 
     init(presenter: ProductPresenterProtocol) {
         self.presenter = presenter
@@ -88,7 +94,16 @@ class ProductViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        presenter.didLoadHandler()
+        presenter.loadInfo()
+        checkAndLoadFaceImageTask = Task { [weak self] in
+            do {
+                guard !Task.isCancelled else { return }
+                try await self?.presenter.checkAndLoadFaceImage()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
+        
         setupUiTexts()
         fillProductStackView()
         arrangeUiElements()
@@ -97,7 +112,7 @@ class ProductViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        presenter.willDisappearHandler()
+        checkAndLoadFaceImageTask?.cancel()
     }
     
     private func setupUiTexts() {

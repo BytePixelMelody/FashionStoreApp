@@ -16,7 +16,6 @@
 // Backlog:
 // TODO: Database write to CoreData after loading from backend
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
-// TODO: combine: filling fields of chipping and payment screens; presenter don't have links to subviews, it sends Publisher with data to ViewController that transfer it to subviews, view's Subscribers fill UI elements
 
 import UIKit
 import SnapKit

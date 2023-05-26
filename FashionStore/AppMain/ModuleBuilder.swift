@@ -42,7 +42,11 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createStoreModule(router: RouterProtocol) -> StoreViewController {
-        let presenter = StorePresenter(router: router, webService: webService, coreDataService: coreDataService)
+        let presenter = StorePresenter(
+            router: router,
+            webService: webService,
+            coreDataService: coreDataService
+        )
         let view = StoreViewController(presenter: presenter)
         presenter.view = view
         return view
@@ -56,6 +60,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
         let presenter = ProductPresenter(
             router: router,
             webService: webService,
+            coreDataService: coreDataService,
             product: product,
             image: image
         )
@@ -65,7 +70,11 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createCartModule(router: RouterProtocol) -> CartViewController {
-        let presenter = CartPresenter(router: router, webService: webService)
+        let presenter = CartPresenter(
+            router: router,
+            webService: webService,
+            coreDataService: coreDataService
+        )
         let view = CartViewController(presenter: presenter)
         presenter.view = view
         return view
@@ -86,7 +95,12 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController {
-        let presenter = CheckoutPresenter(router: router, keychainService: keychainService, webService: webService)
+        let presenter = CheckoutPresenter(
+            router: router,
+            keychainService: keychainService,
+            webService: webService,
+            coreDataService: coreDataService
+        )
         let view = CheckoutViewController(presenter: presenter)
         presenter.view = view
         return view

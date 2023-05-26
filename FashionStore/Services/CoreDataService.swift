@@ -55,9 +55,7 @@ class CoreDataService: CoreDataServiceProtocol {
         
         try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
-            
-            throw Errors.ErrorType.unsupportedImageFormat
-            
+                        
             if cartItemsModel.isEmpty {
                 // create a new entry
                 let cartItemModel = CartItemModel(context: self.backgroundContext)
@@ -115,10 +113,12 @@ class CoreDataService: CoreDataServiceProtocol {
         }
     }
     
+    // TODO: do it
     func editCartItemCount(item: Item, newCount: Int) async throws {
         
     }
     
+    // TODO: do it
     func removeCartItemFromCart(item: Item) async throws {
         
     }

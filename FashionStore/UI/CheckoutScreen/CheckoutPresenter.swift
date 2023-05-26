@@ -24,7 +24,8 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     private let router: RouterProtocol
     private let keychainService: KeychainServiceProtocol
     private let webService: WebServiceProtocol
-    
+    private let coreDataService: CoreDataServiceProtocol
+
     // success purchase popup
     private let successPurchasePopupTitle = "Success"
     private let successPurchasePopupMessageText = "Thank you for your purchase"
@@ -66,11 +67,17 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
 
     private var cartProducts: [CartItem] = []
-
-    init(router: RouterProtocol, keychainService: KeychainServiceProtocol, webService: WebServiceProtocol) {
+    
+    init(
+        router: RouterProtocol,
+        keychainService: KeychainServiceProtocol,
+        webService: WebServiceProtocol,
+        coreDataService: CoreDataServiceProtocol
+    ) {
         self.router = router
         self.keychainService = keychainService
         self.webService = webService
+        self.coreDataService = coreDataService
     }
     
     func closeScreen() {
