@@ -34,6 +34,7 @@ class Errors {
         case invalidUrlStringError
         case urlResponseCastError
         case unsupportedImageFormat
+        case modelUnwrapError
         
         // errors localized descriptions
         var errorDescription: String? {
@@ -85,13 +86,14 @@ class Errors {
             case .invalidUrlStringError:
                 return "URL string is invalid"
                 
-           // invalid URL string error
             case .urlResponseCastError:
                 return "URLResponse casting to HTTPURLResponse finished with error"
 
-           // invalid URL string error
             case .unsupportedImageFormat:
                 return "Loaded image has unsupported format for using in UIImage"
+
+            case .modelUnwrapError:
+                return "Model type unwrapping finished with error"
 
             }
         }
@@ -133,6 +135,10 @@ class Errors {
             return
         // log 404 errors
         case ErrorType.httpError(let statusCode, _) where (400...499).contains(statusCode):
+            logger.error("\(checkingError.localizedDescription, privacy: .public)")
+            return
+        // log model unwrapping errors
+        case ErrorType.modelUnwrapError:
             logger.error("\(checkingError.localizedDescription, privacy: .public)")
             return
         default:

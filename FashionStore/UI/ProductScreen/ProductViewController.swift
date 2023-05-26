@@ -66,7 +66,11 @@ class ProductViewController: UIViewController {
     private let productDescriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     
     private lazy var addToCartAction: () -> Void = { [weak self] in
-        self?.presenter.addProductToCart()
+        Task { [weak self] in
+            guard let self else { return }
+//            try await presenter.addProductToCart()
+            try await withThrowingTaskGroup(of: <#T##Sendable.Protocol#>, body: <#T##(inout ThrowingTaskGroup<Sendable, Error>) async throws -> GroupResult#>)
+        }
     }
     private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: addToCartAction)
 
@@ -160,7 +164,7 @@ class ProductViewController: UIViewController {
     private func arrangeProductStackView() {
         productScrollView.addSubview(productStackView)
         productStackView.snp.makeConstraints { make in
-            make.top.equalTo(productScrollView.contentLayoutGuide).offset(19)
+            make.top.equalTo(productScrollView.contentLayoutGuide).offset(17)
             make.bottom.equalTo(productScrollView.contentLayoutGuide).offset(-20)
             make.left.right.equalTo(productScrollView.contentLayoutGuide).inset(16)
         }

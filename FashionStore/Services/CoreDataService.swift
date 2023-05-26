@@ -9,19 +9,17 @@ import Foundation
 import CoreData
 
 protocol CoreDataServiceProtocol {
-    var persistentContainer: NSPersistentContainer { get }
-    var mainContext: NSManagedObjectContext { get }
-    func saveMainContext()
-    func addCartItemToCart(item: Item) async
-    func fetchCart() async -> Cart?
-    func editCartItemCount(item: Item, newCount: Int)
-    func removeCartItemFromCart(item: Item)
+    func addCartItemToCart(item: Item) async throws
+    func checkItemInCart(item: Item) async throws -> Bool
+    func fetchEntireCart() async throws -> Cart
+    func editCartItemCount(item: Item, newCount: Int) async throws
+    func removeCartItemFromCart(item: Item) async throws
 }
 
 class CoreDataService: CoreDataServiceProtocol {
     
     // creating of Core Data persistentContainer
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container. This implementation
          creates and returns a container. This property is optional since there are legitimate
@@ -45,80 +43,55 @@ class CoreDataService: CoreDataServiceProtocol {
         })
         return container
     }()
-
-    // Main queue Core Data context. Not for long operations(!)
-    var mainContext: NSManagedObjectContext {
-        persistentContainer.viewContext
-    }
     
     // Background queue Core Data context. Use with backgroundContext.perform { }
-    var backgroundContext: NSManagedObjectContext {
-        persistentContainer.newBackgroundContext()
-    }
+    private lazy var backgroundContext = persistentContainer.newBackgroundContext()
     
-    // Core Data check changes and try to save mainContext
-    func saveMainContext() {
-        if mainContext.hasChanges {
-            do {
-                try mainContext.save()
-            } catch {
-                Errors.handler.checkError(error)
-            }
-        }
-    }
-    
-    // Core Data check changes and try to save backgroundContext
-    func saveBackgroundContext() {
-        if backgroundContext.hasChanges {
-            do {
-                try backgroundContext.save()
-            } catch {
-                Errors.handler.checkError(error)
-            }
-        }
-    }
-    
-    func addCartItemToCart(item: Item) async {
+    // add item to cart or change count += 1
+    func addCartItemToCart(item: Item) async throws {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
         
-        var cartItemsModel: [CartItemModel] = []
-        
-        await backgroundContext.perform { [weak self] in
-            guard let self else { return }
-            do {
-                cartItemsModel = try backgroundContext.fetch(fetchRequest)
-            } catch {
-                Errors.handler.checkError(error)
-                return
-            }
+        try await backgroundContext.perform {
+            let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
+            
+            throw Errors.ErrorType.unsupportedImageFormat
             
             if cartItemsModel.isEmpty {
-                let cartItem = CartItemModel(context: backgroundContext)
-                cartItem.id = UUID()
-                cartItem.itemId = item.id
-                cartItem.count = 1
-                saveBackgroundContext()
+                // create a new entry
+                let cartItemModel = CartItemModel(context: self.backgroundContext)
+                cartItemModel.id = UUID()
+                cartItemModel.count = 1
+                cartItemModel.itemId = item.id
+                try self.backgroundContext.save()
             } else {
+                // increase count
                 guard let cartItemModel = cartItemsModel.first else { return }
+                cartItemModel.count += 1
+                try self.backgroundContext.save()
             }
         }
     }
     
+    // check the presence of item in the cart
+    func checkItemInCart(item: Item) async throws -> Bool {
+        // check existing
+        let fetchRequest = CartItemModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+                
+        return try await backgroundContext.perform {
+            let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
+            return !cartItemsModel.isEmpty
+        }
+    }
+    
     // return all cart items
-    func fetchCart() async -> Cart? {
-        return await backgroundContext.perform { [weak self] in
-            guard let self else { return nil }
+    func fetchEntireCart() async throws -> Cart {
+        return try await backgroundContext.perform {
             let fetchRequest = CartItemModel.fetchRequest()
             // Core Data result of request SELECT * FROM CartItemModel
-            let cartItemsModel: [CartItemModel]
-            do {
-                cartItemsModel = try backgroundContext.fetch(fetchRequest)
-            } catch {
-                Errors.handler.checkError(error)
-                return nil
-            }
+            let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
             
             // struct Result of request SELECT * FROM CartItemModel
             var cartItems: [CartItem] = []
@@ -127,7 +100,7 @@ class CoreDataService: CoreDataServiceProtocol {
                     let id = cartItemModel.id,
                     let itemId = cartItemModel.itemId
                 else {
-                    return nil
+                    throw Errors.ErrorType.modelUnwrapError
                 }
                 // creating item by item
                 let cartItem = CartItem(
@@ -142,11 +115,11 @@ class CoreDataService: CoreDataServiceProtocol {
         }
     }
     
-    func editCartItemCount(item: Item, newCount: Int) {
+    func editCartItemCount(item: Item, newCount: Int) async throws {
         
     }
     
-    func removeCartItemFromCart(item: Item) {
+    func removeCartItemFromCart(item: Item) async throws {
         
     }
     

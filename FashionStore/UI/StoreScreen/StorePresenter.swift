@@ -49,7 +49,7 @@ class StorePresenter: StorePresenterProtocol {
                 // check task cancellation
                 if Task.isCancelled { return }
                 
-                catalog = try await webService.getData(urlString: Settings.catalogUrl)
+                catalog = try await webService.getData(urlString: Settings.catalogUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
                 
 //                print(catalog ?? "")
             } catch {

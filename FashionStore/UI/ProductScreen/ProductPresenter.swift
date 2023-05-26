@@ -11,7 +11,7 @@ import UIKit
 protocol ProductPresenterProtocol {
     func backScreen()
     func showCart()
-    func addProductToCart()
+    func addProductToCart() async throws
     func didLoadHandler()
     func willDisappearHandler()
 }
@@ -73,14 +73,13 @@ class ProductPresenter: ProductPresenterProtocol {
         router.showCartScreen()
     }
     
-    func addProductToCart() {
+    func addProductToCart() async throws {
         let coreDataService = CoreDataService()
         guard let item = product.colors.first?.items.first else { return }
         Task {
-            print(item.id)
-            await coreDataService.addCartItemToCart(item: item)
-            let cart = await coreDataService.fetchCart()
-            print(cart ?? "cart is nul")
+            try await coreDataService.addCartItemToCart(item: item)
+            let cart = try await coreDataService.fetchEntireCart()
+            print(cart)
         }
     }
 }
