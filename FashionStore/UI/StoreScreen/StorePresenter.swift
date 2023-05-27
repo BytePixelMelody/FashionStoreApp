@@ -50,8 +50,6 @@ class StorePresenter: StorePresenterProtocol {
                 if Task.isCancelled { return }
                 
                 catalog = try await webService.getData(urlString: Settings.catalogUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
-                
-//                print(catalog ?? "")
             } catch {
                 await MainActor.run {
                     Errors.handler.checkError(error)

@@ -4,7 +4,7 @@
  Fashion Store - pet-project application of an online Fashion Store. Allows the user to select products in the online catalog, add them to the cart, make a fake order after adding the delivery address and payment method.
 
 ## Architectural pattern
-- [x] MVP + Router
+- [x] MVP + Builder + Router
 
 ## Frameworks
 - [x] SnapKit
@@ -15,21 +15,20 @@
 - [x] UI fully by code
 - [x] Design from Figma, adapted for rounded screens
 - [x] Self-designed JSON-structured database
-- [x] GitHub Pages based mock Web-server
-- [x] Web service
-- [x] Async/await, Tasks
-- [ ] Core data for offline use
+- [x] Mock Web-server based on GitHub Pages
+- [x] Core data service by actor on background queue to store Shopping Cart
+- [x] Web service on async/await
+- [x] Keychain service with iCloud sync by native API for sensitive data
+- [x] Deep link service to open product page in App by link
+- [x] Errors service with UI popups and logging
+- [x] Async/await and Tasks with cancellation on main and background queues
+- [x] Generics
 - [ ] FileManager images storage for offline use
 - [ ] Collection views
-- [x] Combine for text input check
-- [x] Keychain service with iCloud sync by native API for sensitive data
-- [ ] JSON service
-- [x] Generics
-- [x] Typographic font styles with dynamic font scaling
+- [x] Combine for text fields input check
+- [x] Typographic font styles with dynamic accessibility font scaling
 - [x] Customized animation between screens
-- [x] Logging errors
-- [x] Styled pop-up for errors and warnings
-- [x] Deep link
+- [x] App-styled pop-up for user warnings
 - [ ] Unit tests
 
 ## Code patterns

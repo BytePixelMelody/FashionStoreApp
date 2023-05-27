@@ -10,6 +10,7 @@ import SnapKit
 
 protocol ProductViewProtocol: AnyObject {
     
+    // fill view with info
     func fillProduct(
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
@@ -18,13 +19,21 @@ protocol ProductViewProtocol: AnyObject {
         image: UIImage?
     )
         
+    // fill first (face) image
     func fillFaceImage(image: UIImage) async
     
+    // enable button in product is not in cart
+    func enableAddToCartButton() async
+        
+    // disable button if product is in cart
+    func disableAddToCartButton() async
 }
 
 class ProductViewController: UIViewController {
     
-    private static let addToCartButtonTitle = "Add to cart"
+    private var addToCartTitle = "Add to cart"
+    private var inTheCartTitle = "In the cart"
+    private lazy var addToCartButtonTitle = addToCartTitle
     
     private let productImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
@@ -69,6 +78,7 @@ class ProductViewController: UIViewController {
         Task<Void, Never> { [weak self] in
             do {
                 try await self?.presenter.addProductToCart()
+                try await self?.presenter.checkInCartPresence()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -77,8 +87,24 @@ class ProductViewController: UIViewController {
     
     private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: addToCartAction)
     
-    // storing task to cancel it on willDisappearHandler()
-    private var checkAndLoadFaceImageTask: Task<Void, Never>?
+    // storing task, cancelling is in willDisappearHandler()
+    private lazy var checkAndLoadFaceImageTask: Task<Void, Never> = Task { [weak self] in
+        do {
+            guard !Task.isCancelled else { return }
+            try await self?.presenter.checkAndLoadFaceImage()
+        } catch {
+            Errors.handler.checkError(error)
+        }
+    }
+    
+    private lazy var checkInCartPresenceTask: Task<Void, Never> = Task { [weak self] in
+        do {
+            guard !Task.isCancelled else { return }
+            try await self?.presenter.checkInCartPresence()
+        } catch {
+            Errors.handler.checkError(error)
+        }
+    }
 
     init(presenter: ProductPresenterProtocol) {
         self.presenter = presenter
@@ -95,24 +121,25 @@ class ProductViewController: UIViewController {
         view.backgroundColor = .white
         
         presenter.loadInfo()
-        checkAndLoadFaceImageTask = Task { [weak self] in
-            do {
-                guard !Task.isCancelled else { return }
-                try await self?.presenter.checkAndLoadFaceImage()
-            } catch {
-                Errors.handler.checkError(error)
-            }
-        }
+        
+        _ = checkAndLoadFaceImageTask
         
         setupUiTexts()
         fillProductStackView()
         arrangeUiElements()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        _ = checkInCartPresenceTask
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        checkAndLoadFaceImageTask?.cancel()
+        checkAndLoadFaceImageTask.cancel()
+        checkInCartPresenceTask.cancel()
     }
     
     private func setupUiTexts() {
@@ -127,7 +154,7 @@ class ProductViewController: UIViewController {
             descriptionLabel.attributedText = descriptionLabelTitle.uppercased().setStyle(style: .titleSmall)
             productDescriptionLabel.attributedText = productDescriptionLabelTitle.setStyle(style: .bodyMedium)
         }
-        addToCartButton.configuration?.attributedTitle = AttributedString(Self.addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
+        addToCartButton.configuration?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
     
     // accessibility settings was changed - scale fonts
@@ -222,5 +249,25 @@ extension ProductViewController: ProductViewProtocol {
     func fillFaceImage(image: UIImage) async {
         self.productImageView.image = image
     }
-
+    
+    func enableAddToCartButton() async {
+        addToCartButton.isEnabled = true
+        var config = addToCartButton.configuration
+        config?.background.backgroundColor = UIColor(named: "Active") ?? .black
+        config?.image = UIImage(named: ImageName.plusDark)
+        addToCartButtonTitle = addToCartTitle
+        config?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
+        addToCartButton.configuration = config
+    }
+    
+    func disableAddToCartButton() async {
+        addToCartButton.isEnabled = false
+        var config = addToCartButton.configuration
+        config?.background.backgroundColor = UIColor(named: "ButtonDisabled") ?? .lightGray
+        config?.image = nil
+        addToCartButtonTitle = inTheCartTitle
+        config?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
+        addToCartButton.configuration = config
+    }
+    
 }

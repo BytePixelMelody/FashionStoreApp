@@ -14,6 +14,7 @@ protocol ProductPresenterProtocol {
     func addProductToCart() async throws
     func loadInfo()
     func checkAndLoadFaceImage() async throws
+    func checkInCartPresence() async throws
 }
 
 class ProductPresenter: ProductPresenterProtocol {
@@ -53,7 +54,7 @@ class ProductPresenter: ProductPresenterProtocol {
     func checkAndLoadFaceImage() async throws {
         // if image == nil, than load image
         guard image == nil else { return }
-        // check task cancellation
+        // get image name
         guard let imageName = product.images.first else { return }
         // load image from web
         let image = try await webService.getImage(imageName: imageName)
@@ -72,7 +73,16 @@ class ProductPresenter: ProductPresenterProtocol {
     func addProductToCart() async throws {
         guard let item = product.colors.first?.items.first else { return }
         try await coreDataService.addCartItemToCart(item: item)
-//        let cart = try await coreDataService.fetchEntireCart()
-//        _ = cart
+    }
+    
+    func checkInCartPresence() async throws {
+        guard let item = product.colors.first?.items.first else { return }
+        let itemInCart = try await coreDataService.checkItemInCart(item: item)
+        
+        if itemInCart {
+            await view?.disableAddToCartButton()
+        } else {
+            await view?.enableAddToCartButton()
+        }
     }
 }
