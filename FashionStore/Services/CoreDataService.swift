@@ -113,14 +113,37 @@ class CoreDataService: CoreDataServiceProtocol {
         }
     }
     
-    // TODO: do it
+    // edit CartItem count
     func editCartItemCount(item: Item, newCount: Int) async throws {
-        
+        let fetchRequest = CartItemModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+        // run on background
+        try await backgroundContext.perform {
+            // first item by itemId
+            guard let cartItemModel = try self.backgroundContext.fetch(fetchRequest).first else { return }
+            // edit count
+            cartItemModel.count = Int64(newCount)
+            try self.backgroundContext.save()
+        }
     }
     
-    // TODO: do it
+    // remove CartItem from cart
     func removeCartItemFromCart(item: Item) async throws {
+        let fetchRequest = CartItemModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+        fetchRequest.includesPropertyValues = false
         
+        // run on background
+        try await backgroundContext.perform {
+            // all items by itemId
+            let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
+            // delete
+            for cartItemModel in cartItemsModel {
+                self.backgroundContext.delete(cartItemModel)
+            }
+            // save
+            try self.backgroundContext.save()
+        }
     }
     
 }

@@ -72,7 +72,7 @@ class ProductPresenter: ProductPresenterProtocol {
     func addProductToCart() async throws {
         guard let item = product.colors.first?.items.first else { return }
         try await coreDataService.addCartItemToCart(item: item)
-        let cart = try await coreDataService.fetchEntireCart()
-        _ = cart
+//        let cart = try await coreDataService.fetchEntireCart()
+//        _ = cart
     }
 }
