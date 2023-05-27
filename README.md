@@ -20,7 +20,7 @@
 - [x] Web service on async/await
 - [x] Keychain service with iCloud sync by native API for sensitive data
 - [x] Deep link service to open product page in App by link
-- [x] Errors service with UI popups and logging
+- [x] Errors service with App-styled pop-up for user warnings and logging
 - [x] Async/await and Tasks with cancellation on main and background queues
 - [x] Generics
 - [ ] FileManager images storage for offline use
@@ -28,7 +28,6 @@
 - [x] Combine for text fields input check
 - [x] Typographic font styles with dynamic accessibility font scaling
 - [x] Customized animation between screens
-- [x] App-styled pop-up for user warnings
 - [ ] Unit tests
 
 ## Code patterns

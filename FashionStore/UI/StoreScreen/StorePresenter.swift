@@ -46,10 +46,11 @@ class StorePresenter: StorePresenterProtocol {
     func storeScreenWillAppear() {
         loadCatalogTask = Task {
             do {
-                // check task cancellation
-                if Task.isCancelled { return }
-                
-                catalog = try await webService.getData(urlString: Settings.catalogUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
+                try Task.checkCancellation()
+                catalog = try await webService.getData(
+                    urlString: Settings.catalogUrl,
+                    cachePolicy: .reloadIgnoringLocalAndRemoteCacheData
+                )
             } catch {
                 await MainActor.run {
                     Errors.handler.checkError(error)

@@ -90,21 +90,15 @@ class ProductViewController: UIViewController {
     // storing task, cancelling is in willDisappearHandler()
     private lazy var checkAndLoadFaceImageTask: Task<Void, Never> = Task { [weak self] in
         do {
-            guard !Task.isCancelled else { return }
+            try Task.checkCancellation()
             try await self?.presenter.checkAndLoadFaceImage()
         } catch {
             Errors.handler.checkError(error)
         }
     }
     
-    private lazy var checkInCartPresenceTask: Task<Void, Never> = Task { [weak self] in
-        do {
-            guard !Task.isCancelled else { return }
-            try await self?.presenter.checkInCartPresence()
-        } catch {
-            Errors.handler.checkError(error)
-        }
-    }
+    // check item in cart, creating and calling in viewWillAppear, cancelation is in viewWillDisappear
+    private var checkInCartPresenceTask: Task<Void, Never>?
 
     init(presenter: ProductPresenterProtocol) {
         self.presenter = presenter
@@ -122,6 +116,7 @@ class ProductViewController: UIViewController {
         
         presenter.loadInfo()
         
+        // one-time task call in the lifecycle of the view controller
         _ = checkAndLoadFaceImageTask
         
         setupUiTexts()
@@ -132,14 +127,22 @@ class ProductViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        _ = checkInCartPresenceTask
+        // creating and calling task, cancelation is in viewWillDisappear
+        checkInCartPresenceTask = Task { [weak self] in
+            do {
+                try Task.checkCancellation()
+                try await self?.presenter.checkInCartPresence()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         checkAndLoadFaceImageTask.cancel()
-        checkInCartPresenceTask.cancel()
+        checkInCartPresenceTask?.cancel()
     }
     
     private func setupUiTexts() {
@@ -250,6 +253,7 @@ extension ProductViewController: ProductViewProtocol {
         self.productImageView.image = image
     }
     
+    // enable button in product is not in cart
     func enableAddToCartButton() async {
         addToCartButton.isEnabled = true
         var config = addToCartButton.configuration
@@ -260,6 +264,7 @@ extension ProductViewController: ProductViewProtocol {
         addToCartButton.configuration = config
     }
     
+    // disable button if product is in cart
     func disableAddToCartButton() async {
         addToCartButton.isEnabled = false
         var config = addToCartButton.configuration
