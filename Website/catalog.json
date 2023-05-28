@@ -417,7 +417,7 @@
                             "name": "Denim jacket",
                             "brand": "DenimCo",
                             "price": 69.90,
-                            "images": ["1019.png", "1020.png", "1021.png"],
+                            "images": ["1005.png", "1020.png", "1021.png"],
                             "material": "Denim",
                             "information": "Classic denim jacket with collar and button front closure. Flap chest pockets and side welt pockets. Adjustable button tabs at hem.",
                             "styles": [
@@ -484,7 +484,7 @@
                             "name": "Pleated skirt",
                             "brand": "Luna",
                             "price": 39.99,
-                            "images": ["1022.png", "1023.png", "1024.png"],
+                            "images": ["1006.png", "1023.png", "1024.png"],
                             "material": "Cotton blend",
                             "information": "Flowy pleated skirt with elastic waistband. Midi length. Fully lined.",
                             "styles": [

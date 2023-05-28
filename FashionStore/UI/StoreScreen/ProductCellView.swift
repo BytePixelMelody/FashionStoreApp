@@ -1,0 +1,124 @@
+//
+//  ProductCellView.swift
+//  FashionStore
+//
+//  Created by Vyacheslav on 27.05.2023.
+//
+
+import Foundation
+import UIKit
+
+class ProductCellView: UIView {
+    
+    private let productBrandLabelTitle: String
+    private let productNameLabelTitle: String
+    private let productPriceLabelTitle: String
+    private let itemId: UUID
+    private let cellTapAction: (UUID, UIImage?) -> Void
+    private let imageName: String
+    private let loadImageAction: (String) async throws -> UIImage
+   
+    private let commonVerticalStackView = UIStackView.makeVerticalStackView()
+    private let labelsContainerView = UIView(frame: .zero)
+    private let labelsVerticalStackView = UIStackView.makeVerticalStackView()
+    
+    private let productImageView = UIImageView.makeImageView(
+        contentMode: .scaleAspectFill,
+        cornerRadius: 3.0
+    )
+    private let productBrandLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let productNameLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let productPriceLabel = UILabel.makeLabel(numberOfLines: 1)
+    
+    private lazy var cellTap = UITapGestureRecognizer(target: self, action: #selector(cellSelector))
+    
+    internal init(
+        productBrandLabelTitle: String,
+        productNameLabelTitle: String,
+        productPriceLabelTitle: String,
+        productId: UUID,
+        cellTapAction: @escaping (UUID, UIImage?) -> Void,
+        imageName: String,
+        loadImageAction: @escaping (String) async throws -> UIImage,
+        frame: CGRect = .zero
+    ) {
+        self.productBrandLabelTitle = productBrandLabelTitle
+        self.productNameLabelTitle = productNameLabelTitle
+        self.productPriceLabelTitle = productPriceLabelTitle
+        self.itemId = productId
+        self.cellTapAction = cellTapAction
+        self.imageName = imageName
+        self.loadImageAction = loadImageAction
+        super.init(frame: frame)
+        
+        // load image
+        Task<Void, Never> {
+            do {
+                productImageView.image = try await loadImageAction(imageName)
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
+        
+        // adding tap
+        self.addGestureRecognizer(cellTap)
+
+        // setup typography texts
+        setupUiTexts()
+        
+        // arrange elements
+        arrangeUiElements()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // called by tap on the view
+    @objc
+    private func cellSelector() {
+        cellTapAction(itemId, productImageView.image)
+    }
+    
+    private func setupUiTexts() {
+        productBrandLabel.attributedText = productBrandLabelTitle.setStyle(style: .bodySmallActive)
+        productNameLabel.attributedText = productNameLabelTitle.setStyle(style: .bodySmallLabel)
+        productPriceLabel.attributedText = productPriceLabelTitle.setStyle(style: .priceMedium)
+    }
+    
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupUiTexts()
+    }
+    
+    private func arrangeUiElements() {
+        
+        self.addSubview(commonVerticalStackView)
+        commonVerticalStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        commonVerticalStackView.addArrangedSubview(productImageView)
+        
+        productImageView.clipsToBounds = true
+        productImageView.snp.makeConstraints { make in
+            make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
+        }
+
+        commonVerticalStackView.setCustomSpacing(8.0, after: productImageView)
+        commonVerticalStackView.addArrangedSubview(labelsContainerView)
+        
+        labelsContainerView.addSubview(labelsVerticalStackView)
+        labelsVerticalStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(4.0)
+        }
+        
+        labelsVerticalStackView.addArrangedSubview(productBrandLabel)
+        labelsVerticalStackView.addArrangedSubview(productNameLabel)
+        labelsVerticalStackView.setCustomSpacing(4.0, after: productNameLabel)
+        labelsVerticalStackView.addArrangedSubview(productPriceLabel)
+    }
+    
+}

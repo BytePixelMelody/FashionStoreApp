@@ -25,7 +25,6 @@ class ProductPresenter: ProductPresenterProtocol {
     private let product: Product
     private let image: UIImage?
     
-    
     init(
         router: RouterProtocol,
         webService: WebServiceProtocol,

@@ -9,10 +9,13 @@ import Foundation
 import UIKit
 
 protocol StorePresenterProtocol {
-    func showProduct()
+    func showProduct(productId: UUID, image: UIImage?)
     func showCart()
     func storeScreenWillAppear()
     func storeScreenWillDisappear()
+    func loadImage(imageName: String) async throws -> UIImage
+    // TODO: delete this
+    func showMockView()
 }
 
 class StorePresenter: StorePresenterProtocol {
@@ -31,12 +34,16 @@ class StorePresenter: StorePresenterProtocol {
         self.coreDataService = coreDataService
     }
     
-    func showProduct() {
-        guard let product = catalog?.audiences.first?.categories.first?.products.first else {
+    func showProduct(productId: UUID, image: UIImage?) {
+//        guard let product = catalog?.audiences.first?.categories.first?.products.first else {
+//            return
+//        }
+        // search product by id in catalog
+        guard let product = catalog?.audiences.flatMap({ $0.categories.flatMap { $0.products } }).first(where: { $0.id == productId }) else {
             return
         }
         
-        router.showProductScreen(product: product, image: nil)
+        router.showProductScreen(product: product, image: image)
     }
     
     func showCart() {
@@ -63,4 +70,18 @@ class StorePresenter: StorePresenterProtocol {
         loadCatalogTask?.cancel()
     }
 
+    // load image from web
+    func loadImage(imageName: String) async throws -> UIImage {
+        try await webService.getImage(imageName: imageName)
+    }
+    
+    func showMockView() {
+//        view?.addMockCellView(
+//            productBrandLabelTitle: <#T##String#>,
+//            productNameLabelTitle: <#T##String#>,
+//            productPriceLabelTitle: <#T##String#>,
+//            productId: <#T##UUID#>,
+//            imageName: <#T##String#>
+//        )
+    }
 }

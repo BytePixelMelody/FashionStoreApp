@@ -23,7 +23,7 @@ class FilledPaymentMethodView: UIView {
     private let horizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12, alignment: .center)
 
     // creating a payment system image
-    private lazy var paymentSystemImage = UIImageView.makeImageView(imageName: paymentSystemImageName,
+    private lazy var paymentSystemImageView = UIImageView.makeImageView(imageName: paymentSystemImageName,
                                                                     width: 52,
                                                                     height: 52,
                                                                     contentMode: .scaleAspectFit)
@@ -92,7 +92,7 @@ class FilledPaymentMethodView: UIView {
         }
         
         // adding vertical stack view for labels to horizontal stack view
-        horizontalStackView.addArrangedSubview(paymentSystemImage)
+        horizontalStackView.addArrangedSubview(paymentSystemImageView)
         horizontalStackView.addArrangedSubview(cardInfoLabel)
         horizontalStackView.addArrangedSubview(deleteInfoButton)
         

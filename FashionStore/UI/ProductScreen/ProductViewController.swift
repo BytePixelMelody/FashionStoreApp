@@ -35,10 +35,6 @@ class ProductViewController: UIViewController {
     private var inTheCartTitle = "In the cart"
     private lazy var addToCartButtonTitle = addToCartTitle
     
-    private let productImageView = UIImageView.makeImageView(
-        contentMode: .scaleAspectFill,
-        cornerRadius: 6.0
-    )
     private var productBrandLabelTitle: String?
     private var productNameLabelTitle: String?
     private var productPriceLabelTitle: String?
@@ -68,6 +64,10 @@ class ProductViewController: UIViewController {
     // creating stack view
     private let productStackView = UIStackView.makeVerticalStackView(spacing: 8)
 
+    private let productImageView = UIImageView.makeImageView(
+        contentMode: .scaleAspectFill,
+        cornerRadius: 6.0
+    )
     private let productBrandLabel = UILabel.makeLabel(numberOfLines: 0)
     private let productNameLabel = UILabel.makeLabel(numberOfLines: 0)
     private let productPriceLabel = UILabel.makeLabel(numberOfLines: 0)
@@ -122,6 +122,7 @@ class ProductViewController: UIViewController {
         setupUiTexts()
         fillProductStackView()
         arrangeUiElements()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

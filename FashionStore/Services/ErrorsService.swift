@@ -35,6 +35,7 @@ class Errors {
         case urlResponseCastError
         case unsupportedImageFormat
         case modelUnwrapError
+        case loadImageError(errorMessage: String)
         
         // errors localized descriptions
         var errorDescription: String? {
@@ -80,7 +81,7 @@ class Errors {
 
            // text is not integer
             case .notIntegerInputError (let errorMessage):
-                return errorMessage
+                return "Not Integer input error: " + errorMessage
 
            // invalid URL string error
             case .invalidUrlStringError:
@@ -94,6 +95,9 @@ class Errors {
 
             case .modelUnwrapError:
                 return "Model type unwrapping finished with error"
+
+            case .loadImageError(let errorMessage):
+                return "Load image error: " + errorMessage
 
             }
         }
@@ -139,6 +143,9 @@ class Errors {
             return
         // log model unwrapping errors
         case ErrorType.modelUnwrapError:
+            logger.error("\(checkingError.localizedDescription, privacy: .public)")
+            return
+        case ErrorType.loadImageError(_):
             logger.error("\(checkingError.localizedDescription, privacy: .public)")
             return
         default:

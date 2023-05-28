@@ -97,7 +97,13 @@ extension TextStyle {
         lineHeight: 24,
         fontMetrics: UIFont.TextStyle.title2.metrics
     )
-    static let bodySmall = TextStyle(
+    static let bodySmallActive = TextStyle(
+        size: 12,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 18,
+        fontMetrics: UIFont.TextStyle.title3.metrics
+    )
+    static let bodySmallLabel = TextStyle(
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 18,

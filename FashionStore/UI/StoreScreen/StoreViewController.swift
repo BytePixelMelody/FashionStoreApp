@@ -22,6 +22,14 @@ import SnapKit
 
 protocol StoreViewProtocol: AnyObject {
     
+    func addMockCellView(
+        productBrandLabelTitle: String,
+        productNameLabelTitle: String,
+        productPriceLabelTitle: String,
+        productId: UUID,
+        imageName: String
+    )
+    
 }
 
 class StoreViewController: UIViewController {
@@ -45,7 +53,7 @@ class StoreViewController: UIViewController {
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
     private lazy var goProductAction: () -> Void = { [weak self] in
-        self?.presenter.showProduct()
+        self?.presenter.showProduct(productId: UUID(uuidString: "383cc439-7b76-4089-9a32-90e8e37a0377") ?? UUID(), image: nil)
     }
     
     private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, action: goProductAction)
@@ -66,6 +74,9 @@ class StoreViewController: UIViewController {
         
         setupUiTexts()
         arrangeUiElements()
+
+        // TODO: delete this 
+        presenter.showMockView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,5 +151,36 @@ class StoreViewController: UIViewController {
 }
 
 extension StoreViewController: StoreViewProtocol {
+    
+    // TODO: delete this
+    func addMockCellView(
+        productBrandLabelTitle: String,
+        productNameLabelTitle: String,
+        productPriceLabelTitle: String,
+        productId: UUID,
+        imageName: String
+    ) {
+        let cellTapAction: (UUID, UIImage?) -> Void = { [weak self] productId, image in
+            self?.presenter.showProduct(productId: productId, image: image)
+        }
+        
+        let loadImageAction: (String) async throws -> UIImage = { [weak self] imageName in
+            guard let self else {
+                throw Errors.ErrorType.loadImageError(errorMessage: "self is nil")
+            }
+            // load image by presenter
+            return try await presenter.loadImage(imageName: imageName)
+        }
+        
+        let mockCellView = ProductCellView(
+            productBrandLabelTitle: productBrandLabelTitle,
+            productNameLabelTitle: productNameLabelTitle,
+            productPriceLabelTitle: productPriceLabelTitle,
+            productId: productId,
+            cellTapAction: cellTapAction,
+            imageName: imageName,
+            loadImageAction: loadImageAction
+        )
+    }
     
 }
