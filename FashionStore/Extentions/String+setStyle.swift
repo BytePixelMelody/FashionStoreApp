@@ -100,14 +100,14 @@ extension TextStyle {
     static let bodySmallActive = TextStyle(
         size: 12,
         color: UIColor(named: "Active") ?? .black,
-        lineHeight: 18,
-        fontMetrics: UIFont.TextStyle.title3.metrics
+        lineHeight: 15,
+        fontMetrics: UIFont.TextStyle.body.metrics
     )
     static let bodySmallLabel = TextStyle(
         size: 12,
         color: UIColor(named: "Label") ?? .black,
-        lineHeight: 18,
-        fontMetrics: UIFont.TextStyle.title3.metrics
+        lineHeight: 14,
+        fontMetrics: UIFont.TextStyle.body.metrics
     )
     static let priceLarge = TextStyle(
         size: 18,

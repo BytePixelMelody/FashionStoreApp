@@ -27,8 +27,10 @@ protocol StoreViewProtocol: AnyObject {
         productNameLabelTitle: String,
         productPriceLabelTitle: String,
         productId: UUID,
-        imageName: String
+        imageName: String?
     )
+    
+    func catalogIsLoaded()
     
 }
 
@@ -74,22 +76,21 @@ class StoreViewController: UIViewController {
         
         setupUiTexts()
         arrangeUiElements()
-
-        // TODO: delete this 
-        presenter.showMockView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        presenter.storeScreenWillAppear()
+        Task<Void, Never> {
+            do {
+                try await presenter.loadCatalog()
+                presenter.showMockView()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        presenter.storeScreenWillDisappear()
-    }
+
     
     private func setupUiTexts() {
         screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLargeAlignLeft)
@@ -132,7 +133,7 @@ class StoreViewController: UIViewController {
         productsScrollView.addSubview(screenNameLabel)
         
         screenNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(300)
+            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(400)
             make.centerX.equalTo(productsScrollView.contentLayoutGuide)
         }
     }
@@ -158,7 +159,7 @@ extension StoreViewController: StoreViewProtocol {
         productNameLabelTitle: String,
         productPriceLabelTitle: String,
         productId: UUID,
-        imageName: String
+        imageName: String?
     ) {
         let cellTapAction: (UUID, UIImage?) -> Void = { [weak self] productId, image in
             self?.presenter.showProduct(productId: productId, image: image)
@@ -181,6 +182,17 @@ extension StoreViewController: StoreViewProtocol {
             imageName: imageName,
             loadImageAction: loadImageAction
         )
+        
+        productsScrollView.addSubview(mockCellView)
+        mockCellView.snp.makeConstraints { make in
+            make.top.left.equalTo(productsScrollView.contentLayoutGuide).offset(16)
+            make.width.equalTo(productsScrollView.contentLayoutGuide).dividedBy(2.0).inset((16.0 + 12.0 / 2) / 2) // insets on each side so... /= 2
+        }
+    }
+    
+    func catalogIsLoaded() {
+        // TODO: delete this
+        presenter.showMockView()
     }
     
 }

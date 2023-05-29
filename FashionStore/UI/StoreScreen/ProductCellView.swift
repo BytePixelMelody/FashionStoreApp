@@ -15,7 +15,7 @@ class ProductCellView: UIView {
     private let productPriceLabelTitle: String
     private let itemId: UUID
     private let cellTapAction: (UUID, UIImage?) -> Void
-    private let imageName: String
+    private let imageName: String?
     private let loadImageAction: (String) async throws -> UIImage
    
     private let commonVerticalStackView = UIStackView.makeVerticalStackView()
@@ -24,7 +24,7 @@ class ProductCellView: UIView {
     
     private let productImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
-        cornerRadius: 3.0
+        cornerRadius: 6.0
     )
     private let productBrandLabel = UILabel.makeLabel(numberOfLines: 1)
     private let productNameLabel = UILabel.makeLabel(numberOfLines: 1)
@@ -38,7 +38,7 @@ class ProductCellView: UIView {
         productPriceLabelTitle: String,
         productId: UUID,
         cellTapAction: @escaping (UUID, UIImage?) -> Void,
-        imageName: String,
+        imageName: String?,
         loadImageAction: @escaping (String) async throws -> UIImage,
         frame: CGRect = .zero
     ) {
@@ -54,6 +54,7 @@ class ProductCellView: UIView {
         // load image
         Task<Void, Never> {
             do {
+                guard let imageName else { return }
                 productImageView.image = try await loadImageAction(imageName)
             } catch {
                 Errors.handler.checkError(error)
@@ -106,7 +107,7 @@ class ProductCellView: UIView {
             make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
         }
 
-        commonVerticalStackView.setCustomSpacing(8.0, after: productImageView)
+        commonVerticalStackView.setCustomSpacing(9.0, after: productImageView)
         commonVerticalStackView.addArrangedSubview(labelsContainerView)
         
         labelsContainerView.addSubview(labelsVerticalStackView)
@@ -117,7 +118,7 @@ class ProductCellView: UIView {
         
         labelsVerticalStackView.addArrangedSubview(productBrandLabel)
         labelsVerticalStackView.addArrangedSubview(productNameLabel)
-        labelsVerticalStackView.setCustomSpacing(4.0, after: productNameLabel)
+//        labelsVerticalStackView.setCustomSpacing(2.0, after: productNameLabel)
         labelsVerticalStackView.addArrangedSubview(productPriceLabel)
     }
     
