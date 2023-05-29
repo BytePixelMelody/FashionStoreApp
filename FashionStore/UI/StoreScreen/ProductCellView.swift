@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 class ProductCellView: UIView {
-    
+    // init properties
+    private let imageName: String?
+    private let loadImageAction: (String) async throws -> UIImage
     private let productBrandLabelTitle: String
     private let productNameLabelTitle: String
     private let productPriceLabelTitle: String
-    private let itemId: UUID
+    private let productId: UUID
     private let cellTapAction: (UUID, UIImage?) -> Void
-    private let imageName: String?
-    private let loadImageAction: (String) async throws -> UIImage
    
     private let commonVerticalStackView = UIStackView.makeVerticalStackView()
     private let labelsContainerView = UIView(frame: .zero)
@@ -45,7 +45,7 @@ class ProductCellView: UIView {
         self.productBrandLabelTitle = productBrandLabelTitle
         self.productNameLabelTitle = productNameLabelTitle
         self.productPriceLabelTitle = productPriceLabelTitle
-        self.itemId = productId
+        self.productId = productId
         self.cellTapAction = cellTapAction
         self.imageName = imageName
         self.loadImageAction = loadImageAction
@@ -78,7 +78,7 @@ class ProductCellView: UIView {
     // called by tap on the view
     @objc
     private func cellSelector() {
-        cellTapAction(itemId, productImageView.image)
+        cellTapAction(productId, productImageView.image)
     }
     
     private func setupUiTexts() {
@@ -118,7 +118,6 @@ class ProductCellView: UIView {
         
         labelsVerticalStackView.addArrangedSubview(productBrandLabel)
         labelsVerticalStackView.addArrangedSubview(productNameLabel)
-//        labelsVerticalStackView.setCustomSpacing(2.0, after: productNameLabel)
         labelsVerticalStackView.addArrangedSubview(productPriceLabel)
     }
     

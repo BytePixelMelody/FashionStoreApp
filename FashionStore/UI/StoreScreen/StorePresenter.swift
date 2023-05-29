@@ -55,6 +55,7 @@ class StorePresenter: StorePresenterProtocol {
         try await webService.getImage(imageName: imageName)
     }
     
+    // TODO: delete this
     func showMockView() {
         guard let product = catalog?.audiences.first?.categories.first?.products.first(where: { $0.id == UUID(uuidString: "c305f1ce-2b34-4a8e-b0b4-34e738eeab7e") ?? UUID() }) else {
             return

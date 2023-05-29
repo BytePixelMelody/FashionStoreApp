@@ -73,7 +73,7 @@ class FilledPaymentMethodView: UIView {
     private func setupUiTexts() {
         let cardInfoLabelText = paymentSystemName + "  ••••" + cardLastDigits
         
-        cardInfoLabel.attributedText = cardInfoLabelText.setStyle(style: .card)
+        cardInfoLabel.attributedText = cardInfoLabelText.setStyle(style: .bodyMediumDark)
     }
     
     // accessibility settings was changed - scale fonts

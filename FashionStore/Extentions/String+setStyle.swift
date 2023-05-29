@@ -78,6 +78,13 @@ extension TextStyle {
         letterSpacing: 2,
         fontMetrics: UIFont.TextStyle.title3.metrics
     )
+    static let titleSmallHight = TextStyle(
+        size: 14,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 20,
+        letterSpacing: 2,
+        fontMetrics: UIFont.TextStyle.title3.metrics
+    )
     static let bodyLarge = TextStyle(
         size: 16,
         color: UIColor(named: "Label") ?? .black,
@@ -107,6 +114,12 @@ extension TextStyle {
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 14,
+        fontMetrics: UIFont.TextStyle.body.metrics
+    )
+    static let bodySmallLabelHight = TextStyle(
+        size: 12,
+        color: UIColor(named: "Label") ?? .black,
+        lineHeight: 18,
         fontMetrics: UIFont.TextStyle.body.metrics
     )
     static let priceLarge = TextStyle(
@@ -173,10 +186,16 @@ extension TextStyle {
         lineHeight: 22,
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
-    static let card = TextStyle(
+    static let bodyMediumDark = TextStyle(
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 16,
+        fontMetrics: UIFont.TextStyle.headline.metrics
+    )
+    static let numberMediumDark = TextStyle(
+        size: 14,
+        color: UIColor(named: "Active") ?? .black,
+        lineHeight: 14,
         fontMetrics: UIFont.TextStyle.headline.metrics
     )
     static let activeMediumCentered = TextStyle(
