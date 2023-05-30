@@ -32,7 +32,7 @@ class ProductCellView: UIView {
     
     private lazy var cellTap = UITapGestureRecognizer(target: self, action: #selector(cellSelector))
     
-    internal init(
+    init(
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
         productPriceLabelTitle: String,

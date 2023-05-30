@@ -37,7 +37,7 @@ class CartItemCellView: UIView {
     private let plusButton = UIButton.makeIconicButton(imageName: ImageName.plusCircled)
     private let itemPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
-    internal init(
+    init(
         imageName: String? = nil,
         loadImageAction: @escaping (String) async throws -> UIImage,
         itemBrand: String,

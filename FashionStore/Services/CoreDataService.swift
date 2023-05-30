@@ -14,6 +14,7 @@ protocol CoreDataServiceProtocol {
     func fetchEntireCart() async throws -> Cart
     func editCartItemCount(item: Item, newCount: Int) async throws -> Int
     func removeCartItemFromCart(item: Item) async throws
+    func syncCartWithAvailableItems(itemsInStock: [UUID : Int]) async throws -> Int
 }
 
 actor CoreDataService: CoreDataServiceProtocol {
@@ -146,6 +147,48 @@ actor CoreDataService: CoreDataServiceProtocol {
             }
             // save
             try self.backgroundContext.save()
+        }
+    }
+    
+    // delete cartItems that are not in stock in necessary count
+    func syncCartWithAvailableItems(itemsInStock: [UUID : Int]) async throws -> Int {
+        let fetchRequest = CartItemModel.fetchRequest()
+        fetchRequest.includesPropertyValues = true
+        
+        // run on background
+        return try await backgroundContext.perform {
+            // deleted cart items count
+            var deletedCartItemsCount = 0
+            
+            // all cart items
+            let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
+            
+            // delete cartItems that are not in stock in necessary count
+            for cartItemModel in cartItemsModel {
+                
+                // is cartItem in stock?
+                if let cartItemId = cartItemModel.itemId,
+                   itemsInStock.keys.contains(cartItemId) {
+                    
+                    // is count not sufficient?
+                    if let itemInStockCount = itemsInStock[cartItemId],
+                       cartItemModel.count > itemInStockCount {
+                        deletedCartItemsCount += Int(cartItemModel.count) - itemInStockCount
+                        cartItemModel.count = Int64(itemInStockCount)
+                    }
+                    
+                // cart item not found in stock, delete it
+                } else {
+                    // add count of deleted items
+                    deletedCartItemsCount += Int(cartItemModel.count)
+                    self.backgroundContext.delete(cartItemModel)
+                }
+            }
+            
+            // save
+            try self.backgroundContext.save()
+            
+            return deletedCartItemsCount
         }
     }
     

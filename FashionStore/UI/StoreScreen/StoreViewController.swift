@@ -29,9 +29,7 @@ protocol StoreViewProtocol: AnyObject {
         productId: UUID,
         imageName: String?
     )
-    
-    func catalogIsLoaded()
-    
+        
 }
 
 class StoreViewController: UIViewController {
@@ -188,11 +186,6 @@ extension StoreViewController: StoreViewProtocol {
             make.top.left.equalTo(productsScrollView.contentLayoutGuide).offset(16)
             make.width.equalTo(productsScrollView.contentLayoutGuide).dividedBy(2.0).inset((16.0 + 12.0 / 2) / 2) // insets on each side so... /= 2
         }
-    }
-    
-    func catalogIsLoaded() {
-        // TODO: delete this
-        presenter.showMockView()
     }
     
 }

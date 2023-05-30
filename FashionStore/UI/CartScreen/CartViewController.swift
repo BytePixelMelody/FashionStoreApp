@@ -67,8 +67,22 @@ class CartViewController: UIViewController {
         // turn off navigation swipe, the extension is below
         // turn navigation swipe back on is in viewWillDisappear
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-
-        presenter.cartIsEmptyCheck()        
+        
+        Task<Void, Never> { [weak self] in
+            do {
+                // load catalog from Web
+                try await self?.presenter.loadCatalog()
+                // check cartItems for availability in the catalog, pop-up message when deleting from cart
+                try await self?.presenter.checkCartInStock()
+                // load synchronised cart
+                try await self?.presenter.loadCart()
+                
+                // TODO: delete this
+                self?.presenter.showMockView()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -215,6 +229,21 @@ extension CartViewController: CartViewProtocol {
     
     func setTotalPrice(price: Decimal) {
         footerTotalPriceView.setTotalPrice(price: price)
+    }
+    
+    // TODO: delete this
+    func addMockCellView() {
+//        let mockCellView = CartItemCellView(
+//            imageName: <#T##String?#>,
+//            loadImageAction: <#T##(String) async throws -> UIImage#>,
+//            itemBrand: <#T##String#>,
+//            itemNameColorSize: <#T##String#>,
+//            itemId: <#T##UUID#>,
+//            minusButtonAction: <#T##(UUID) async throws -> Int#>,
+//            count: <#T##Int#>,
+//            plusButtonAction: <#T##(UUID) async throws -> Int#>,
+//            itemPrice: <#T##Decimal#>
+//        )
     }
 }
 

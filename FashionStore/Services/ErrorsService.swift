@@ -36,6 +36,7 @@ class Errors {
         case unsupportedImageFormat
         case modelUnwrapError
         case loadImageError(errorMessage: String)
+        case cartItemsDeleted(count: Int)
         
         // errors localized descriptions
         var errorDescription: String? {
@@ -98,6 +99,9 @@ class Errors {
 
             case .loadImageError(let errorMessage):
                 return "Load image error: " + errorMessage
+
+            case .cartItemsDeleted(let count):
+                return "\(count) items are currently unavailable and have been removed from the cart"
 
             }
         }
