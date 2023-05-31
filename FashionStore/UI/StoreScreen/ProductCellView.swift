@@ -11,7 +11,7 @@ import UIKit
 class ProductCellView: UIView {
     // init properties
     private let imageName: String?
-    private let loadImageAction: (String) async throws -> UIImage
+    private let loadImageAction: (String) async throws -> UIImage?
     private let productBrandLabelTitle: String
     private let productNameLabelTitle: String
     private let productPriceLabelTitle: String
@@ -24,7 +24,8 @@ class ProductCellView: UIView {
     
     private let productImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
-        cornerRadius: 6.0
+        cornerRadius: 6.0,
+        clipsToBounds: true
     )
     private let productBrandLabel = UILabel.makeLabel(numberOfLines: 1)
     private let productNameLabel = UILabel.makeLabel(numberOfLines: 1)
@@ -39,7 +40,7 @@ class ProductCellView: UIView {
         productId: UUID,
         cellTapAction: @escaping (UUID, UIImage?) -> Void,
         imageName: String?,
-        loadImageAction: @escaping (String) async throws -> UIImage,
+        loadImageAction: @escaping (String) async throws -> UIImage?,
         frame: CGRect = .zero
     ) {
         self.productBrandLabelTitle = productBrandLabelTitle
@@ -102,7 +103,6 @@ class ProductCellView: UIView {
         
         commonVerticalStackView.addArrangedSubview(productImageView)
         
-        productImageView.clipsToBounds = true
         productImageView.snp.makeConstraints { make in
             make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
         }

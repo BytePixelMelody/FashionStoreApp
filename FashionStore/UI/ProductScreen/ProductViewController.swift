@@ -66,7 +66,8 @@ class ProductViewController: UIViewController {
 
     private let productImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
-        cornerRadius: 6.0
+        cornerRadius: 6.0,
+        clipsToBounds: true
     )
     private let productBrandLabel = UILabel.makeLabel(numberOfLines: 0)
     private let productNameLabel = UILabel.makeLabel(numberOfLines: 0)
@@ -217,7 +218,6 @@ class ProductViewController: UIViewController {
     }
     
     private func arrangeProductImageView() {
-        productImageView.clipsToBounds = true
         productImageView.snp.makeConstraints { make in
             make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
         }

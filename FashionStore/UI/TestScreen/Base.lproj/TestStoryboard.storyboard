@@ -103,6 +103,7 @@
                             <constraint firstItem="EQX-OH-1nx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YKr-8A-5AS"/>
                             <constraint firstItem="EQX-OH-1nx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="je2-pL-Dt0"/>
                             <constraint firstItem="EQX-OH-1nx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.3" id="qCA-TS-JSw"/>
+                            <constraint firstItem="vxD-vo-6eC" firstAttribute="height" secondItem="EQX-OH-1nx" secondAttribute="height" multiplier="0.870763" id="si5-bm-IRA"/>
                             <constraint firstItem="vxD-vo-6eC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zPa-W5-kwm"/>
                         </constraints>
                     </view>

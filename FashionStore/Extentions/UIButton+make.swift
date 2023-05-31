@@ -23,7 +23,7 @@ extension UIButton {
         config.imagePadding = 24
         
         let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let action { action() }
+            if let action { action() } 
         }))
         return button
     }
@@ -37,9 +37,13 @@ extension UIButton {
         }
         config.contentInsets = .zero
         
-        let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let action { action() }
-        }))
+        let button: UIButton
+        
+        if let action {
+            button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in action() }))
+        } else {
+            button = UIButton(configuration: config)
+        }
         return button
     }
     

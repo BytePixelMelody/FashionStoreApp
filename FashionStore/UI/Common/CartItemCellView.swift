@@ -12,18 +12,19 @@ class CartItemCellView: UIView {
     
     // init properties
     private let imageName: String?
-    private let loadImageAction: (String) async throws -> UIImage
+    private let loadImageAction: (String) async throws -> UIImage?
     private let itemBrandLabelTitle: String
     private let itemNameColorSizeLabelTitle: String
     private let itemId: UUID
-    private let minusButtonAction: (UUID) async throws -> Int
+    private let minusButtonAction: (UUID, Int) async throws -> Int?
     private var count: Int
-    private let plusButtonAction: (UUID) async throws -> Int
+    private let plusButtonAction: (UUID, Int) async throws -> Int?
     private let itemPrice: Decimal
     
     private let itemImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
-        cornerRadius: 6.0
+        cornerRadius: 4.0,
+        clipsToBounds: true
     )
     private let infoView = UIView(frame: .zero)
     private let spacerBrandModelHorizontalStack = UIStackView.makeHorizontalStackView(alignment: .top)
@@ -38,14 +39,14 @@ class CartItemCellView: UIView {
     private let itemPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
     init(
-        imageName: String? = nil,
-        loadImageAction: @escaping (String) async throws -> UIImage,
+        imageName: String?,
+        loadImageAction: @escaping (String) async throws -> UIImage?,
         itemBrand: String,
         itemNameColorSize: String,
         itemId: UUID,
-        minusButtonAction: @escaping (UUID) async throws -> Int,
+        minusButtonAction: @escaping (UUID, Int) async throws -> Int?,
         count: Int,
-        plusButtonAction: @escaping (UUID) async throws -> Int,
+        plusButtonAction: @escaping (UUID, Int) async throws -> Int?,
         itemPrice: Decimal,
         frame: CGRect = .zero
     ) {
@@ -96,7 +97,8 @@ class CartItemCellView: UIView {
                 guard let self else { return }
                 do {
                     // call action and set new count
-                    self.count = try await self.minusButtonAction(self.itemId)
+                    guard let newCount = try await self.minusButtonAction(self.itemId, self.count) else { return }
+                    self.count = newCount
                     // assign new count to label
                     self.itemCountLabel.attributedText = String(self.count).setStyle(style: .bodyMediumDark)
                 } catch {
@@ -104,13 +106,14 @@ class CartItemCellView: UIView {
                 }
             }
         }, for: .primaryActionTriggered)
-        
+
         plusButton.addAction(UIAction { [weak self] _ in
             Task<Void, Never> {
                 guard let self else { return }
                 do {
                     // call action and set new count
-                    self.count = try await self.plusButtonAction(self.itemId)
+                    guard let newCount = try await self.plusButtonAction(self.itemId, self.count) else { return }
+                    self.count = newCount
                     // assign new count to label
                     self.itemCountLabel.attributedText = String(self.count).setStyle(style: .bodyMediumDark)
                 } catch {
@@ -142,6 +145,7 @@ class CartItemCellView: UIView {
             make.top.leading.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.3)
             make.height.equalTo(itemImageView.snp.width).multipliedBy(4.0 / 3.0)
+            make.height.lessThanOrEqualToSuperview()
         }
         
         // right info section
@@ -149,6 +153,7 @@ class CartItemCellView: UIView {
         infoView.snp.makeConstraints { make in
             make.leading.equalTo(itemImageView.snp.trailing)
             make.top.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().priority(.medium)
         }
         
         // brand and model stack with minimum size by spacer
@@ -192,6 +197,10 @@ class CartItemCellView: UIView {
             make.trailing.lessThanOrEqualToSuperview().inset(4.0)
             make.bottom.equalToSuperview().inset(2.0)
         }
+        
+        // buttons to front
+        self.bringSubviewToFront(minusButton)
+        self.bringSubviewToFront(plusButton)
     }
     
 }

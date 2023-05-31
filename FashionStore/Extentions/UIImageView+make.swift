@@ -15,7 +15,8 @@ extension UIImageView {
         width: Double? = nil,
         height: Double? = nil,
         contentMode: UIView.ContentMode? = nil,
-        cornerRadius: Double = 0
+        cornerRadius: Double = 0,
+        clipsToBounds: Bool = false
     ) -> UIImageView {
         let imageView: UIImageView
         
@@ -37,6 +38,7 @@ extension UIImageView {
         }
         
         imageView.layer.cornerRadius = cornerRadius
+        imageView.clipsToBounds = clipsToBounds
         
         return imageView
     }

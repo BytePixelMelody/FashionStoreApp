@@ -22,6 +22,7 @@ import SnapKit
 
 protocol StoreViewProtocol: AnyObject {
     
+    // TODO: delete this
     func addMockCellView(
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
@@ -163,15 +164,12 @@ extension StoreViewController: StoreViewProtocol {
             self?.presenter.showProduct(productId: productId, image: image)
         }
         
-        let loadImageAction: (String) async throws -> UIImage = { [weak self] imageName in
-            guard let self else {
-                throw Errors.ErrorType.loadImageError(errorMessage: "self is nil")
-            }
+        let loadImageAction: (String) async throws -> UIImage? = { [weak self] imageName in
             // load image by presenter
-            return try await presenter.loadImage(imageName: imageName)
+            return try await self?.presenter.loadImage(imageName: imageName)
         }
         
-        let mockCellView = ProductCellView(
+        let mockProductCellView = ProductCellView(
             productBrandLabelTitle: productBrandLabelTitle,
             productNameLabelTitle: productNameLabelTitle,
             productPriceLabelTitle: productPriceLabelTitle,
@@ -181,8 +179,8 @@ extension StoreViewController: StoreViewProtocol {
             loadImageAction: loadImageAction
         )
         
-        productsScrollView.addSubview(mockCellView)
-        mockCellView.snp.makeConstraints { make in
+        productsScrollView.addSubview(mockProductCellView)
+        mockProductCellView.snp.makeConstraints { make in
             make.top.left.equalTo(productsScrollView.contentLayoutGuide).offset(16)
             make.width.equalTo(productsScrollView.contentLayoutGuide).dividedBy(2.0).inset((16.0 + 12.0 / 2) / 2) // insets on each side so... /= 2
         }

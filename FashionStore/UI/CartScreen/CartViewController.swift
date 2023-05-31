@@ -12,6 +12,16 @@ protocol CartViewProtocol: AnyObject {
     func showEmptyCartWithAnimation()
     func showFullCart()
     func setTotalPrice(price: Decimal)
+    
+    // TODO: delete this
+    func addMockCartItemCellView(
+        imageName: String?,
+        itemBrand: String,
+        itemNameColorSize: String,
+        itemId: UUID,
+        count: Int,
+        itemPrice: Decimal
+    )
 }
 
 class CartViewController: UIViewController {
@@ -33,6 +43,9 @@ class CartViewController: UIViewController {
 
     private let productsScrollView = UIScrollView.makeScrollView()
 
+    // TODO: delete this
+    private var mockCellView: CartItemCellView?
+    
     private let cartIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
     private lazy var checkoutAction: () -> Void = { [weak self] in
@@ -75,10 +88,7 @@ class CartViewController: UIViewController {
                 // check cartItems for availability in the catalog, pop-up message when deleting from cart
                 try await self?.presenter.checkCartInStock()
                 // load synchronised cart
-                try await self?.presenter.loadCart()
-                
-                // TODO: delete this
-                self?.presenter.showMockView()
+                try await self?.presenter.reloadCart()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -225,6 +235,9 @@ extension CartViewController: CartViewProtocol {
             make.width.equalTo(productsScrollView.contentLayoutGuide.snp.width)
             make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
         }
+        
+        // TODO: delete this
+        presenter.showMockCartItemCellView()
     }
     
     func setTotalPrice(price: Decimal) {
@@ -232,19 +245,47 @@ extension CartViewController: CartViewProtocol {
     }
     
     // TODO: delete this
-    func addMockCellView() {
-//        let mockCellView = CartItemCellView(
-//            imageName: <#T##String?#>,
-//            loadImageAction: <#T##(String) async throws -> UIImage#>,
-//            itemBrand: <#T##String#>,
-//            itemNameColorSize: <#T##String#>,
-//            itemId: <#T##UUID#>,
-//            minusButtonAction: <#T##(UUID) async throws -> Int#>,
-//            count: <#T##Int#>,
-//            plusButtonAction: <#T##(UUID) async throws -> Int#>,
-//            itemPrice: <#T##Decimal#>
-//        )
+    func addMockCartItemCellView(
+        imageName: String?,
+        itemBrand: String,
+        itemNameColorSize: String,
+        itemId: UUID,
+        count: Int,
+        itemPrice: Decimal
+    ) {
+        let loadImageAction: (String) async throws -> UIImage? = { [weak self] imageName in
+            // load image by presenter
+            return try await self?.presenter.loadImage(imageName: imageName)
+        }
+        
+        let minusButtonAction: (UUID, Int) async throws -> Int? = { [weak self] itemId, currentCartItemCount in
+            try await self?.presenter.reduceCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
+        }
+        
+        let plusButtonAction: (UUID, Int) async throws -> Int? = { [weak self] itemId, currentCartItemCount in
+            try await self?.presenter.increaseCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
+        }
+        
+        mockCellView = CartItemCellView(
+            imageName: imageName,
+            loadImageAction: loadImageAction,
+            itemBrand: itemBrand,
+            itemNameColorSize: itemNameColorSize,
+            itemId: itemId,
+            minusButtonAction: minusButtonAction,
+            count: count,
+            plusButtonAction: plusButtonAction,
+            itemPrice: itemPrice
+        )
+        
+        guard let mockCellView else { return }
+        
+        productsScrollView.addSubview(mockCellView)
+        mockCellView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview().inset(16)
+        }
     }
+    
 }
 
 // turn off navigation swipes

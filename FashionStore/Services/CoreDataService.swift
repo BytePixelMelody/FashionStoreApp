@@ -9,12 +9,12 @@ import Foundation
 import CoreData
 
 protocol CoreDataServiceProtocol {
-    func addCartItemToCart(item: Item) async throws
-    func checkItemInCart(item: Item) async throws -> Bool
+    func addCartItemToCart(itemId: UUID) async throws
+    func checkItemInCart(itemId: UUID) async throws -> Bool
     func fetchEntireCart() async throws -> Cart
-    func editCartItemCount(item: Item, newCount: Int) async throws -> Int
-    func removeCartItemFromCart(item: Item) async throws
-    func syncCartWithAvailableItems(itemsInStock: [UUID : Int]) async throws -> Int
+    func editCartItemCount(itemId: UUID, newCount: Int) async throws -> Int
+    func removeCartItemFromCart(itemId: UUID) async throws
+    func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int
 }
 
 actor CoreDataService: CoreDataServiceProtocol {
@@ -49,10 +49,10 @@ actor CoreDataService: CoreDataServiceProtocol {
     private lazy var backgroundContext = persistentContainer.newBackgroundContext()
     
     // add item to cart or change count += 1
-    func addCartItemToCart(item: Item) async throws {
+    func addCartItemToCart(itemId: UUID) async throws {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
         
         try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
@@ -62,7 +62,7 @@ actor CoreDataService: CoreDataServiceProtocol {
                 let cartItemModel = CartItemModel(context: self.backgroundContext)
                 cartItemModel.id = UUID()
                 cartItemModel.count = 1
-                cartItemModel.itemId = item.id
+                cartItemModel.itemId = itemId
                 try self.backgroundContext.save()
             } else {
                 // increase count
@@ -74,10 +74,10 @@ actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // check the presence of item in the cart
-    func checkItemInCart(item: Item) async throws -> Bool {
+    func checkItemInCart(itemId: UUID) async throws -> Bool {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
                 
         return try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
@@ -115,9 +115,9 @@ actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // edit CartItem count
-    func editCartItemCount(item: Item, newCount: Int) async throws -> Int {
+    func editCartItemCount(itemId: UUID, newCount: Int) async throws -> Int {
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
         // run on background
         try await backgroundContext.perform {
             // first item by itemId
@@ -132,9 +132,9 @@ actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // remove CartItem from cart
-    func removeCartItemFromCart(item: Item) async throws {
+    func removeCartItemFromCart(itemId: UUID) async throws {
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", item.id.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
         fetchRequest.includesPropertyValues = false
         
         // run on background
@@ -151,7 +151,7 @@ actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // delete cartItems that are not in stock in necessary count
-    func syncCartWithAvailableItems(itemsInStock: [UUID : Int]) async throws -> Int {
+    func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int {
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.includesPropertyValues = true
         
@@ -168,10 +168,10 @@ actor CoreDataService: CoreDataServiceProtocol {
                 
                 // is cartItem in stock?
                 if let cartItemId = cartItemModel.itemId,
-                   itemsInStock.keys.contains(cartItemId) {
+                   itemIdsInStockCount.keys.contains(cartItemId) {
                     
                     // is count not sufficient?
-                    if let itemInStockCount = itemsInStock[cartItemId],
+                    if let itemInStockCount = itemIdsInStockCount[cartItemId],
                        cartItemModel.count > itemInStockCount {
                         deletedCartItemsCount += Int(cartItemModel.count) - itemInStockCount
                         cartItemModel.count = Int64(itemInStockCount)
