@@ -26,6 +26,7 @@ class CartPresenter: CartPresenterProtocol {
     private let router: RouterProtocol
     private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol
+    
     private var cart: Cart?
     private var catalog: Catalog?
     private var itemIdsInStockCount: [UUID : Int]?
@@ -100,68 +101,6 @@ class CartPresenter: CartPresenterProtocol {
     func loadImage(imageName: String) async throws -> UIImage {
         try await webService.getImage(imageName: imageName)
     }
-
-    func showCheckout() {
-        router.showCheckoutScreen()
-    }
-    
-    func closeScreen() {
-        router.popScreenToBottom()
-    }
-    
-    // TODO: delete this
-    func showMockCartItemCellView() {
-        guard let cartItem = cart?.cartItems.first else { return }
-        let itemId = cartItem.itemId
-        guard let catalog else { return }
-        guard let product = findProduct(catalog: catalog, itemId: itemId) else { return }
-        guard let color = findColor(catalog: catalog, itemId: itemId) else { return }
-        guard let item = findItem(catalog: catalog, itemId: itemId) else { return }
-        let imageName = color.images.first
-        let itemBrand = product.brand
-        let productName = product.name
-        let colorName = color.name
-        let size = item.size
-        let itemNameColorSize = "\(productName), \(colorName), \(size)"
-        let count = cartItem.count
-        let itemPrice = product.price
-                        
-        view?.addMockCartItemCellView(
-            imageName: imageName,
-            itemBrand: itemBrand,
-            itemNameColorSize: itemNameColorSize,
-            itemId: itemId,
-            count: count,
-            itemPrice: itemPrice
-        )
-    }
-    
-    // find product by itemId
-    private func findProduct(catalog: Catalog, itemId: UUID) -> Product? {
-        let allProducts = catalog.audiences.flatMap { $0.categories.flatMap { $0.products } }
-        
-        let foundProduct = allProducts.first(where: { $0.colors.contains { $0.items.contains { $0.id == itemId } } })
-        
-        return foundProduct
-    }
-    
-    // find color by itemId
-    private func findColor(catalog: Catalog, itemId: UUID) -> Color? {
-        let allColors = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors } } }
-        
-        let foundColor = allColors.first(where: { $0.items.contains { $0.id == itemId } })
-        
-        return foundColor
-    }
-    
-    // find item by itemId
-    private func findItem(catalog: Catalog, itemId: UUID) -> Item? {
-        let allItems = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors.flatMap { $0.items } } } }
-        
-        let foundItem = allItems.first(where: { $0.id == itemId } )
-        
-        return foundItem
-    }
     
     func reduceCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int? {
         if currentCartItemCount <= 1 {
@@ -202,6 +141,41 @@ class CartPresenter: CartPresenterProtocol {
             return currentCartItemCount
         }
     }
+ 
+    func showCheckout() {
+        router.showCheckoutScreen()
+    }
+    
+    func closeScreen() {
+        router.popScreenToBottom()
+    }
+    
+    // TODO: delete this
+    func showMockCartItemCellView() {
+        guard let cartItem = cart?.cartItems.first else { return }
+        let itemId = cartItem.itemId
+        guard let catalog else { return }
+        guard let product = findProduct(catalog: catalog, itemId: itemId) else { return }
+        guard let color = findColor(catalog: catalog, itemId: itemId) else { return }
+        guard let item = findItem(catalog: catalog, itemId: itemId) else { return }
+        let imageName = color.images.first
+        let itemBrand = product.brand
+        let productName = product.name
+        let colorName = color.name
+        let size = item.size
+        let itemNameColorSize = "\(productName), \(colorName), \(size)"
+        let count = cartItem.count
+        let itemPrice = product.price
+                        
+        view?.addMockCartItemCellView(
+            imageName: imageName,
+            itemBrand: itemBrand,
+            itemNameColorSize: itemNameColorSize,
+            itemId: itemId,
+            count: count,
+            itemPrice: itemPrice
+        )
+    }
     
     // popup when trying to remove item from cart
     private func removeCartItemWithWarning(itemId: UUID) {
@@ -226,5 +200,32 @@ class CartPresenter: CartPresenterProtocol {
             image: deleteCartItemImage
         )
     }
-
+    
+    // find product by itemId
+    private func findProduct(catalog: Catalog, itemId: UUID) -> Product? {
+        let allProducts = catalog.audiences.flatMap { $0.categories.flatMap { $0.products } }
+        
+        let foundProduct = allProducts.first(where: { $0.colors.contains { $0.items.contains { $0.id == itemId } } })
+        
+        return foundProduct
+    }
+    
+    // find color by itemId
+    private func findColor(catalog: Catalog, itemId: UUID) -> Color? {
+        let allColors = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors } } }
+        
+        let foundColor = allColors.first(where: { $0.items.contains { $0.id == itemId } })
+        
+        return foundColor
+    }
+    
+    // find item by itemId
+    private func findItem(catalog: Catalog, itemId: UUID) -> Item? {
+        let allItems = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors.flatMap { $0.items } } } }
+        
+        let foundItem = allItems.first(where: { $0.id == itemId } )
+        
+        return foundItem
+    }
+   
 }

@@ -12,7 +12,7 @@
 
 ## Technologies
 - [x] UIKit
-- [x] UI fully by code
+- [x] UI fully by code, forced unwrap avoided
 - [x] Design from Figma, adapted for rounded screens
 - [x] Self-designed JSON-structured database
 - [x] Mock Web-server based on GitHub Pages

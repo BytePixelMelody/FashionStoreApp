@@ -103,17 +103,17 @@
                                         {
                                             "id": "43AAD3BD-0C74-46BD-BE08-991817B3E3F5",
                                             "size": "S",
-                                            "inStock": 12
+                                            "inStock": 3
                                         },
                                         {
                                             "id": "86a40c92-6112-4d44-b9bc-032ae7cbb884",
                                             "size": "M",
-                                            "inStock": 18
+                                            "inStock": 2
                                         },
                                         {
                                             "id": "d6f7875c-82e0-47b6-80ab-7e91f605c27b",
                                             "size": "L",
-                                            "inStock": 15
+                                            "inStock": 5
                                         }
                                     ]
                                 },
