@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProductCellView: UIView {
+class ProductCellView: UICollectionViewCell {
     // init properties
     private let imageName: String?
     private let loadImageAction: (String) async throws -> UIImage?
