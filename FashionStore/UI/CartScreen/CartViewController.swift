@@ -35,8 +35,8 @@ class CartViewController: UIViewController {
 
     private let presenter: CartPresenterProtocol
     
-    private lazy var closeScreenAction: () -> Void = { [weak self] in
-        self?.presenter.closeScreen()
+    private lazy var closeScreenAction: () -> Void = { [weak presenter] in
+        presenter?.closeScreen()
     }
 
     private lazy var closableHeaderView = HeaderNamedView(closeScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
@@ -46,10 +46,14 @@ class CartViewController: UIViewController {
     // TODO: delete this
     private var mockCellView: CartItemCellView?
     
-    private let cartIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
+    private let cartIsEmptyLabel: UILabel = {
+        let label = UILabel.makeLabel(numberOfLines: 0)
+        label.isHidden = true
+        return label
+    }()
         
-    private lazy var checkoutAction: () -> Void = { [weak self] in
-        self?.presenter.showCheckout()
+    private lazy var checkoutAction: () -> Void = { [weak presenter] in
+        presenter?.showCheckout()
     }
 
     private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, buttonAction: checkoutAction, buttonTitle: Self.checkoutButtonTitle)
@@ -71,7 +75,7 @@ class CartViewController: UIViewController {
         view.backgroundColor = .white
         
         setupUiTexts()
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,14 +85,14 @@ class CartViewController: UIViewController {
         // turn navigation swipe back on is in viewWillDisappear
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
-        Task<Void, Never> { [weak self] in
+        Task<Void, Never> { [weak presenter] in
             do {
                 // load catalog from Web
-                try await self?.presenter.loadCatalog()
+                try await presenter?.loadCatalog()
                 // check cartItems for availability in the catalog, pop-up message when deleting from cart
-                try await self?.presenter.checkCartInStock()
+                try await presenter?.checkCartInStock()
                 // load synchronised cart
-                try await self?.presenter.reloadCart()
+                try await presenter?.reloadCart()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -116,7 +120,7 @@ class CartViewController: UIViewController {
         setupUiTexts()
     }
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeClosableHeaderView()
         arrangeProductsScrollView()
         arrangeCartIsEmptyLabel()
@@ -253,17 +257,17 @@ extension CartViewController: CartViewProtocol {
         count: Int,
         itemPrice: Decimal
     ) {
-        let loadImageAction: (String) async throws -> UIImage? = { [weak self] imageName in
+        let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
             // load image by presenter
-            return try await self?.presenter.loadImage(imageName: imageName)
+            return try await presenter?.loadImage(imageName: imageName)
         }
         
-        let minusButtonAction: (UUID, Int) async throws -> Int? = { [weak self] itemId, currentCartItemCount in
-            try await self?.presenter.reduceCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
+        let minusButtonAction: (UUID, Int) async throws -> Int? = { [weak presenter] itemId, currentCartItemCount in
+            try await presenter?.reduceCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
         }
         
-        let plusButtonAction: (UUID, Int) async throws -> Int? = { [weak self] itemId, currentCartItemCount in
-            try await self?.presenter.increaseCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
+        let plusButtonAction: (UUID, Int) async throws -> Int? = { [weak presenter] itemId, currentCartItemCount in
+            try await presenter?.increaseCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
         }
         
         mockCellView = CartItemCellView(

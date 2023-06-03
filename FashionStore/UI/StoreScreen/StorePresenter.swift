@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol StorePresenterProtocol {
+protocol StorePresenterProtocol: AnyObject {
     func showProduct(productId: UUID, image: UIImage?)
     func showCart()
     func loadCatalog() async throws

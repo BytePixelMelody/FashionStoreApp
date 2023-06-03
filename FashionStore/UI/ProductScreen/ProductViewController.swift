@@ -43,12 +43,12 @@ class ProductViewController: UIViewController {
     
     private let presenter: ProductPresenterProtocol
 
-    private lazy var goBackAction: () -> Void = { [weak self] in
-        self?.presenter.backScreen()
+    private lazy var goBackAction: () -> Void = { [weak presenter] in
+        presenter?.backScreen()
     }
 
-    private lazy var goCartAction: () -> Void = { [weak self] in
-        self?.presenter.showCart()
+    private lazy var goCartAction: () -> Void = { [weak presenter] in
+        presenter?.showCart()
     }
     
     private lazy var headerBrandedView = HeaderBrandedView(
@@ -75,11 +75,11 @@ class ProductViewController: UIViewController {
     private let descriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     private let productDescriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    private lazy var addToCartAction: () -> Void = {
-        Task<Void, Never> { [weak self] in
+    private lazy var addToCartAction: () -> Void = { [weak presenter] in
+        Task<Void, Never> { [weak presenter] in
             do {
-                try await self?.presenter.addProductToCart()
-                try await self?.presenter.checkInCartPresence()
+                try await presenter?.addProductToCart()
+                try await presenter?.checkInCartPresence()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -89,10 +89,10 @@ class ProductViewController: UIViewController {
     private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: addToCartAction)
     
     // storing task, cancelling is in willDisappearHandler()
-    private lazy var checkAndLoadFaceImageTask: Task<Void, Never> = Task { [weak self] in
+    private lazy var checkAndLoadFaceImageTask: Task<Void, Never> = Task { [weak presenter] in
         do {
             try Task.checkCancellation()
-            try await self?.presenter.checkAndLoadFaceImage()
+            try await presenter?.checkAndLoadFaceImage()
         } catch {
             Errors.handler.checkError(error)
         }
@@ -122,7 +122,7 @@ class ProductViewController: UIViewController {
         
         setupUiTexts()
         fillProductStackView()
-        arrangeUiElements()
+        arrangeLayout()
         
     }
     
@@ -130,10 +130,10 @@ class ProductViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // creating and calling task, cancelation is in viewWillDisappear
-        checkInCartPresenceTask = Task { [weak self] in
+        checkInCartPresenceTask = Task { [weak presenter] in
             do {
                 try Task.checkCancellation()
-                try await self?.presenter.checkInCartPresence()
+                try await presenter?.checkInCartPresence()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -180,7 +180,7 @@ class ProductViewController: UIViewController {
         productStackView.addArrangedSubview(productDescriptionLabel)
     }
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeHeaderBrandedView()
         arrangeProductScrollView()
         arrangeProductStackView()

@@ -34,7 +34,7 @@ class HeaderNamedView: UIView {
         super.init(frame: frame)
         
         setupUiTexts()
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     // view doesn't support storyboards
@@ -52,7 +52,7 @@ class HeaderNamedView: UIView {
         setupUiTexts()
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeCloseButton()
         arrangeBackButton()
         arrangeHeaderLabel()

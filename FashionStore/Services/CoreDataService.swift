@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-protocol CoreDataServiceProtocol {
+protocol CoreDataServiceProtocol: AnyObject {
     func addCartItemToCart(itemId: UUID) async throws
     func checkItemInCart(itemId: UUID) async throws -> Bool
     func fetchEntireCart() async throws -> Cart

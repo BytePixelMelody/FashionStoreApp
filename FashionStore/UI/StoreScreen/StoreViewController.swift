@@ -14,8 +14,12 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
+// TODO: change cell init to setup
+// TODO: ScrollViews to CollectionViews
 // TODO: Database write to CoreData after loading from backend
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
+// TODO: for correct UICollectionView animations replace "view" with "contentView" is cells
+// TODO: reverse view-presenter injection and delete view's inits
 
 import UIKit
 import SnapKit
@@ -39,8 +43,8 @@ class StoreViewController: UIViewController {
     
     private let presenter: StorePresenterProtocol
     
-    private lazy var goCartAction: () -> Void = { [weak self] in
-        self?.presenter.showCart()
+    private lazy var goCartAction: () -> Void = { [weak presenter] in
+        presenter?.showCart()
     }
     
     private lazy var headerBrandedView = HeaderBrandedView(
@@ -53,8 +57,8 @@ class StoreViewController: UIViewController {
 
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
     
-    private lazy var goProductAction: () -> Void = { [weak self] in
-        self?.presenter.showProduct(productId: UUID(uuidString: "383cc439-7b76-4089-9a32-90e8e37a0377") ?? UUID(), image: nil)
+    private lazy var goProductAction: () -> Void = { [weak presenter] in
+        presenter?.showProduct(productId: UUID(uuidString: "383cc439-7b76-4089-9a32-90e8e37a0377") ?? UUID(), image: nil)
     }
     
     private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, action: goProductAction)
@@ -74,7 +78,7 @@ class StoreViewController: UIViewController {
         view.backgroundColor = .white
         
         setupUiTexts()
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,7 +106,7 @@ class StoreViewController: UIViewController {
         setupUiTexts()
     }
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeHeaderBrandedView()
         arrangeProductsScrollView()
         arrangeScreenNameLabel()
@@ -160,16 +164,19 @@ extension StoreViewController: StoreViewProtocol {
         productId: UUID,
         imageName: String?
     ) {
-        let cellTapAction: (UUID, UIImage?) -> Void = { [weak self] productId, image in
-            self?.presenter.showProduct(productId: productId, image: image)
+        // TODO: move this call in CollectionViewDelegate method didSelectRowAt
+        let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productId, image in
+            presenter?.showProduct(productId: productId, image: image)
         }
         
-        let loadImageAction: (String) async throws -> UIImage? = { [weak self] imageName in
+        let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
             // load image by presenter
-            return try await self?.presenter.loadImage(imageName: imageName)
+            return try await presenter?.loadImage(imageName: imageName)
         }
         
-        let mockProductCellView = ProductCellView(
+        let mockProductCellView = ProductCellView()
+        
+        mockProductCellView.setup(
             productBrandLabelTitle: productBrandLabelTitle,
             productNameLabelTitle: productNameLabelTitle,
             productPriceLabelTitle: productPriceLabelTitle,

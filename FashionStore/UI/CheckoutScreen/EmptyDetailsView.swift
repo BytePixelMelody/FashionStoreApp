@@ -32,7 +32,7 @@ class EmptyDetailsView: UIView {
         super.init(frame: frame)
         
         setupUiTexts()
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     // view doesn't support storyboards
@@ -51,7 +51,7 @@ class EmptyDetailsView: UIView {
         setupUiTexts()
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeInfoNameLabel()
         arrangeAddInfoButton()
         arrangeLineImage()

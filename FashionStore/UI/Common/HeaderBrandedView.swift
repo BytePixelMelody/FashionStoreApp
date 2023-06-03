@@ -48,7 +48,7 @@ class HeaderBrandedView: UIView {
         
         super.init(frame: frame)
         
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     // view doesn't support storyboards
@@ -56,7 +56,7 @@ class HeaderBrandedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeLeftFirstButton()
         arrangeRightFirstButton()
         arrangeRightSecondButton()

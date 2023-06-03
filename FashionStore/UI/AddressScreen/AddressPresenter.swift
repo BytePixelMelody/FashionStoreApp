@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol AddressPresenterProtocol {
+protocol AddressPresenterProtocol: AnyObject {
     func backScreen(someTextFieldEdited: Bool)
     func addressScreenWillAppear()
     func saveChanges(
@@ -33,8 +33,8 @@ class AddressPresenter: AddressPresenterProtocol {
     private let discardChangesPopupTitle = "We care"
     private let discardChangesPopupMessageText = "You have unsaved changes"
     private let discardChangesPopupButtonTitle = "Discard changes"
-    private lazy var discardChangesAction = { [weak self] in
-        guard let self else { return }
+    private lazy var discardChangesAction = { [weak router] in
+        guard let router else { return }
         router.popScreen()
     }
     private let discardChangesImage = UIImageView.makeImageView(imageName: ImageName.message)

@@ -122,7 +122,7 @@ class AddressViewController: UIViewController {
 
         setupUiTexts()
         fillStackViews()
-        arrangeUiElements()
+        arrangeLayout()
         textFieldsChaining()
         makeAddOrSaveButtonPublisher()
     }
@@ -206,7 +206,7 @@ class AddressViewController: UIViewController {
         fullAddressVerticalStackView.addArrangedSubview(createLineGray())
     }
   
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeClosableHeaderView()
         arrangeAddressScrollView()
         arrangeAddressStackView()

@@ -39,7 +39,7 @@ class FooterTotalPriceView: UIView {
         super.init(frame: frame)
         
         setupUiTexts()
-        arrangeUiElements()
+        arrangeLayout()
     }
    
     // view doesn't support storyboards
@@ -59,7 +59,7 @@ class FooterTotalPriceView: UIView {
         setupUiTexts()
     }
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeButton()
         arrangeTotalLabel()
         arrangeTotalPriceLabel()

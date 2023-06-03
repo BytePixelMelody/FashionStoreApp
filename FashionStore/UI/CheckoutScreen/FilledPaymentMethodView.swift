@@ -56,7 +56,7 @@ class FilledPaymentMethodView: UIView {
         setupUiTexts()
         
         // arrange elements
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     // view doesn't support storyboards
@@ -82,7 +82,7 @@ class FilledPaymentMethodView: UIView {
         setupUiTexts()
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         
         self.addSubview(horizontalStackView)
         horizontalStackView.snp.makeConstraints { make in

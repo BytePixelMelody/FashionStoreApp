@@ -61,7 +61,7 @@ class FilledAddressView: UIView {
         setupUiTexts()
         
         // arrange elements
-        arrangeUiElements()
+        arrangeLayout()
     }
 
     // view doesn't support storyboards
@@ -89,7 +89,7 @@ class FilledAddressView: UIView {
         setupUiTexts()
     }
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         
         self.addSubview(horizontalStackView)
         horizontalStackView.snp.makeConstraints { make in

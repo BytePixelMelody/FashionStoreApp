@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DeepLinkServiceProtocol {
+protocol DeepLinkServiceProtocol: AnyObject {
     func fetchProductId(url: URL?) -> String?
 }
 

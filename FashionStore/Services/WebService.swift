@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol WebServiceProtocol {
+protocol WebServiceProtocol: AnyObject {
     func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy) async throws -> T
     func getImage(imageName: String) async throws -> UIImage
 }

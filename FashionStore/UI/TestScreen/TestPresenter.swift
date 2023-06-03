@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TestPresenterProtocol {
+protocol TestPresenterProtocol: AnyObject {
     
 }
 

@@ -10,6 +10,11 @@ import UIKit
 
 class CartItemCellView: UICollectionViewCell {
     
+    // cell reuse identifier
+    static var identifier: String {
+        String(describing: self)
+    }
+    
     // init properties
     private let imageName: String?
     private let loadImageAction: (String) async throws -> UIImage?
@@ -71,7 +76,7 @@ class CartItemCellView: UICollectionViewCell {
         setupUiTexts()
         
         // arrange elements
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -137,7 +142,7 @@ class CartItemCellView: UICollectionViewCell {
         setupUiTexts()
     }
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         
         // image
         self.addSubview(itemImageView)

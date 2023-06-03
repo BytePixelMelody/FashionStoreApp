@@ -8,7 +8,7 @@
 import Foundation
 import Security
 
-protocol KeychainServiceProtocol {
+protocol KeychainServiceProtocol: AnyObject {
     func add<T>(keychainId: String, value: T) throws where T: Codable
     func read<T>(keychainId: String) throws -> T where T: Codable
     func delete(keychainId: String) throws

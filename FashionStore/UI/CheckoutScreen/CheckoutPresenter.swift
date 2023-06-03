@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CheckoutPresenterProtocol {
+protocol CheckoutPresenterProtocol: AnyObject {
     func loadCatalog() async throws
     func checkCartInStock() async throws
     func reloadCart() async throws
@@ -58,9 +58,9 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     private let successPurchasePopupMessageText = "Thank you for your purchase"
     private var successPurchasePopupSubMessageText = "Payment receipt: "
     private let successPurchasePopupButtonTitle = "To store"
-    private lazy var goToStoreAction = { [weak self] in
-        guard let self else { return }
-        self.router.popToRootScreen()
+    private lazy var goToStoreAction = { [weak router] in
+        guard let router else { return }
+        router.popToRootScreen()
     }
     private let successImage = UIImageView.makeImageView(imageName: ImageName.success)
  

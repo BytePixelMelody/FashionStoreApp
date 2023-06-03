@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PopupPresenterProtocol {
+protocol PopupPresenterProtocol: AnyObject {
     func closePopupScreen()
 }
 

@@ -37,11 +37,11 @@ class CheckoutViewController: UIViewController {
     
     private let presenter: CheckoutPresenterProtocol
     
-    private lazy var closeCheckoutAction: () -> Void = { [weak self] in
-        self?.presenter.closeScreen()
+    private lazy var closeCheckoutAction: () -> Void = { [weak presenter] in
+        presenter?.closeScreen()
     }
-    private lazy var closeCheckoutAndCartAction: () -> Void = { [weak self] in
-        self?.presenter.closeCheckoutAndCart()
+    private lazy var closeCheckoutAndCartAction: () -> Void = { [weak presenter] in
+        presenter?.closeCheckoutAndCart()
     }
     
     private lazy var closeCheckoutHeaderView = HeaderNamedView(closeScreenAction: closeCheckoutAction, headerTitle: Self.headerTitle)
@@ -58,22 +58,22 @@ class CheckoutViewController: UIViewController {
     private var filledAddressView: FilledAddressView?
     private var filledPaymentMethodView: FilledPaymentMethodView?
     
-    private lazy var editAddressAction: () -> Void = { [weak self] in
-        self?.presenter.editAddress()
+    private lazy var editAddressAction: () -> Void = { [weak presenter] in
+        presenter?.editAddress()
     }
 
-    private lazy var deleteAddressAction: () -> Void = { [weak self] in
-        self?.presenter.deleteAddress()
+    private lazy var deleteAddressAction: () -> Void = { [weak presenter] in
+        presenter?.deleteAddress()
     }
 
     private lazy var addAddressView = EmptyDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
    
-    private lazy var editPaymentMethodAction: () -> Void = { [weak self] in
-        self?.presenter.editPaymentCard()
+    private lazy var editPaymentMethodAction: () -> Void = { [weak presenter] in
+        presenter?.editPaymentCard()
     }
     
-    private lazy var deletePaymentMethodAction: () -> Void = { [weak self] in
-        self?.presenter.deletePaymentCard()
+    private lazy var deletePaymentMethodAction: () -> Void = { [weak presenter] in
+        presenter?.deletePaymentCard()
     }
     
     private lazy var addPaymentMethodView = EmptyDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
@@ -82,8 +82,8 @@ class CheckoutViewController: UIViewController {
         
     private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, action: closeCheckoutAndCartAction)
     
-    private lazy var placeOrderAction: () -> Void = { [weak self] in
-        self?.presenter.placeOrder()
+    private lazy var placeOrderAction: () -> Void = { [weak presenter] in
+        presenter?.placeOrder()
     }
 
     private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, buttonAction: placeOrderAction, buttonTitle: Self.placeOrderButtonTitle)
@@ -104,7 +104,7 @@ class CheckoutViewController: UIViewController {
 
         setupUiTexts()
         fillDetailsAndProductsStackView()
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,7 +144,7 @@ class CheckoutViewController: UIViewController {
         detailsAndProductsStackView.setCustomSpacing(29, after: paymentMethodContainerView)
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeCloseCheckoutHeaderView()
         arrangeCloseCheckoutAndCartHeaderView()
         arrangeDetailsAndProductsScrollView()

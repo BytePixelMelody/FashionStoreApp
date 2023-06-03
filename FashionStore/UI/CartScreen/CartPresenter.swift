@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CartPresenterProtocol {
+protocol CartPresenterProtocol: AnyObject {
     func loadCatalog() async throws
     func checkCartInStock() async throws
     func reloadCart() async throws

@@ -100,7 +100,7 @@ class PaymentMethodViewController: UIViewController {
         
         setupUiTexts()
         fillStackViews()
-        arrangeUiElements()
+        arrangeLayout()
         textFieldsChaining()
         // publisher to react on buttons tap
         addOrSaveButtonTapPublisher()
@@ -167,7 +167,7 @@ class PaymentMethodViewController: UIViewController {
         paymentMethodVerticalStackView.addArrangedSubview(createLineGray())
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         arrangeClosableHeaderView()
         arrangePaymentMethodScrollView()
         arrangePaymentMethodStackView()

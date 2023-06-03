@@ -9,14 +9,19 @@ import Foundation
 import UIKit
 
 class ProductCellView: UICollectionViewCell {
-    // init properties
-    private let imageName: String?
-    private let loadImageAction: (String) async throws -> UIImage?
-    private let productBrandLabelTitle: String
-    private let productNameLabelTitle: String
-    private let productPriceLabelTitle: String
-    private let productId: UUID
-    private let cellTapAction: (UUID, UIImage?) -> Void
+    
+    // cell reuse identifier
+    static var identifier: String {
+        String(describing: self)
+    }
+    
+    // setup properties
+    private var imageName: String?
+    private var productBrandLabelTitle: String?
+    private var productNameLabelTitle: String?
+    private var productPriceLabelTitle: String?
+    private var productId: UUID?
+    private var cellTapAction: ((UUID, UIImage?) -> Void)?
    
     private let commonVerticalStackView = UIStackView.makeVerticalStackView()
     private let labelsContainerView = UIView(frame: .zero)
@@ -33,15 +38,25 @@ class ProductCellView: UICollectionViewCell {
     
     private lazy var cellTap = UITapGestureRecognizer(target: self, action: #selector(cellSelector))
     
-    init(
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        // arrange elements
+        arrangeLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    public func setup(
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
         productPriceLabelTitle: String,
         productId: UUID,
         cellTapAction: @escaping (UUID, UIImage?) -> Void,
         imageName: String?,
-        loadImageAction: @escaping (String) async throws -> UIImage?,
-        frame: CGRect = .zero
+        loadImageAction: @escaping (String) async throws -> UIImage?
     ) {
         self.productBrandLabelTitle = productBrandLabelTitle
         self.productNameLabelTitle = productNameLabelTitle
@@ -49,8 +64,6 @@ class ProductCellView: UICollectionViewCell {
         self.productId = productId
         self.cellTapAction = cellTapAction
         self.imageName = imageName
-        self.loadImageAction = loadImageAction
-        super.init(frame: frame)
         
         // load image
         Task<Void, Never> {
@@ -67,25 +80,19 @@ class ProductCellView: UICollectionViewCell {
 
         // setup typography texts
         setupUiTexts()
-        
-        // arrange elements
-        arrangeUiElements()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // called by tap on the view
     @objc
     private func cellSelector() {
+        guard let cellTapAction, let productId else { return }
         cellTapAction(productId, productImageView.image)
     }
     
     private func setupUiTexts() {
-        productBrandLabel.attributedText = productBrandLabelTitle.setStyle(style: .bodySmallActive)
-        productNameLabel.attributedText = productNameLabelTitle.setStyle(style: .bodySmallLabel)
-        productPriceLabel.attributedText = productPriceLabelTitle.setStyle(style: .priceMedium)
+        productBrandLabel.attributedText = productBrandLabelTitle?.setStyle(style: .bodySmallActive)
+        productNameLabel.attributedText = productNameLabelTitle?.setStyle(style: .bodySmallLabel)
+        productPriceLabel.attributedText = productPriceLabelTitle?.setStyle(style: .priceMedium)
     }
     
     // accessibility settings was changed - scale fonts
@@ -94,7 +101,7 @@ class ProductCellView: UICollectionViewCell {
         setupUiTexts()
     }
     
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         
         self.addSubview(commonVerticalStackView)
         commonVerticalStackView.snp.makeConstraints { make in

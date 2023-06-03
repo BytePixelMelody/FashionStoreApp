@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ProductPresenterProtocol {
+protocol ProductPresenterProtocol: AnyObject {
     func backScreen()
     func showCart()
     func addProductToCart() async throws

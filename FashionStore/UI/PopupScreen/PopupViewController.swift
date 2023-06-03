@@ -98,7 +98,7 @@ class PopupViewController: UIViewController {
         super.viewDidLoad()
         
         setupUiTexts()
-        arrangeUiElements()
+        arrangeLayout()
     }
     
     @objc
@@ -123,7 +123,7 @@ class PopupViewController: UIViewController {
     }
     
 
-    private func arrangeUiElements() {
+    private func arrangeLayout() {
         view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
