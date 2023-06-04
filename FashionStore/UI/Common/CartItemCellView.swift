@@ -15,16 +15,15 @@ class CartItemCellView: UICollectionViewCell {
         String(describing: self)
     }
     
-    // init properties
-    private let imageName: String?
-    private let loadImageAction: (String) async throws -> UIImage?
-    private let itemBrandLabelTitle: String
-    private let itemNameColorSizeLabelTitle: String
-    private let itemId: UUID
-    private let minusButtonAction: (UUID, Int) async throws -> Int?
-    private var count: Int
-    private let plusButtonAction: (UUID, Int) async throws -> Int?
-    private let itemPrice: Decimal
+    // setup properties
+    private var imageName: String?
+    private var itemBrandLabelTitle: String?
+    private var itemNameColorSizeLabelTitle: String?
+    private var itemId: UUID?
+    private var minusButtonAction: ((UUID, Int) async throws -> Int?)?
+    private var count: Int?
+    private var plusButtonAction: ((UUID, Int) async throws -> Int?)?
+    private var itemPrice: Decimal?
     
     private let itemImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
@@ -43,7 +42,21 @@ class CartItemCellView: UICollectionViewCell {
     private let plusButton = UIButton.makeIconicButton(imageName: ImageName.plusCircled)
     private let itemPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
-    init(
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+                
+        // arrange elements
+        arrangeLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+
+        // arrange elements
+        arrangeLayout()
+    }
+    
+    public func setup(
         imageName: String?,
         loadImageAction: @escaping (String) async throws -> UIImage?,
         itemBrand: String,
@@ -52,11 +65,9 @@ class CartItemCellView: UICollectionViewCell {
         minusButtonAction: @escaping (UUID, Int) async throws -> Int?,
         count: Int,
         plusButtonAction: @escaping (UUID, Int) async throws -> Int?,
-        itemPrice: Decimal,
-        frame: CGRect = .zero
+        itemPrice: Decimal
     ) {
         self.imageName = imageName
-        self.loadImageAction = loadImageAction
         self.itemBrandLabelTitle = itemBrand
         self.itemNameColorSizeLabelTitle = itemNameColorSize
         self.itemId = itemId
@@ -64,27 +75,19 @@ class CartItemCellView: UICollectionViewCell {
         self.count = count
         self.plusButtonAction = plusButtonAction
         self.itemPrice = itemPrice
-        super.init(frame: frame)
         
         // load image
-        loadImage()
+        loadImage(loadImageAction: loadImageAction)
         
         // setup button actions
         setButtonActions()
 
         // setup typography texts
         setupUiTexts()
-        
-        // arrange elements
-        arrangeLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // load image
-    private func loadImage() {
+    private func loadImage(loadImageAction: @escaping (String) async throws -> UIImage?) {
         Task<Void, Never> {
             do {
                 guard let imageName else { return }
@@ -98,14 +101,14 @@ class CartItemCellView: UICollectionViewCell {
     // adding button actions, that will change item count
     private func setButtonActions() {
         minusButton.addAction(UIAction { [weak self] _ in
-            Task<Void, Never> {
-                guard let self else { return }
+            Task<Void, Never> { [weak self] in
+                guard let self, let minusButtonAction, let itemId, let count else { return }
                 do {
                     // call action and set new count
-                    guard let newCount = try await self.minusButtonAction(self.itemId, self.count) else { return }
+                    guard let newCount = try await minusButtonAction(itemId, count) else { return }
                     self.count = newCount
                     // assign new count to label
-                    self.itemCountLabel.attributedText = String(self.count).setStyle(style: .bodyMediumDark)
+                    self.itemCountLabel.attributedText = String(newCount).setStyle(style: .bodyMediumDark)
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -113,14 +116,14 @@ class CartItemCellView: UICollectionViewCell {
         }, for: .primaryActionTriggered)
 
         plusButton.addAction(UIAction { [weak self] _ in
-            Task<Void, Never> {
-                guard let self else { return }
+            Task<Void, Never> { [weak self] in
+                guard let self, let plusButtonAction, let itemId, let count else { return }
                 do {
                     // call action and set new count
-                    guard let newCount = try await self.plusButtonAction(self.itemId, self.count) else { return }
+                    guard let newCount = try await plusButtonAction(itemId, count) else { return }
                     self.count = newCount
                     // assign new count to label
-                    self.itemCountLabel.attributedText = String(self.count).setStyle(style: .bodyMediumDark)
+                    self.itemCountLabel.attributedText = String(newCount).setStyle(style: .bodyMediumDark)
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -129,11 +132,15 @@ class CartItemCellView: UICollectionViewCell {
     }
 
     private func setupUiTexts() {
-        itemBrandLabel.attributedText = itemBrandLabelTitle.setStyle(style: .titleSmallHight)
-        itemModelColorSizeLabel.attributedText = itemNameColorSizeLabelTitle.setStyle(style: .bodySmallLabelHight)
-        itemCountLabel.attributedText = String(count).setStyle(style: .numberMediumDark)
-        let itemPriceString = "$" + itemPrice.formatted(.number.precision(.fractionLength(0...2)))
-        itemPriceLabel.attributedText = itemPriceString.setStyle(style: .priceMedium)
+        itemBrandLabel.attributedText = itemBrandLabelTitle?.setStyle(style: .titleSmallHight)
+        itemModelColorSizeLabel.attributedText = itemNameColorSizeLabelTitle?.setStyle(style: .bodySmallLabelHight)
+        if let count {
+            itemCountLabel.attributedText = String(count).setStyle(style: .numberMediumDark)
+        }
+        if let itemPrice {
+            let itemPriceString = "$" + itemPrice.formatted(.number.precision(.fractionLength(0...2)))
+            itemPriceLabel.attributedText = itemPriceString.setStyle(style: .priceMedium)
+        }
     }
     
     // accessibility settings was changed - scale fonts

@@ -47,6 +47,9 @@ class ProductCellView: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+
+        // arrange elements
+        arrangeLayout()
     }
     
     public func setup(
@@ -66,6 +69,16 @@ class ProductCellView: UICollectionViewCell {
         self.imageName = imageName
         
         // load image
+        loadImage(loadImageAction: loadImageAction)
+        
+        // adding tap
+        self.addGestureRecognizer(cellTap)
+
+        // setup typography texts
+        setupUiTexts()
+    }
+    
+    private func loadImage(loadImageAction: @escaping (String) async throws -> UIImage?) {
         Task<Void, Never> {
             do {
                 guard let imageName else { return }
@@ -74,12 +87,6 @@ class ProductCellView: UICollectionViewCell {
                 Errors.handler.checkError(error)
             }
         }
-        
-        // adding tap
-        self.addGestureRecognizer(cellTap)
-
-        // setup typography texts
-        setupUiTexts()
     }
     
     // called by tap on the view
@@ -102,7 +109,6 @@ class ProductCellView: UICollectionViewCell {
     }
     
     private func arrangeLayout() {
-        
         self.addSubview(commonVerticalStackView)
         commonVerticalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

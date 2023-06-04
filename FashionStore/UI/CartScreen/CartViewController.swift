@@ -42,9 +42,6 @@ class CartViewController: UIViewController {
     private lazy var closableHeaderView = HeaderNamedView(closeScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
 
     private let productsScrollView = UIScrollView.makeScrollView()
-
-    // TODO: delete this
-    private var mockCellView: CartItemCellView?
     
     private let cartIsEmptyLabel: UILabel = {
         let label = UILabel.makeLabel(numberOfLines: 0)
@@ -270,7 +267,8 @@ extension CartViewController: CartViewProtocol {
             try await presenter?.increaseCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
         }
         
-        mockCellView = CartItemCellView(
+        let mockCellView = CartItemCellView()
+        mockCellView.setup(
             imageName: imageName,
             loadImageAction: loadImageAction,
             itemBrand: itemBrand,
@@ -281,9 +279,7 @@ extension CartViewController: CartViewProtocol {
             plusButtonAction: plusButtonAction,
             itemPrice: itemPrice
         )
-        
-        guard let mockCellView else { return }
-        
+                
         productsScrollView.addSubview(mockCellView)
         mockCellView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview().inset(16)
