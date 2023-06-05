@@ -53,6 +53,13 @@ class StoreViewController: UIViewController {
         frame: .zero
     )
     
+    public struct ProductsFlowLayoutConstants {
+        static let cellsInLineCount: CGFloat = 2
+        static let sectionInset: UIEdgeInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
+        static let lineSpacing: CGFloat = 15.0
+        static let minimumInteritemSpacing: CGFloat = 12.0
+    }
+    
     private let productsScrollView = UIScrollView.makeScrollView()
 
     private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)

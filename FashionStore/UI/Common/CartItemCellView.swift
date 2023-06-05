@@ -25,6 +25,11 @@ class CartItemCellView: UICollectionViewCell {
     private var plusButtonAction: ((UUID, Int) async throws -> Int?)?
     private var itemPrice: Decimal?
     
+    private var itemTotalPrice: Decimal? {
+        guard let count, let itemPrice else { return nil }
+        return Decimal(count) * itemPrice
+    }
+    
     private let itemImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
         cornerRadius: 4.0,
@@ -40,7 +45,7 @@ class CartItemCellView: UICollectionViewCell {
     private let minusButton = UIButton.makeIconicButton(imageName: ImageName.minusCircled)
     private let itemCountLabel = UILabel.makeLabel(numberOfLines: 1)
     private let plusButton = UIButton.makeIconicButton(imageName: ImageName.plusCircled)
-    private let itemPriceLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let itemTotalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,7 +113,7 @@ class CartItemCellView: UICollectionViewCell {
                     guard let newCount = try await minusButtonAction(itemId, count) else { return }
                     self.count = newCount
                     // assign new count to label
-                    self.itemCountLabel.attributedText = String(newCount).setStyle(style: .bodyMediumDark)
+                    setupUiTexts()
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -123,7 +128,7 @@ class CartItemCellView: UICollectionViewCell {
                     guard let newCount = try await plusButtonAction(itemId, count) else { return }
                     self.count = newCount
                     // assign new count to label
-                    self.itemCountLabel.attributedText = String(newCount).setStyle(style: .bodyMediumDark)
+                    setupUiTexts()
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -137,9 +142,9 @@ class CartItemCellView: UICollectionViewCell {
         if let count {
             itemCountLabel.attributedText = String(count).setStyle(style: .numberMediumDark)
         }
-        if let itemPrice {
-            let itemPriceString = "$" + itemPrice.formatted(.number.precision(.fractionLength(0...2)))
-            itemPriceLabel.attributedText = itemPriceString.setStyle(style: .priceMedium)
+        if let itemTotalPrice {
+            let itemTotalPriceString = "$" + itemTotalPrice.formatted(.number.precision(.fractionLength(0...2)))
+            itemTotalPriceLabel.attributedText = itemTotalPriceString.setStyle(style: .priceMedium)
         }
     }
     
@@ -202,8 +207,8 @@ class CartItemCellView: UICollectionViewCell {
         minusPlusCountHorizontalStack.addArrangedSubview(plusButton)
         
         // price label
-        infoView.addSubview(itemPriceLabel)
-        itemPriceLabel.snp.makeConstraints { make in
+        infoView.addSubview(itemTotalPriceLabel)
+        itemTotalPriceLabel.snp.makeConstraints { make in
             make.top.equalTo(minusPlusCountHorizontalStack.snp.bottom)
             make.leading.equalToSuperview().inset(12.0)
             make.trailing.lessThanOrEqualToSuperview().inset(4.0)
