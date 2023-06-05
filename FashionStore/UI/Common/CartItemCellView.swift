@@ -220,5 +220,23 @@ class CartItemCellView: UICollectionViewCell {
         self.bringSubviewToFront(plusButton)
     }
     
+    // automatic cell size calculation for collection view
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        
+        let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+        
+        guard let collectionViewWidth = superview?.frame.width else { return layoutAttributes }
+        let leftRightInsetsWidth = CartItemsFlowLayoutConstants.sectionInset.left + CartItemsFlowLayoutConstants.sectionInset.right
+        let allInteritemSpacings = CartItemsFlowLayoutConstants.minimumInteritemSpacing * (CartItemsFlowLayoutConstants.cellsInLineCount - 1)
+        let itemWidth = (collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / CartItemsFlowLayoutConstants.cellsInLineCount - 0.2
+
+        let targetSize = CGSize(width: itemWidth, height: .zero)
+        let size = self.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
+
+        layoutAttributes.size = size
+        
+        return layoutAttributes
+    }
+    
 }
 

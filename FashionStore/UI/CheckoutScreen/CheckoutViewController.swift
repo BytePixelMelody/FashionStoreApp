@@ -77,12 +77,6 @@ class CheckoutViewController: UIViewController {
     }
     
     private lazy var addPaymentMethodView = EmptyDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
-
-    public struct CartItemsFlowLayoutConstants {
-        static let cellsInLineCount: CGFloat = 1
-        static let sectionInset: UIEdgeInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-        static let lineSpacing: CGFloat = 16.0
-    }
     
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         

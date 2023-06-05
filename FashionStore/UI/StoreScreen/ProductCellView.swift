@@ -134,4 +134,22 @@ class ProductCellView: UICollectionViewCell {
         labelsVerticalStackView.addArrangedSubview(productPriceLabel)
     }
     
+    // automatic cell size calculation for collection view
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        
+        let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+        
+        guard let collectionViewWidth = superview?.frame.width else { return layoutAttributes }
+        let leftRightInsetsWidth = ProductsFlowLayoutConstants.sectionInset.left + ProductsFlowLayoutConstants.sectionInset.right
+        let allInteritemSpacings = ProductsFlowLayoutConstants.minimumInteritemSpacing * (ProductsFlowLayoutConstants.cellsInLineCount - 1)
+        let itemWidth = (collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / ProductsFlowLayoutConstants.cellsInLineCount - 0.2
+
+        let targetSize = CGSize(width: itemWidth, height: .zero)
+        let size = self.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
+
+        layoutAttributes.size = size
+        
+        return layoutAttributes
+    }
+    
 }
