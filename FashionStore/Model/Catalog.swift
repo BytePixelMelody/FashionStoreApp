@@ -8,23 +8,23 @@
 import Foundation
 
 // JSON array
-struct Catalog: Codable {
+struct Catalog: Codable, Hashable {
     var audiences: [Audience]
 }
 
-struct Audience: Codable {
+struct Audience: Codable, Hashable {
     var id: UUID
     var name: String // "Women", "Men", "Kids"
     var categories: [Category]
 }
 
-struct Category: Codable {
+struct Category: Codable, Hashable {
     var id: UUID
     var name: String // "Apparel", "Shoes", "Bags", "Accessoires"
     var products: [Product]
 }
 
-struct Product: Codable {
+struct Product: Codable, Hashable {
     var id: UUID
     var name: String // "Dot print corset dress", "Blazer with tuxedo collar" etc
     var brand: String // "Mohani", "Diolo", "Loriani", "Totto", "Jole" etc
@@ -36,12 +36,12 @@ struct Product: Codable {
     var colors: [Color]
 }
 
-struct Style: Codable {
+struct Style: Codable, Hashable {
     var id: UUID
     var name: String // "Business", "Smart casual", "Casual" etc
 }
 
-struct Color: Codable {
+struct Color: Codable, Hashable {
     var id: UUID
     var name: String // "black", "pink", "navy" etc
     var hex: String // "#000000", "#FFC0CB", "#000080" ect
@@ -49,7 +49,7 @@ struct Color: Codable {
     var items: [Item]
 }
 
-struct Item: Codable {
+struct Item: Codable, Hashable {
     var id: UUID
     var size: String // "XS", "S", "M", "L", "XL", "XXL"
     var inStock: Int // 1...1000

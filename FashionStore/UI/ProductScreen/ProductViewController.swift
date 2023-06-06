@@ -123,7 +123,6 @@ class ProductViewController: UIViewController {
         setupUiTexts()
         fillProductStackView()
         arrangeLayout()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

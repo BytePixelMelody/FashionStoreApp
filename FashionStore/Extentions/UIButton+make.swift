@@ -23,8 +23,9 @@ extension UIButton {
         config.imagePadding = 24
         
         let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let action { action() } 
+            if let action { action() }
         }))
+                
         return button
     }
     

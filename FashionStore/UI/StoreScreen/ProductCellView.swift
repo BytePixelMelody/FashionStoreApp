@@ -10,11 +10,6 @@ import UIKit
 
 class ProductCellView: UICollectionViewCell {
     
-    // cell reuse identifier
-    static var identifier: String {
-        String(describing: self)
-    }
-    
     // setup properties
     private var imageName: String?
     private var productBrandLabelTitle: String?
@@ -33,7 +28,7 @@ class ProductCellView: UICollectionViewCell {
         clipsToBounds: true
     )
     private let productBrandLabel = UILabel.makeLabel(numberOfLines: 1)
-    private let productNameLabel = UILabel.makeLabel(numberOfLines: 1)
+    private let productNameLabel = UILabel.makeLabel(numberOfLines: 2)
     private let productPriceLabel = UILabel.makeLabel(numberOfLines: 1)
     
     private lazy var cellTap = UITapGestureRecognizer(target: self, action: #selector(cellSelector))
@@ -109,7 +104,7 @@ class ProductCellView: UICollectionViewCell {
     }
     
     private func arrangeLayout() {
-        self.addSubview(commonVerticalStackView)
+        contentView.addSubview(commonVerticalStackView)
         commonVerticalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -117,7 +112,7 @@ class ProductCellView: UICollectionViewCell {
         commonVerticalStackView.addArrangedSubview(productImageView)
         
         productImageView.snp.makeConstraints { make in
-            make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
+            make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0).priority(.high)
         }
 
         commonVerticalStackView.setCustomSpacing(9.0, after: productImageView)
@@ -134,6 +129,25 @@ class ProductCellView: UICollectionViewCell {
         labelsVerticalStackView.addArrangedSubview(productPriceLabel)
     }
     
+    // clean cell for reuse
+    override func prepareForReuse() {
+        // clean info
+        productBrandLabelTitle = nil
+        productNameLabelTitle = nil
+        productPriceLabelTitle = nil
+        productId = nil
+        cellTapAction = nil
+        imageName = nil
+        
+        // clean image
+        productImageView.image = nil
+        
+        // clean texts
+        productBrandLabel.attributedText = nil
+        productNameLabel.attributedText = nil
+        productPriceLabel.attributedText = nil
+    }
+
     // automatic cell size calculation for collection view
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         
