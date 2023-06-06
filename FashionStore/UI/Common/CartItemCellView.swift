@@ -10,11 +10,6 @@ import UIKit
 
 class CartItemCellView: UICollectionViewCell {
     
-    // cell reuse identifier
-    static var identifier: String {
-        String(describing: self)
-    }
-    
     // setup properties
     private var imageName: String?
     private var itemBrandLabelTitle: String?
@@ -218,6 +213,50 @@ class CartItemCellView: UICollectionViewCell {
         // buttons to front
         self.bringSubviewToFront(minusButton)
         self.bringSubviewToFront(plusButton)
+    }
+    
+    // clean cell for reuse
+    override func prepareForReuse() {
+        // clean info
+        imageName = nil
+        itemBrandLabelTitle = nil
+        itemNameColorSizeLabelTitle = nil
+        itemId = nil
+        minusButtonAction = nil
+        count = nil
+        plusButtonAction = nil
+        itemPrice = nil
+        
+        // clean image
+        itemImageView.image = nil
+        
+        // clean button actions
+        minusButton.removeTarget(nil, action: nil, for: .allEvents)
+        plusButton.removeTarget(nil, action: nil, for: .allEvents)
+        
+        // clean texts
+        itemBrandLabel.attributedText = nil
+        itemModelColorSizeLabel.attributedText = nil
+        itemCountLabel.attributedText = nil
+        itemTotalPriceLabel.attributedText = nil
+    }
+    
+    // automatic cell size calculation for collection view
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        
+        let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+        
+        guard let collectionViewWidth = superview?.frame.width else { return layoutAttributes }
+        let leftRightInsetsWidth = CartItemsFlowLayoutConstants.sectionInset.left + CartItemsFlowLayoutConstants.sectionInset.right
+        let allInteritemSpacings = CartItemsFlowLayoutConstants.minimumInteritemSpacing * (CartItemsFlowLayoutConstants.cellsInLineCount - 1)
+        let itemWidth = (collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / CartItemsFlowLayoutConstants.cellsInLineCount - 0.2
+
+        let targetSize = CGSize(width: itemWidth, height: .zero)
+        let size = self.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
+
+        layoutAttributes.size = size
+        
+        return layoutAttributes
     }
     
 }

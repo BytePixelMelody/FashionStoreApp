@@ -40,12 +40,6 @@ class CartViewController: UIViewController {
     }
 
     private lazy var closableHeaderView = HeaderNamedView(closeScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
-
-    public struct CartItemsFlowLayoutConstants {
-        static let cellsInLineCount: CGFloat = 1
-        static let sectionInset: UIEdgeInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-        static let lineSpacing: CGFloat = 16.0
-    }
     
     private let productsScrollView = UIScrollView.makeScrollView()
     

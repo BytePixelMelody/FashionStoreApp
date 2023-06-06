@@ -13,8 +13,7 @@ protocol StorePresenterProtocol: AnyObject {
     func showCart()
     func loadCatalog() async throws
     func loadImage(imageName: String) async throws -> UIImage
-    // TODO: delete this
-    func showMockView()
+    func getProducts() -> [Product]?
 }
 
 class StorePresenter: StorePresenterProtocol {
@@ -55,18 +54,8 @@ class StorePresenter: StorePresenterProtocol {
         try await webService.getImage(imageName: imageName)
     }
     
-    // TODO: delete this
-    func showMockView() {
-        guard let product = catalog?.audiences.first?.categories.first?.products.first(where: { $0.id == UUID(uuidString: "c305f1ce-2b34-4a8e-b0b4-34e738eeab7e") ?? UUID() }) else {
-            return
-        }
-
-        view?.addMockCellView(
-            productBrandLabelTitle: product.brand,
-            productNameLabelTitle: product.name,
-            productPriceLabelTitle: "$" + product.price.formatted(.number.precision(.fractionLength(0...2))),
-            productId: product.id,
-            imageName: product.images.first
-        )
+    func getProducts() -> [Product]? {
+        return catalog?.audiences.flatMap { $0.categories.flatMap { $0.products } }
     }
+
 }

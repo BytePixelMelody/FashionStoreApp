@@ -49,6 +49,8 @@
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
 		1186C98F29A2AD07002852BB /* String+setStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C98E29A2AD07002852BB /* String+setStyle.swift */; };
+		118981252A2DD66C00952D01 /* ProductsFlowLayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118981242A2DD66C00952D01 /* ProductsFlowLayoutConstants.swift */; };
+		118981272A2DD76D00952D01 /* CartItemsFlowLayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118981262A2DD76D00952D01 /* CartItemsFlowLayoutConstants.swift */; };
 		11A8F63D29E195A70048EF2E /* UIImageView+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8F63C29E195A70048EF2E /* UIImageView+make.swift */; };
 		11B2E9602A227451000F9BA9 /* ProductCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2E95F2A227451000F9BA9 /* ProductCellView.swift */; };
 		11B5E3E02A099E6F00321004 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 11B5E3DF2A099E6F00321004 /* CombineCocoa */; };
@@ -110,6 +112,8 @@
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TenorSans-Regular.ttf"; sourceTree = "<group>"; };
 		1186C98E29A2AD07002852BB /* String+setStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setStyle.swift"; sourceTree = "<group>"; };
+		118981242A2DD66C00952D01 /* ProductsFlowLayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsFlowLayoutConstants.swift; sourceTree = "<group>"; };
+		118981262A2DD76D00952D01 /* CartItemsFlowLayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemsFlowLayoutConstants.swift; sourceTree = "<group>"; };
 		11A8F63C29E195A70048EF2E /* UIImageView+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+make.swift"; sourceTree = "<group>"; };
 		11B2E95F2A227451000F9BA9 /* ProductCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellView.swift; sourceTree = "<group>"; };
 		11CF2AD529C896D50065D47F /* UITextFieldStyled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldStyled.swift; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				117CB24829AE10C6006F4192 /* StoreViewController.swift */,
 				1185D6C629B72BD200833991 /* StorePresenter.swift */,
 				11B2E95F2A227451000F9BA9 /* ProductCellView.swift */,
+				118981242A2DD66C00952D01 /* ProductsFlowLayoutConstants.swift */,
 			);
 			path = StoreScreen;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */,
 				111646CE29E05DA3004EEE20 /* ContainerView.swift */,
 				11D89A442A247A14008FB732 /* CartItemCellView.swift */,
+				118981262A2DD76D00952D01 /* CartItemsFlowLayoutConstants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 				1185D6CB29B72BF800833991 /* CartPresenter.swift in Sources */,
 				1186C935299FFA66002852BB /* TestViewController.swift in Sources */,
 				112B524C2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld in Sources */,
+				118981252A2DD66C00952D01 /* ProductsFlowLayoutConstants.swift in Sources */,
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
 				117CB25A29AE1415006F4192 /* CartViewController.swift in Sources */,
 				111646D129E086B1004EEE20 /* ChippingAddress.swift in Sources */,
@@ -476,6 +483,7 @@
 				1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */,
 				11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */,
 				1185D6C729B72BD200833991 /* StorePresenter.swift in Sources */,
+				118981272A2DD76D00952D01 /* CartItemsFlowLayoutConstants.swift in Sources */,
 				111646CF29E05DA3004EEE20 /* ContainerView.swift in Sources */,
 				114466CB29D2D36200E504F8 /* UIStackView+make.swift in Sources */,
 				117CB25829AE140A006F4192 /* ProductViewController.swift in Sources */,

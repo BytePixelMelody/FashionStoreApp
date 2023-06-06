@@ -14,7 +14,6 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
-// TODO: change cell init to setup
 // TODO: ScrollViews to CollectionViews
 // TODO: Database write to CoreData after loading from backend
 // TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
@@ -25,21 +24,10 @@ import UIKit
 import SnapKit
 
 protocol StoreViewProtocol: AnyObject {
-    
-    // TODO: delete this
-    func addMockCellView(
-        productBrandLabelTitle: String,
-        productNameLabelTitle: String,
-        productPriceLabelTitle: String,
-        productId: UUID,
-        imageName: String?
-    )
         
 }
 
 class StoreViewController: UIViewController {
-    private static let screenNameTitle = "Fashion\nStore"
-    private static let toProductButtonTitle = "TO PRODUCT"
     
     private let presenter: StorePresenterProtocol
     
@@ -53,23 +41,9 @@ class StoreViewController: UIViewController {
         frame: .zero
     )
     
-    public struct ProductsFlowLayoutConstants {
-        static let cellsInLineCount: CGFloat = 2
-        static let sectionInset: UIEdgeInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-        static let lineSpacing: CGFloat = 15.0
-        static let minimumInteritemSpacing: CGFloat = 12.0
-    }
-    
-    private let productsScrollView = UIScrollView.makeScrollView()
+    private var productsCollectionView: UICollectionView?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
 
-    private let screenNameLabel = UILabel.makeLabel(numberOfLines: 0)
-    
-    private lazy var goProductAction: () -> Void = { [weak presenter] in
-        presenter?.showProduct(productId: UUID(uuidString: "383cc439-7b76-4089-9a32-90e8e37a0377") ?? UUID(), image: nil)
-    }
-    
-    private lazy var productButton = UIButton.makeDarkButton(imageName: ImageName.tagDark, action: goProductAction)
-    
     init(presenter: StorePresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -84,8 +58,14 @@ class StoreViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        setupUiTexts()
+        // create and configure collection view
+        configureCollectionView()
+        
+        // arrange layouts
         arrangeLayout()
+        
+        // configure collection view data source
+        configureDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,30 +74,25 @@ class StoreViewController: UIViewController {
         Task<Void, Never> {
             do {
                 try await presenter.loadCatalog()
-                presenter.showMockView()
+                // apply data snapshot to collection view
+                reloadCollectionViewData()
             } catch {
                 Errors.handler.checkError(error)
             }
         }
     }
-
-    
-    private func setupUiTexts() {
-        screenNameLabel.attributedText = Self.screenNameTitle.uppercased().setStyle(style: .titleLargeAlignLeft)
-        productButton.configuration?.attributedTitle = AttributedString(Self.toProductButtonTitle.setStyle(style: .buttonDark))
-    }
     
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        setupUiTexts()
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            productsCollectionView?.collectionViewLayout.invalidateLayout()
+        }
     }
 
     private func arrangeLayout() {
         arrangeHeaderBrandedView()
-        arrangeProductsScrollView()
-        arrangeScreenNameLabel()
-        arrangeProductButton()
+        arrangeProductsCollectionView()
     }
 
     private func arrangeHeaderBrandedView() {
@@ -127,77 +102,95 @@ class StoreViewController: UIViewController {
         }
     }
     
-    private func arrangeProductsScrollView() {
-        view.addSubview(productsScrollView)
-        productsScrollView.snp.makeConstraints { make in
+    private func arrangeProductsCollectionView() {
+        guard let productsCollectionView else { return }
+        view.addSubview(productsCollectionView)
+        productsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(headerBrandedView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
-        productsScrollView.contentLayoutGuide.snp.makeConstraints { make in
-            make.width.equalTo(productsScrollView.frameLayoutGuide.snp.width)
+    }
+        
+}
+
+// collection view implementing
+extension StoreViewController {
+    
+    // create and configure collection view
+    private func configureCollectionView() {
+        // flow layout creating
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        // layout setup, automaticSize requires func preferredLayoutAttributesFitting() in cell class
+        collectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        collectionViewFlowLayout.sectionInset = ProductsFlowLayoutConstants.sectionInset
+        collectionViewFlowLayout.minimumLineSpacing = ProductsFlowLayoutConstants.lineSpacing
+        collectionViewFlowLayout.minimumInteritemSpacing = ProductsFlowLayoutConstants.minimumInteritemSpacing
+        
+        productsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+           // any setup of collection view
+        productsCollectionView?.alwaysBounceVertical = true // springing (bounce)
+        productsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
+    }
+    
+    enum Section: Hashable {
+        case productSection
+    }
+    
+    enum Item: Hashable {
+        case product(Product)
+    }
+    
+    private func createProductCellRegistration() -> UICollectionView.CellRegistration<ProductCellView, Product> {
+        return UICollectionView.CellRegistration<ProductCellView, Product> { [weak presenter] cell, indexPath, item in
+            
+            let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productId, image in
+                presenter?.showProduct(productId: productId, image: image)
+            }
+            
+            let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
+                // load image by presenter
+                return try await presenter?.loadImage(imageName: imageName)
+            }
+                        
+            cell.setup(
+                productBrandLabelTitle: item.brand,
+                productNameLabelTitle: item.name,
+                productPriceLabelTitle: "$" + item.price.formatted(.number.precision(.fractionLength(0...2))),
+                productId: item.id,
+                cellTapAction: cellTapAction,
+                imageName: item.images.first,
+                loadImageAction: loadImageAction
+            )
         }
-        // contentLayoutGuide must have top and bottom constraints
+    }
+    
+    private func configureDataSource() {
+        let productCellRegistration = createProductCellRegistration()
+        
+        guard let productsCollectionView else { return }
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: productsCollectionView) {collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .product(let product):
+                return collectionView.dequeueConfiguredReusableCell(using: productCellRegistration, for: indexPath, item: product)
+            }
+        }
+    }
+    
+    private func reloadCollectionViewData(_ reloadedItems: [Item] = []) {
+        guard let products = presenter.getProducts() else { return }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        // adding sections to snapshot
+        snapshot.appendSections([.productSection])
+        // adding products to snapshot by Item enum entities .product(Product)
+        snapshot.appendItems(products.map { Item.product($0) })
+        // reload changes
+        snapshot.reloadItems(reloadedItems)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 
-    private func arrangeScreenNameLabel() {
-        productsScrollView.addSubview(screenNameLabel)
-        
-        screenNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(400)
-            make.centerX.equalTo(productsScrollView.contentLayoutGuide)
-        }
-    }
-    
-    private func arrangeProductButton() {
-        productsScrollView.addSubview(productButton)
-        productButton.snp.makeConstraints { make in
-            make.top.equalTo(screenNameLabel.snp.bottom).offset(24)
-            make.centerX.equalTo(screenNameLabel)
-            make.height.equalTo(50)
-            make.width.equalTo(210)
-            make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom).inset(500)
-        }
-    }
-    
 }
 
 extension StoreViewController: StoreViewProtocol {
-    
-    // TODO: delete this
-    func addMockCellView(
-        productBrandLabelTitle: String,
-        productNameLabelTitle: String,
-        productPriceLabelTitle: String,
-        productId: UUID,
-        imageName: String?
-    ) {
-        // TODO: move this call in CollectionViewDelegate method didSelectRowAt
-        let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productId, image in
-            presenter?.showProduct(productId: productId, image: image)
-        }
-        
-        let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
-            // load image by presenter
-            return try await presenter?.loadImage(imageName: imageName)
-        }
-        
-        let mockProductCellView = ProductCellView()
-        
-        mockProductCellView.setup(
-            productBrandLabelTitle: productBrandLabelTitle,
-            productNameLabelTitle: productNameLabelTitle,
-            productPriceLabelTitle: productPriceLabelTitle,
-            productId: productId,
-            cellTapAction: cellTapAction,
-            imageName: imageName,
-            loadImageAction: loadImageAction
-        )
-        
-        productsScrollView.addSubview(mockProductCellView)
-        mockProductCellView.snp.makeConstraints { make in
-            make.top.left.equalTo(productsScrollView.contentLayoutGuide).offset(16)
-            make.width.equalTo(productsScrollView.contentLayoutGuide).dividedBy(2.0).inset((16.0 + 12.0 / 2) / 2) // insets on each side so... /= 2
-        }
-    }
     
 }
