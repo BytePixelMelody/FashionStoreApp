@@ -9,8 +9,18 @@ import Foundation
 import UIKit
 
 protocol WebServiceProtocol: AnyObject {
-    func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy) async throws -> T
-    func getImage(imageName: String) async throws -> UIImage
+    
+    func getData<T: Codable>(
+        urlString: String,
+        cachePolicy: URLRequest.CachePolicy,
+        timeoutInterval: TimeInterval
+    ) async throws -> T
+    
+    func getImage(
+        imageName: String,
+        cachePolicy: URLRequest.CachePolicy,
+        timeoutInterval: TimeInterval
+    ) async throws -> UIImage
 }
  
 // web service that used to obtain decoded JSON-data by URL string
@@ -19,13 +29,17 @@ extension WebServiceProtocol {
     
     // usage example:
     // let catalog: Catalog = try await WebService().getData(urlString: Settings.catalogUrl)
-    public func getData<T: Codable>(urlString: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy) async throws -> T {
+    public func getData<T: Codable>(
+        urlString: String,
+        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+        timeoutInterval: TimeInterval = 5.0
+    ) async throws -> T {
         // urlString check
         guard let url = URL(string: urlString) else {
             throw Errors.ErrorType.invalidUrlStringError
         }
         
-        let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: 5.0)
+        let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
         
         // try to get data from url
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
@@ -46,11 +60,12 @@ extension WebServiceProtocol {
         return decodedData
     }
     
-}
-
-class WebService: WebServiceProtocol {
     // image loading
-    func getImage(imageName: String) async throws -> UIImage {
+    func getImage(
+        imageName: String,
+        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+        timeoutInterval: TimeInterval = 5.0
+    ) async throws -> UIImage {
         
         let urlString = Settings.imagesUrl + imageName
         
@@ -59,7 +74,7 @@ class WebService: WebServiceProtocol {
             throw Errors.ErrorType.invalidUrlStringError
         }
         
-        let urlRequest = URLRequest(url: url)
+        let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
         
         // try to get data from url
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
@@ -81,5 +96,9 @@ class WebService: WebServiceProtocol {
         
         return image
     }
+    
+}
+
+class WebService: WebServiceProtocol {
     
 }
