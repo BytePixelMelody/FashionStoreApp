@@ -67,6 +67,15 @@ class CartItemCellView: UICollectionViewCell {
         plusButtonAction: @escaping (UUID, Int) async throws -> Void,
         itemPrice: Decimal
     ) {
+        // update only count if cell was not prepared for reuse
+        guard self.itemId == nil else {
+            // update only count and computed property itemTotalPrice
+            self.count = count
+            // setup typography texts
+            setupUiTexts()
+            return
+        }
+        
         self.imageName = imageName
         self.itemBrandLabelTitle = itemBrand
         self.itemNameColorSizeLabelTitle = itemNameColorSize
@@ -76,7 +85,6 @@ class CartItemCellView: UICollectionViewCell {
         self.plusButtonAction = plusButtonAction
         self.itemPrice = itemPrice
         
-        // load image
         loadImage(loadImageAction: loadImageAction)
         
         // setup button actions

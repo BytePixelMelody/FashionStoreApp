@@ -20,7 +20,8 @@ protocol CartPresenterProtocol: AnyObject {
     func getCartItems() -> [CartItem]?
     func findProduct(itemId: UUID) -> Product?
     func findColor(itemId: UUID) -> Color?
-    func findItem(itemId: UUID) -> Item?
+    func findCatalogItem(itemId: UUID) -> CatalogItem?
+    func findCartItem(itemId: UUID) -> CartItem?
 }
 
 class CartPresenter: CartPresenterProtocol {
@@ -41,7 +42,9 @@ class CartPresenter: CartPresenterProtocol {
         guard let self else { return }
         try await coreDataService.removeCartItemFromCart(itemId: itemId)
         try await reloadCart()
-        // TODO: call view?.reloadDataSource
+        await MainActor.run { [weak view] in
+            view?.reloadCollectionViewData()
+        }
     }
     private let deleteCartItemImage = UIImageView.makeImageView(imageName: ImageName.message)
 
@@ -113,7 +116,9 @@ class CartPresenter: CartPresenterProtocol {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             // reload cart
             try await reloadCart()
-            // TODO: call view?.reloadDataSource
+            await MainActor.run { [weak view] in
+                view?.updateCollectionViewItems(updatedItemIds: [itemId])
+            }
         }
     }
     
@@ -126,7 +131,9 @@ class CartPresenter: CartPresenterProtocol {
         if newCount <= cartItemInStockCount {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             try await reloadCart()
-            // TODO: call view?.reloadDataSource
+            await MainActor.run { [weak view] in
+                view?.updateCollectionViewItems(updatedItemIds: [itemId])
+            }
         } else {
             // popup that maximum available quantity has been reached
             await MainActor.run {
@@ -201,8 +208,8 @@ class CartPresenter: CartPresenterProtocol {
         return foundColor
     }
     
-    // find item by itemId
-    func findItem(itemId: UUID) -> Item? {
+    // find catalog item by itemId
+    func findCatalogItem(itemId: UUID) -> CatalogItem? {
         guard let catalog else { return nil }
 
         let allItems = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors.flatMap { $0.items } } } }
@@ -212,4 +219,10 @@ class CartPresenter: CartPresenterProtocol {
         return foundItem
     }
    
+    // find cart item by itemId
+    func findCartItem(itemId: UUID) -> CartItem? {
+        guard let cart else { return nil }
+        
+        return cart.cartItems.first(where: { $0.itemId == itemId })
+    }
 }

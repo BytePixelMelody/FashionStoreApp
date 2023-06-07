@@ -46,10 +46,10 @@ struct Color: Codable, Hashable {
     var name: String // "black", "pink", "navy" etc
     var hex: String // "#000000", "#FFC0CB", "#000080" ect
     var images: [String] // ["100001", "100002", "100002", "100004" etc]
-    var items: [Item]
+    var items: [CatalogItem]
 }
 
-struct Item: Codable, Hashable, Identifiable {
+struct CatalogItem: Codable, Hashable, Identifiable {
     var id: UUID
     var size: String // "XS", "S", "M", "L", "XL", "XXL"
     var inStock: Int // 1...1000

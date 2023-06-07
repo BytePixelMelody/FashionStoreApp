@@ -12,7 +12,8 @@ protocol CartViewProtocol: AnyObject {
     func showEmptyCartWithAnimation()
     func showFullCart()
     func setTotalPrice(price: Decimal)
-//    func reloadCollectionViewData(reloadedItems: [Item]?)
+    func reloadCollectionViewData()
+    func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID])
 }
 
 class CartViewController: UIViewController {
@@ -99,7 +100,7 @@ class CartViewController: UIViewController {
                 // reload cart items
                 try await presenter?.reloadCart()
                 // apply data snapshot to collection view
-                reloadCollectionViewData(reloadedItems: nil)
+                reloadCollectionViewData()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -276,11 +277,11 @@ extension CartViewController {
     }
     
     enum Item: Hashable {
-        case cartItem(CartItem)
+        case cartItem(CatalogItem.ID)
     }
     
-    private func createCartItemCellRegistration() -> UICollectionView.CellRegistration<CartItemCellView, CartItem> {
-        return UICollectionView.CellRegistration<CartItemCellView, CartItem> { [weak self] cell, indexPath, cartItem in
+    private func createCartItemCellRegistration() -> UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> {
+        return UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> { [weak self] cell, indexPath, itemId in
             
             guard let self else { return }
             
@@ -297,17 +298,15 @@ extension CartViewController {
                 try await presenter?.increaseCartItemCount(itemId: itemId, newCount: newCount)
             }
             
-            // itemId in cart and in catalog
-            let itemId = cartItem.itemId
-            
             // find info in catalog
             guard let product = presenter.findProduct(itemId: itemId) else { return }
             guard let color = presenter.findColor(itemId: itemId) else { return }
-            guard let item = presenter.findItem(itemId: itemId) else { return }
+            guard let catalogItem = presenter.findCatalogItem(itemId: itemId) else { return }
+            guard let cartItem = presenter.findCartItem(itemId: itemId) else { return }
 
             let productName = product.name
             let colorName = color.name
-            let size = item.size
+            let size = catalogItem.size
             
             cell.setup(
                 imageName: color.images.first,
@@ -327,26 +326,35 @@ extension CartViewController {
         let cartItemCellRegistration = createCartItemCellRegistration()
         
         guard let cartItemsCollectionView else { return }
+        
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: cartItemsCollectionView) {collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .cartItem(let cartItem):
-                return collectionView.dequeueConfiguredReusableCell(using: cartItemCellRegistration, for: indexPath, item: cartItem)
+            case .cartItem(let itemId):
+                return collectionView.dequeueConfiguredReusableCell(using: cartItemCellRegistration, for: indexPath, item: itemId)
             }
         }
     }
     
-    func reloadCollectionViewData(reloadedItems: [Item]?) {
+    func reloadCollectionViewData() {
         guard let dataSource, let cartItems = presenter.getCartItems() else { return }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         // adding sections to snapshot
         snapshot.appendSections([.cartItemSection])
         // adding products to snapshot by Item enum entities .product(Product)
-        snapshot.appendItems(cartItems.map { Item.cartItem($0) })
-        // reload changes
-        if let reloadedItems {
-            snapshot.reloadItems(reloadedItems)
-        }
+        snapshot.appendItems(cartItems.map { Item.cartItem($0.itemId) })
+        dataSource.apply(snapshot, animatingDifferences: true)
+        // rebuild correct layout
+        cartItemsCollectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID]) {
+        guard let dataSource else { return }
+        
+        var snapshot = dataSource.snapshot()
+        let updatedCartItems = updatedItemIds.compactMap { presenter.findCartItem(itemId: $0) }
+        let updatedItems = updatedCartItems.map { Item.cartItem($0.itemId) }
+        snapshot.reconfigureItems(updatedItems)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
