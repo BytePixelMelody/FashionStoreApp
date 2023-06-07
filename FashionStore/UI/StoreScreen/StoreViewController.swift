@@ -15,10 +15,10 @@
 
 // Backlog:
 // TODO: ScrollViews to CollectionViews
-// TODO: Database write to CoreData after loading from backend
-// TODO: Collection Views with one presenter on screen, which communicates with subviews via ViewController
 // TODO: for correct UICollectionView animations replace "view" with "contentView" is cells
 // TODO: reverse view-presenter injection and delete view's inits
+// TODO: add if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory
+// TODO: Database write to CoreData after loading from backend
 
 import UIKit
 import SnapKit
@@ -127,7 +127,7 @@ extension StoreViewController {
         collectionViewFlowLayout.minimumInteritemSpacing = ProductsFlowLayoutConstants.minimumInteritemSpacing
         
         productsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-           // any setup of collection view
+        // some setup of collection view
         productsCollectionView?.alwaysBounceVertical = true // springing (bounce)
         productsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
     }
@@ -141,7 +141,7 @@ extension StoreViewController {
     }
     
     private func createProductCellRegistration() -> UICollectionView.CellRegistration<ProductCellView, Product> {
-        return UICollectionView.CellRegistration<ProductCellView, Product> { [weak presenter] cell, indexPath, item in
+        return UICollectionView.CellRegistration<ProductCellView, Product> { [weak presenter] cell, indexPath, product in
             
             let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productId, image in
                 presenter?.showProduct(productId: productId, image: image)
@@ -153,12 +153,12 @@ extension StoreViewController {
             }
                         
             cell.setup(
-                productBrandLabelTitle: item.brand,
-                productNameLabelTitle: item.name,
-                productPriceLabelTitle: "$" + item.price.formatted(.number.precision(.fractionLength(0...2))),
-                productId: item.id,
+                productBrandLabelTitle: product.brand,
+                productNameLabelTitle: product.name,
+                productPriceLabelTitle: "$" + product.price.formatted(.number.precision(.fractionLength(0...2))),
+                productId: product.id,
                 cellTapAction: cellTapAction,
-                imageName: item.images.first,
+                imageName: product.images.first,
                 loadImageAction: loadImageAction
             )
         }

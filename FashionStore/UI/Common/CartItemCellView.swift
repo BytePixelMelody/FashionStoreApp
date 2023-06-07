@@ -15,9 +15,9 @@ class CartItemCellView: UICollectionViewCell {
     private var itemBrandLabelTitle: String?
     private var itemNameColorSizeLabelTitle: String?
     private var itemId: UUID?
-    private var minusButtonAction: ((UUID, Int) async throws -> Int?)?
+    private var minusButtonAction: ((UUID, Int) async throws -> Void)?
     private var count: Int?
-    private var plusButtonAction: ((UUID, Int) async throws -> Int?)?
+    private var plusButtonAction: ((UUID, Int) async throws -> Void)?
     private var itemPrice: Decimal?
     
     private var itemTotalPrice: Decimal? {
@@ -62,9 +62,9 @@ class CartItemCellView: UICollectionViewCell {
         itemBrand: String,
         itemNameColorSize: String,
         itemId: UUID,
-        minusButtonAction: @escaping (UUID, Int) async throws -> Int?,
+        minusButtonAction: @escaping (UUID, Int) async throws -> Void,
         count: Int,
-        plusButtonAction: @escaping (UUID, Int) async throws -> Int?,
+        plusButtonAction: @escaping (UUID, Int) async throws -> Void,
         itemPrice: Decimal
     ) {
         self.imageName = imageName
@@ -105,10 +105,7 @@ class CartItemCellView: UICollectionViewCell {
                 guard let self, let minusButtonAction, let itemId, let count else { return }
                 do {
                     // call action and set new count
-                    guard let newCount = try await minusButtonAction(itemId, count) else { return }
-                    self.count = newCount
-                    // assign new count to label
-                    setupUiTexts()
+                    try await minusButtonAction(itemId, count - 1)
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -120,10 +117,7 @@ class CartItemCellView: UICollectionViewCell {
                 guard let self, let plusButtonAction, let itemId, let count else { return }
                 do {
                     // call action and set new count
-                    guard let newCount = try await plusButtonAction(itemId, count) else { return }
-                    self.count = newCount
-                    // assign new count to label
-                    setupUiTexts()
+                    try await plusButtonAction(itemId, count + 1)
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -152,16 +146,16 @@ class CartItemCellView: UICollectionViewCell {
     private func arrangeLayout() {
         
         // image
-        self.addSubview(itemImageView)
+        contentView.addSubview(itemImageView)
         itemImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.3)
-            make.height.equalTo(itemImageView.snp.width).multipliedBy(4.0 / 3.0)
+            make.height.equalTo(itemImageView.snp.width).multipliedBy(4.0 / 3.0).priority(.high)
             make.height.lessThanOrEqualToSuperview()
         }
         
         // right info section
-        self.addSubview(infoView)
+        contentView.addSubview(infoView)
         infoView.snp.makeConstraints { make in
             make.leading.equalTo(itemImageView.snp.trailing)
             make.top.trailing.equalToSuperview()
@@ -211,8 +205,8 @@ class CartItemCellView: UICollectionViewCell {
         }
         
         // buttons to front
-        self.bringSubviewToFront(minusButton)
-        self.bringSubviewToFront(plusButton)
+        contentView.bringSubviewToFront(minusButton)
+        contentView.bringSubviewToFront(plusButton)
     }
     
     // clean cell for reuse

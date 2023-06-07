@@ -49,7 +49,7 @@ struct Color: Codable, Hashable {
     var items: [Item]
 }
 
-struct Item: Codable, Hashable {
+struct Item: Codable, Hashable, Identifiable {
     var id: UUID
     var size: String // "XS", "S", "M", "L", "XL", "XXL"
     var inStock: Int // 1...1000

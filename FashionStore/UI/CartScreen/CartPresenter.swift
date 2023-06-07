@@ -13,12 +13,14 @@ protocol CartPresenterProtocol: AnyObject {
     func checkCartInStock() async throws
     func reloadCart() async throws
     func loadImage(imageName: String) async throws -> UIImage
-    func reduceCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int?
-    func increaseCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int?
+    func reduceCartItemCount(itemId: UUID, newCount: Int) async throws
+    func increaseCartItemCount(itemId: UUID, newCount: Int) async throws
     func showCheckout()
     func closeScreen()
-    // TODO: delete this
-    func showMockCartItemCellView()
+    func getCartItems() -> [CartItem]?
+    func findProduct(itemId: UUID) -> Product?
+    func findColor(itemId: UUID) -> Color?
+    func findItem(itemId: UUID) -> Item?
 }
 
 class CartPresenter: CartPresenterProtocol {
@@ -39,6 +41,7 @@ class CartPresenter: CartPresenterProtocol {
         guard let self else { return }
         try await coreDataService.removeCartItemFromCart(itemId: itemId)
         try await reloadCart()
+        // TODO: call view?.reloadDataSource
     }
     private let deleteCartItemImage = UIImageView.makeImageView(imageName: ImageName.message)
 
@@ -99,29 +102,31 @@ class CartPresenter: CartPresenterProtocol {
         try await webService.getImage(imageName: imageName)
     }
     
-    func reduceCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int? {
-        if currentCartItemCount <= 1 {
+    func reduceCartItemCount(itemId: UUID, newCount: Int) async throws {
+        if newCount == 0 {
             // delete action with popup confirmation
             await MainActor.run {
                 removeCartItemWithWarning(itemId: itemId)
             }
-            return nil
         } else {
-            let newCount = currentCartItemCount - 1
-            return try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+            // reduce CartItem count
+            try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+            // reload cart
+            try await reloadCart()
+            // TODO: call view?.reloadDataSource
         }
     }
     
-    func increaseCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int? {
+    func increaseCartItemCount(itemId: UUID, newCount: Int) async throws {
         guard
             let itemIdsInStockCount,
             let cartItemInStockCount = itemIdsInStockCount[itemId]
-        else { return nil }
+        else { return }
         
-        if currentCartItemCount < cartItemInStockCount {
-            // increase cartItem count
-            let newCount = currentCartItemCount + 1
-            return try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+        if newCount <= cartItemInStockCount {
+            try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+            try await reloadCart()
+            // TODO: call view?.reloadDataSource
         } else {
             // popup that maximum available quantity has been reached
             await MainActor.run {
@@ -135,7 +140,6 @@ class CartPresenter: CartPresenterProtocol {
                     image: maxCartItemCountImage
                 )
             }
-            return currentCartItemCount
         }
     }
  
@@ -147,33 +151,10 @@ class CartPresenter: CartPresenterProtocol {
         router.popScreenToBottom()
     }
     
-    // TODO: delete this
-    func showMockCartItemCellView() {
-        guard let cartItem = cart?.cartItems.first else { return }
-        let itemId = cartItem.itemId
-        guard let catalog else { return }
-        guard let product = findProduct(catalog: catalog, itemId: itemId) else { return }
-        guard let color = findColor(catalog: catalog, itemId: itemId) else { return }
-        guard let item = findItem(catalog: catalog, itemId: itemId) else { return }
-        let imageName = color.images.first
-        let itemBrand = product.brand
-        let productName = product.name
-        let colorName = color.name
-        let size = item.size
-        let itemNameColorSize = "\(productName), \(colorName), \(size)"
-        let count = cartItem.count
-        let itemPrice = product.price
-                        
-        view?.addMockCartItemCellView(
-            imageName: imageName,
-            itemBrand: itemBrand,
-            itemNameColorSize: itemNameColorSize,
-            itemId: itemId,
-            count: count,
-            itemPrice: itemPrice
-        )
+    func getCartItems() -> [CartItem]? {
+        cart?.cartItems
     }
-    
+
     // popup when trying to remove item from cart
     private func removeCartItemWithWarning(itemId: UUID) {
         // transform    (UUID) async throws -> Void    to    () -> Void
@@ -199,7 +180,9 @@ class CartPresenter: CartPresenterProtocol {
     }
     
     // find product by itemId
-    private func findProduct(catalog: Catalog, itemId: UUID) -> Product? {
+    func findProduct(itemId: UUID) -> Product? {
+        guard let catalog else { return nil }
+        
         let allProducts = catalog.audiences.flatMap { $0.categories.flatMap { $0.products } }
         
         let foundProduct = allProducts.first(where: { $0.colors.contains { $0.items.contains { $0.id == itemId } } })
@@ -208,7 +191,9 @@ class CartPresenter: CartPresenterProtocol {
     }
     
     // find color by itemId
-    private func findColor(catalog: Catalog, itemId: UUID) -> Color? {
+    func findColor(itemId: UUID) -> Color? {
+        guard let catalog else { return nil }
+
         let allColors = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors } } }
         
         let foundColor = allColors.first(where: { $0.items.contains { $0.id == itemId } })
@@ -217,7 +202,9 @@ class CartPresenter: CartPresenterProtocol {
     }
     
     // find item by itemId
-    private func findItem(catalog: Catalog, itemId: UUID) -> Item? {
+    func findItem(itemId: UUID) -> Item? {
+        guard let catalog else { return nil }
+
         let allItems = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors.flatMap { $0.items } } } }
         
         let foundItem = allItems.first(where: { $0.id == itemId } )

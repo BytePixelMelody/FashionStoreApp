@@ -12,16 +12,7 @@ protocol CartViewProtocol: AnyObject {
     func showEmptyCartWithAnimation()
     func showFullCart()
     func setTotalPrice(price: Decimal)
-    
-    // TODO: delete this
-    func addMockCartItemCellView(
-        imageName: String?,
-        itemBrand: String,
-        itemNameColorSize: String,
-        itemId: UUID,
-        count: Int,
-        itemPrice: Decimal
-    )
+//    func reloadCollectionViewData(reloadedItems: [Item]?)
 }
 
 class CartViewController: UIViewController {
@@ -41,7 +32,8 @@ class CartViewController: UIViewController {
 
     private lazy var closableHeaderView = HeaderNamedView(closeScreenAction: closeScreenAction, headerTitle: Self.headerTitle)
     
-    private let productsScrollView = UIScrollView.makeScrollView()
+    private var cartItemsCollectionView: UICollectionView?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     
     private let cartIsEmptyLabel: UILabel = {
         let label = UILabel.makeLabel(numberOfLines: 0)
@@ -71,8 +63,28 @@ class CartViewController: UIViewController {
         
         view.backgroundColor = .white
         
+        // create and configure collection view
+        configureCollectionView()
+        
+        // setup texts with styles
         setupUiTexts()
+        
+        // arrange layouts
         arrangeLayout()
+        
+        Task<Void, Never> { [weak presenter] in
+            do {
+                // load catalog from Web
+                try await presenter?.loadCatalog()
+                // check cartItems for availability in the catalog, pop-up message when deleting from cart
+                try await presenter?.checkCartInStock()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
+        
+        // configure collection view data source
+        configureDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,12 +96,10 @@ class CartViewController: UIViewController {
         
         Task<Void, Never> { [weak presenter] in
             do {
-                // load catalog from Web
-                try await presenter?.loadCatalog()
-                // check cartItems for availability in the catalog, pop-up message when deleting from cart
-                try await presenter?.checkCartInStock()
-                // load synchronised cart
+                // reload cart items
                 try await presenter?.reloadCart()
+                // apply data snapshot to collection view
+                reloadCollectionViewData(reloadedItems: nil)
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -114,16 +124,19 @@ class CartViewController: UIViewController {
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        setupUiTexts()
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            setupUiTexts()
+            cartItemsCollectionView?.collectionViewLayout.invalidateLayout()
+        }
     }
 
     private func arrangeLayout() {
         arrangeClosableHeaderView()
-        arrangeProductsScrollView()
+        arrangeCartItemsCollectionView()
         arrangeCartIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
-        arrangeProductsScrollViewBottom()
+        arrangeCartItemsCollectionView()
     }
     
     private func arrangeClosableHeaderView() {
@@ -133,26 +146,21 @@ class CartViewController: UIViewController {
         }
     }
     
-    private func arrangeProductsScrollView() {
-        view.addSubview(productsScrollView)
-        productsScrollView.snp.makeConstraints { make in
+    private func arrangeCartItemsCollectionView() {
+        guard let cartItemsCollectionView else { return }
+        view.addSubview(cartItemsCollectionView)
+        cartItemsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
             // bottom is in footer constraints
         }
-        productsScrollView.contentLayoutGuide.snp.makeConstraints { make in
-            make.width.equalTo(productsScrollView.frameLayoutGuide.snp.width)
-        }
-        // contentLayoutGuide must have top and bottom constraints
     }
     
-    // TODO: after adding Collection View - remake productsScrollView.contentLayoutGuide to it, add put label on view with constraint header.offset(100)
     private func arrangeCartIsEmptyLabel() {
-        productsScrollView.addSubview(cartIsEmptyLabel)
+        view.addSubview(cartIsEmptyLabel)
         cartIsEmptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(productsScrollView.contentLayoutGuide.snp.top).offset(100)
-            make.left.right.equalTo(productsScrollView.contentLayoutGuide).inset(16)
-            make.bottom.equalTo(productsScrollView.contentLayoutGuide.snp.bottom)
+            make.top.equalToSuperview().offset(240)
+            make.left.right.equalToSuperview().inset(16)
         }
     }
     
@@ -171,15 +179,16 @@ class CartViewController: UIViewController {
         }
     }
     
-    private func arrangeProductsScrollViewBottom() {
-        productsScrollView.snp.makeConstraints { make in
+    private func arrangeCartItemsCollectionViewBottom() {
+        guard let cartItemsCollectionView else { return }
+        cartItemsCollectionView.snp.makeConstraints { make in
             make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
         }
     }
-
+    
 }
 
-extension CartViewController: CartViewProtocol {
+extension CartViewController: CartViewProtocol {    
     
     public func showEmptyCartWithAnimation() {
         
@@ -200,18 +209,17 @@ extension CartViewController: CartViewProtocol {
         
         // animations
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
-            guard let self else { return }
+            guard let self, let cartItemsCollectionView else { return }
             // show
             cartIsEmptyLabel.alpha = 1
             continueShoppingButton.alpha = 1
             // hide
             footerTotalPriceView.alpha = 0
             // remake scrollView constraints
-            productsScrollView.snp.remakeConstraints { [weak self] make in
+            cartItemsCollectionView.snp.remakeConstraints { [weak self] make in
                 guard let self else { return }
                 make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
                 make.left.right.equalToSuperview()
-                make.width.equalTo(productsScrollView.contentLayoutGuide.snp.width)
                 make.bottom.equalTo(continueShoppingButton.snp.top).offset(-8)
             }
 
@@ -223,67 +231,123 @@ extension CartViewController: CartViewProtocol {
     }
     
     public func showFullCart() {
+        guard let cartItemsCollectionView else { return }
         // show
         footerTotalPriceView.isHidden = false
         // hide
         cartIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
         // remake scrollView constraints
-        productsScrollView.snp.remakeConstraints { [weak self] make in
+        cartItemsCollectionView.snp.remakeConstraints { [weak self] make in
             guard let self else { return }
             make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
-            make.width.equalTo(productsScrollView.contentLayoutGuide.snp.width)
             make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
         }
-        
-        // TODO: delete this
-        presenter.showMockCartItemCellView()
     }
     
     func setTotalPrice(price: Decimal) {
         footerTotalPriceView.setTotalPrice(price: price)
     }
     
-    // TODO: delete this
-    func addMockCartItemCellView(
-        imageName: String?,
-        itemBrand: String,
-        itemNameColorSize: String,
-        itemId: UUID,
-        count: Int,
-        itemPrice: Decimal
-    ) {
-        let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
-            // load image by presenter
-            return try await presenter?.loadImage(imageName: imageName)
-        }
+}
+
+// collection view implementing
+extension CartViewController {
+    
+    // create and configure collection view
+    private func configureCollectionView() {
+        // flow layout creating
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        // layout setup, automaticSize requires func preferredLayoutAttributesFitting() in cell class
+        collectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        collectionViewFlowLayout.sectionInset = CartItemsFlowLayoutConstants.sectionInset
+        collectionViewFlowLayout.minimumLineSpacing = CartItemsFlowLayoutConstants.lineSpacing
+        collectionViewFlowLayout.minimumInteritemSpacing = CartItemsFlowLayoutConstants.minimumInteritemSpacing
         
-        let minusButtonAction: (UUID, Int) async throws -> Int? = { [weak presenter] itemId, currentCartItemCount in
-            try await presenter?.reduceCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
+        cartItemsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        // some setup of collection view
+        cartItemsCollectionView?.alwaysBounceVertical = true // springing (bounce)
+        cartItemsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
+    }
+    
+    enum Section: Hashable {
+        case cartItemSection
+    }
+    
+    enum Item: Hashable {
+        case cartItem(CartItem)
+    }
+    
+    private func createCartItemCellRegistration() -> UICollectionView.CellRegistration<CartItemCellView, CartItem> {
+        return UICollectionView.CellRegistration<CartItemCellView, CartItem> { [weak self] cell, indexPath, cartItem in
+            
+            guard let self else { return }
+            
+            let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
+                // load image by presenter
+                return try await presenter?.loadImage(imageName: imageName)
+            }
+            
+            let minusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemId, newCount in
+                try await presenter?.reduceCartItemCount(itemId: itemId, newCount: newCount)
+            }
+            
+            let plusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemId, newCount in
+                try await presenter?.increaseCartItemCount(itemId: itemId, newCount: newCount)
+            }
+            
+            // itemId in cart and in catalog
+            let itemId = cartItem.itemId
+            
+            // find info in catalog
+            guard let product = presenter.findProduct(itemId: itemId) else { return }
+            guard let color = presenter.findColor(itemId: itemId) else { return }
+            guard let item = presenter.findItem(itemId: itemId) else { return }
+
+            let productName = product.name
+            let colorName = color.name
+            let size = item.size
+            
+            cell.setup(
+                imageName: color.images.first,
+                loadImageAction: loadImageAction,
+                itemBrand: product.brand,
+                itemNameColorSize: "\(productName), \(colorName), \(size)",
+                itemId: itemId,
+                minusButtonAction: minusButtonAction,
+                count: cartItem.count,
+                plusButtonAction: plusButtonAction,
+                itemPrice: product.price
+            )
         }
+    }
+    
+    private func configureDataSource() {
+        let cartItemCellRegistration = createCartItemCellRegistration()
         
-        let plusButtonAction: (UUID, Int) async throws -> Int? = { [weak presenter] itemId, currentCartItemCount in
-            try await presenter?.increaseCartItemCount(itemId: itemId, currentCartItemCount: currentCartItemCount)
+        guard let cartItemsCollectionView else { return }
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: cartItemsCollectionView) {collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .cartItem(let cartItem):
+                return collectionView.dequeueConfiguredReusableCell(using: cartItemCellRegistration, for: indexPath, item: cartItem)
+            }
         }
+    }
+    
+    func reloadCollectionViewData(reloadedItems: [Item]?) {
+        guard let dataSource, let cartItems = presenter.getCartItems() else { return }
         
-        let mockCellView = CartItemCellView()
-        mockCellView.setup(
-            imageName: imageName,
-            loadImageAction: loadImageAction,
-            itemBrand: itemBrand,
-            itemNameColorSize: itemNameColorSize,
-            itemId: itemId,
-            minusButtonAction: minusButtonAction,
-            count: count,
-            plusButtonAction: plusButtonAction,
-            itemPrice: itemPrice
-        )
-                
-        productsScrollView.addSubview(mockCellView)
-        mockCellView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview().inset(16)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        // adding sections to snapshot
+        snapshot.appendSections([.cartItemSection])
+        // adding products to snapshot by Item enum entities .product(Product)
+        snapshot.appendItems(cartItems.map { Item.cartItem($0) })
+        // reload changes
+        if let reloadedItems {
+            snapshot.reloadItems(reloadedItems)
         }
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
 }
@@ -294,3 +358,4 @@ extension CartViewController: UIGestureRecognizerDelegate {
         return false
     }
 }
+
