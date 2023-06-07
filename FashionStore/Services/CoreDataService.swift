@@ -12,7 +12,7 @@ protocol CoreDataServiceProtocol: AnyObject {
     func addCartItemToCart(itemId: UUID) async throws
     func checkItemInCart(itemId: UUID) async throws -> Bool
     func fetchEntireCart() async throws -> Cart
-    func editCartItemCount(itemId: UUID, newCount: Int) async throws -> Int
+    func editCartItemCount(itemId: UUID, newCount: Int) async throws
     func removeCartItemFromCart(itemId: UUID) async throws
     func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int
 }
@@ -115,7 +115,7 @@ actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // edit CartItem count
-    func editCartItemCount(itemId: UUID, newCount: Int) async throws -> Int {
+    func editCartItemCount(itemId: UUID, newCount: Int) async throws {
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
         // run on background
@@ -128,7 +128,6 @@ actor CoreDataService: CoreDataServiceProtocol {
             cartItemModel.count = Int64(newCount)
             try self.backgroundContext.save()
         }
-        return newCount
     }
     
     // remove CartItem from cart

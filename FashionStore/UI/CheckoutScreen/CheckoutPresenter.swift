@@ -13,8 +13,8 @@ protocol CheckoutPresenterProtocol: AnyObject {
     func checkCartInStock() async throws
     func reloadCart() async throws
     func loadImage(imageName: String) async throws -> UIImage
-    func reduceCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int?
-    func increaseCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int?
+    func reduceCartItemCount(itemId: UUID, newCount: Int) async throws
+    func increaseCartItemCount(itemId: UUID, newCount: Int) async throws
     func closeScreen()
     func editAddress()
     func deleteAddress()
@@ -149,29 +149,31 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
 
     
-    func reduceCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int? {
-        if currentCartItemCount <= 1 {
+    func reduceCartItemCount(itemId: UUID, newCount: Int) async throws {
+        if newCount == 0 {
             // delete action with popup confirmation
             await MainActor.run {
                 removeCartItemWithWarning(itemId: itemId)
             }
-            return nil
         } else {
-            let newCount = currentCartItemCount - 1
-            return try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+            // reduce CartItem count
+            try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+            // reload cart
+            try await reloadCart()
+            // TODO: call view?.reloadDataSource
         }
     }
     
-    func increaseCartItemCount(itemId: UUID, currentCartItemCount: Int) async throws -> Int? {
+    func increaseCartItemCount(itemId: UUID, newCount: Int) async throws {
         guard
             let itemIdsInStockCount,
             let cartItemInStockCount = itemIdsInStockCount[itemId]
-        else { return nil }
+        else { return }
         
-        if currentCartItemCount < cartItemInStockCount {
-            // increase cartItem count
-            let newCount = currentCartItemCount + 1
-            return try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+        if newCount <= cartItemInStockCount {
+            try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
+            try await reloadCart()
+            // TODO: call view?.reloadDataSource
         } else {
             // popup that maximum available quantity has been reached
             await MainActor.run {
@@ -185,10 +187,9 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
                     image: maxCartItemCountImage
                 )
             }
-            return currentCartItemCount
         }
     }
- 
+    
     // popup when trying to remove item from cart
     private func removeCartItemWithWarning(itemId: UUID) {
         // transform    (UUID) async throws -> Void    to    () -> Void

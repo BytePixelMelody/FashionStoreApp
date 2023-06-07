@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="1001.png" translatesAutoresizingMaskIntoConstraints="NO" id="EQX-OH-1nx" userLabel="ImageView">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="1004.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EQX-OH-1nx" userLabel="ImageView">
                                 <rect key="frame" x="0.0" y="59.000000000000014" width="118" height="157.33333333333337"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EQX-OH-1nx" secondAttribute="height" multiplier="3:4" id="MWV-zg-NoT"/>
@@ -114,7 +114,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1001.png" width="600" height="750"/>
+        <image name="1004.jpg" width="126" height="168"/>
         <image name="MinusCircled" width="44" height="44"/>
         <image name="PlusCircled" width="44" height="44"/>
         <namedColor name="Label">

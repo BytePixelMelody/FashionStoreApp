@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Cart: Codable {
+struct Cart: Codable, Hashable {
     var cartItems: [CartItem]
 }
 
-struct CartItem: Codable {
+struct CartItem: Codable, Hashable {
     var id: UUID
     var itemId: UUID
     var count: Int
