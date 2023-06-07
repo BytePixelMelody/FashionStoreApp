@@ -24,7 +24,7 @@ class ProductCellView: UICollectionViewCell {
     
     private let productImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
-        cornerRadius: 6.0,
+        cornerRadius: 4.0,
         clipsToBounds: true
     )
     private let productBrandLabel = UILabel.makeLabel(numberOfLines: 1)

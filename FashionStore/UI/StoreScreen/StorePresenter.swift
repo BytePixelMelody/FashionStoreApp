@@ -43,10 +43,7 @@ class StorePresenter: StorePresenterProtocol {
     }
     
     func loadCatalog() async throws {
-        catalog = try await webService.getData(
-            urlString: Settings.catalogUrl,
-            cachePolicy: .reloadIgnoringLocalAndRemoteCacheData
-        )
+        catalog = try await webService.getData(urlString: Settings.catalogUrl)
     }
     
     // load image from web

@@ -59,10 +59,7 @@ class CartPresenter: CartPresenterProtocol {
     }
     
     func loadCatalog() async throws {
-        catalog = try await webService.getData(
-            urlString: Settings.catalogUrl,
-            cachePolicy: .reloadIgnoringLocalAndRemoteCacheData
-        )
+        catalog = try await webService.getData(urlString: Settings.catalogUrl)
     }
 
     // remove unavailable CartItems from cart
