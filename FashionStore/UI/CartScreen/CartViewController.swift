@@ -11,7 +11,7 @@ import SnapKit
 protocol CartViewProtocol: AnyObject {
     func showEmptyCartWithAnimation()
     func showFullCart()
-    func setTotalPrice(price: Decimal)
+    func setTotalPrice(price: Decimal?)
     func reloadCollectionViewData()
     func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID])
 }
@@ -99,8 +99,7 @@ class CartViewController: UIViewController {
             do {
                 // reload cart items
                 try await presenter?.reloadCart()
-                // apply data snapshot to collection view
-                reloadCollectionViewData()
+                presenter?.reloadCollectionView()
             } catch {
                 Errors.handler.checkError(error)
             }
@@ -247,7 +246,7 @@ extension CartViewController: CartViewProtocol {
         }
     }
     
-    func setTotalPrice(price: Decimal) {
+    func setTotalPrice(price: Decimal?) {
         footerTotalPriceView.setTotalPrice(price: price)
     }
     
@@ -343,11 +342,11 @@ extension CartViewController {
         snapshot.appendSections([.cartItemSection])
         // adding products to snapshot by Item enum entities .product(Product)
         snapshot.appendItems(cartItems.map { Item.cartItem($0.itemId) })
+        // apply dataSource with correct animations
         dataSource.apply(snapshot, animatingDifferences: true)
-        // rebuild correct layout
-        cartItemsCollectionView?.collectionViewLayout.invalidateLayout()
     }
     
+    // if count changes
     func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID]) {
         guard let dataSource else { return }
         
@@ -366,4 +365,3 @@ extension CartViewController: UIGestureRecognizerDelegate {
         return false
     }
 }
-

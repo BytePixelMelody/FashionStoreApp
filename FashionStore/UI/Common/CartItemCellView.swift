@@ -20,11 +20,13 @@ class CartItemCellView: UICollectionViewCell {
     private var plusButtonAction: ((UUID, Int) async throws -> Void)?
     private var itemPrice: Decimal?
     
+    // price calculation
     private var itemTotalPrice: Decimal? {
         guard let count, let itemPrice else { return nil }
         return Decimal(count) * itemPrice
     }
     
+    // UI elements
     private let itemImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
         cornerRadius: 4.0,
@@ -56,6 +58,7 @@ class CartItemCellView: UICollectionViewCell {
         arrangeLayout()
     }
     
+    // setup properties and actions
     public func setup(
         imageName: String?,
         loadImageAction: @escaping (String) async throws -> UIImage?,
@@ -67,15 +70,16 @@ class CartItemCellView: UICollectionViewCell {
         plusButtonAction: @escaping (UUID, Int) async throws -> Void,
         itemPrice: Decimal
     ) {
-        // update only count if cell was not prepared for reuse
+        // if cell not prepared for reuse
         guard self.itemId == nil else {
-            // update only count and computed property itemTotalPrice
+            // update only count
             self.count = count
-            // setup typography texts
+            // setup typography texts of updated count and price
             setupUiTexts()
             return
         }
         
+        // setup properties
         self.imageName = imageName
         self.itemBrandLabelTitle = itemBrand
         self.itemNameColorSizeLabelTitle = itemNameColorSize
@@ -85,6 +89,7 @@ class CartItemCellView: UICollectionViewCell {
         self.plusButtonAction = plusButtonAction
         self.itemPrice = itemPrice
         
+        // image loading
         loadImage(loadImageAction: loadImageAction)
         
         // setup button actions
@@ -219,6 +224,8 @@ class CartItemCellView: UICollectionViewCell {
     
     // clean cell for reuse
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         // clean info
         imageName = nil
         itemBrandLabelTitle = nil
@@ -248,10 +255,15 @@ class CartItemCellView: UICollectionViewCell {
         
         let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
         
-        guard let collectionViewWidth = superview?.frame.width else { return layoutAttributes }
+        let collectionViewWidth: CGFloat
+        if let superviewCollectionViewWidth = superview?.frame.width {
+            collectionViewWidth = superviewCollectionViewWidth
+        } else {
+            collectionViewWidth = UIScreen.main.bounds.width
+        }
         let leftRightInsetsWidth = CartItemsFlowLayoutConstants.sectionInset.left + CartItemsFlowLayoutConstants.sectionInset.right
         let allInteritemSpacings = CartItemsFlowLayoutConstants.minimumInteritemSpacing * (CartItemsFlowLayoutConstants.cellsInLineCount - 1)
-        let itemWidth = (collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / CartItemsFlowLayoutConstants.cellsInLineCount - 0.2
+        let itemWidth = ((collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / CartItemsFlowLayoutConstants.cellsInLineCount).rounded(.down)
 
         let targetSize = CGSize(width: itemWidth, height: .zero)
         let size = self.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)

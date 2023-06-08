@@ -186,8 +186,6 @@ extension StoreViewController {
         snapshot.appendItems(products.map { Item.product($0) })
         // reload changes
         dataSource?.apply(snapshot, animatingDifferences: true)
-        // rebuild correct layout
-        productsCollectionView?.collectionViewLayout.invalidateLayout()
     }
 
 }

@@ -18,6 +18,7 @@ class FooterTotalPriceView: UIView {
     
     // total price label
     private let currencySign: String
+    private var totalPrice: String?
     private let totalPriceLabel = UILabel.makeLabel(numberOfLines: 2)
     
     // button
@@ -50,7 +51,12 @@ class FooterTotalPriceView: UIView {
     private func setupUiTexts() {
         button.configuration?.attributedTitle = AttributedString(buttonTitle.uppercased().setStyle(style: .buttonDark))
         totalLabel.attributedText = totalLabelTitle.uppercased().setStyle(style: .titleSmall)
-        totalPriceLabel.attributedText = currencySign.setStyle(style: .priceTotal)
+        // price
+        if let totalPrice {
+            totalPriceLabel.attributedText = totalPrice.setStyle(style: .priceTotal)
+        } else {
+            totalPriceLabel.attributedText = nil
+        }
     }
     
     // accessibility settings was changed - scale fonts
@@ -105,8 +111,13 @@ class FooterTotalPriceView: UIView {
         }
     }
     
-    public func setTotalPrice(price: Decimal) {
-        totalPriceLabel.text = "\(currencySign)\(price)"
+    public func setTotalPrice(price: Decimal?) {
+        if let price {
+            totalPrice = "\(currencySign)\(price)"
+        } else {
+            totalPrice = nil
+        }
+        setupUiTexts()
     }
 
 }

@@ -230,6 +230,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.popTwoScreensToBottom()
     }
     
+    // TODO: Check cart and address
     // fake order placement
     func placeOrder() {
         successPurchasePopupSubMessageText = successPurchasePopupSubMessageText + String(Int.random(in: 100_000...999_999))

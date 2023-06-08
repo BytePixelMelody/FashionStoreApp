@@ -12,6 +12,7 @@ protocol CartPresenterProtocol: AnyObject {
     func loadCatalog() async throws
     func checkCartInStock() async throws
     func reloadCart() async throws
+    func reloadCollectionView()
     func loadImage(imageName: String) async throws -> UIImage
     func reduceCartItemCount(itemId: UUID, newCount: Int) async throws
     func increaseCartItemCount(itemId: UUID, newCount: Int) async throws
@@ -42,8 +43,9 @@ class CartPresenter: CartPresenterProtocol {
         guard let self else { return }
         try await coreDataService.removeCartItemFromCart(itemId: itemId)
         try await reloadCart()
-        await MainActor.run { [weak view] in
-            view?.reloadCollectionViewData()
+        await MainActor.run { [weak self] in
+            self?.view?.reloadCollectionViewData()
+            self?.setTotalPrice()
         }
     }
     private let deleteCartItemImage = UIImageView.makeImageView(imageName: ImageName.message)
@@ -100,6 +102,13 @@ class CartPresenter: CartPresenterProtocol {
         }
     }
     
+    // on view will appear
+    func reloadCollectionView() {
+        // apply data snapshot to collection view
+        view?.reloadCollectionViewData()
+        setTotalPrice()
+    }
+    
     // load image from web
     func loadImage(imageName: String) async throws -> UIImage {
         try await webService.getImage(imageName: imageName)
@@ -116,8 +125,9 @@ class CartPresenter: CartPresenterProtocol {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             // reload cart
             try await reloadCart()
-            await MainActor.run { [weak view] in
-                view?.updateCollectionViewItems(updatedItemIds: [itemId])
+            await MainActor.run { [weak self] in
+                self?.view?.updateCollectionViewItems(updatedItemIds: [itemId])
+                self?.setTotalPrice()
             }
         }
     }
@@ -131,8 +141,9 @@ class CartPresenter: CartPresenterProtocol {
         if newCount <= cartItemInStockCount {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             try await reloadCart()
-            await MainActor.run { [weak view] in
-                view?.updateCollectionViewItems(updatedItemIds: [itemId])
+            await MainActor.run { [weak self] in
+                self?.view?.updateCollectionViewItems(updatedItemIds: [itemId])
+                self?.setTotalPrice()
             }
         } else {
             // popup that maximum available quantity has been reached
@@ -225,4 +236,23 @@ class CartPresenter: CartPresenterProtocol {
         
         return cart.cartItems.first(where: { $0.itemId == itemId })
     }
+    
+    // total cart price
+    private func setTotalPrice() {
+        let result: Decimal?
+        
+        // cart is not nil
+        if let cartItems = cart?.cartItems  {
+            var totalPrice: Decimal = 0.00
+            for cartItem in cartItems {
+                guard let product = findProduct(itemId: cartItem.itemId) else { break }
+                totalPrice += product.price * Decimal(cartItem.count)
+            }
+            result = totalPrice
+        } else {
+            result = nil
+        }
+        view?.setTotalPrice(price: result)
+    }
+    
 }
