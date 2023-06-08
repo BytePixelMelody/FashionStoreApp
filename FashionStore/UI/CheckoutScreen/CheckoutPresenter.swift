@@ -230,33 +230,19 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.popTwoScreensToBottom()
     }
     
+    // TODO: Check cart and address
     // fake order placement
     func placeOrder() {
-        do{
-            switch Int.random(in: 0..<100) {
-            case 0..<15:
-                throw Errors.ErrorType.networkConnectionFail
-            case 15..<20:
-                throw Errors.ErrorType.httpError(statusCode: 418, urlString: "https://mock.place.order")
-            case 20..<25:
-                throw Errors.ErrorType.httpError(statusCode: 503, urlString: "https://mock.place.order")
-            case 25..<50:
-                throw Errors.ErrorType.paymentFail
-            default:
-                successPurchasePopupSubMessageText = successPurchasePopupSubMessageText + String(Int.random(in: 100_000...999_999))
-                router.showPopupScreen(
-                    headerTitle: successPurchasePopupTitle,
-                    message: successPurchasePopupMessageText,
-                    subMessage: successPurchasePopupSubMessageText,
-                    buttonTitle: successPurchasePopupButtonTitle,
-                    buttonAction: goToStoreAction,
-                    closeAction: goToStoreAction,
-                    image: successImage
-                )
-            }
-        } catch {
-            Errors.handler.checkError(error)
-        }
+        successPurchasePopupSubMessageText = successPurchasePopupSubMessageText + String(Int.random(in: 100_000...999_999))
+        router.showPopupScreen(
+            headerTitle: successPurchasePopupTitle,
+            message: successPurchasePopupMessageText,
+            subMessage: successPurchasePopupSubMessageText,
+            buttonTitle: successPurchasePopupButtonTitle,
+            buttonAction: goToStoreAction,
+            closeAction: goToStoreAction,
+            image: successImage
+        )
     }
     
     func checkoutScreenWillAppear() {

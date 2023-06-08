@@ -176,7 +176,7 @@ extension StoreViewController {
         }
     }
     
-    private func reloadCollectionViewData(_ reloadedItems: [Item] = []) {
+    private func reloadCollectionViewData() {
         guard let products = presenter.getProducts() else { return }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -185,7 +185,6 @@ extension StoreViewController {
         // adding products to snapshot by Item enum entities .product(Product)
         snapshot.appendItems(products.map { Item.product($0) })
         // reload changes
-        snapshot.reloadItems(reloadedItems)
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
 

@@ -131,6 +131,8 @@ class ProductCellView: UICollectionViewCell {
     
     // clean cell for reuse
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         // clean info
         productBrandLabelTitle = nil
         productNameLabelTitle = nil
@@ -153,10 +155,15 @@ class ProductCellView: UICollectionViewCell {
         
         let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
         
-        guard let collectionViewWidth = superview?.frame.width else { return layoutAttributes }
+        let collectionViewWidth: CGFloat
+        if let superviewCollectionViewWidth = superview?.frame.width {
+            collectionViewWidth = superviewCollectionViewWidth
+        } else {
+            collectionViewWidth = UIScreen.main.bounds.width
+        }
         let leftRightInsetsWidth = ProductsFlowLayoutConstants.sectionInset.left + ProductsFlowLayoutConstants.sectionInset.right
         let allInteritemSpacings = ProductsFlowLayoutConstants.minimumInteritemSpacing * (ProductsFlowLayoutConstants.cellsInLineCount - 1)
-        let itemWidth = (collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / ProductsFlowLayoutConstants.cellsInLineCount - 0.2
+        let itemWidth = ((collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / ProductsFlowLayoutConstants.cellsInLineCount).rounded(.down)
 
         let targetSize = CGSize(width: itemWidth, height: .zero)
         let size = self.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)

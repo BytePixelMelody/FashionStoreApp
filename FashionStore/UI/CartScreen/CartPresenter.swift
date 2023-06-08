@@ -12,6 +12,7 @@ protocol CartPresenterProtocol: AnyObject {
     func loadCatalog() async throws
     func checkCartInStock() async throws
     func reloadCart() async throws
+    func reloadCollectionView()
     func loadImage(imageName: String) async throws -> UIImage
     func reduceCartItemCount(itemId: UUID, newCount: Int) async throws
     func increaseCartItemCount(itemId: UUID, newCount: Int) async throws
@@ -20,7 +21,8 @@ protocol CartPresenterProtocol: AnyObject {
     func getCartItems() -> [CartItem]?
     func findProduct(itemId: UUID) -> Product?
     func findColor(itemId: UUID) -> Color?
-    func findItem(itemId: UUID) -> Item?
+    func findCatalogItem(itemId: UUID) -> CatalogItem?
+    func findCartItem(itemId: UUID) -> CartItem?
 }
 
 class CartPresenter: CartPresenterProtocol {
@@ -41,7 +43,10 @@ class CartPresenter: CartPresenterProtocol {
         guard let self else { return }
         try await coreDataService.removeCartItemFromCart(itemId: itemId)
         try await reloadCart()
-        // TODO: call view?.reloadDataSource
+        await MainActor.run { [weak self] in
+            self?.view?.reloadCollectionViewData()
+            self?.setTotalPrice()
+        }
     }
     private let deleteCartItemImage = UIImageView.makeImageView(imageName: ImageName.message)
 
@@ -97,6 +102,13 @@ class CartPresenter: CartPresenterProtocol {
         }
     }
     
+    // on view will appear
+    func reloadCollectionView() {
+        // apply data snapshot to collection view
+        view?.reloadCollectionViewData()
+        setTotalPrice()
+    }
+    
     // load image from web
     func loadImage(imageName: String) async throws -> UIImage {
         try await webService.getImage(imageName: imageName)
@@ -113,7 +125,10 @@ class CartPresenter: CartPresenterProtocol {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             // reload cart
             try await reloadCart()
-            // TODO: call view?.reloadDataSource
+            await MainActor.run { [weak self] in
+                self?.view?.updateCollectionViewItems(updatedItemIds: [itemId])
+                self?.setTotalPrice()
+            }
         }
     }
     
@@ -126,7 +141,10 @@ class CartPresenter: CartPresenterProtocol {
         if newCount <= cartItemInStockCount {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             try await reloadCart()
-            // TODO: call view?.reloadDataSource
+            await MainActor.run { [weak self] in
+                self?.view?.updateCollectionViewItems(updatedItemIds: [itemId])
+                self?.setTotalPrice()
+            }
         } else {
             // popup that maximum available quantity has been reached
             await MainActor.run {
@@ -201,8 +219,8 @@ class CartPresenter: CartPresenterProtocol {
         return foundColor
     }
     
-    // find item by itemId
-    func findItem(itemId: UUID) -> Item? {
+    // find catalog item by itemId
+    func findCatalogItem(itemId: UUID) -> CatalogItem? {
         guard let catalog else { return nil }
 
         let allItems = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors.flatMap { $0.items } } } }
@@ -212,4 +230,29 @@ class CartPresenter: CartPresenterProtocol {
         return foundItem
     }
    
+    // find cart item by itemId
+    func findCartItem(itemId: UUID) -> CartItem? {
+        guard let cart else { return nil }
+        
+        return cart.cartItems.first(where: { $0.itemId == itemId })
+    }
+    
+    // total cart price
+    private func setTotalPrice() {
+        let result: Decimal?
+        
+        // cart is not nil
+        if let cartItems = cart?.cartItems  {
+            var totalPrice: Decimal = 0.00
+            for cartItem in cartItems {
+                guard let product = findProduct(itemId: cartItem.itemId) else { break }
+                totalPrice += product.price * Decimal(cartItem.count)
+            }
+            result = totalPrice
+        } else {
+            result = nil
+        }
+        view?.setTotalPrice(price: result)
+    }
+    
 }

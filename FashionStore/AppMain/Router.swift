@@ -116,6 +116,11 @@ class Router: RouterProtocol {
         closeAction: (() -> Void)?,
         image: UIImageView
     ) {
+        // don't create popup message if it already exists
+        if navigationController.viewControllers.last?.presentedViewController is PopupViewController {
+            return
+        }
+        
         let viewController = moduleBuilder.createPopupModule(
             router: self,
             headerTitle: headerTitle,
@@ -128,6 +133,7 @@ class Router: RouterProtocol {
         )
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.modalTransitionStyle = .crossDissolve
+        
         navigationController.viewControllers.last?.present(viewController, animated: true)
     }
     
