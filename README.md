@@ -23,12 +23,10 @@
 - [x] Errors service with App-styled pop-up for user warnings and logging
 - [x] Async/await and Tasks with cancellation on main and background queues
 - [x] Generics
-- [ ] Images cache
-- [ ] Collection views
+- [x] Collection views
 - [x] Combine for text fields input check
 - [x] Typographic font styles with dynamic accessibility font scaling
 - [x] Customized animation between screens
-- [ ] Unit tests
 
 ## Code patterns
 - [x] Builder
