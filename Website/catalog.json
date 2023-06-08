@@ -15,7 +15,7 @@
                             "price": 90.00,
                             "images": ["1001.jpg", "1001.jpg", "1001.jpg"],
                             "material": "Cotton",
-                            "information": "Elevate your style with this long sleeve jacket featuring a tuxedo collar. Its timeless design exudes sophistication and elegance. The jacket is equipped with front flap pockets and a chest welt pocket, adding a touch of functionality without compromising on style. The tonal matching inner lining creates a seamless and harmonious look from the inside out. With a front button closure, this jacket ensures a polished and refined appearance. Whether you're attending a formal event or looking to elevate your everyday ensemble, this jacket is a versatile and stylish choice. Its attention to detail and impeccable tailoring make it a must-have addition to your wardrobe.",
+                            "information": "Elevate your style with this long sleeve jacket featuring a tuxedo collar. Its timeless design exudes sophistication and elegance. The jacket is equipped with front flap pockets and a chest welt pocket, adding a touch of functionality without compromising on style. The tonal matching inner lining creates a seamless and harmonious look from the inside out. With a front button closure, this jacket ensures a polished and refined appearance.",
                             "styles": [
                                 {
                                     "id": "2ebdfe33-bfb7-4f0a-869f-3e0a8cc7f6cd",
@@ -35,17 +35,17 @@
                                     "items": [
                                         {
                                             "id": "4A7886D5-BDF3-4B00-A697-FC55E4D37429",
-                                            "size": "XS",
-                                            "inStock": 5
+                                            "size": "S",
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "12f7f81c-348d-4591-a74e-4e11a078b72c",
-                                            "size": "S",
+                                            "size": "M",
                                             "inStock": 20
                                         },
                                         {
                                             "id": "8d3ad1b4-8857-4c8e-894a-2d5d3a4b8b30",
-                                            "size": "M",
+                                            "size": "L",
                                             "inStock": 15
                                         }
                                     ]
@@ -82,7 +82,7 @@
                             "price": 120.00,
                             "images": ["1002.jpg", "1002.jpg", "1002.jpg"],
                             "material": "Wool",
-                            "information": "Double-breasted blazer with tuxedo collar, perfect for adding a touch of sophistication to your ensemble. The blazer features front welt pockets and a chest pocket, providing both style and functionality. Its satin lining adds a luxurious feel and ensures comfort throughout the day. The front button closure adds a polished finish to the overall design, making it an ideal choice for formal occasions or when you want to make a fashion statement. With its impeccable tailoring and attention to detail, this blazer is sure to elevate your wardrobe and exude an aura of refined elegance.",
+                            "information": "Double-breasted blazer with tuxedo collar, perfect for adding a touch of sophistication to your ensemble. The blazer features front welt pockets and a chest pocket, providing both style and functionality. Its satin lining adds a luxurious feel and ensures comfort throughout the day. The front button closure adds a polished finish to the overall design, making it an ideal choice for formal occasions or when you want to make a fashion statement.",
                             "styles": [
                                 {
                                     "id": "9b6958fe-5be5-4b2b-9e8c-77a5a68bc0fd",
@@ -102,17 +102,17 @@
                                     "items": [
                                         {
                                             "id": "43AAD3BD-0C74-46BD-BE08-991817B3E3F5",
-                                            "size": "S",
-                                            "inStock": 3
+                                            "size": "M",
+                                            "inStock": 11
                                         },
                                         {
                                             "id": "86a40c92-6112-4d44-b9bc-032ae7cbb884",
-                                            "size": "M",
+                                            "size": "L",
                                             "inStock": 2
                                         },
                                         {
                                             "id": "d6f7875c-82e0-47b6-80ab-7e91f605c27b",
-                                            "size": "L",
+                                            "size": "XL",
                                             "inStock": 5
                                         }
                                     ]
@@ -126,7 +126,7 @@
                                         {
                                             "id": "3c678d3d-6c7a-4e66-9974-f7aefbc9e9b7",
                                             "size": "S",
-                                            "inStock": 7
+                                            "inStock": 14
                                         },
                                         {
                                             "id": "4f4a1ab7-1a11-43d7-bd8a-5c59ea6d7c3b",
@@ -149,7 +149,7 @@
                             "price": 80.00,
                             "images": ["1003.jpg", "1003.jpg", "1003.jpg"],
                             "material": "Polyester",
-                            "information": "Make a statement with this stunning floral print maxi dress. The vibrant and eye-catching floral pattern brings a burst of color and life to your wardrobe. The dress features short sleeves and a flattering V-neckline, adding a touch of femininity and elegance. With an elastic waistband, it offers a comfortable and customizable fit that accentuates your curves. The flowy skirt adds a sense of movement and grace, allowing you to twirl and dance with ease. The dress is fully lined, providing an extra layer of comfort and ensuring a smooth silhouette. Whether you're attending a garden party, a summer wedding, or simply want to embrace your feminine side, this floral print maxi dress is the perfect choice. Its combination of style, comfort, and versatility makes it a must-have addition to your wardrobe.",
+                            "information": "Make a statement with this stunning floral print maxi dress. The vibrant and eye-catching floral pattern brings a burst of color and life to your wardrobe. The dress features short sleeves and a flattering V-neckline, adding a touch of femininity and elegance. With an elastic waistband, it offers a comfortable and customizable fit that accentuates your curves. The flowy skirt adds a sense of movement and grace, allowing you to twirl and dance with ease.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -169,7 +169,7 @@
                                     "items": [
                                         {
                                             "id": "e0ad7c63-37d5-41c7-9976-9ed05f27445c",
-                                            "size": "S",
+                                            "size": "XS",
                                             "inStock": 8
                                         },
                                         {
@@ -193,7 +193,7 @@
                                         {
                                             "id": "5b8bb57b-b6d0-4fe4-b66e-0753b704e6d4",
                                             "size": "S",
-                                            "inStock": 2
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "bc3c5a20-0a6f-4ce1-8daa-7c0c70438f9a",
@@ -216,7 +216,7 @@
                             "price": 80.00,
                             "images": ["1004.jpg", "1004.jpg", "1004.jpg"],
                             "material": "Wool blend",
-                            "information": "Elevate your style with this timeless classic tweed blazer. Crafted with attention to detail, it features a sophisticated design that exudes elegance and refinement. The blazer showcases notch lapels, adding a touch of sophistication to your ensemble. With its front patch pockets and chest welt pocket, it combines both style and functionality, providing ample storage for your essentials. The button cuffs add a polished finishing touch, while the single-breasted button closure ensures a sleek and streamlined look. Made from high-quality tweed fabric, this blazer offers both warmth and durability, making it suitable for various occasions and seasons. Whether you're dressing up for a formal event or adding a touch of sophistication to your everyday attire, this classic tweed blazer is a versatile wardrobe staple that effortlessly combines style and functionality.",
+                            "information": "Elevate your style with this timeless classic tweed blazer. Crafted with attention to detail, it features a sophisticated design that exudes elegance and refinement. The blazer showcases notch lapels, adding a touch of sophistication to your ensemble. With its front patch pockets and chest welt pocket, it combines both style and functionality, providing ample storage for your essentials.",
                             "styles": [
                                 {
                                     "id": "e772d954-4df9-4d85-a960-2e7f15352549",
@@ -239,7 +239,7 @@
                                         {
                                             "id": "83be9b9d-b156-448b-bf9e-8544d6e74a5c",
                                             "size": "S",
-                                            "inStock": 4
+                                            "inStock": 7
                                         },
                                         {
                                             "id": "f0b53171-1b77-4b2f-a157-0a84c23b22fd",
@@ -285,7 +285,7 @@
                             "price": 55.00,
                             "images": ["1005.jpg", "1005.jpg", "1005.jpg"],
                             "material": "Cashmere",
-                            "information": "Wrap yourself in timeless style with this classic striped sweater. Designed with a crew neckline, it offers a clean and versatile look that complements any outfit. The sweater features ribbed cuffs, neckline, and hem, adding a touch of texture and definition to the overall design. Crafted from high-quality materials, it is not only stylish but also incredibly soft and cozy, providing a comfortable and warm experience. The classic stripes give the sweater a refined and sophisticated appearance, making it a perfect choice for both casual and semi-formal occasions. Pair it with your favorite jeans or dress it up with a skirt for a polished ensemble. With its combination of style, comfort, and timeless appeal, this classic striped sweater is a wardrobe essential that will never go out of fashion.",
+                            "information": "Wrap yourself in timeless style with this classic striped sweater. Designed with a crew neckline, it offers a clean and versatile look that complements any outfit. The sweater features ribbed cuffs, neckline, and hem, adding a touch of texture and definition to the overall design. Crafted from high-quality materials, it is not only stylish but also incredibly soft and cozy, providing a comfortable and warm experience.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -352,7 +352,7 @@
                             "price": 145.00,
                             "images": ["1006.jpg", "1006.jpg", "1006.jpg"],
                             "material": "Silk",
-                            "information": "Elevate your feminine charm with this stunning flowy ruffled blouse. The blouse features a flattering V-neckline that adds a touch of allure to your look. Its long sleeves are adorned with delicate ruffles, creating a romantic and ethereal vibe. The flowy silhouette drapes gracefully, allowing for freedom of movement and a comfortable fit. Elastic cuffs add a subtle detail and help to create a billowy effect on the sleeves. The blouse is adorned with a button front closure, adding a polished touch to the overall design. Whether you're dressing up for a special occasion or looking to add a touch of elegance to your everyday outfits, this flowy ruffled blouse is a perfect choice. Pair it with tailored pants or a skirt for a sophisticated ensemble, or dress it down with jeans for a more relaxed yet chic look. Embrace your feminine side with this charming blouse and make a fashion statement wherever you go.",
+                            "information": "Elevate your feminine charm with this stunning flowy ruffled blouse. The blouse features a flattering V-neckline that adds a touch of allure to your look. Its long sleeves are adorned with delicate ruffles, creating a romantic and ethereal vibe. The flowy silhouette drapes gracefully, allowing for freedom of movement and a comfortable fit. Elastic cuffs add a subtle detail and help to create a billowy effect on the sleeves.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -372,18 +372,13 @@
                                     "items": [
                                         {
                                             "id": "4b97ebe3-b8d0-4b02-9d57-2e7185ef1a97",
-                                            "size": "XS",
+                                            "size": "M",
                                             "inStock": 12
                                         },
                                         {
                                             "id": "a7419573-6229-4978-8a5a-3db282a6c0f7",
-                                            "size": "S",
+                                            "size": "L",
                                             "inStock": 18
-                                        },
-                                        {
-                                            "id": "44c4fd2c-9a88-4cc7-8f0d-1e9c5e3c59a9",
-                                            "size": "M",
-                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -395,18 +390,13 @@
                                     "items": [
                                         {
                                             "id": "6c1336d1-8d13-4a5d-8490-7ee3c25064b0",
-                                            "size": "XS",
+                                            "size": "L",
                                             "inStock": 8
                                         },
                                         {
                                             "id": "c1f19d61-2e19-4ccf-8c5d-9ad6a636dfe7",
-                                            "size": "S",
+                                            "size": "XL",
                                             "inStock": 10
-                                        },
-                                        {
-                                            "id": "4a2c1447-4a9e-4e8e-8f35-1a54a5c6ee5a",
-                                            "size": "M",
-                                            "inStock": 5
                                         }
                                     ]
                                 }
@@ -419,7 +409,7 @@
                             "price": 55.00,
                             "images": ["1007.jpg", "1007.jpg", "1007.jpg"],
                             "material": "Denim",
-                            "information": "Introducing the timeless classic denim jacket, a must-have staple for every wardrobe. This jacket features a collar that adds a touch of structure and versatility to the design. The button front closure allows for easy wear and adds a touch of traditional charm. The jacket is equipped with flap chest pockets, providing a convenient and stylish storage option. Additionally, there are side welt pockets, perfect for keeping your hands warm or storing small essentials. For a personalized fit and added style, the jacket is equipped with adjustable button tabs at the hem. These tabs allow you to cinch the jacket in at the waist, creating a flattering silhouette. Crafted from durable denim fabric, this jacket is designed to withstand the test of time. Its versatility makes it a perfect layering piece for various seasons and occasions. Pair it with jeans for a classic denim-on-denim look, or style it over a dress for a playful contrast. Effortlessly cool and eternally stylish, this classic denim jacket is a wardrobe essential that will never go out of fashion.",
+                            "information": "Introducing the timeless classic denim jacket, a must-have staple for every wardrobe. This jacket features a collar that adds a touch of structure and versatility to the design. The button front closure allows for easy wear and adds a touch of traditional charm. The jacket is equipped with flap chest pockets, providing a convenient and stylish storage option. Additionally, there are side welt pockets, perfect for keeping your hands warm or storing small essentials.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -440,7 +430,7 @@
                                         {
                                             "id": "11a020fc-fb19-4ea1-9df5-ddeab0e69d4a",
                                             "size": "XS",
-                                            "inStock": 2
+                                            "inStock": 11
                                         },
                                         {
                                             "id": "e4d94d6e-5f5e-4ff6-a9bc-dc7f08bc83d4",
@@ -463,7 +453,7 @@
                                         {
                                             "id": "149edcb5-b6de-4bcb-9400-d54c62bc09a3",
                                             "size": "S",
-                                            "inStock": 5
+                                            "inStock": 6
                                         },
                                         {
                                             "id": "a1ab8a16-95c3-4ce2-aae3-cbfa63b866f3",
@@ -486,7 +476,7 @@
                             "price": 180.00,
                             "images": ["1008.jpg", "1008.jpg", "1008.jpg"],
                             "material": "Cotton blend",
-                            "information": "Introducing the elegant and feminine flowy pleated skirt, a versatile addition to any wardrobe. This skirt features a flattering midi length, falling gracefully below the knee for a sophisticated look. The elastic waistband ensures a comfortable and adjustable fit, accommodating different body shapes and sizes. The flowy pleats add movement and grace to the skirt, creating a beautiful silhouette with every step. The skirt is fully lined, providing a smooth and luxurious feel against the skin. The lining also adds an extra layer of coverage, ensuring that the skirt remains opaque and suitable for various occasions. Crafted from high-quality materials, this skirt is designed to retain its shape and drape beautifully. Its timeless design and versatile style make it suitable for both casual and formal settings. Pair it with a tucked-in blouse and heels for a chic and polished look, or dress it down with a simple tee and sneakers for a more relaxed ensemble. Whether you're attending a special event or simply want to add a touch of elegance to your everyday outfits, this flowy pleated skirt is a perfect choice.",
+                            "information": "Introducing the elegant and feminine flowy pleated skirt, a versatile addition to any wardrobe. This skirt features a flattering midi length, falling gracefully below the knee for a sophisticated look. The elastic waistband ensures a comfortable and adjustable fit, accommodating different body shapes and sizes. The flowy pleats add movement and grace to the skirt, creating a beautiful silhouette with every step.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
@@ -506,18 +496,13 @@
                                     "items": [
                                         {
                                             "id": "14cfce5a-6342-4f11-8943-32dfef9e023d",
-                                            "size": "XS",
+                                            "size": "M",
                                             "inStock": 14
                                         },
                                         {
                                             "id": "ecbd8847-9a5a-4a12-9069-fa56ae3e41fd",
-                                            "size": "S",
+                                            "size": "L",
                                             "inStock": 18
-                                        },
-                                        {
-                                            "id": "0148996e-b61b-464f-bb64-0724a2888f22",
-                                            "size": "M",
-                                            "inStock": 15
                                         }
                                     ]
                                 },
@@ -530,7 +515,7 @@
                                         {
                                             "id": "16ae858f-4b5d-428f-9fcf-19567b7507ff",
                                             "size": "XS",
-                                            "inStock": 2
+                                            "inStock": 12
                                         },
                                         {
                                             "id": "aa83967a-0f5e-4b46-9b02-b7b54fd48316",
@@ -548,20 +533,16 @@
                         },
                         {
                             "id": "d61f4df1-1319-4b47-bfa2-1429b789441c",
-                            "name": "Leather boots",
+                            "name": "Long leather skirt",
                             "brand": "Aurelia",
                             "price": 99.00,
                             "images": ["1009.jpg", "1009.jpg", "1009.jpg"],
                             "material": "Leather",
-                            "information": "These classic leather boots feature a rounded toe and a sturdy block heel. They are designed with a convenient side zipper closure and have an ankle-height silhouette. Crafted from durable genuine leather, these boots offer both reliability and longevity. Meticulously stitched with attention to detail, they are perfect for everyday wear as well as special occasions. The boots showcase an elegant and versatile design, allowing for easy pairing with various outfits and styles. With a comfortable fit and the added convenience of a side zipper, these boots provide both comfort and confidence with every step.",
+                            "information": "The high-quality leather ensures durability, ensuring that this skirt will remain a staple in your wardrobe for years to come. It features a comfortable and flattering fit, with a waistband that accentuates your curves while providing ease of movement. The skirt's design allows for versatile styling options, easily transitioning from day to night and effortlessly complementing a range of tops, blouses, or jackets.",
                             "styles": [
                                 {
                                     "id": "46d4e46b-b6b1-4f83-86b1-8db036a46877",
                                     "name": "Casual"
-                                },
-                                {
-                                    "id": "ff88070f-9696-42fd-bac4-582956ae65bf",
-                                    "name": "Edgy"
                                 }
                             ],
                             "colors": [
@@ -573,18 +554,13 @@
                                     "items": [
                                         {
                                             "id": "d6c51446-7f9d-4f78-b8e4-b2372eae6a06",
-                                            "size": "35",
-                                            "inStock": 5
+                                            "size": "M",
+                                            "inStock": 9
                                         },
                                         {
                                             "id": "d97de3ab-7e6d-4c26-94c8-49d80b850fcd",
-                                            "size": "36",
+                                            "size": "L",
                                             "inStock": 15
-                                        },
-                                        {
-                                            "id": "67271f73-7589-4b11-bf17-f63c99417a8b",
-                                            "size": "37",
-                                            "inStock": 12
                                         }
                                     ]
                                 },
@@ -596,17 +572,17 @@
                                     "items": [
                                         {
                                             "id": "ac1f8a2c-8f39-4bb6-bb4a-8d695ab9f3c4",
-                                            "size": "35",
+                                            "size": "S",
                                             "inStock": 6
                                         },
                                         {
                                             "id": "d577a551-6e19-47f4-aeb5-7b3f0e343b6d",
-                                            "size": "36",
+                                            "size": "M",
                                             "inStock": 10
                                         },
                                         {
                                             "id": "b7b471d3-9d4e-4d81-932a-6c1c9baf1b1e",
-                                            "size": "37",
+                                            "size": "L",
                                             "inStock": 6
                                         }
                                     ]
@@ -620,7 +596,7 @@
                             "price": 125.00,
                             "images": ["1010.jpg", "1010.jpg", "1010.jpg"],
                             "material": "Cotton",
-                            "information": "This classic striped T-shirt boasts a timeless design with its round neckline and short sleeves. The shirt features a series of horizontal stripes, adding a touch of visual interest and style. The round neckline provides a comfortable fit and frames the upper body nicely. The short sleeves offer a relaxed and casual look, making it a perfect choice for warm weather or layering under jackets and sweaters. The T-shirt is crafted from high-quality fabric, ensuring both comfort and durability. Its versatile design allows for easy pairing with various bottoms, such as jeans, shorts, or skirts, making it a versatile staple in any wardrobe. Whether worn alone or as a part of a layered outfit, this classic striped T-shirt is a go-to option for effortless style and comfort.",
+                            "information": "This classic striped T-shirt boasts a timeless design with its round neckline and short sleeves. The shirt features a series of horizontal stripes, adding a touch of visual interest and style. The round neckline provides a comfortable fit and frames the upper body nicely. The short sleeves offer a relaxed and casual look, making it a perfect choice for warm weather or layering under jackets and sweaters.",
                             "styles": [
                                 {
                                     "id": "e5aa3d78-96d1-4528-8608-7e8e8c65de4c",
@@ -707,17 +683,17 @@
                                     "items": [
                                         {
                                             "id": "9db09c4a-5e8e-43e4-9850-5b384d2e49f6",
-                                            "size": "XS",
-                                            "inStock": 3
+                                            "size": "S",
+                                            "inStock": 10
                                         },
                                         {
                                             "id": "eb02a2f3-877b-48b2-9f7f-795b6986075e",
-                                            "size": "S",
+                                            "size": "M",
                                             "inStock": 15
                                         },
                                         {
                                             "id": "27d3e2ad-5e42-4a33-b57c-9b31a1a5504e",
-                                            "size": "M",
+                                            "size": "L",
                                             "inStock": 20
                                         }
                                     ]
@@ -774,17 +750,17 @@
                                     "items": [
                                         {
                                             "id": "c2db9d1d-0904-4d2b-a835-5250e6a9790e",
-                                            "size": "XS",
+                                            "size": "M",
                                             "inStock": 6
                                         },
                                         {
                                             "id": "8f53a199-cb16-4161-bd34-bd746fe80eb2",
-                                            "size": "S",
+                                            "size": "L",
                                             "inStock": 10
                                         },
                                         {
                                             "id": "c04dd614-0eb0-4340-a71d-943d9e5b5581",
-                                            "size": "M",
+                                            "size": "XL",
                                             "inStock": 12
                                         }
                                     ]
@@ -795,11 +771,6 @@
                                     "hex": "#87CEEB",
                                     "images": ["1012.jpg", "1012.jpg", "1012.jpg"],
                                     "items": [
-                                        {
-                                            "id": "e491af36-7b1c-4618-9f40-651c9daab692",
-                                            "size": "XS",
-                                            "inStock": 8
-                                        },
                                         {
                                             "id": "dd75918d-98d1-40ad-9703-8282e0a1d4dd",
                                             "size": "S",

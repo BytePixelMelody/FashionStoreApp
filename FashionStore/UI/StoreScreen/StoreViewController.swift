@@ -14,11 +14,22 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
-// TODO: ScrollViews to CollectionViews
-// TODO: for correct UICollectionView animations replace "view" with "contentView" is cells
-// TODO: reverse view-presenter injection and delete view's inits
+// TODO: CollectionView to ScrollView
 // TODO: add if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory
-// TODO: Database write to CoreData after loading from backend
+// TODO: reverse view-presenter injection and delete view's inits
+
+// Functionality that may be done in future:
+// 1. Many bank cards support
+// 2. Color and size support
+// 3. Favorites
+// 4. Search
+// 5. Menu
+// 6. Login
+
+// Technical solutions for speed and stability
+// 1. Image cache
+// 2. Unit tests
+// 3. Database write to CoreData after loading from backend
 
 import UIKit
 import SnapKit
