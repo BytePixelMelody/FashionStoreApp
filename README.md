@@ -38,4 +38,4 @@ Fashion Store App Overview | Dynamic Font Scale
 | <video src="https://user-images.githubusercontent.com/74405334/232993722-ddc8be22-5c84-4d8d-baf2-4326fda97ec3.mov" width="320"/> | <video src="https://user-images.githubusercontent.com/74405334/232993874-d6321b4e-04e1-4ed9-9f56-be14ddb038d6.mov" width="320"/> |
 
 **Contacts:**  
-[LinkedIn](https://www.linkedin.com/in/vnazimko "https://www.linkedin.com/in/vnazimko") | [Telegram](https://t.me/Voleno "@Voleno") | [Email](mailto:vnazimko@gmail.com "vnazimko@gmail.com")
+[LinkedIn](https://www.linkedin.com/in/bytepixelmelody "https://www.linkedin.com/in/bytepixelmelody") | [Telegram](https://t.me/BytePixelMelody "@BytePixelMelody") | [Email](mailto:bytepixelmelody@gmail.com "bytepixelmelody@gmail.com")
