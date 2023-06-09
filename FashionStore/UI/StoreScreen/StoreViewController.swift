@@ -14,7 +14,6 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
-// TODO: CollectionView to ScrollView
 // TODO: add if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory
 // TODO: reverse view-presenter injection and delete view's inits
 
@@ -27,9 +26,12 @@
 // 6. Login
 
 // Technical solutions for speed and stability
-// 1. Image cache
-// 2. Unit tests
-// 3. Database write to CoreData after loading from backend
+// - Collection View with different cell types in checkout
+// - Catalog refresh control
+// - Cart swipe to delete
+// - Image cache
+// - Unit tests
+// - Database write to CoreData after loading from backend
 
 import UIKit
 import SnapKit
