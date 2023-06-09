@@ -12,17 +12,23 @@ protocol CheckoutPresenterProtocol: AnyObject {
     func loadCatalog() async throws
     func checkCartInStock() async throws
     func reloadCart() async throws
+    func reloadCollectionView()
     func loadImage(imageName: String) async throws -> UIImage
     func reduceCartItemCount(itemId: UUID, newCount: Int) async throws
     func increaseCartItemCount(itemId: UUID, newCount: Int) async throws
     func closeScreen()
     func editAddress()
     func deleteAddress()
-    func editPaymentCard()
+    func editPaymentMethod()
     func deletePaymentCard()
     func placeOrder()
     func closeCheckoutAndCart()
-    func checkoutScreenWillAppear()
+    func fillChippingAddressAndPaymentMethod()
+    func getCartItems() -> [CartItem]?
+    func findProduct(itemId: UUID) -> Product?
+    func findColor(itemId: UUID) -> Color?
+    func findCatalogItem(itemId: UUID) -> CatalogItem?
+    func findCartItem(itemId: UUID) -> CartItem?
 }
 
 class CheckoutPresenter: CheckoutPresenterProtocol {
@@ -44,6 +50,10 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         guard let self else { return }
         try await coreDataService.removeCartItemFromCart(itemId: itemId)
         try await reloadCart()
+        await MainActor.run { [weak self] in
+            self?.view?.reloadCollectionViewData()
+            self?.setTotalPrice()
+        }
     }
     private let deleteCartItemImage = UIImageView.makeImageView(imageName: ImageName.message)
 
@@ -91,6 +101,25 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         } catch {
             Errors.handler.checkError(error)
         }
+    }
+
+    // no chipping address popup
+    private let addChippingAddressPopupTitle = "Missing address"
+    private let addChippingAddressMessageText = "Please add the shipping address"
+    private let addChippingAddressButtonTitle = "Add address"
+    private lazy var addChippingAddressAction = { [weak self] in
+        guard let self else { return }
+        editAddress()
+    }
+    private let addImage = UIImageView.makeImageView(imageName: ImageName.message)
+
+    // no payment method popup
+    private let addPaymentMethodPopupTitle = "Missing payment method"
+    private let addPaymentMethodMessageText = "Please add a payment card"
+    private let addPaymentMethodButtonTitle = "Add card"
+    private lazy var addPaymentMethodAction = { [weak self] in
+        guard let self else { return }
+        editPaymentMethod()
     }
 
     private var cartProducts: [CartItem] = []
@@ -143,11 +172,17 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         }
     }
     
+    // on view will appear
+    func reloadCollectionView() {
+        // apply data snapshot to collection view
+        view?.reloadCollectionViewData()
+        setTotalPrice()
+    }
+    
     // load image from web
     func loadImage(imageName: String) async throws -> UIImage {
         try await webService.getImage(imageName: imageName)
     }
-
     
     func reduceCartItemCount(itemId: UUID, newCount: Int) async throws {
         if newCount == 0 {
@@ -160,7 +195,10 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             // reload cart
             try await reloadCart()
-            // TODO: call view?.reloadDataSource
+            await MainActor.run { [weak self] in
+                self?.view?.updateCollectionViewItems(updatedItemIds: [itemId])
+                self?.setTotalPrice()
+            }
         }
     }
     
@@ -173,7 +211,10 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         if newCount <= cartItemInStockCount {
             try await coreDataService.editCartItemCount(itemId: itemId, newCount: newCount)
             try await reloadCart()
-            // TODO: call view?.reloadDataSource
+            await MainActor.run { [weak self] in
+                self?.view?.updateCollectionViewItems(updatedItemIds: [itemId])
+                self?.setTotalPrice()
+            }
         } else {
             // popup that maximum available quantity has been reached
             await MainActor.run {
@@ -189,7 +230,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             }
         }
     }
-    
+
     // popup when trying to remove item from cart
     private func removeCartItemWithWarning(itemId: UUID) {
         // transform    (UUID) async throws -> Void    to    () -> Void
@@ -222,7 +263,7 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.showAddressScreen()
     }
     
-    func editPaymentCard() {
+    func editPaymentMethod() {
         router.showPaymentMethodScreen()
     }
     
@@ -230,9 +271,51 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         router.popTwoScreensToBottom()
     }
     
-    // TODO: Check cart and address
     // fake order placement
     func placeOrder() {
+        // if no chipping address - we ask to fill it
+        guard let _ = getChippingAddress() else {
+            showAddAddressPopup()
+            return
+        }
+        
+        // if no payment method - we ask to add it
+        guard let _ = getPaymentMethod() else {
+            showPaymentMethodPopup()
+            return
+        }
+
+        // all good, we did it
+        orderIsSuccessful()
+        
+        // TODO: clean cart
+    }
+    
+    private func showAddAddressPopup() {
+        router.showPopupScreen(
+            headerTitle: addChippingAddressPopupTitle,
+            message: addChippingAddressMessageText,
+            subMessage: nil,
+            buttonTitle: addChippingAddressButtonTitle,
+            buttonAction: addChippingAddressAction,
+            closeAction: nil,
+            image: addImage
+        )
+    }
+    
+    private func showPaymentMethodPopup() {
+        router.showPopupScreen(
+            headerTitle: addPaymentMethodPopupTitle,
+            message: addPaymentMethodMessageText,
+            subMessage: nil,
+            buttonTitle: addPaymentMethodButtonTitle,
+            buttonAction: addPaymentMethodAction,
+            closeAction: nil,
+            image: addImage
+        )
+    }
+    
+    private func orderIsSuccessful() {
         successPurchasePopupSubMessageText = successPurchasePopupSubMessageText + String(Int.random(in: 100_000...999_999))
         router.showPopupScreen(
             headerTitle: successPurchasePopupTitle,
@@ -245,21 +328,22 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         )
     }
     
-    func checkoutScreenWillAppear() {
-        checkChippingAddress()
-        checkPaymentMethod()
-        checkCart()
+    func fillChippingAddressAndPaymentMethod() {
+        fillChippingAddress()
+        fillPaymentMethod()
     }
     
-    private func checkChippingAddress() {
-        var chippingAddress: ChippingAddress? = nil
+    private func getChippingAddress() -> ChippingAddress? {
         do {
-            chippingAddress = try keychainService.read(keychainId: Settings.keychainChippingAddressId)
+            return try keychainService.read(keychainId: Settings.keychainChippingAddressId)
         } catch {
             Errors.handler.checkError(error)
+            return nil
         }
-        
-        if let chippingAddress {
+    }
+    
+    private func fillChippingAddress() {
+        if let chippingAddress = getChippingAddress() {
             let firstAndLastName = "\(chippingAddress.firstName) \(chippingAddress.lastName)"
             let address = chippingAddress.address
             let city = chippingAddress.city.isEmpty ? "" : "\(chippingAddress.city), "
@@ -277,16 +361,18 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
             view?.showAddAddressView()
         }
     }
-
-    private func checkPaymentMethod() {
-        var paymentMethod: PaymentMethod? = nil
+    
+    private func getPaymentMethod() -> PaymentMethod? {
         do {
-            paymentMethod = try keychainService.read(keychainId: Settings.keychainPaymentMethodId)
+            return try keychainService.read(keychainId: Settings.keychainPaymentMethodId)
         } catch {
             Errors.handler.checkError(error)
+            return nil
         }
-        
-        if let paymentMethod {
+    }
+
+    private func fillPaymentMethod() {
+        if let paymentMethod = getPaymentMethod() {
             let cardFirstDigit = String(paymentMethod.cardNumber).prefix(1)
             var paymentSystemImageName = ""
             var paymentSystemName = ""
@@ -345,12 +431,66 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         )
     }
     
-    private func checkCart() {
-        if !cartProducts.isEmpty {
-            view?.showEmptyCheckoutWithAnimation()
-        } else {
-            view?.showFullCheckout()
-        }
+    func getCartItems() -> [CartItem]? {
+        cart?.cartItems
+    }
+
+    // find product by itemId
+    func findProduct(itemId: UUID) -> Product? {
+        guard let catalog else { return nil }
+        
+        let allProducts = catalog.audiences.flatMap { $0.categories.flatMap { $0.products } }
+        
+        let foundProduct = allProducts.first(where: { $0.colors.contains { $0.items.contains { $0.id == itemId } } })
+        
+        return foundProduct
     }
     
+    // find color by itemId
+    func findColor(itemId: UUID) -> Color? {
+        guard let catalog else { return nil }
+
+        let allColors = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors } } }
+        
+        let foundColor = allColors.first(where: { $0.items.contains { $0.id == itemId } })
+        
+        return foundColor
+    }
+    
+    // find catalog item by itemId
+    func findCatalogItem(itemId: UUID) -> CatalogItem? {
+        guard let catalog else { return nil }
+
+        let allItems = catalog.audiences.flatMap { $0.categories.flatMap { $0.products.flatMap { $0.colors.flatMap { $0.items } } } }
+        
+        let foundItem = allItems.first(where: { $0.id == itemId } )
+        
+        return foundItem
+    }
+   
+    // find cart item by itemId
+    func findCartItem(itemId: UUID) -> CartItem? {
+        guard let cart else { return nil }
+        
+        return cart.cartItems.first(where: { $0.itemId == itemId })
+    }
+    
+    // total cart price
+    private func setTotalPrice() {
+        let result: Decimal?
+        
+        // cart is not nil
+        if let cartItems = cart?.cartItems  {
+            var totalPrice: Decimal = 0.00
+            for cartItem in cartItems {
+                guard let product = findProduct(itemId: cartItem.itemId) else { break }
+                totalPrice += product.price * Decimal(cartItem.count)
+            }
+            result = totalPrice
+        } else {
+            result = nil
+        }
+        view?.setTotalPrice(price: result)
+    }
+
 }

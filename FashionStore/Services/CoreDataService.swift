@@ -15,6 +15,7 @@ protocol CoreDataServiceProtocol: AnyObject {
     func editCartItemCount(itemId: UUID, newCount: Int) async throws
     func removeCartItemFromCart(itemId: UUID) async throws
     func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int
+//    func removeAllCartItemFromCart(itemId: UUID) async throws
 }
 
 actor CoreDataService: CoreDataServiceProtocol {

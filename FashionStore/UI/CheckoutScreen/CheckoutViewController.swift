@@ -19,7 +19,9 @@ protocol CheckoutViewProtocol: AnyObject {
                                phone: String)
     func showAddPaymentMethodView()
     func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String)
-    func setTotalPrice(price: Decimal)
+    func setTotalPrice(price: Decimal?)
+    func reloadCollectionViewData()
+    func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID])
 }
 
 class CheckoutViewController: UIViewController {
@@ -47,9 +49,7 @@ class CheckoutViewController: UIViewController {
     private lazy var closeCheckoutHeaderView = HeaderNamedView(closeScreenAction: closeCheckoutAction, headerTitle: Self.headerTitle)
     
     private lazy var closeCheckoutAndCartHeaderView = HeaderNamedView(closeScreenAction: closeCheckoutAndCartAction, headerTitle: Self.headerTitle)
-    
-    private let detailsAndProductsScrollView = UIScrollView.makeScrollView()
-    
+        
     private let detailsAndProductsStackView = UIStackView.makeVerticalStackView()
 
     private let addressContainerView = ContainerView(frame: .zero)
@@ -69,7 +69,7 @@ class CheckoutViewController: UIViewController {
     private lazy var addAddressView = EmptyDetailsView(infoLabelText: Self.shippingAddressLabelTitle, addInfoButtonTitle: Self.addAddressButtonTitle, addInfoAction: editAddressAction)
    
     private lazy var editPaymentMethodAction: () -> Void = { [weak presenter] in
-        presenter?.editPaymentCard()
+        presenter?.editPaymentMethod()
     }
     
     private lazy var deletePaymentMethodAction: () -> Void = { [weak presenter] in
@@ -78,6 +78,9 @@ class CheckoutViewController: UIViewController {
     
     private lazy var addPaymentMethodView = EmptyDetailsView(infoLabelText: Self.paymentMethodLabelTitle, addInfoButtonTitle: Self.addPaymentMethodButtonTitle, addInfoAction: editPaymentMethodAction)
     
+    private var cartItemsCollectionView: UICollectionView?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+
     private let checkoutIsEmptyLabel = UILabel.makeLabel(numberOfLines: 0)
         
     private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, action: closeCheckoutAndCartAction)
@@ -99,12 +102,34 @@ class CheckoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
 
+        Task<Void, Never> { [weak presenter] in
+            do {
+                // load catalog from Web
+                try await presenter?.loadCatalog()
+                // check cartItems for availability in the catalog, pop-up message when deleting from cart
+                try await presenter?.checkCartInStock()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
+
+        // create and configure collection view
+        configureCollectionView()
+        
+        // setup texts with styles
         setupUiTexts()
+        
+        // fill stack with elements
         fillDetailsAndProductsStackView()
+        
+        // arrange layouts
         arrangeLayout()
+        
+        // configure collection view data source
+        configureDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,8 +138,19 @@ class CheckoutViewController: UIViewController {
         // turn off navigation swipe, the extension is below
         // turn navigation swipe back on is in viewWillDisappear
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-
-        presenter.checkoutScreenWillAppear()
+        
+        Task<Void, Never> { [weak presenter] in
+            do {
+                // reload cart items
+                try await presenter?.reloadCart()
+                presenter?.reloadCollectionView()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
+        
+        // while task is running we will fill chipping address and payment method
+        presenter.fillChippingAddressAndPaymentMethod()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -135,7 +171,10 @@ class CheckoutViewController: UIViewController {
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        setupUiTexts()
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            setupUiTexts()
+            cartItemsCollectionView?.collectionViewLayout.invalidateLayout()
+        }
     }
     
     private func fillDetailsAndProductsStackView() {
@@ -147,11 +186,11 @@ class CheckoutViewController: UIViewController {
     private func arrangeLayout() {
         arrangeCloseCheckoutHeaderView()
         arrangeCloseCheckoutAndCartHeaderView()
-        arrangeDetailsAndProductsScrollView()
         arrangeDetailsAndProductsStackView()
+        arrangeCartItemsCollectionView()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
-        arrangeDetailsAndProductsScrollViewBottom()
+        arrangeCartItemsCollectionViewBottom()
     }
     
     private func arrangeCloseCheckoutHeaderView() {
@@ -168,21 +207,21 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-    private func arrangeDetailsAndProductsScrollView() {
-        view.addSubview(detailsAndProductsScrollView)
-        detailsAndProductsScrollView.snp.makeConstraints { make in
+    private func arrangeDetailsAndProductsStackView() {
+        view.addSubview(detailsAndProductsStackView)
+        detailsAndProductsStackView.snp.makeConstraints { make in
             make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
-            make.left.right.equalToSuperview()
-            make.width.equalTo(detailsAndProductsScrollView.contentLayoutGuide.snp.width)
-            // bottom is in footer constraints
+            make.left.right.equalToSuperview().inset(16)
         }
     }
     
-    private func arrangeDetailsAndProductsStackView() {
-        detailsAndProductsScrollView.addSubview(detailsAndProductsStackView)
-        detailsAndProductsStackView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(detailsAndProductsScrollView.contentLayoutGuide)
-            make.left.right.equalTo(detailsAndProductsScrollView.contentLayoutGuide).inset(16)
+    private func arrangeCartItemsCollectionView() {
+        guard let cartItemsCollectionView else { return }
+        view.addSubview(cartItemsCollectionView)
+        cartItemsCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(detailsAndProductsStackView.snp.bottom).offset(8)
+            make.left.right.equalToSuperview()
+            // bottom is in footer constraints
         }
     }
     
@@ -201,8 +240,9 @@ class CheckoutViewController: UIViewController {
         }
     }
     
-    private func arrangeDetailsAndProductsScrollViewBottom() {
-        detailsAndProductsScrollView.snp.makeConstraints { make in
+    private func arrangeCartItemsCollectionViewBottom() {
+        guard let cartItemsCollectionView else { return }
+        cartItemsCollectionView.snp.makeConstraints { make in
             make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
         }
     }
@@ -274,7 +314,7 @@ extension CheckoutViewController: CheckoutViewProtocol {
         
         // animations
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction], animations: { [weak self] in
-            guard let self else { return }
+            guard let self, let cartItemsCollectionView else { return }
             // show
             closeCheckoutAndCartHeaderView.alpha = 1
             checkoutIsEmptyLabel.alpha = 1
@@ -282,12 +322,11 @@ extension CheckoutViewController: CheckoutViewProtocol {
             // hide
             closeCheckoutHeaderView.alpha = 0
             footerTotalPriceView.alpha = 0
-            // remake scrollView constraints
-            detailsAndProductsScrollView.snp.remakeConstraints { [weak self] make in
+            // remake cartItemsCollectionView constraints
+            cartItemsCollectionView.snp.remakeConstraints { [weak self] make in
                 guard let self else { return }
-                make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
+                make.top.equalTo(detailsAndProductsStackView.snp.bottom).offset(8)
                 make.left.right.equalToSuperview()
-                make.width.equalTo(detailsAndProductsScrollView.contentLayoutGuide.snp.width)
                 make.bottom.equalTo(continueShoppingButton.snp.top).offset(-8)
             }
         }) { [weak self] _ in
@@ -310,18 +349,125 @@ extension CheckoutViewController: CheckoutViewProtocol {
         closeCheckoutAndCartHeaderView.isHidden = true
         checkoutIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
-        // remake scrollView constraints
-        detailsAndProductsScrollView.snp.remakeConstraints { [weak self] make in
+        // remake cartItemsCollectionView constraints
+        guard let cartItemsCollectionView else { return }
+        cartItemsCollectionView.snp.remakeConstraints { [weak self] make in
             guard let self else { return }
-            make.top.equalTo(closeCheckoutHeaderView.snp.bottom).offset(5)
+            make.top.equalTo(detailsAndProductsStackView.snp.bottom).offset(8)
             make.left.right.equalToSuperview()
-            make.width.equalTo(detailsAndProductsScrollView.contentLayoutGuide.snp.width)
             make.bottom.equalTo(footerTotalPriceView.snp.top).offset(-8)
         }
     }
     
-    public func setTotalPrice(price: Decimal) {
+    public func setTotalPrice(price: Decimal?) {
         footerTotalPriceView.setTotalPrice(price: price)
+    }
+
+}
+
+// collection view implementing
+extension CheckoutViewController {
+    
+    // create and configure collection view
+    private func configureCollectionView() {
+        // flow layout creating
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        // layout setup, automaticSize requires func preferredLayoutAttributesFitting() in cell class
+        collectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        collectionViewFlowLayout.sectionInset = CartItemsFlowLayoutConstants.sectionInset
+        collectionViewFlowLayout.minimumLineSpacing = CartItemsFlowLayoutConstants.lineSpacing
+        collectionViewFlowLayout.minimumInteritemSpacing = CartItemsFlowLayoutConstants.minimumInteritemSpacing
+        
+        cartItemsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        // some setup of collection view
+        cartItemsCollectionView?.alwaysBounceVertical = true // springing (bounce)
+        cartItemsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
+    }
+    
+    enum Section: Hashable {
+        case cartItemSection
+    }
+    
+    enum Item: Hashable {
+        case cartItem(CatalogItem.ID)
+    }
+    
+    private func createCartItemCellRegistration() -> UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> {
+        return UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> { [weak self] cell, indexPath, itemId in
+            
+            guard let self else { return }
+            
+            let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
+                // load image by presenter
+                return try await presenter?.loadImage(imageName: imageName)
+            }
+            
+            let minusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemId, newCount in
+                try await presenter?.reduceCartItemCount(itemId: itemId, newCount: newCount)
+            }
+            
+            let plusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemId, newCount in
+                try await presenter?.increaseCartItemCount(itemId: itemId, newCount: newCount)
+            }
+            
+            // find info in catalog
+            guard let product = presenter.findProduct(itemId: itemId) else { return }
+            guard let color = presenter.findColor(itemId: itemId) else { return }
+            guard let catalogItem = presenter.findCatalogItem(itemId: itemId) else { return }
+            guard let cartItem = presenter.findCartItem(itemId: itemId) else { return }
+
+            let productName = product.name
+            let colorName = color.name
+            let size = catalogItem.size
+            
+            cell.setup(
+                imageName: color.images.first,
+                loadImageAction: loadImageAction,
+                itemBrand: product.brand,
+                itemNameColorSize: "\(productName), \(colorName), \(size)",
+                itemId: itemId,
+                minusButtonAction: minusButtonAction,
+                count: cartItem.count,
+                plusButtonAction: plusButtonAction,
+                itemPrice: product.price
+            )
+        }
+    }
+    
+    private func configureDataSource() {
+        let cartItemCellRegistration = createCartItemCellRegistration()
+        
+        guard let cartItemsCollectionView else { return }
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: cartItemsCollectionView) {collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .cartItem(let itemId):
+                return collectionView.dequeueConfiguredReusableCell(using: cartItemCellRegistration, for: indexPath, item: itemId)
+            }
+        }
+    }
+    
+    func reloadCollectionViewData() {
+        guard let dataSource, let cartItems = presenter.getCartItems() else { return }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        // adding sections to snapshot
+        snapshot.appendSections([.cartItemSection])
+        // adding products to snapshot by Item enum entities .product(Product)
+        snapshot.appendItems(cartItems.map { Item.cartItem($0.itemId) })
+        // apply dataSource with correct animations
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    // if count changes
+    func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID]) {
+        guard let dataSource else { return }
+        
+        var snapshot = dataSource.snapshot()
+        let updatedCartItems = updatedItemIds.compactMap { presenter.findCartItem(itemId: $0) }
+        let updatedItems = updatedCartItems.map { Item.cartItem($0.itemId) }
+        snapshot.reconfigureItems(updatedItems)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
 }

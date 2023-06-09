@@ -64,15 +64,6 @@ class CartViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        // create and configure collection view
-        configureCollectionView()
-        
-        // setup texts with styles
-        setupUiTexts()
-        
-        // arrange layouts
-        arrangeLayout()
-        
         Task<Void, Never> { [weak presenter] in
             do {
                 // load catalog from Web
@@ -83,6 +74,15 @@ class CartViewController: UIViewController {
                 Errors.handler.checkError(error)
             }
         }
+        
+        // create and configure collection view
+        configureCollectionView()
+        
+        // setup texts with styles
+        setupUiTexts()
+        
+        // arrange layouts
+        arrangeLayout()
         
         // configure collection view data source
         configureDataSource()
@@ -136,7 +136,7 @@ class CartViewController: UIViewController {
         arrangeCartIsEmptyLabel()
         arrangeContinueShoppingButton()
         arrangeFooterTotalPriceView()
-        arrangeCartItemsCollectionView()
+        arrangeCartItemsCollectionViewBottom()
     }
     
     private func arrangeClosableHeaderView() {
@@ -215,7 +215,7 @@ extension CartViewController: CartViewProtocol {
             continueShoppingButton.alpha = 1
             // hide
             footerTotalPriceView.alpha = 0
-            // remake scrollView constraints
+            // remake cartItemsCollectionView constraints
             cartItemsCollectionView.snp.remakeConstraints { [weak self] make in
                 guard let self else { return }
                 make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
@@ -231,13 +231,13 @@ extension CartViewController: CartViewProtocol {
     }
     
     public func showFullCart() {
-        guard let cartItemsCollectionView else { return }
         // show
         footerTotalPriceView.isHidden = false
         // hide
         cartIsEmptyLabel.isHidden = true
         continueShoppingButton.isHidden = true
-        // remake scrollView constraints
+        // remake cartItemsCollectionView constraints
+        guard let cartItemsCollectionView else { return }
         cartItemsCollectionView.snp.remakeConstraints { [weak self] make in
             guard let self else { return }
             make.top.equalTo(closableHeaderView.snp.bottom).offset(5)
@@ -246,7 +246,7 @@ extension CartViewController: CartViewProtocol {
         }
     }
     
-    func setTotalPrice(price: Decimal?) {
+    public func setTotalPrice(price: Decimal?) {
         footerTotalPriceView.setTotalPrice(price: price)
     }
     

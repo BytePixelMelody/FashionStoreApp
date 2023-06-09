@@ -69,7 +69,15 @@ class CartPresenter: CartPresenterProtocol {
     func loadCatalog() async throws {
         catalog = try await webService.getData(urlString: Settings.catalogUrl)
     }
-
+    
+    func showCheckout() {
+        router.showCheckoutScreen()
+    }
+    
+    func closeScreen() {
+        router.popScreenToBottom()
+    }
+    
     // remove unavailable CartItems from cart
     func checkCartInStock() async throws {
         
@@ -161,18 +169,6 @@ class CartPresenter: CartPresenterProtocol {
         }
     }
  
-    func showCheckout() {
-        router.showCheckoutScreen()
-    }
-    
-    func closeScreen() {
-        router.popScreenToBottom()
-    }
-    
-    func getCartItems() -> [CartItem]? {
-        cart?.cartItems
-    }
-
     // popup when trying to remove item from cart
     private func removeCartItemWithWarning(itemId: UUID) {
         // transform    (UUID) async throws -> Void    to    () -> Void
@@ -197,6 +193,10 @@ class CartPresenter: CartPresenterProtocol {
         )
     }
     
+    func getCartItems() -> [CartItem]? {
+        cart?.cartItems
+    }
+
     // find product by itemId
     func findProduct(itemId: UUID) -> Product? {
         guard let catalog else { return nil }
