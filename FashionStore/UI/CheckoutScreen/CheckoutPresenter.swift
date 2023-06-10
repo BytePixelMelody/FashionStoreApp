@@ -21,7 +21,7 @@ protocol CheckoutPresenterProtocol: AnyObject {
     func deleteAddress()
     func editPaymentMethod()
     func deletePaymentCard()
-    func placeOrder()
+    func placeOrder() async throws
     func closeCheckoutAndCart()
     func fillChippingAddressAndPaymentMethod()
     func getCartItems() -> [CartItem]?
@@ -272,7 +272,8 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
     }
     
     // fake order placement
-    func placeOrder() {
+    @MainActor
+    func placeOrder() async throws {
         // if no chipping address - we ask to fill it
         guard let _ = getChippingAddress() else {
             showAddAddressPopup()
@@ -288,7 +289,8 @@ class CheckoutPresenter: CheckoutPresenterProtocol {
         // all good, we did it
         orderIsSuccessful()
         
-        // TODO: clean cart
+        // clean cart
+        try await coreDataService.removeAllCartItemsFromCart()
     }
     
     private func showAddAddressPopup() {

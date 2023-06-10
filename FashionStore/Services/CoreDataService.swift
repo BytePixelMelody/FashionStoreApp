@@ -15,7 +15,7 @@ protocol CoreDataServiceProtocol: AnyObject {
     func editCartItemCount(itemId: UUID, newCount: Int) async throws
     func removeCartItemFromCart(itemId: UUID) async throws
     func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int
-//    func removeAllCartItemFromCart(itemId: UUID) async throws
+    func removeAllCartItemsFromCart() async throws
 }
 
 actor CoreDataService: CoreDataServiceProtocol {
@@ -189,6 +189,23 @@ actor CoreDataService: CoreDataServiceProtocol {
             try self.backgroundContext.save()
             
             return deletedCartItemsCount
+        }
+    }
+    
+    func removeAllCartItemsFromCart() async throws {
+        let fetchRequest = CartItemModel.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        
+        // run on background
+        try await backgroundContext.perform {
+            // all cart items
+            let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
+            // delete
+            for cartItemModel in cartItemsModel {
+                self.backgroundContext.delete(cartItemModel)
+            }
+            // save
+            try self.backgroundContext.save()
         }
     }
     

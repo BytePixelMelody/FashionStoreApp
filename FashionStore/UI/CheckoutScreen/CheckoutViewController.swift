@@ -86,7 +86,13 @@ class CheckoutViewController: UIViewController {
     private lazy var continueShoppingButton = UIButton.makeDarkButton(imageName: ImageName.cartDark, action: closeCheckoutAndCartAction)
     
     private lazy var placeOrderAction: () -> Void = { [weak presenter] in
-        presenter?.placeOrder()
+        Task<Void, Never> { [weak presenter] in
+            do {
+                try await presenter?.placeOrder()
+            } catch {
+                Errors.handler.checkError(error)
+            }
+        }
     }
 
     private lazy var footerTotalPriceView = FooterTotalPriceView(totalLabelTitle: Self.totalLabelTitle, currencySign: Self.currencySign, buttonAction: placeOrderAction, buttonTitle: Self.placeOrderButtonTitle)
