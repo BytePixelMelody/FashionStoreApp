@@ -23,7 +23,9 @@ class HeaderBrandedView: UIView {
     private lazy var rightSecondButton = UIButton.makeIconicButton(imageName: rightSecondButtonImageName, action: rightSecondButtonAction)
     
     // logo image
-    private let logoImage = UIImageView(image: UIImage(named: ImageName.logo))
+    private let logoImage = UIImageView.makeImageView(imageName: ImageName.logo, width: 98, height: 38, contentMode: .scaleAspectFit)
+    
+    // UIImageView(image: UIImage(named: ImageName.logo))
 
     init(
         leftFirstButtonAction: (() -> Void)? = nil,
@@ -103,14 +105,14 @@ class HeaderBrandedView: UIView {
     private func arrangeLogoImage() {
         self.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(6)
+            make.centerY.equalToSuperview().offset(-1)
             make.centerX.equalToSuperview()
         }
     }
     
     private func setViewHeight() {
         self.snp.makeConstraints { make in
-            make.bottom.equalTo(logoImage).offset(10)
+            make.height.equalTo(55)
         }
     }
 

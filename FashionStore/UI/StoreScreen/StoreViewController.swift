@@ -27,7 +27,6 @@
 
 // Technical solutions for speed and stability
 // - Collection View with different cell types in checkout
-// - Catalog refresh control
 // - Cart swipe to delete
 // - Image cache
 // - Unit tests
@@ -56,6 +55,7 @@ class StoreViewController: UIViewController {
     
     private var productsCollectionView: UICollectionView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+    private let refreshControl = UIRefreshControl(frame: .zero)
 
     init(presenter: StorePresenterProtocol) {
         self.presenter = presenter
@@ -84,7 +84,8 @@ class StoreViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        Task<Void, Never> {
+        Task<Void, Never> { [weak self] in
+            guard let self else { return }
             do {
                 try await presenter.loadCatalog()
                 // apply data snapshot to collection view
@@ -143,6 +144,22 @@ extension StoreViewController {
         // some setup of collection view
         productsCollectionView?.alwaysBounceVertical = true // springing (bounce)
         productsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
+        
+        // adding the refresh control
+        refreshControl.addAction(UIAction { _ in
+            Task<Void, Never> { [weak self] in
+                guard let self else { return }
+                do {
+                    try await presenter.loadCatalog()
+                    // apply data snapshot to collection view
+                    reloadCollectionViewData()
+                } catch {
+                    Errors.handler.checkError(error)
+                }
+                refreshControl.endRefreshing()
+            }
+        }, for: .primaryActionTriggered)
+        productsCollectionView?.refreshControl = refreshControl
     }
     
     enum Section: Hashable {

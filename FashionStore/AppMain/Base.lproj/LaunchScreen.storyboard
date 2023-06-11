@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +21,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Rkv-rL-Z1h">
-                                <rect key="frame" x="147.66666666666666" y="65" width="97.666666666666657" height="40"/>
+                                <rect key="frame" x="147.66666666666666" y="67" width="98" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="C9D-rT-e7F"/>
+                                    <constraint firstAttribute="width" constant="98" id="m3A-6W-pI8"/>
+                                </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="mUH-Bk-HDH">
                                 <rect key="frame" x="23.666666666666657" y="399.66666666666669" width="345.66666666666674" height="132.66666666666669"/>
@@ -33,7 +38,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mUH-Bk-HDH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1Eg-iN-hHJ"/>
-                            <constraint firstItem="Rkv-rL-Z1h" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="6" id="3zq-BA-YGv"/>
+                            <constraint firstItem="Rkv-rL-Z1h" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="3zq-BA-YGv"/>
                             <constraint firstItem="20f-9t-WaG" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Jnm-29-yR9"/>
                             <constraint firstItem="mUH-Bk-HDH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="40" id="MOF-DU-FAd"/>
                             <constraint firstItem="Rkv-rL-Z1h" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PQZ-45-dt6"/>
@@ -50,7 +55,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="98" height="40"/>
+        <image name="Logo" width="1127" height="462"/>
         <image name="StartBackground" width="1440" height="1708"/>
         <image name="Title" width="317" height="121"/>
         <systemColor name="systemBackgroundColor">

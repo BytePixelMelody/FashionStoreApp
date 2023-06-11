@@ -210,7 +210,7 @@ class ProductViewController: UIViewController {
     private func arrangeProductStackView() {
         productScrollView.addSubview(productStackView)
         productStackView.snp.makeConstraints { make in
-            make.top.equalTo(productScrollView.contentLayoutGuide).offset(17)
+            make.top.equalTo(productScrollView.contentLayoutGuide).offset(12)
             make.bottom.equalTo(productScrollView.contentLayoutGuide).offset(-20)
             make.left.right.equalTo(productScrollView.contentLayoutGuide).inset(16)
         }

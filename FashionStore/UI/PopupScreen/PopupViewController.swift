@@ -77,7 +77,7 @@ class PopupViewController: UIViewController {
         buttonTitle: String,
         buttonAction: (() -> Void)?,
         closeAction: (() -> Void)?,
-        image: UIImageView // = UIImageView.makeImageView(imageName: ImageName.message)
+        image: UIImageView
     ) {
         self.presenter = presenter
         self.headerTitle = headerTitle
