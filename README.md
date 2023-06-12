@@ -28,6 +28,7 @@
 - [x] Typographic font styles with dynamic accessibility font scaling
 - [x] Customized animations between screens
 
+## Screenshots
 <img src="PresentationMedia/StoreScreen.png" width="273"/> <img src="PresentationMedia/ProductScreen.png" width="273"/> <img src="PresentationMedia/CartScreen.png" width="273"/> <img src="PresentationMedia/AddressScreen.png" width="273"/> <img src="PresentationMedia/CheckoutScreen.png" width="273"/> <img src="PresentationMedia/PopupScreen.png" width="273"/>
 
 **Contacts:**  
