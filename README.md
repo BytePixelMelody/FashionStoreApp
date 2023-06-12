@@ -20,18 +20,13 @@
 - [x] Web service on async/await
 - [x] Keychain service with iCloud sync by native API for sensitive data
 - [x] Deep link service to open product page in App by link
-- [x] Errors service with App-styled pop-up for user warnings and logging
-- [x] Async/await and Tasks with cancellation on main and background queues
-- [x] Generics
+- [x] Errors service with logging and App-styled popups
+- [x] Async/await and Tasks on main and background queues
+- [x] Generics in Keychain and Web services
 - [x] Collection views based on snapshots with refresh control
-- [x] Combine for text fields input check
+- [x] Combine reactive framework for text fields input check
 - [x] Typographic font styles with dynamic accessibility font scaling
-- [x] Customized animation between screens
-
-## Code patterns
-- [x] Builder
-- [x] Factory
-- [x] Singleton
+- [x] Customized animations between screens
 
 <img src="PresentationMedia/StoreScreen.png" width="273"/> <img src="PresentationMedia/ProductScreen.png" width="273"/> <img src="PresentationMedia/CartScreen.png" width="273"/> <img src="PresentationMedia/AddressScreen.png" width="273"/> <img src="PresentationMedia/CheckoutScreen.png" width="273"/> <img src="PresentationMedia/PopupScreen.png" width="273"/>
 
