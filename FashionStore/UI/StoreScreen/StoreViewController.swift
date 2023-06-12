@@ -17,6 +17,13 @@
 // TODO: add if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory
 // TODO: reverse view-presenter injection and delete view's inits
 
+// Technical solutions for speed and stability that may be done in future:
+// - Collection View with different cell types in checkout
+// - Cart swipe to delete
+// - Image cache
+// - Unit tests
+// - Database write to CoreData after loading from backend
+
 // Functionality that may be done in future:
 // 1. Many bank cards support
 // 2. Color and size support
@@ -24,13 +31,6 @@
 // 4. Search
 // 5. Menu
 // 6. Login
-
-// Technical solutions for speed and stability
-// - Collection View with different cell types in checkout
-// - Cart swipe to delete
-// - Image cache
-// - Unit tests
-// - Database write to CoreData after loading from backend
 
 import UIKit
 import SnapKit
