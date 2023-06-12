@@ -42,7 +42,7 @@
 
 | Dynamic fonts |
 | :-: |
-| <video src="https://user-images.githubusercontent.com/74405334/1dac75b9-f455-406f-9ae9-5b61b7381980.mov" max-width="150"/> |
+| <video src="https://user-images.githubusercontent.com/74405334/1dac75b9-f455-406f-9ae9-5b61b7381980.mov" max-width="100"/> |
 
 **Contacts**  
 [LinkedIn](https://www.linkedin.com/in/bytepixelmelody "https://www.linkedin.com/in/bytepixelmelody") | [Telegram](https://t.me/BytePixelMelody "@BytePixelMelody") | [Email](mailto:bytepixelmelody@gmail.com "bytepixelmelody@gmail.com")
