@@ -34,11 +34,15 @@
 ## Videos
 | Selecting a product from the catalog and adding it to the cart | Removing an item from the cart, changing the quantity | Editing the address, deleting the payment method |
 | :-: | :-: | :-: |
-| <video src="https://user-images.githubusercontent.com/74405334/4bc75151-9187-49fe-be04-a853f2316799.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/326d511d-bd3c-4a28-a1ca-3d4fbda798ed.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/4dcbd8e8-9008-4359-8d75-528839f72933.mov" width="273"/> |
+| <video src="https://user-images.githubusercontent.com/74405334/352ab07c-d541-4551-94e2-9c9974a00de5.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/0ab59c5e-5638-47dd-aa3f-dac212daadf2.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/24624ec5-6081-4909-b8dd-f319406c8575.mov" width="273"/> |
 
 | Adding a payment method | Placing an order | Opening a product in the App via deep link |
 | :-: | :-: | :-: |
-| <video src="https://user-images.githubusercontent.com/74405334/41ebc1ec-f1f1-43cc-a29a-45596f95bb6d.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/2aef9c1a-6cf7-4216-bcd3-2b92eedba176.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/2a3e82b2-66da-404f-a739-301d6eac5273.mov" width="273"/> |
+| <video src="https://user-images.githubusercontent.com/74405334/7213cd1c-bd48-4fea-930b-0a82a15edd51.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/72714ae7-0c00-4d23-98e3-a86bd4926688.mov" width="273"/> | <video src="https://user-images.githubusercontent.com/74405334/5de0b35d-e8ff-459b-8d81-1b776bf04e59.mov" width="273"/> |
+
+| Dynamic font scaling |
+| :-: |
+| <video src="https://user-images.githubusercontent.com/74405334/1dac75b9-f455-406f-9ae9-5b61b7381980.mov" width="273"/> |
 
 **Contacts**  
 [LinkedIn](https://www.linkedin.com/in/bytepixelmelody "https://www.linkedin.com/in/bytepixelmelody") | [Telegram](https://t.me/BytePixelMelody "@BytePixelMelody") | [Email](mailto:bytepixelmelody@gmail.com "bytepixelmelody@gmail.com")
