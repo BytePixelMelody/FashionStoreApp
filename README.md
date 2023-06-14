@@ -1,7 +1,16 @@
 ![Platform: iOS](https://img.shields.io/badge/Platform-iOS-green.svg)
 
-# Fashion Store App
- Fashion Store - pet-project application of an online Fashion Store. Allows users choose products in the online catalog, add them to the cart and make a fake order after adding the delivery address and payment method.
+  <table>
+    <tr>
+      <td>
+        <img src="PresentationMedia/FashionStoreAppIcon.png" alt="Fashion Store App Icon" width="320">
+      </td>
+      <td>
+        <h1>Fashion Store App</h1>
+        <p>Fashion Store - pet-project application of an online Fashion Store. Allows users choose products in the online catalog, add them to the cart and make a fake order after adding the delivery address and payment method.</p>
+      </td>
+    </tr>
+  </table>
 
 ## Architectural pattern
 - [x] MVP + Builder + Router
