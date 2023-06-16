@@ -22,7 +22,7 @@
 // - Cart swipe to delete
 // - Image cache
 // - Unit tests
-// - Database write to CoreData after loading from backend
+// - Database write to SwiftData after loading from backend
 
 // Functionality that may be done in future:
 // 1. Many bank cards support
