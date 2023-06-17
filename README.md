@@ -25,7 +25,7 @@
 - [x] Design from Figma, adapted for rounded screens
 - [x] Self-designed JSON-structured database
 - [x] Mock Web-server based on GitHub Pages
-- [x] Core data service by actor on background queue to store Shopping Cart
+- [x] Core Data service by actor on background queue to store Shopping Cart
 - [x] Web service on async/await
 - [x] Keychain service with iCloud sync by native API for sensitive data
 - [x] Deep link service to open product page in App by link
@@ -54,4 +54,4 @@
 | <video src="https://user-images.githubusercontent.com/74405334/1dac75b9-f455-406f-9ae9-5b61b7381980.mov"/> |
 
 ## Contact me
-[LinkedIn](https://www.linkedin.com/in/bytepixelmelody "https://www.linkedin.com/in/bytepixelmelody") | [Telegram](https://t.me/BytePixelMelody "@BytePixelMelody") | [Email](mailto:bytepixelmelody@gmail.com "bytepixelmelody@gmail.com")
+[LinkedIn](https://www.linkedin.com/in/bytepixelmelody "https://www.linkedin.com/in/bytepixelmelody") | [Telegram](https://t.me/bytepixelmelody "@bytepixelmelody") | [Email](mailto:bytepixelmelody@gmail.com "bytepixelmelody@gmail.com")
