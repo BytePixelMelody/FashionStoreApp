@@ -57,24 +57,29 @@ class PaymentMethodViewController: UIViewController {
  
     private lazy var nameOnCardTextField = UITextFieldStyled(
         placeholder: Self.nameOnCardTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var cardNumberTextField = UITextFieldStyled(
         placeholder: Self.cardNumberTextFieldPlaceholder,
-        keyboardType: .numberPad
+        keyboardType: .numberPad,
+        dataIsSensitive: true
     )
     private lazy var expMonthTextField = UITextFieldStyled(
         placeholder: Self.expMonthTextFieldPlaceholder,
-        keyboardType: .numberPad
+        keyboardType: .numberPad,
+        dataIsSensitive: true
     )
     private lazy var expYearTextField = UITextFieldStyled(
         placeholder: Self.expYearTextFieldPlaceholder,
-        keyboardType: .numberPad
+        keyboardType: .numberPad,
+        dataIsSensitive: true
     )
     private lazy var cvvTextField = UITextFieldStyled(
         placeholder: Self.cvvTextFieldPlaceholder,
         keyboardType: .numberPad,
-        isSecureTextEntry: true
+        isSecureTextEntry: true,
+        dataIsSensitive: true
     )
 
     private lazy var addCardButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine

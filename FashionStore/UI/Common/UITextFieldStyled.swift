@@ -26,6 +26,7 @@ class UITextFieldStyled: UITextField {
         keyboardType: UIKeyboardType = .default,
         returnKeyType: UIReturnKeyType = .default,
         isSecureTextEntry: Bool = false,
+        dataIsSensitive: Bool = false, // MASVS (Mobile Application Security Verification Standard)
         frame: CGRect = .zero
     ) {
         self.insets = insets
@@ -37,6 +38,11 @@ class UITextFieldStyled: UITextField {
         self.keyboardType = keyboardType
         self.returnKeyType = returnKeyType
         self.isSecureTextEntry = isSecureTextEntry
+        if dataIsSensitive { // MASVS (Mobile Application Security Verification Standard) - turn off keyboard cache
+            self.autocorrectionType = .no
+            self.autocapitalizationType = .none
+            self.spellCheckingType = .no
+        }
         
         setupUiTexts()
     }

@@ -68,35 +68,43 @@ class AddressViewController: UIViewController {
 
     private lazy var firstNameTextField = UITextFieldStyled(
         placeholder: Self.firstNameTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var lastNameTextField = UITextFieldStyled(
         placeholder: Self.lastNameTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var addressTextField = UITextFieldStyled(
         placeholder: Self.addressTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var cityTextField = UITextFieldStyled(
         placeholder: Self.cityTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var stateTextField = UITextFieldStyled(
         placeholder: Self.stateTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var zipCodeTextField = UITextFieldStyled(
         placeholder: Self.zipCodeTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var countryTextField = UITextFieldStyled(
         placeholder: Self.countryTextFieldPlaceholder,
-        returnKeyType: .next
+        returnKeyType: .next,
+        dataIsSensitive: true
     )
     private lazy var phoneNumberTextField = UITextFieldStyled(
         placeholder: Self.phoneNumberTextFieldPlaceholder,
-        keyboardType: .phonePad
+        keyboardType: .phonePad,
+        dataIsSensitive: true
     )
 
     private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine
