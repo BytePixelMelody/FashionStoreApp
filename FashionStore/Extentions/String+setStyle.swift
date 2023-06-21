@@ -54,14 +54,14 @@ extension TextStyle {
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 24,
         letterSpacing: 4,
-        fontMetrics: UIFont.TextStyle.title1.metrics
+        fontMetrics: UIFont.TextStyle.largeTitle.metrics
     )
     static let titleLargeAlignCentered = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 24,
         letterSpacing: 4,
-        fontMetrics: UIFont.TextStyle.title1.metrics,
+        fontMetrics: UIFont.TextStyle.largeTitle.metrics,
         alignment: .center
     )
     static let titleMedium = TextStyle(
@@ -69,21 +69,21 @@ extension TextStyle {
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 19,
         letterSpacing: 3,
-        fontMetrics: UIFont.TextStyle.title2.metrics
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let titleSmall = TextStyle(
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 16,
         letterSpacing: 2,
-        fontMetrics: UIFont.TextStyle.title3.metrics
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let titleSmallHight = TextStyle(
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 20,
         letterSpacing: 2,
-        fontMetrics: UIFont.TextStyle.title3.metrics
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let bodyLarge = TextStyle(
         size: 16,
@@ -108,45 +108,45 @@ extension TextStyle {
         size: 12,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 15,
-        fontMetrics: UIFont.TextStyle.body.metrics
+        fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let bodySmallLabel = TextStyle(
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 14,
-        fontMetrics: UIFont.TextStyle.body.metrics
+        fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let bodySmallLabelHight = TextStyle(
         size: 12,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 18,
-        fontMetrics: UIFont.TextStyle.body.metrics
+        fontMetrics: UIFont.TextStyle.title3.metrics
     )
     static let priceLarge = TextStyle(
         size: 18,
         color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 21,
-        fontMetrics: UIFont.TextStyle.headline.metrics
+        fontMetrics: UIFont.TextStyle.largeTitle.metrics
     )
     static let priceMedium = TextStyle(
         size: 15,
         color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 24,
-        fontMetrics: UIFont.TextStyle.subheadline.metrics
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let priceTotal = TextStyle(
         size: 16,
         color: UIColor(named: "Secondary") ?? .brown,
         lineHeight: 20,
         letterSpacing: 3,
-        fontMetrics: UIFont.TextStyle.title3.metrics
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let buttonDark = TextStyle(
         size: 16,
         color: UIColor(named: "OffWhite") ?? .white,
         lineHeight: 20,
         letterSpacing: 0.16, // letter spacing 1% = 16 / 100 * 1
-        fontMetrics: UIFont.TextStyle.title1.metrics
+        fontMetrics: UIFont.TextStyle.largeTitle.metrics
     )
     static let subHeader = TextStyle(
         size: 14,
@@ -159,50 +159,50 @@ extension TextStyle {
         size: 15,
         color: UIColor(named: "PlaceholderLight") ?? .gray,
         lineHeight: 18,
-        fontMetrics: UIFont.TextStyle.title2.metrics
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let textField = TextStyle(
         size: 15,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 18,
-        fontMetrics: UIFont.TextStyle.title2.metrics
+        fontMetrics: UIFont.TextStyle.title1.metrics
     )
     static let infoLarge = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 22,
-        fontMetrics: UIFont.TextStyle.headline.metrics
+        fontMetrics: UIFont.TextStyle.largeTitle.metrics
     )
     static let infoLargeCentered = TextStyle(
         size: 18,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 22,
-        fontMetrics: UIFont.TextStyle.headline.metrics,
+        fontMetrics: UIFont.TextStyle.largeTitle.metrics,
         alignment: .center
     )
     static let address = TextStyle(
         size: 14,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 22,
-        fontMetrics: UIFont.TextStyle.headline.metrics
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let bodyMediumDark = TextStyle(
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 16,
-        fontMetrics: UIFont.TextStyle.headline.metrics
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let numberMediumDark = TextStyle(
         size: 14,
         color: UIColor(named: "Active") ?? .black,
         lineHeight: 14,
-        fontMetrics: UIFont.TextStyle.headline.metrics
+        fontMetrics: UIFont.TextStyle.title2.metrics
     )
     static let activeMediumCentered = TextStyle(
         size: 15,
         color: UIColor(named: "Label") ?? .black,
         lineHeight: 22,
-        fontMetrics: UIFont.TextStyle.subheadline.metrics,
+        fontMetrics: UIFont.TextStyle.title1.metrics,
         alignment: .center
     )
 }
