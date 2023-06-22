@@ -44,11 +44,41 @@ class UITextFieldStyled: UITextField {
             self.spellCheckingType = .no
         }
         
+        // clear button
+        clearButtonMode = .whileEditing
+        
         setupUiTexts()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var placeholder: String? {
+        get {
+            super.placeholder
+        }
+        set {
+            super.placeholder = newValue
+            attributedPlaceholder = newValue?.setStyle(style: placeholderStyle)
+        }
+    }
+    
+    private func setupUiTexts() {
+        // placeholder style
+        attributedPlaceholder = placeholder?.setStyle(style: placeholderStyle)
+        
+        // text style
+        font = textStyle.fontMetrics.scaledFont(for: textStyle.font)
+        textColor = textStyle.color
+    }
+    
+    // accessibility settings was changed - scale fonts
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            setupUiTexts()
+        }
     }
     
     // apply insets
@@ -63,19 +93,17 @@ class UITextFieldStyled: UITextField {
         return rect.inset(by: insets)
     }
     
-    private func setupUiTexts() {
-        if let placeholder {
-            attributedPlaceholder = NSLocalizedString(placeholder, comment: placeholder)
-                .setStyle(style: placeholderStyle)
-        }
-        font = textStyle.fontMetrics.scaledFont(for: textStyle.font)
-        textColor = textStyle.color
+    override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
+        var clearButtonRect = super.clearButtonRect(forBounds: bounds)
+        // centerY shift calculation
+        let clearButtonCenterY = clearButtonRect.minY + clearButtonRect.height / 2
+        let textFieldShiftedCenterY = insets.top + (frame.height - insets.top - insets.bottom) / 2
+        // changing of clearButton start point with shift
+        let shiftY = textFieldShiftedCenterY - clearButtonCenterY
+        
+        let clearButtonNewOrigin = CGPoint(x: clearButtonRect.origin.x, y: clearButtonRect.origin.y + shiftY)
+        clearButtonRect.origin = clearButtonNewOrigin
+        return clearButtonRect
     }
     
-    // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        setupUiTexts()
-    }
-   
 }
