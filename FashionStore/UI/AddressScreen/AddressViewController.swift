@@ -158,7 +158,10 @@ class AddressViewController: UIViewController {
     
     // creating a line image
     private func createLineGray() -> UIImageView {
-       UIImageView(image: UIImage(named: ImageName.lineGray))
+       let imageView = UIImageView(image: UIImage(named: ImageName.lineGray))
+        // no vertical scale
+        imageView.setContentHuggingPriority(.required, for: .vertical)
+        return imageView
     }
     
     private func fillStackViews() {
