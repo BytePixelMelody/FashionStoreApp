@@ -29,12 +29,14 @@ class TestViewController: UIViewController {
         label.attributedText = Self.labelText.uppercased().setStyle(style: .titleLargeAlignLeft)
     }
 
-    // accessibility font scale on the fly
+    // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
-        fillByStyledText()
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            fillByStyledText()
+        }
     }
+    
 }
 
 extension TestViewController: TestViewProtocol {

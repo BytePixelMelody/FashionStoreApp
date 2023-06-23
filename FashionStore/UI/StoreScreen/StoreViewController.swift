@@ -14,7 +14,6 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
-// TODO: add if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory
 // TODO: reverse view-presenter injection and delete view's inits
 
 // Technical solutions for speed and stability that may be done in future:

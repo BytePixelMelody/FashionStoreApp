@@ -164,9 +164,11 @@ class ProductViewController: UIViewController {
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        setupUiTexts()
+        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+            setupUiTexts()
+        }
     }
-
+    
     private func fillProductStackView() {
         productStackView.addArrangedSubview(productImageView)
         productStackView.setCustomSpacing(29, after: productImageView)
