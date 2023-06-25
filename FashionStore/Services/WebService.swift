@@ -67,12 +67,17 @@ extension WebServiceProtocol {
         timeoutInterval: TimeInterval = 5.0
     ) async throws -> UIImage {
         
+        if let image = await CacheService.shared.loadCachedImage(imageName: imageName) {
+            return image
+        }
+        
         let urlString = Settings.imagesUrl + imageName
         
         // urlString check
         guard let url = URL(string: urlString) else {
             throw Errors.ErrorType.invalidUrlStringError
         }
+        
         
         let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
         
@@ -92,6 +97,11 @@ extension WebServiceProtocol {
         // try decode image to T type
         guard let image = UIImage(data: data) else {
             throw Errors.ErrorType.unsupportedImageFormat
+        }
+        
+        // cache image in background
+        Task.detached(priority: .background) {
+            await CacheService.shared.cacheImage(imageName: imageName, image: image)
         }
         
         return image

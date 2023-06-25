@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110EFE8B2A482B0A009153B6 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EFE8A2A482B09009153B6 /* CacheService.swift */; };
 		111646CD29DF2767004EEE20 /* FilledAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646CC29DF2767004EEE20 /* FilledAddressView.swift */; };
 		111646CF29E05DA3004EEE20 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646CE29E05DA3004EEE20 /* ContainerView.swift */; };
 		111646D129E086B1004EEE20 /* ChippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111646D029E086B1004EEE20 /* ChippingAddress.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		110EFE8A2A482B09009153B6 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		111646CC29DF2767004EEE20 /* FilledAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledAddressView.swift; sourceTree = "<group>"; };
 		111646CE29E05DA3004EEE20 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		111646D029E086B1004EEE20 /* ChippingAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChippingAddress.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				1163019429EE9D5C0031362C /* ErrorsService.swift */,
 				1171F78229F2E2550011465D /* DeepLinkService.swift */,
 				117C0BE12A1230E300138CA9 /* WebService.swift */,
+				110EFE8A2A482B09009153B6 /* CacheService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */,
 				1185D6DA29B72D9C00833991 /* Router.swift in Sources */,
 				11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */,
+				110EFE8B2A482B0A009153B6 /* CacheService.swift in Sources */,
 				1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */,
 				11646EE529CF80AA004C9EC2 /* EmptyDetailsView.swift in Sources */,
 				1185D6C729B72BD200833991 /* StorePresenter.swift in Sources */,

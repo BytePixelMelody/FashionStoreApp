@@ -171,4 +171,9 @@ class Errors {
         logger.error("\(checkingError.localizedDescription, privacy: .public)")
     }
     
+    // logging errors with public privacy
+    public func logError(_ error: Error) {
+        logger.error("\(error.localizedDescription, privacy: .public)")
+    }
+    
 }
