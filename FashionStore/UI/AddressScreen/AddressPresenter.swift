@@ -24,7 +24,7 @@ protocol AddressPresenterProtocol: AnyObject {
     )
 }
 
-class AddressPresenter: AddressPresenterProtocol {
+final class AddressPresenter: AddressPresenterProtocol {
     weak var view: AddressViewProtocol?
     private let router: RouterProtocol
     private let keychainService: KeychainServiceProtocol

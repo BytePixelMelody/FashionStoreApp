@@ -11,7 +11,7 @@ protocol TestPresenterProtocol: AnyObject {
     
 }
 
-class TestPresenter: TestPresenterProtocol {
+final class TestPresenter: TestPresenterProtocol {
     weak var view: TestViewProtocol?
     private let router: RouterProtocol
 

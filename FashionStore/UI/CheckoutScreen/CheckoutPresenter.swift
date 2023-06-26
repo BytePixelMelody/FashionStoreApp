@@ -31,7 +31,7 @@ protocol CheckoutPresenterProtocol: AnyObject {
     func findCartItem(itemId: UUID) -> CartItem?
 }
 
-class CheckoutPresenter: CheckoutPresenterProtocol {
+final class CheckoutPresenter: CheckoutPresenterProtocol {
     weak var view: CheckoutViewProtocol?
     private let router: RouterProtocol
     private let keychainService: KeychainServiceProtocol

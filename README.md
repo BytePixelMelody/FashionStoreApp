@@ -27,7 +27,7 @@
 - [x] Mock Web-server based on GitHub Pages
 - [x] Core Data service by actor on background queue to store Shopping Cart
 - [x] Web service on async/await
-- [x] Image caching service by actor
+- [x] Actor-based image caching service
 - [x] Keychain service with iCloud sync by native API for sensitive data
 - [x] Deep link service to open product page in App by link
 - [x] Errors service with logging and App-styled popups

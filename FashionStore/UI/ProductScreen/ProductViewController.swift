@@ -29,7 +29,7 @@ protocol ProductViewProtocol: AnyObject {
     func disableAddToCartButton() async
 }
 
-class ProductViewController: UIViewController {
+final class ProductViewController: UIViewController {
     
     private var addToCartTitle = "Add to cart"
     private var inTheCartTitle = "In the cart"

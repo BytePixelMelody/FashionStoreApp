@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HeaderNamedView: UIView {
+final class HeaderNamedView: UIView {
         
     // buttons: close and back
     private let closeScreenAction: (() -> Void)?

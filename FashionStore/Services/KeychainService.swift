@@ -14,7 +14,7 @@ protocol KeychainServiceProtocol: AnyObject {
     func delete(keychainId: String) throws
 }
 
-class KeychainService: KeychainServiceProtocol {
+final class KeychainService: KeychainServiceProtocol {
     
     // add item to keychain
     public func add<T>(keychainId: String, value: T) throws where T: Codable {

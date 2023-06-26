@@ -18,7 +18,7 @@ protocol CoreDataServiceProtocol: AnyObject {
     func removeAllCartItemsFromCart() async throws
 }
 
-actor CoreDataService: CoreDataServiceProtocol {
+final actor CoreDataService: CoreDataServiceProtocol {
     
     // creating of Core Data persistentContainer
     private lazy var persistentContainer: NSPersistentContainer = {

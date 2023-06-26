@@ -14,7 +14,7 @@ protocol CacheServiceProtocol {
     func loadCachedImage(imageName: String) async -> UIImage?
 }
 
-actor CacheService: CacheServiceProtocol {
+final actor CacheService: CacheServiceProtocol {
     
     // singletone
     public static let shared = CacheService()

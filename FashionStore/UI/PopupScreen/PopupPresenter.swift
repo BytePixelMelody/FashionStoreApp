@@ -11,7 +11,7 @@ protocol PopupPresenterProtocol: AnyObject {
     func closePopupScreen()
 }
 
-class PopupPresenter: PopupPresenterProtocol {
+final class PopupPresenter: PopupPresenterProtocol {
     private let router: RouterProtocol
     weak var view: PopupViewProtocol?
     

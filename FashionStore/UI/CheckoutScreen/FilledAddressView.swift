@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilledAddressView: UIView {
+final class FilledAddressView: UIView {
     
     // labels texts, action from init
     private let firstLastNameLabelText: String

@@ -21,7 +21,7 @@ protocol PaymentMethodPresenterProtocol: AnyObject {
     )
 }
 
-class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
+final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
     weak var view: PaymentMethodViewProtocol?
     private let router: RouterProtocol
     private let keychainService: KeychainServiceProtocol

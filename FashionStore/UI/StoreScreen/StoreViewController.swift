@@ -38,7 +38,7 @@ protocol StoreViewProtocol: AnyObject {
         
 }
 
-class StoreViewController: UIViewController {
+final class StoreViewController: UIViewController {
     
     private let presenter: StorePresenterProtocol
     

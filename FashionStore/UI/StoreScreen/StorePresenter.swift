@@ -16,7 +16,7 @@ protocol StorePresenterProtocol: AnyObject {
     func getProducts() -> [Product]?
 }
 
-class StorePresenter: StorePresenterProtocol {
+final class StorePresenter: StorePresenterProtocol {
     weak var view: StoreViewProtocol?
     private let router: RouterProtocol
     private let webService: WebServiceProtocol

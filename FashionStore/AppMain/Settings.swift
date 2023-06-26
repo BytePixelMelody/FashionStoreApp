@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Settings {
+struct Settings {
     
     // keychain ids
     public static let keychainChippingAddressId = "com.vnazimko.fashion.store.chipping.address"

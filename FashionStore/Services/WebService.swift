@@ -109,6 +109,6 @@ extension WebServiceProtocol {
     
 }
 
-class WebService: WebServiceProtocol {
+final class WebService: WebServiceProtocol {
     
 }

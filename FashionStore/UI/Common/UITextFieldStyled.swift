@@ -8,7 +8,7 @@
 import UIKit
 
 // text field with custom insets and text style
-class UITextFieldStyled: UITextField {
+final class UITextFieldStyled: UITextField {
     
     // insets from bounds to text
     private let insets: UIEdgeInsets

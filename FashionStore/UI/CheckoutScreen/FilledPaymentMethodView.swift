@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilledPaymentMethodView: UIView {
+final class FilledPaymentMethodView: UIView {
     
     // view image, labels texts, action from init
     private let paymentSystemImageName: String

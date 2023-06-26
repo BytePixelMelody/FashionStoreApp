@@ -22,7 +22,7 @@ protocol PaymentMethodViewProtocol: AnyObject {
     )
 }
 
-class PaymentMethodViewController: UIViewController {
+final class PaymentMethodViewController: UIViewController {
     private static let headerTitle = "Payment method"
     private static let nameOnCardTextFieldPlaceholder = "Name On Card*"
     private static let cardNumberTextFieldPlaceholder = "Card Number*"

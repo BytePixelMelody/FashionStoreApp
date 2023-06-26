@@ -12,7 +12,7 @@ protocol TestViewProtocol: AnyObject {
     
 }
 
-class TestViewController: UIViewController {
+final class TestViewController: UIViewController {
     private static let labelText = "Test\nView\nController"
     
     @IBOutlet private var label: UILabel!

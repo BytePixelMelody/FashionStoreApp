@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FooterTotalPriceView: UIView {
+final class FooterTotalPriceView: UIView {
     
     // line image
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))

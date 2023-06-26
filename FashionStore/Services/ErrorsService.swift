@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import OSLog
 
-class Errors {
+final class Errors {
     
     // singletone
     public static let handler = Errors()

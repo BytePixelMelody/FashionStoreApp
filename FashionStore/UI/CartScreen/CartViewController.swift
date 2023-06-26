@@ -16,7 +16,7 @@ protocol CartViewProtocol: AnyObject {
     func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID])
 }
 
-class CartViewController: UIViewController {
+final class CartViewController: UIViewController {
     
     private static let headerTitle = "Cart"
     private static let cartIsEmptyTitle = "Your card is empty.\nChoose the best goods from our catalog"

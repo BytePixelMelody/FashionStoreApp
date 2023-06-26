@@ -17,7 +17,7 @@ protocol ProductPresenterProtocol: AnyObject {
     func checkInCartPresence() async throws
 }
 
-class ProductPresenter: ProductPresenterProtocol {
+final class ProductPresenter: ProductPresenterProtocol {
     weak var view: ProductViewProtocol?
     private let router: RouterProtocol
     private let webService: WebServiceProtocol

@@ -24,7 +24,7 @@ protocol CheckoutViewProtocol: AnyObject {
     func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID])
 }
 
-class CheckoutViewController: UIViewController {
+final class CheckoutViewController: UIViewController {
     
     private static let headerTitle = "Checkout"
     private static let shippingAddressLabelTitle = "Shipping address"

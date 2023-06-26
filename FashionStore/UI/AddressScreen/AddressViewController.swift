@@ -25,7 +25,7 @@ protocol AddressViewProtocol: AnyObject {
     )
 }
 
-class AddressViewController: UIViewController {
+final class AddressViewController: UIViewController {
     private static let headerTitle = "Shipping Address"
     private static let firstNameTextFieldPlaceholder = "First name*"
     private static let lastNameTextFieldPlaceholder = "Last name*"

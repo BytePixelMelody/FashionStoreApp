@@ -12,7 +12,7 @@ protocol PopupViewProtocol: AnyObject {
     
 }
 
-class PopupViewController: UIViewController {
+final class PopupViewController: UIViewController {
 
     // properties for init
     private let presenter: PopupPresenterProtocol

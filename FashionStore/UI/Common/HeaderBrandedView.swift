@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HeaderBrandedView: UIView {
+final class HeaderBrandedView: UIView {
     
     // buttons
     private let leftFirstButtonAction: (() -> Void)?

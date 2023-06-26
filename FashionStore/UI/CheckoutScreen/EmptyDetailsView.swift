@@ -8,7 +8,7 @@
 import UIKit
 
 // view with button like "Add address +"
-class EmptyDetailsView: UIView {
+final class EmptyDetailsView: UIView {
     
     // label
     private let infoLabelText: String

@@ -49,7 +49,7 @@ extension RouterProtocol {
     }
 }
 
-class Router: RouterProtocol {
+final class Router: RouterProtocol {
     var navigationController: UINavigationController
     var moduleBuilder: ModuleBuilderProtocol
     

@@ -25,7 +25,7 @@ protocol CartPresenterProtocol: AnyObject {
     func findCartItem(itemId: UUID) -> CartItem?
 }
 
-class CartPresenter: CartPresenterProtocol {
+final class CartPresenter: CartPresenterProtocol {
     weak var view: CartViewProtocol?
     private let router: RouterProtocol
     private let webService: WebServiceProtocol

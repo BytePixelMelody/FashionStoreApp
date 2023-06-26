@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CartItemCellView: UICollectionViewCell {
+final class CartItemCellView: UICollectionViewCell {
     
     // setup properties
     private var imageName: String?

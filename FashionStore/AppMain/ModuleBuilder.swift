@@ -30,7 +30,7 @@ protocol ModuleBuilderProtocol {
     func createTestModule(router: RouterProtocol) -> TestViewController
 }
 
-class ModuleBuilder: ModuleBuilderProtocol {
+final class ModuleBuilder: ModuleBuilderProtocol {
     
     private let keychainService = KeychainService()
     private let webService: WebServiceProtocol
