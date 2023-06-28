@@ -39,8 +39,9 @@ extension WebServiceProtocol {
             throw Errors.ErrorType.invalidUrlStringError
         }
         
-        let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
-        
+        var urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+        urlRequest.httpMethod = "GET"
+
         // try to get data from url
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
@@ -78,8 +79,8 @@ extension WebServiceProtocol {
             throw Errors.ErrorType.invalidUrlStringError
         }
         
-        
-        let urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+        var urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+        urlRequest.httpMethod = "GET"
         
         // try to get data from url
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
