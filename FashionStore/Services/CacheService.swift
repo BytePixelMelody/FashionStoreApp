@@ -8,16 +8,11 @@
 import UIKit
 
 protocol CacheServiceProtocol {
-    static var shared: CacheService { get }
-    
     func cacheImage(imageName: String, image: UIImage) async
     func loadCachedImage(imageName: String) async -> UIImage?
 }
 
 final actor CacheService: CacheServiceProtocol {
-    
-    // singletone
-    public static let shared = CacheService()
     
     // async func of actor to cache image
     func cacheImage(imageName: String, image: UIImage) {

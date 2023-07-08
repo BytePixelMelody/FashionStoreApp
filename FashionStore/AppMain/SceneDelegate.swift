@@ -10,9 +10,10 @@ import UIKit
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var router: Router?
-    private let coreDataService = CoreDataService()
-    private let webService = WebService()
+    private var router: RouterProtocol?
+    private let coreDataService: CoreDataServiceProtocol = CoreDataService()
+    private let cacheService: CacheServiceProtocol = CacheService()
+    private lazy var webService: WebServiceProtocol = WebService(cacheService: cacheService)
     private let deepLinkService: DeepLinkServiceProtocol = DeepLinkService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

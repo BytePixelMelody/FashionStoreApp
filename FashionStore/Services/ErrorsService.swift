@@ -107,6 +107,10 @@ final class Errors {
         }
     }
         
+    // private init to access deny
+    private init() {
+    }
+    
     // handling errors
     public func checkError(_ checkingError: Error) {
         guard let router else { return }

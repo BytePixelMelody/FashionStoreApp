@@ -9,37 +9,28 @@ import Foundation
 import UIKit
 
 protocol WebServiceProtocol: AnyObject {
-    
-    func getData<T: Codable>(
-        urlString: String,
-        cachePolicy: URLRequest.CachePolicy,
-        timeoutInterval: TimeInterval
-    ) async throws -> T
-    
-    func getImage(
-        imageName: String,
-        cachePolicy: URLRequest.CachePolicy,
-        timeoutInterval: TimeInterval
-    ) async throws -> UIImage
+    init(cacheService: CacheServiceProtocol)
+    func getData<T: Codable>(urlString: String) async throws -> T
+    func getImage(imageName: String) async throws -> UIImage
 }
- 
-// web service that used to obtain decoded JSON-data by URL string
-// extension is used here to set default param to cachePolicy
-extension WebServiceProtocol {
+
+final class WebService: WebServiceProtocol {
+    
+    private let cacheService: CacheServiceProtocol
+    
+    init(cacheService: CacheServiceProtocol) {
+        self.cacheService = cacheService
+    }
     
     // usage example:
     // let catalog: Catalog = try await WebService().getData(urlString: Settings.catalogUrl)
-    public func getData<T: Codable>(
-        urlString: String,
-        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-        timeoutInterval: TimeInterval = 5.0
-    ) async throws -> T {
+    public func getData<T: Codable>(urlString: String) async throws -> T {
         // urlString check
         guard let url = URL(string: urlString) else {
             throw Errors.ErrorType.invalidUrlStringError
         }
         
-        var urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+        var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
 
         // try to get data from url
@@ -62,13 +53,9 @@ extension WebServiceProtocol {
     }
     
     // image loading
-    func getImage(
-        imageName: String,
-        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-        timeoutInterval: TimeInterval = 5.0
-    ) async throws -> UIImage {
+    func getImage(imageName: String) async throws -> UIImage {
         
-        if let image = await CacheService.shared.loadCachedImage(imageName: imageName) {
+        if let image = await cacheService.loadCachedImage(imageName: imageName) {
             return image
         }
         
@@ -79,7 +66,7 @@ extension WebServiceProtocol {
             throw Errors.ErrorType.invalidUrlStringError
         }
         
-        var urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+        var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         
         // try to get data from url
@@ -101,15 +88,12 @@ extension WebServiceProtocol {
         }
         
         // cache image in background
-        Task.detached(priority: .background) {
-            await CacheService.shared.cacheImage(imageName: imageName, image: image)
+        Task.detached(priority: .background) { [weak self] in
+            guard let self else { return }
+            await cacheService.cacheImage(imageName: imageName, image: image)
         }
         
         return image
     }
-    
-}
-
-final class WebService: WebServiceProtocol {
     
 }
