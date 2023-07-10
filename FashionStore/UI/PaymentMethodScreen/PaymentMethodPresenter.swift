@@ -23,7 +23,7 @@ protocol PaymentMethodPresenterProtocol: AnyObject {
 
 final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
     weak var view: PaymentMethodViewProtocol?
-    private let router: RouterProtocol
+    private let router: Routing
     private let keychainService: KeychainServiceProtocol
 
     // popup when back button tapped, but there is any edits
@@ -38,7 +38,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
 
     private let notIntegerInputErrorMessage = "Card number, expiration month/year and CVV must contain only digits"
     
-    init(router: RouterProtocol, keychainService: KeychainServiceProtocol) {
+    init(router: Routing, keychainService: KeychainServiceProtocol) {
         self.router = router
         self.keychainService = keychainService
     }

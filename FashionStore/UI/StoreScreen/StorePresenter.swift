@@ -18,12 +18,12 @@ protocol StorePresenterProtocol: AnyObject {
 
 final class StorePresenter: StorePresenterProtocol {
     weak var view: StoreViewProtocol?
-    private let router: RouterProtocol
+    private let router: Routing
     private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol // load catalog to Core Data
     private var catalog: Catalog?
     
-    init(router: RouterProtocol, webService: WebServiceProtocol, coreDataService: CoreDataServiceProtocol) {
+    init(router: Routing, webService: WebServiceProtocol, coreDataService: CoreDataServiceProtocol) {
         self.router = router
         self.webService = webService
         self.coreDataService = coreDataService

@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-protocol ModuleBuilderProtocol {
-    func createStoreModule(router: RouterProtocol) -> StoreViewController
-    func createProductModule(router: RouterProtocol, product: Product, image: UIImage?) -> ProductViewController
-    func createCartModule(router: RouterProtocol) -> CartViewController
-    func createAddressModule(router: RouterProtocol) -> AddressViewController
-    func createPaymentMethodModule(router: RouterProtocol) -> PaymentMethodViewController
-    func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController
+protocol ModuleBuilding {
+    func createStoreModule(router: Routing) -> StoreViewController
+    func createProductModule(router: Routing, product: Product, image: UIImage?) -> ProductViewController
+    func createCartModule(router: Routing) -> CartViewController
+    func createAddressModule(router: Routing) -> AddressViewController
+    func createPaymentMethodModule(router: Routing) -> PaymentMethodViewController
+    func createCheckoutModule(router: Routing) -> CheckoutViewController
     
     func createPopupModule(
-        router: RouterProtocol,
+        router: Routing,
         headerTitle: String,
         message: String,
         subMessage: String?,
@@ -27,10 +27,10 @@ protocol ModuleBuilderProtocol {
         image: UIImageView
     ) -> PopupViewController
         
-    func createTestModule(router: RouterProtocol) -> TestViewController
+    func createTestModule(router: Routing) -> TestViewController
 }
 
-final class ModuleBuilder: ModuleBuilderProtocol {
+final class ModuleBuilder: ModuleBuilding {
     
     private let keychainService = KeychainService()
     private let webService: WebServiceProtocol
@@ -41,7 +41,7 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         self.webService = webService
     }
     
-    func createStoreModule(router: RouterProtocol) -> StoreViewController {
+    func createStoreModule(router: Routing) -> StoreViewController {
         let presenter = StorePresenter(
             router: router,
             webService: webService,
@@ -53,7 +53,7 @@ final class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createProductModule(
-        router: RouterProtocol,
+        router: Routing,
         product: Product,
         image: UIImage?
     ) -> ProductViewController {
@@ -69,7 +69,7 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    func createCartModule(router: RouterProtocol) -> CartViewController {
+    func createCartModule(router: Routing) -> CartViewController {
         let presenter = CartPresenter(
             router: router,
             webService: webService,
@@ -80,21 +80,21 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    func createAddressModule(router: RouterProtocol) -> AddressViewController {
+    func createAddressModule(router: Routing) -> AddressViewController {
         let presenter = AddressPresenter(router: router, keychainService: keychainService)
         let view = AddressViewController(presenter: presenter)
         presenter.view = view
         return view
     }
     
-    func createPaymentMethodModule(router: RouterProtocol) -> PaymentMethodViewController {
+    func createPaymentMethodModule(router: Routing) -> PaymentMethodViewController {
         let presenter = PaymentMethodPresenter(router: router, keychainService: keychainService)
         let view = PaymentMethodViewController(presenter: presenter)
         presenter.view = view
         return view
     }
     
-    func createCheckoutModule(router: RouterProtocol) -> CheckoutViewController {
+    func createCheckoutModule(router: Routing) -> CheckoutViewController {
         let presenter = CheckoutPresenter(
             router: router,
             keychainService: keychainService,
@@ -107,7 +107,7 @@ final class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createPopupModule(
-        router: RouterProtocol,
+        router: Routing,
         headerTitle: String,
         message: String,
         subMessage: String?,
@@ -131,7 +131,7 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    func createTestModule(router: RouterProtocol) -> TestViewController {
+    func createTestModule(router: Routing) -> TestViewController {
         let presenter = TestPresenter(router: router)
         let view: TestViewController
         view = UIStoryboard(name: "TestStoryboard", bundle: nil)

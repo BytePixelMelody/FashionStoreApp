@@ -19,14 +19,14 @@ protocol ProductPresenterProtocol: AnyObject {
 
 final class ProductPresenter: ProductPresenterProtocol {
     weak var view: ProductViewProtocol?
-    private let router: RouterProtocol
+    private let router: Routing
     private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol
     private let product: Product
     private let image: UIImage?
     
     init(
-        router: RouterProtocol,
+        router: Routing,
         webService: WebServiceProtocol,
         coreDataService: CoreDataServiceProtocol,
         product: Product,

@@ -10,7 +10,7 @@ import UIKit
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var router: RouterProtocol?
+    private var router: Routing?
     private let coreDataService: CoreDataServiceProtocol = CoreDataService()
     private let cacheService: CacheServiceProtocol = CacheService()
     private lazy var webService: WebServiceProtocol = WebService(cacheService: cacheService)

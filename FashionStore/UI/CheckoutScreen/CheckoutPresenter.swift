@@ -33,7 +33,7 @@ protocol CheckoutPresenterProtocol: AnyObject {
 
 final class CheckoutPresenter: CheckoutPresenterProtocol {
     weak var view: CheckoutViewProtocol?
-    private let router: RouterProtocol
+    private let router: Routing
     private let keychainService: KeychainServiceProtocol
     private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol
@@ -125,7 +125,7 @@ final class CheckoutPresenter: CheckoutPresenterProtocol {
     private var cartProducts: [CartItem] = []
     
     init(
-        router: RouterProtocol,
+        router: Routing,
         keychainService: KeychainServiceProtocol,
         webService: WebServiceProtocol,
         coreDataService: CoreDataServiceProtocol

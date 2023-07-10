@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-protocol RouterProtocol: AnyObject {
+protocol Routing: AnyObject {
     var navigationController: UINavigationController { get set }
-    var moduleBuilder: ModuleBuilderProtocol { get set }
+    var moduleBuilder: ModuleBuilding { get set }
     
     // show screens
     func showStoreScreen()
@@ -42,18 +42,18 @@ protocol RouterProtocol: AnyObject {
     
 }
 
-extension RouterProtocol {
+extension Routing {
     // close screen with standard pop-animation
     func popScreen(animated: Bool = true) {
         navigationController.popViewController(animated: true)
     }
 }
 
-final class Router: RouterProtocol {
+final class Router: Routing {
     var navigationController: UINavigationController
-    var moduleBuilder: ModuleBuilderProtocol
+    var moduleBuilder: ModuleBuilding
     
-    init(navigationController: UINavigationController, moduleBuilder: ModuleBuilderProtocol) {
+    init(navigationController: UINavigationController, moduleBuilder: ModuleBuilding) {
         self.navigationController = navigationController
         self.moduleBuilder = moduleBuilder
     }

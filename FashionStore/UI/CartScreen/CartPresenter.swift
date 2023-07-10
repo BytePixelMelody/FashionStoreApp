@@ -27,7 +27,7 @@ protocol CartPresenterProtocol: AnyObject {
 
 final class CartPresenter: CartPresenterProtocol {
     weak var view: CartViewProtocol?
-    private let router: RouterProtocol
+    private let router: Routing
     private let webService: WebServiceProtocol
     private let coreDataService: CoreDataServiceProtocol
     
@@ -57,7 +57,7 @@ final class CartPresenter: CartPresenterProtocol {
     private let maxCartItemCountImage = UIImageView.makeImageView(imageName: ImageName.dummy)
 
     init(
-        router: RouterProtocol,
+        router: Routing,
         webService: WebServiceProtocol,
         coreDataService: CoreDataServiceProtocol
     ) {

@@ -15,7 +15,7 @@ final class Errors {
     public static let handler = Errors()
     
     // for router injection
-    public var router: RouterProtocol?
+    public var router: Routing?
     
     // logger, use Console to view logs
     private let logger = Logger(subsystem: #file, category: "Errors handler")

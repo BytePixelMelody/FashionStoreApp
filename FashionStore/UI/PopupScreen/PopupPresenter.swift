@@ -12,10 +12,10 @@ protocol PopupPresenterProtocol: AnyObject {
 }
 
 final class PopupPresenter: PopupPresenterProtocol {
-    private let router: RouterProtocol
+    private let router: Routing
     weak var view: PopupViewProtocol?
     
-    init(router: RouterProtocol) {
+    init(router: Routing) {
         self.router = router
     }
 
