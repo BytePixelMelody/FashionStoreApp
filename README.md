@@ -16,11 +16,11 @@
 - [x] MVP + Builder + Router
 
 ## Frameworks
+- [x] UIKit
 - [x] SnapKit
 - [x] CombineCocoa
 
 ## Technologies
-- [x] UIKit
 - [x] UI fully by code, forced unwrap avoided
 - [x] Design from Figma, adapted for rounded screens
 - [x] Self-designed JSON-structured database
@@ -37,6 +37,12 @@
 - [x] Combine reactive framework for text fields input check
 - [x] Typographic font styles with dynamic accessibility font scaling
 - [x] Customized animations between screens
+
+## Code patterns
+- [x] Router
+- [x] Factory
+- [x] Dependency injection
+- [x] Singleton for Errors service
 
 ## Screenshots
 <img src="PresentationMedia/StoreScreen.png" width="273"/> <img src="PresentationMedia/ProductScreen.png" width="273"/> <img src="PresentationMedia/CartScreen.png" width="273"/> <img src="PresentationMedia/AddressScreen.png" width="273"/> <img src="PresentationMedia/CheckoutScreen.png" width="273"/> <img src="PresentationMedia/PopupScreen.png" width="273"/>
