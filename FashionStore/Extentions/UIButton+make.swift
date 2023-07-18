@@ -22,9 +22,7 @@ extension UIButton {
         }
         config.imagePadding = 24
         
-        let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let action { action() }
-        }))
+        let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
                 
         return button
     }
@@ -37,14 +35,9 @@ extension UIButton {
             config.image = UIImage(named: imageName)
         }
         config.contentInsets = .zero
-        
-        let button: UIButton
-        
-        if let action {
-            button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in action() }))
-        } else {
-            button = UIButton(configuration: config)
-        }
+                
+        let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
+
         return button
     }
     
@@ -62,9 +55,7 @@ extension UIButton {
 
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
-        let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
-            if let action { action() }
-        }))
+        let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
 
         button.contentHorizontalAlignment = .leading
         
