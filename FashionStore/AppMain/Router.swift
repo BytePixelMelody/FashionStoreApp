@@ -44,8 +44,8 @@ protocol Routing: AnyObject {
 
 extension Routing {
     // close screen with standard pop-animation
-    func popScreen(animated: Bool = true) {
-        navigationController.popViewController(animated: true)
+    func popScreen() {
+        popScreen(animated: true)
     }
 }
 
