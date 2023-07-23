@@ -150,8 +150,7 @@ final class ProductViewController: UIViewController {
         if let productBrandLabelTitle,
             let productNameLabelTitle,
             let productPriceLabelTitle,
-            let productDescriptionLabelTitle
-        {
+            let productDescriptionLabelTitle {
             productBrandLabel.attributedText = productBrandLabelTitle.uppercased().setStyle(style: .titleMedium)
             productNameLabel.attributedText = productNameLabelTitle.setStyle(style: .bodyLarge)
             productPriceLabel.attributedText = productPriceLabelTitle.setStyle(style: .priceLarge)

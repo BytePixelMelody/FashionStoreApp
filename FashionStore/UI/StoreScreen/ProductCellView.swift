@@ -15,7 +15,7 @@ final class ProductCellView: UICollectionViewCell {
     private var productBrandLabelTitle: String?
     private var productNameLabelTitle: String?
     private var productPriceLabelTitle: String?
-    private var productId: UUID?
+    private var productID: UUID?
     private var cellTapAction: ((UUID, UIImage?) -> Void)?
    
     private let commonVerticalStackView = UIStackView.makeVerticalStackView()
@@ -51,7 +51,7 @@ final class ProductCellView: UICollectionViewCell {
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
         productPriceLabelTitle: String,
-        productId: UUID,
+        productID: UUID,
         cellTapAction: @escaping (UUID, UIImage?) -> Void,
         imageName: String?,
         loadImageAction: @escaping (String) async throws -> UIImage?
@@ -59,7 +59,7 @@ final class ProductCellView: UICollectionViewCell {
         self.productBrandLabelTitle = productBrandLabelTitle
         self.productNameLabelTitle = productNameLabelTitle
         self.productPriceLabelTitle = productPriceLabelTitle
-        self.productId = productId
+        self.productID = productID
         self.cellTapAction = cellTapAction
         self.imageName = imageName
         
@@ -87,8 +87,8 @@ final class ProductCellView: UICollectionViewCell {
     // called by tap on the view
     @objc
     private func cellSelector() {
-        guard let cellTapAction, let productId else { return }
-        cellTapAction(productId, productImageView.image)
+        guard let cellTapAction, let productID else { return }
+        cellTapAction(productID, productImageView.image)
     }
     
     private func setupUiTexts() {
@@ -139,7 +139,7 @@ final class ProductCellView: UICollectionViewCell {
         productBrandLabelTitle = nil
         productNameLabelTitle = nil
         productPriceLabelTitle = nil
-        productId = nil
+        productID = nil
         cellTapAction = nil
         imageName = nil
         

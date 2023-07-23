@@ -9,12 +9,12 @@ import Foundation
 import CoreData
 
 protocol CoreDataServiceProtocol: AnyObject {
-    func addCartItemToCart(itemId: UUID) async throws
-    func checkItemInCart(itemId: UUID) async throws -> Bool
+    func addCartItemToCart(itemID: UUID) async throws
+    func checkItemInCart(itemID: UUID) async throws -> Bool
     func fetchEntireCart() async throws -> Cart
-    func editCartItemCount(itemId: UUID, newCount: Int) async throws
-    func removeCartItemFromCart(itemId: UUID) async throws
-    func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int
+    func editCartItemCount(itemID: UUID, newCount: Int) async throws
+    func removeCartItemFromCart(itemID: UUID) async throws
+    func removeUnavailableCartItems(itemIDsInStockCount: [UUID : Int]) async throws -> Int
     func removeAllCartItemsFromCart() async throws
 }
 
@@ -50,10 +50,10 @@ final actor CoreDataService: CoreDataServiceProtocol {
     private lazy var backgroundContext = persistentContainer.newBackgroundContext()
     
     // add item to cart or change count += 1
-    func addCartItemToCart(itemId: UUID) async throws {
+    func addCartItemToCart(itemID: UUID) async throws {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
         
         try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
@@ -63,7 +63,7 @@ final actor CoreDataService: CoreDataServiceProtocol {
                 let cartItemModel = CartItemModel(context: self.backgroundContext)
                 cartItemModel.id = UUID()
                 cartItemModel.count = 1
-                cartItemModel.itemId = itemId
+                cartItemModel.itemID = itemID
                 try self.backgroundContext.save()
             } else {
                 // increase count
@@ -75,10 +75,10 @@ final actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // check the presence of item in the cart
-    func checkItemInCart(itemId: UUID) async throws -> Bool {
+    func checkItemInCart(itemID: UUID) async throws -> Bool {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
                 
         return try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
@@ -98,14 +98,14 @@ final actor CoreDataService: CoreDataServiceProtocol {
             for cartItemModel in cartItemsModel {
                 guard
                     let id = cartItemModel.id,
-                    let itemId = cartItemModel.itemId
+                    let itemID = cartItemModel.itemID
                 else {
                     throw Errors.ErrorType.modelUnwrapError
                 }
                 // creating item by item
                 let cartItem = CartItem(
                     id: id,
-                    itemId: itemId,
+                    itemID: itemID,
                     count: Int(cartItemModel.count)
                 )
                 cartItems.append(cartItem)
@@ -116,12 +116,12 @@ final actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // edit CartItem count
-    func editCartItemCount(itemId: UUID, newCount: Int) async throws {
+    func editCartItemCount(itemID: UUID, newCount: Int) async throws {
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
         // run on background
         try await backgroundContext.perform {
-            // first item by itemId
+            // first item by itemID
             guard let cartItemModel = try self.backgroundContext.fetch(fetchRequest).first else {
                 throw Errors.ErrorType.modelUnwrapError
             }
@@ -132,14 +132,14 @@ final actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // remove CartItem from cart
-    func removeCartItemFromCart(itemId: UUID) async throws {
+    func removeCartItemFromCart(itemID: UUID) async throws {
         let fetchRequest = CartItemModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "itemId == %@", itemId.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
         fetchRequest.includesPropertyValues = false
         
         // run on background
         try await backgroundContext.perform {
-            // all items by itemId
+            // all items by itemID
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
             // delete
             for cartItemModel in cartItemsModel {
@@ -151,7 +151,7 @@ final actor CoreDataService: CoreDataServiceProtocol {
     }
     
     // delete cartItems that are not in stock in necessary count
-    func removeUnavailableCartItems(itemIdsInStockCount: [UUID : Int]) async throws -> Int {
+    func removeUnavailableCartItems(itemIDsInStockCount: [UUID : Int]) async throws -> Int {
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.includesPropertyValues = true
         
@@ -167,11 +167,11 @@ final actor CoreDataService: CoreDataServiceProtocol {
             for cartItemModel in cartItemsModel {
                 
                 // is cartItem in stock?
-                if let cartItemId = cartItemModel.itemId,
-                   itemIdsInStockCount.keys.contains(cartItemId) {
+                if let cartItemID = cartItemModel.itemID,
+                   itemIDsInStockCount.keys.contains(cartItemID) {
                     
                     // is count not sufficient?
-                    if let itemInStockCount = itemIdsInStockCount[cartItemId],
+                    if let itemInStockCount = itemIDsInStockCount[cartItemID],
                        cartItemModel.count > itemInStockCount {
                         deletedCartItemsCount += Int(cartItemModel.count) - itemInStockCount
                         cartItemModel.count = Int64(itemInStockCount)

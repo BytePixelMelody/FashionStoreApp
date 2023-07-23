@@ -9,21 +9,21 @@ import Foundation
 import Security
 
 protocol KeychainServiceProtocol: AnyObject {
-    func add<T>(keychainId: String, value: T) throws where T: Codable
-    func read<T>(keychainId: String) throws -> T where T: Codable
-    func delete(keychainId: String) throws
+    func add<T>(keychainID: String, value: T) throws where T: Codable
+    func read<T>(keychainID: String) throws -> T where T: Codable
+    func delete(keychainID: String) throws
 }
 
 final class KeychainService: KeychainServiceProtocol {
     
     // add item to keychain
-    public func add<T>(keychainId: String, value: T) throws where T: Codable {
+    public func add<T>(keychainID: String, value: T) throws where T: Codable {
         let jsonEncoder = JSONEncoder()
         let data = try jsonEncoder.encode(value)
         
         // creating keychain query for add operation
         let addQuery: [String: Any] = [
-            kSecAttrService as String: keychainId, // service + account = id to data access
+            kSecAttrService as String: keychainID, // service + account = id to data access
             kSecValueData as String: data, // encoded data to store in keychain
             kSecClass as String: kSecClassGenericPassword, // type of secure data
             kSecAttrSynchronizable as String: kCFBooleanTrue as Any // store in iCloud
@@ -36,7 +36,7 @@ final class KeychainService: KeychainServiceProtocol {
         if status == errSecDuplicateItem {
             // creating query for update operation
             let updateQuery: [String: Any] = [
-                kSecAttrService as String: keychainId, // service + account = id to data access
+                kSecAttrService as String: keychainID, // service + account = id to data access
                 kSecClass as String: kSecClassGenericPassword, // type of secure data
                 kSecAttrSynchronizable as String: kCFBooleanTrue as Any // store in iCloud
             ]
@@ -54,10 +54,10 @@ final class KeychainService: KeychainServiceProtocol {
     }
     
     // read item from keychain
-    public func read<T>(keychainId: String) throws -> T where T: Codable {
+    public func read<T>(keychainID: String) throws -> T where T: Codable {
         // creating keychain query for read operation
         let readQuery: [String: Any] = [
-            kSecAttrService as String: keychainId, // id to data access
+            kSecAttrService as String: keychainID, // id to data access
             kSecClass as String: kSecClassGenericPassword, // type of secure data in keychain
             kSecAttrSynchronizable as String: kCFBooleanTrue as Any, // store in iCloud
             kSecReturnData as String: true // return the data flag
@@ -86,11 +86,11 @@ final class KeychainService: KeychainServiceProtocol {
         return try jsonDecoder.decode(T.self, from: data)
     }
     
-    // delete item from keychain by keychainId
-    public func delete(keychainId: String) throws {
+    // delete item from keychain by keychainID
+    public func delete(keychainID: String) throws {
         // creating keychain query for delete operation
         let deleteQuery: [String: Any] = [
-            kSecAttrService as String: keychainId, // service + account = id to data access
+            kSecAttrService as String: keychainID, // service + account = id to data access
             kSecClass as String: kSecClassGenericPassword, // type of secure data in keychain
             kSecAttrSynchronizable as String: kCFBooleanTrue as Any // store in iCloud
         ]

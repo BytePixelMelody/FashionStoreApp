@@ -16,7 +16,7 @@ final actor CacheService: CacheServiceProtocol {
     
     // async func of actor to cache image
     func cacheImage(imageName: String, image: UIImage) {
-        guard let url = getCacheUrl()?.appending(path: imageName) else { return }
+        guard let url = getCacheURL()?.appending(path: imageName) else { return }
         guard let data = image.jpegData(compressionQuality: 0.92) else { return }
         do {
             // write file if it is not exist
@@ -30,7 +30,7 @@ final actor CacheService: CacheServiceProtocol {
     
     // async func of actor to retrieve image
     func loadCachedImage(imageName: String) -> UIImage? {
-        guard let url = getCacheUrl()?.appending(path: imageName) else { return nil }
+        guard let url = getCacheURL()?.appending(path: imageName) else { return nil }
 
         do {
             let data = try Data(contentsOf: url)
@@ -41,7 +41,7 @@ final actor CacheService: CacheServiceProtocol {
     }
     
     // generate cache url
-    private func getCacheUrl() -> URL? {
+    private func getCacheURL() -> URL? {
         do {
             var url = try FileManager.default.url(
                 for: .cachesDirectory,
@@ -52,7 +52,7 @@ final actor CacheService: CacheServiceProtocol {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
             return url
         } catch {
-            let error = Errors.ErrorType.invalidUrlStringError
+            let error = Errors.ErrorType.invalidURLStringError
             Errors.handler.logError(error)
             return nil
         }

@@ -172,8 +172,8 @@ extension StoreViewController {
     private func createProductCellRegistration() -> UICollectionView.CellRegistration<ProductCellView, Product> {
         return UICollectionView.CellRegistration<ProductCellView, Product> { [weak presenter] cell, indexPath, product in
             
-            let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productId, image in
-                presenter?.showProduct(productId: productId, image: image)
+            let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productID, image in
+                presenter?.showProduct(productID: productID, image: image)
             }
             
             let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
@@ -185,7 +185,7 @@ extension StoreViewController {
                 productBrandLabelTitle: product.brand,
                 productNameLabelTitle: product.name,
                 productPriceLabelTitle: "$" + product.price.formatted(.number.precision(.fractionLength(0...2))),
-                productId: product.id,
+                productID: product.id,
                 cellTapAction: cellTapAction,
                 imageName: product.images.first,
                 loadImageAction: loadImageAction

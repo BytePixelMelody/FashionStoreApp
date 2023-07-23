@@ -14,7 +14,7 @@ final class CartItemCellView: UICollectionViewCell {
     private var imageName: String?
     private var itemBrandLabelTitle: String?
     private var itemNameColorSizeLabelTitle: String?
-    private var itemId: UUID?
+    private var itemID: UUID?
     private var minusButtonAction: ((UUID, Int) async throws -> Void)?
     private var count: Int?
     private var plusButtonAction: ((UUID, Int) async throws -> Void)?
@@ -64,14 +64,14 @@ final class CartItemCellView: UICollectionViewCell {
         loadImageAction: @escaping (String) async throws -> UIImage?,
         itemBrand: String,
         itemNameColorSize: String,
-        itemId: UUID,
+        itemID: UUID,
         minusButtonAction: @escaping (UUID, Int) async throws -> Void,
         count: Int,
         plusButtonAction: @escaping (UUID, Int) async throws -> Void,
         itemPrice: Decimal
     ) {
         // if cell not prepared for reuse
-        guard self.itemId == nil else {
+        guard self.itemID == nil else {
             // update only count
             self.count = count
             // setup typography texts of updated count and price
@@ -83,7 +83,7 @@ final class CartItemCellView: UICollectionViewCell {
         self.imageName = imageName
         self.itemBrandLabelTitle = itemBrand
         self.itemNameColorSizeLabelTitle = itemNameColorSize
-        self.itemId = itemId
+        self.itemID = itemID
         self.minusButtonAction = minusButtonAction
         self.count = count
         self.plusButtonAction = plusButtonAction
@@ -115,10 +115,10 @@ final class CartItemCellView: UICollectionViewCell {
     private func setButtonActions() {
         minusButton.addAction(UIAction { [weak self] _ in
             Task<Void, Never> { [weak self] in
-                guard let self, let minusButtonAction, let itemId, let count else { return }
+                guard let self, let minusButtonAction, let itemID, let count else { return }
                 do {
                     // call action and set new count
-                    try await minusButtonAction(itemId, count - 1)
+                    try await minusButtonAction(itemID, count - 1)
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -127,10 +127,10 @@ final class CartItemCellView: UICollectionViewCell {
 
         plusButton.addAction(UIAction { [weak self] _ in
             Task<Void, Never> { [weak self] in
-                guard let self, let plusButtonAction, let itemId, let count else { return }
+                guard let self, let plusButtonAction, let itemID, let count else { return }
                 do {
                     // call action and set new count
-                    try await plusButtonAction(itemId, count + 1)
+                    try await plusButtonAction(itemID, count + 1)
                 } catch {
                     Errors.handler.checkError(error)
                 }
@@ -232,7 +232,7 @@ final class CartItemCellView: UICollectionViewCell {
         imageName = nil
         itemBrandLabelTitle = nil
         itemNameColorSizeLabelTitle = nil
-        itemId = nil
+        itemID = nil
         minusButtonAction = nil
         count = nil
         plusButtonAction = nil

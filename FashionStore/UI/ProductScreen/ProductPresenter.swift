@@ -70,13 +70,13 @@ final class ProductPresenter: ProductPresenterProtocol {
     }
     
     func addProductToCart() async throws {
-        guard let itemId = product.colors.first?.items.first?.id else { return }
-        try await coreDataService.addCartItemToCart(itemId: itemId)
+        guard let itemID = product.colors.first?.items.first?.id else { return }
+        try await coreDataService.addCartItemToCart(itemID: itemID)
     }
     
     func checkInCartPresence() async throws {
-        guard let itemId = product.colors.first?.items.first?.id else { return }
-        let itemInCart = try await coreDataService.checkItemInCart(itemId: itemId)
+        guard let itemID = product.colors.first?.items.first?.id else { return }
+        let itemInCart = try await coreDataService.checkItemInCart(itemID: itemID)
         
         if itemInCart {
             await view?.disableAddToCartButton()

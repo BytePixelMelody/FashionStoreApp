@@ -351,7 +351,8 @@ final class PaymentMethodViewController: UIViewController {
             }
             .compactMap { String($0.prefix(2)) } // only 2 first digits
             .map { text in // not allow to input number > 12
-                if let monthNumber = Int(text), monthNumber > 12 {
+                if let monthNumber = Int(text),
+                    monthNumber > 12 {
                     return String(text.dropLast()) // 12 -> 12, 13 -> 1, 95 -> 9
                 } else {
                     return text

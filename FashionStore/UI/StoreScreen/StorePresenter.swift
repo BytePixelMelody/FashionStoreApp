@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol StorePresenterProtocol: AnyObject {
-    func showProduct(productId: UUID, image: UIImage?)
+    func showProduct(productID: UUID, image: UIImage?)
     func showCart()
     func loadCatalog() async throws
     func loadImage(imageName: String) async throws -> UIImage
@@ -29,9 +29,9 @@ final class StorePresenter: StorePresenterProtocol {
         self.coreDataService = coreDataService
     }
     
-    func showProduct(productId: UUID, image: UIImage?) {
+    func showProduct(productID: UUID, image: UIImage?) {
         // search product by id in catalog
-        guard let product = catalog?.audiences.flatMap({ $0.categories.flatMap { $0.products } }).first(where: { $0.id == productId }) else {
+        guard let product = catalog?.audiences.flatMap({ $0.categories.flatMap { $0.products } }).first(where: { $0.id == productID }) else {
             return
         }
         
@@ -43,7 +43,7 @@ final class StorePresenter: StorePresenterProtocol {
     }
     
     func loadCatalog() async throws {
-        catalog = try await webService.getData(urlString: Settings.catalogUrl)
+        catalog = try await webService.getData(urlString: Settings.catalogURL)
     }
     
     // load image from web

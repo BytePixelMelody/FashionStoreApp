@@ -26,7 +26,8 @@ extension UIImageView {
             imageView = UIImageView(frame: .zero)
         }
         
-        if let width, let height {
+        if let width,
+            let height {
             imageView.snp.makeConstraints { make in
                 make.width.equalTo(width)
                 make.height.equalTo(height)

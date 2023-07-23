@@ -31,7 +31,7 @@ final class Errors {
         case keyChainCastError
         case emptyTextFieldError
         case notIntegerInputError(errorMessage: String)
-        case invalidUrlStringError
+        case invalidURLStringError
         case urlResponseCastError
         case unsupportedImageFormat
         case modelUnwrapError
@@ -85,7 +85,7 @@ final class Errors {
                 return "Not Integer input error: " + errorMessage
 
            // invalid URL string error
-            case .invalidUrlStringError:
+            case .invalidURLStringError:
                 return "URL string is invalid"
                 
             case .urlResponseCastError:

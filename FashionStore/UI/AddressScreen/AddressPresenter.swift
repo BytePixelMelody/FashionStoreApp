@@ -107,7 +107,7 @@ final class AddressPresenter: AddressPresenterProtocol {
                 phoneNumber: phoneNumber
             )
             
-            try keychainService.add(keychainId: Settings.keychainChippingAddressId, value: chippingAddress)
+            try keychainService.add(keychainID: Settings.keychainChippingAddressID, value: chippingAddress)
             router.popScreen()
         } catch {
             // if save error - show error and stay on screen
@@ -122,7 +122,7 @@ final class AddressPresenter: AddressPresenterProtocol {
     private func checkAddress() {
         var chippingAddress: ChippingAddress? = nil
         do {
-            chippingAddress = try keychainService.read(keychainId: Settings.keychainChippingAddressId)
+            chippingAddress = try keychainService.read(keychainID: Settings.keychainChippingAddressID)
         } catch {
             Errors.handler.checkError(error)
         }

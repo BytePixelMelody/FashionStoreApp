@@ -107,7 +107,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             )
             
             // saving to keychain
-            try keychainService.add(keychainId: Settings.keychainPaymentMethodId, value: paymentMethod)
+            try keychainService.add(keychainID: Settings.keychainPaymentMethodID, value: paymentMethod)
             router.popScreen()
         } catch {
             // if save error - show error and stay on screen
@@ -122,7 +122,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
     private func checkPaymentMethod() {
         var paymentMethod: PaymentMethod? = nil
         do {
-            paymentMethod = try keychainService.read(keychainId: Settings.keychainPaymentMethodId)
+            paymentMethod = try keychainService.read(keychainID: Settings.keychainPaymentMethodID)
         } catch {
             Errors.handler.checkError(error)
         }

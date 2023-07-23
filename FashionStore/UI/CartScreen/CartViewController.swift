@@ -13,7 +13,7 @@ protocol CartViewProtocol: AnyObject {
     func showFullCart()
     func setTotalPrice(price: Decimal?)
     func reloadCollectionViewData()
-    func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID])
+    func updateCollectionViewItems(updatedItemIDs: [CatalogItem.ID])
 }
 
 final class CartViewController: UIViewController {
@@ -280,7 +280,7 @@ extension CartViewController {
     }
     
     private func createCartItemCellRegistration() -> UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> {
-        return UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> { [weak self] cell, indexPath, itemId in
+        return UICollectionView.CellRegistration<CartItemCellView, CatalogItem.ID> { [weak self] cell, indexPath, itemID in
             
             guard let self else { return }
             
@@ -289,19 +289,19 @@ extension CartViewController {
                 return try await presenter?.loadImage(imageName: imageName)
             }
             
-            let minusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemId, newCount in
-                try await presenter?.reduceCartItemCount(itemId: itemId, newCount: newCount)
+            let minusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemID, newCount in
+                try await presenter?.reduceCartItemCount(itemID: itemID, newCount: newCount)
             }
             
-            let plusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemId, newCount in
-                try await presenter?.increaseCartItemCount(itemId: itemId, newCount: newCount)
+            let plusButtonAction: (UUID, Int) async throws -> Void = { [weak presenter] itemID, newCount in
+                try await presenter?.increaseCartItemCount(itemID: itemID, newCount: newCount)
             }
             
             // find info in catalog
-            guard let product = presenter.findProduct(itemId: itemId) else { return }
-            guard let color = presenter.findColor(itemId: itemId) else { return }
-            guard let catalogItem = presenter.findCatalogItem(itemId: itemId) else { return }
-            guard let cartItem = presenter.findCartItem(itemId: itemId) else { return }
+            guard let product = presenter.findProduct(itemID: itemID) else { return }
+            guard let color = presenter.findColor(itemID: itemID) else { return }
+            guard let catalogItem = presenter.findCatalogItem(itemID: itemID) else { return }
+            guard let cartItem = presenter.findCartItem(itemID: itemID) else { return }
 
             let productName = product.name
             let colorName = color.name
@@ -312,7 +312,7 @@ extension CartViewController {
                 loadImageAction: loadImageAction,
                 itemBrand: product.brand,
                 itemNameColorSize: "\(productName), \(colorName), \(size)",
-                itemId: itemId,
+                itemID: itemID,
                 minusButtonAction: minusButtonAction,
                 count: cartItem.count,
                 plusButtonAction: plusButtonAction,
@@ -328,8 +328,8 @@ extension CartViewController {
         
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: cartItemsCollectionView) {collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .cartItem(let itemId):
-                return collectionView.dequeueConfiguredReusableCell(using: cartItemCellRegistration, for: indexPath, item: itemId)
+            case .cartItem(let itemID):
+                return collectionView.dequeueConfiguredReusableCell(using: cartItemCellRegistration, for: indexPath, item: itemID)
             }
         }
     }
@@ -341,18 +341,18 @@ extension CartViewController {
         // adding sections to snapshot
         snapshot.appendSections([.cartItemSection])
         // adding products to snapshot by Item enum entities .product(Product)
-        snapshot.appendItems(cartItems.map { Item.cartItem($0.itemId) })
+        snapshot.appendItems(cartItems.map { Item.cartItem($0.itemID) })
         // apply dataSource with correct animations
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     // if count changes
-    func updateCollectionViewItems(updatedItemIds: [CatalogItem.ID]) {
+    func updateCollectionViewItems(updatedItemIDs: [CatalogItem.ID]) {
         guard let dataSource else { return }
         
         var snapshot = dataSource.snapshot()
-        let updatedCartItems = updatedItemIds.compactMap { presenter.findCartItem(itemId: $0) }
-        let updatedItems = updatedCartItems.map { Item.cartItem($0.itemId) }
+        let updatedCartItems = updatedItemIDs.compactMap { presenter.findCartItem(itemID: $0) }
+        let updatedItems = updatedCartItems.map { Item.cartItem($0.itemID) }
         snapshot.reconfigureItems(updatedItems)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
