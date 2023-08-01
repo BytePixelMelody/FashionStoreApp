@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 protocol Routing: AnyObject {
-    var navigationController: UINavigationController { get set }
-    var moduleBuilder: ModuleBuilding { get set }
-    
+
     // show screens
     func showStoreScreen()
     func showProductScreen(product: Product, image: UIImage?)
@@ -50,8 +48,8 @@ extension Routing {
 }
 
 final class Router: Routing {
-    var navigationController: UINavigationController
-    var moduleBuilder: ModuleBuilding
+    private let navigationController: UINavigationController
+    private let moduleBuilder: ModuleBuilding
     
     init(navigationController: UINavigationController, moduleBuilder: ModuleBuilding) {
         self.navigationController = navigationController
