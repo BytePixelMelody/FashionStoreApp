@@ -18,7 +18,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
+        window = UIWindow(windowScene: windowScene)
         
         let rootNavigationController = UINavigationController()
         rootNavigationController.navigationBar.isHidden = true
@@ -35,9 +35,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             switchToProduct(productID: productID)
         }
         
-        window.rootViewController = rootNavigationController
-        window.makeKeyAndVisible()
-        self.window = window
+        window?.rootViewController = rootNavigationController
+        window?.makeKeyAndVisible()
     }
     
     // processing deep link if App was opened 
