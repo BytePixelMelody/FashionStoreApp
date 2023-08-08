@@ -30,14 +30,17 @@ final class WebService: WebServiceProtocol {
             throw Errors.ErrorType.invalidURLStringError
         }
         
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-
+        let urlRequest = {
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "GET"
+            return urlRequest
+        }()
+        
         // try to get data from url
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        async let (data, response) = URLSession.shared.data(for: urlRequest)
         
         // urlResponse typecasting check
-        guard let urlResponse = response as? HTTPURLResponse else {
+        guard let urlResponse = try await response as? HTTPURLResponse else {
             throw Errors.ErrorType.urlResponseCastError
         }
         
@@ -47,7 +50,7 @@ final class WebService: WebServiceProtocol {
         }
         
         // try decode data to T type
-        let decodedData = try JSONDecoder().decode(T.self, from: data)
+        let decodedData = try JSONDecoder().decode(T.self, from: try await data)
         
         return decodedData
     }
@@ -66,14 +69,17 @@ final class WebService: WebServiceProtocol {
             throw Errors.ErrorType.invalidURLStringError
         }
         
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
+        let urlRequest = {
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "GET"
+            return urlRequest
+        }()
         
         // try to get data from url
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        async let (data, response) = URLSession.shared.data(for: urlRequest)
         
         // urlResponse typecasting check
-        guard let urlResponse = response as? HTTPURLResponse else {
+        guard let urlResponse = try await response as? HTTPURLResponse else {
             throw Errors.ErrorType.urlResponseCastError
         }
         
@@ -83,7 +89,7 @@ final class WebService: WebServiceProtocol {
         }
         
         // try decode image to T type
-        guard let image = UIImage(data: data) else {
+        guard let image = UIImage(data: try await data) else {
             throw Errors.ErrorType.unsupportedImageFormat
         }
         

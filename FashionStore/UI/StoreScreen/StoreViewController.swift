@@ -19,7 +19,6 @@
 // Technical solutions for speed and stability that may be done in future:
 // - Collection View with different cell types in checkout
 // - Cart swipe to delete
-// - Image cache
 // - Unit tests
 // - Database write to SwiftData after loading from backend
 

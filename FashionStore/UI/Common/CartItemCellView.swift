@@ -104,7 +104,13 @@ final class CartItemCellView: UICollectionViewCell {
         Task<Void, Never> {
             do {
                 guard let imageName else { return }
-                itemImageView.image = try await loadImageAction(imageName)
+
+                let image = try await loadImageAction(imageName)
+                
+                // cell image name check after loading
+                if imageName == self.imageName {
+                    itemImageView.image = image
+                }
             } catch {
                 Errors.handler.checkError(error)
             }
