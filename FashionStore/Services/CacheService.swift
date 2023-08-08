@@ -12,6 +12,20 @@ protocol CacheServiceProtocol {
     func loadCachedImage(imageName: String) async -> UIImage?
 }
 
+
+// TODO: delete this after test
+final actor MockCacheService: CacheServiceProtocol {
+    
+    func cacheImage(imageName: String, image: UIImage) async {
+        
+    }
+    
+    func loadCachedImage(imageName: String) async -> UIImage? {
+        nil
+    }
+    
+}
+
 final actor CacheService: CacheServiceProtocol {
     
     // async func of actor to cache image

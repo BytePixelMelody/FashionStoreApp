@@ -73,6 +73,7 @@ final class ProductCellView: UICollectionViewCell {
         setupUiTexts()
     }
     
+    // TODO: - check cell image name after loading
     private func loadImage(loadImageAction: @escaping (String) async throws -> UIImage?) {
         Task<Void, Never> {
             do {

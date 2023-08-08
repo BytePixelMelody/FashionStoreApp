@@ -12,7 +12,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var router: Routing?
     private let coreDataService: CoreDataServiceProtocol = CoreDataService()
-    private let cacheService: CacheServiceProtocol = CacheService()
+    // TODO: return working CacheService
+    private let cacheService: CacheServiceProtocol = MockCacheService() // CacheService()
     private lazy var webService: WebServiceProtocol = WebService(cacheService: cacheService)
     private let deepLinkService: DeepLinkServiceProtocol = DeepLinkService()
 
