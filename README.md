@@ -13,36 +13,40 @@
   </table>
 
 ## Architectural pattern
-- [x] MVP + Builder + Router
+- [x] MVP
+- [x] Builder
+- [x] Router
+- [x] Services
+- [x] Dependency injection
 
 ## Frameworks
 - [x] UIKit
 - [x] SnapKit
+- [x] Combine
 - [x] CombineCocoa
+- [x] SwiftLint
 
 ## Technologies
 - [x] UI fully by code, forced unwrap avoided
-- [x] Design from Figma, adapted for rounded screens
+- [x] Design from Figma
 - [x] Self-designed JSON-structured database
-- [x] Mock Web-server based on GitHub Pages
-- [x] Core Data service by actor on background queue to store Shopping Cart
+- [x] Static Web-server based on GitHub Pages
 - [x] Web service on async/await
-- [x] Actor-based image caching service
-- [x] Keychain service with iCloud sync by native API for sensitive data
-- [x] Deep link service to open product page in App by link
-- [x] Errors service with logging and App-styled popups
+- [x] Core Data service on background queue
+- [x] Image caching service
+- [x] Keychain service with iCloud sync by native API
+- [x] Deep link service
+- [x] Errors service with logging
 - [x] Async/await and Tasks on main and background queues
-- [x] Generics in Keychain and Web services
-- [x] Collection views based on snapshots with refresh control
-- [x] Combine reactive framework for text fields input check
-- [x] Typographic font styles with dynamic accessibility font scaling
-- [x] Customized animations between screens
+- [x] Generics
+- [x] Collection views based on snapshots
+- [x] Reactive text checking with Combine
+- [x] Typographic font styles, dynamic accessibility font scaling
+- [x] Customised screen transitions
 
 ## Code patterns
-- [x] Router
-- [x] Factory
-- [x] Dependency injection
-- [x] Singleton for Errors service
+- [x] Factories
+- [x] Delegates
 
 ## Screenshots
 <img src="PresentationMedia/StoreScreen.png" width="273"/> <img src="PresentationMedia/ProductScreen.png" width="273"/> <img src="PresentationMedia/CartScreen.png" width="273"/> <img src="PresentationMedia/AddressScreen.png" width="273"/> <img src="PresentationMedia/CheckoutScreen.png" width="273"/> <img src="PresentationMedia/PopupScreen.png" width="273"/>
