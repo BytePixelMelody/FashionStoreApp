@@ -14,7 +14,6 @@
 // 1. Custom UINavigationBar - using undocumented methods
 
 // Backlog:
-// TODO: reverse view-presenter injection and delete view's inits
 
 // Technical solutions for speed and stability that may be done in future:
 // - Collection View with different cell types in checkout
@@ -24,7 +23,7 @@
 
 // Functionality that may be done in future:
 // 1. Many bank cards support
-// 2. Color and size support
+// 2. Item colors and sizes support
 // 3. Favorites
 // 4. Search
 // 5. Menu
@@ -34,23 +33,23 @@ import UIKit
 import SnapKit
 
 protocol StoreViewProtocol: AnyObject {
-        
+
 }
 
 final class StoreViewController: UIViewController {
-    
+
     private let presenter: StorePresenterProtocol
-    
+
     private lazy var goCartAction: () -> Void = { [weak presenter] in
         presenter?.showCart()
     }
-    
+
     private lazy var headerBrandedView = HeaderBrandedView(
         rightFirstButtonAction: goCartAction,
         rightFirstButtonImageName: ImageName.cart,
         frame: .zero
     )
-    
+
     private var productsCollectionView: UICollectionView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     private let refreshControl = UIRefreshControl(frame: .zero)
@@ -59,29 +58,29 @@ final class StoreViewController: UIViewController {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
-        
+
         // create and configure collection view
         configureCollectionView()
-        
+
         // arrange layouts
         arrangeLayout()
-        
+
         // configure collection view data source
         configureDataSource()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         Task<Void, Never> { [weak self] in
             guard let self else { return }
             do {
@@ -93,7 +92,7 @@ final class StoreViewController: UIViewController {
             }
         }
     }
-    
+
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -113,7 +112,7 @@ final class StoreViewController: UIViewController {
             make.top.right.left.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
+
     private func arrangeProductsCollectionView() {
         guard let productsCollectionView else { return }
         view.addSubview(productsCollectionView)
@@ -122,12 +121,12 @@ final class StoreViewController: UIViewController {
             make.left.right.bottom.equalToSuperview()
         }
     }
-        
+
 }
 
 // collection view implementing
 extension StoreViewController {
-    
+
     // create and configure collection view
     private func configureCollectionView() {
         // flow layout creating
@@ -137,12 +136,12 @@ extension StoreViewController {
         collectionViewFlowLayout.sectionInset = ProductsFlowLayoutConstants.sectionInset
         collectionViewFlowLayout.minimumLineSpacing = ProductsFlowLayoutConstants.lineSpacing
         collectionViewFlowLayout.minimumInteritemSpacing = ProductsFlowLayoutConstants.minimumInteritemSpacing
-        
+
         productsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         // some setup of collection view
         productsCollectionView?.alwaysBounceVertical = true // springing (bounce)
         productsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
-        
+
         // adding the refresh control
         refreshControl.addAction(UIAction { _ in
             Task<Void, Never> { [weak self] in
@@ -159,27 +158,27 @@ extension StoreViewController {
         }, for: .primaryActionTriggered)
         productsCollectionView?.refreshControl = refreshControl
     }
-    
+
     enum Section: Hashable {
         case productSection
     }
-    
+
     enum Item: Hashable {
         case product(Product)
     }
-    
+
     private func createProductCellRegistration() -> UICollectionView.CellRegistration<ProductCellView, Product> {
-        return UICollectionView.CellRegistration<ProductCellView, Product> { [weak presenter] cell, indexPath, product in
-            
+        return UICollectionView.CellRegistration<ProductCellView, Product> { [weak presenter] cell, _, product in
+
             let cellTapAction: (UUID, UIImage?) -> Void = { [weak presenter] productID, image in
                 presenter?.showProduct(productID: productID, image: image)
             }
-            
+
             let loadImageAction: (String) async throws -> UIImage? = { [weak presenter] imageName in
                 // load image by presenter
                 return try await presenter?.loadImage(imageName: imageName)
             }
-                        
+
             cell.setup(
                 productBrandLabelTitle: product.brand,
                 productNameLabelTitle: product.name,
@@ -191,22 +190,24 @@ extension StoreViewController {
             )
         }
     }
-    
+
     private func configureDataSource() {
         let productCellRegistration = createProductCellRegistration()
-        
+
         guard let productsCollectionView else { return }
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: productsCollectionView) {collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(
+            collectionView: productsCollectionView
+        ) { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .product(let product):
                 return collectionView.dequeueConfiguredReusableCell(using: productCellRegistration, for: indexPath, item: product)
             }
         }
     }
-    
+
     private func reloadCollectionViewData() {
         guard let products = presenter.getProducts() else { return }
-        
+
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         // adding sections to snapshot
         snapshot.appendSections([.productSection])
@@ -219,5 +220,5 @@ extension StoreViewController {
 }
 
 extension StoreViewController: StoreViewProtocol {
-    
+
 }

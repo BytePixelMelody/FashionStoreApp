@@ -9,14 +9,14 @@ import UIKit
 
 // text field with custom insets and text style
 final class UITextFieldStyled: UITextField {
-    
+
     // insets from bounds to text
     private let insets: UIEdgeInsets
     // style of text
     private let textStyle: TextStyle
     // style of placeholder
     private let placeholderStyle: TextStyle
-    
+
     init(
         text: String? = nil,
         placeholder: String,
@@ -43,17 +43,17 @@ final class UITextFieldStyled: UITextField {
             self.autocapitalizationType = .none
             self.spellCheckingType = .no
         }
-        
+
         // clear button
         clearButtonMode = .whileEditing
-        
+
         setupUiTexts()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override var placeholder: String? {
         get {
             super.placeholder
@@ -63,16 +63,16 @@ final class UITextFieldStyled: UITextField {
             attributedPlaceholder = newValue?.setStyle(style: placeholderStyle)
         }
     }
-    
+
     private func setupUiTexts() {
         // placeholder style
         attributedPlaceholder = placeholder?.setStyle(style: placeholderStyle)
-        
+
         // text style
         font = textStyle.fontMetrics.scaledFont(for: textStyle.font)
         textColor = textStyle.color
     }
-    
+
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -80,19 +80,19 @@ final class UITextFieldStyled: UITextField {
             setupUiTexts()
         }
     }
-    
+
     // apply insets
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.textRect(forBounds: bounds)
         return rect.inset(by: insets)
     }
-    
+
     // apply insets
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.editingRect(forBounds: bounds)
         return rect.inset(by: insets)
     }
-    
+
     override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
         var clearButtonRect = super.clearButtonRect(forBounds: bounds)
         // centerY shift calculation
@@ -100,10 +100,10 @@ final class UITextFieldStyled: UITextField {
         let textFieldShiftedCenterY = insets.top + (frame.height - insets.top - insets.bottom) / 2
         // changing of clearButton start point with shift
         let shiftY = textFieldShiftedCenterY - clearButtonCenterY
-        
+
         let clearButtonNewOrigin = CGPoint(x: clearButtonRect.origin.x, y: clearButtonRect.origin.y + shiftY)
         clearButtonRect.origin = clearButtonNewOrigin
         return clearButtonRect
     }
-    
+
 }

@@ -24,7 +24,7 @@ final class ProductPresenter: ProductPresenterProtocol {
     private let coreDataService: CoreDataServiceProtocol
     private let product: Product
     private let image: UIImage?
-    
+
     init(
         router: Routing,
         webService: WebServiceProtocol,
@@ -38,7 +38,7 @@ final class ProductPresenter: ProductPresenterProtocol {
         self.product = product
         self.image = image
     }
-    
+
     func loadInfo() {
         view?.fillProduct(
             productBrandLabelTitle: product.brand,
@@ -48,7 +48,7 @@ final class ProductPresenter: ProductPresenterProtocol {
             image: image
         )
     }
-    
+
     // if no image - load from web
     func checkAndLoadFaceImage() async throws {
         // if image == nil, than load image
@@ -60,28 +60,29 @@ final class ProductPresenter: ProductPresenterProtocol {
         // switching run on main queue by calling func fillFaceImage on @MainActor UIViewController
         await view?.fillFaceImage(image: image)
     }
-    
+
     func backScreen() {
         router.popScreen()
     }
-    
+
     func showCart() {
         router.showCartScreen()
     }
-    
+
     func addProductToCart() async throws {
         guard let itemID = product.colors.first?.items.first?.id else { return }
         try await coreDataService.addCartItemToCart(itemID: itemID)
     }
-    
+
     func checkInCartPresence() async throws {
         guard let itemID = product.colors.first?.items.first?.id else { return }
         let itemInCart = try await coreDataService.checkItemInCart(itemID: itemID)
-        
+
         if itemInCart {
             await view?.disableAddToCartButton()
         } else {
             await view?.enableAddToCartButton()
         }
     }
+    
 }

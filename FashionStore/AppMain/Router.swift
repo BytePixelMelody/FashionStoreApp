@@ -18,7 +18,7 @@ protocol Routing: AnyObject {
     func showAddressScreen()
     func showPaymentMethodScreen()
     func showCheckoutScreen()
-    
+
     func showPopupScreen(
         headerTitle: String,
         message: String,
@@ -28,16 +28,14 @@ protocol Routing: AnyObject {
         closeAction: (() -> Void)?,
         image: UIImageView
     )
-    
-    func showTestScreen()
-    
+
     // close screens
     func dismissScreen() // close modal presented ViewController
     func popScreen(animated: Bool) // close screen with pop-animation or without
     func popScreenToBottom() // close screen with to bottom animation
     func popTwoScreensToBottom() // close 2 screens with to bottom animation
     func popToRootScreen() // close all screens with to bottom animation
-    
+
 }
 
 extension Routing {
@@ -50,24 +48,24 @@ extension Routing {
 final class Router: Routing {
     private let navigationController: UINavigationController
     private let moduleBuilder: ModuleBuilding
-    
+
     init(navigationController: UINavigationController, moduleBuilder: ModuleBuilding) {
         self.navigationController = navigationController
         self.moduleBuilder = moduleBuilder
     }
-       
+
     // MARK: show screens
-    
+
     func showStoreScreen() {
         let viewController = moduleBuilder.createStoreModule(router: self)
         navigationController.setViewControllers([viewController], animated: true)
     }
-    
+
     func showProductScreen(product: Product, image: UIImage?) {
         let viewController = moduleBuilder.createProductModule(router: self, product: product, image: image)
         navigationController.pushViewController(viewController, animated: true)
     }
-    
+
     // show Product screen without animations for deep link use
     func showProductScreenInstantly(product: Product, image: UIImage?) {
         let storeViewController: UIViewController?
@@ -87,24 +85,24 @@ final class Router: Routing {
         navigationController.view.layer.add(CATransition.toTop, forKey: nil)
         navigationController.pushViewController(viewController, animated: false)
     }
-    
+
     // with animation like modal
     func showCheckoutScreen() {
         let viewController = moduleBuilder.createCheckoutModule(router: self)
         navigationController.view.layer.add(CATransition.toTop, forKey: nil)
         navigationController.pushViewController(viewController, animated: false)
     }
-    
+
     func showAddressScreen() {
         let viewController = moduleBuilder.createAddressModule(router: self)
         navigationController.pushViewController(viewController, animated: true)
    }
-    
+
     func showPaymentMethodScreen() {
         let viewController = moduleBuilder.createPaymentMethodModule(router: self)
         navigationController.pushViewController(viewController, animated: true)
     }
-    
+
     func showPopupScreen(
         headerTitle: String,
         message: String,
@@ -118,7 +116,7 @@ final class Router: Routing {
         if navigationController.viewControllers.last?.presentedViewController is PopupViewController {
             return
         }
-        
+
         let viewController = moduleBuilder.createPopupModule(
             router: self,
             headerTitle: headerTitle,
@@ -131,22 +129,17 @@ final class Router: Routing {
         )
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.modalTransitionStyle = .crossDissolve
-        
+
         navigationController.viewControllers.last?.present(viewController, animated: true)
     }
-    
-    func showTestScreen() {
-        let viewController = moduleBuilder.createTestModule(router: self)
-        navigationController.setViewControllers([viewController], animated: true)
-    }
-    
+
     // MARK: close screens
-    
+
     // close modal presented ViewController
     func dismissScreen() {
         navigationController.viewControllers.last?.dismiss(animated: true)
     }
-    
+
     // close screen with defined animation
     func popScreen(animated: Bool) {
         navigationController.popViewController(animated: animated)
@@ -157,7 +150,7 @@ final class Router: Routing {
         navigationController.view.layer.add(CATransition.toBottom, forKey: nil)
         navigationController.popViewController(animated: false)
     }
-    
+
     // close two screens with "to bottom" animation
     func popTwoScreensToBottom() {
         // remove penultimate screen
@@ -175,5 +168,5 @@ final class Router: Routing {
             navigationController.popToRootViewController(animated: false)
         }
     }
-    
+
 }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 extension UIImageView {
-    
+
     public static func makeImageView(
         imageName: String? = nil,
         width: Double? = nil,
@@ -19,13 +19,13 @@ extension UIImageView {
         clipsToBounds: Bool = false
     ) -> UIImageView {
         let imageView: UIImageView
-        
+
         if let imageName {
             imageView = UIImageView(image: UIImage(named: imageName))
         } else {
             imageView = UIImageView(frame: .zero)
         }
-        
+
         if let width,
             let height {
             imageView.snp.makeConstraints { make in
@@ -33,15 +33,15 @@ extension UIImageView {
                 make.height.equalTo(height)
             }
         }
-        
+
         if let contentMode {
             imageView.contentMode = contentMode
         }
-        
+
         imageView.layer.cornerRadius = cornerRadius
         imageView.clipsToBounds = clipsToBounds
-        
+
         return imageView
     }
-    
+
 }

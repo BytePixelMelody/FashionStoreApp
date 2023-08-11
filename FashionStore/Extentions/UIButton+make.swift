@@ -10,39 +10,40 @@ import UIKit
 
 // button factory
 extension UIButton {
-    
+
     public static func makeDarkButton(imageName: String? = nil,
                                       action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
-        
+
         config.background.backgroundColor = UIColor(named: "Active") ?? .black
         config.cornerStyle = .capsule
         if let imageName {
             config.image = UIImage(named: imageName)
         }
         config.imagePadding = 24
-        
-        let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
-                
-        return button
-    }
-    
-    public static func makeIconicButton(imageName: String? = nil,
-                                        action: (() -> Void)? = nil) -> UIButton {
-        var config = UIButton.Configuration.plain()
-        
-        if let imageName {
-            config.image = UIImage(named: imageName)
-        }
-        config.contentInsets = .zero
-                
+
         let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
 
         return button
     }
-    
-    public static func makeGrayCapsuleButton(imageName: String? = nil,
-                                      action: (() -> Void)? = nil) -> UIButton {
+
+    public static func makeIconicButton(imageName: String? = nil,
+                                        action: (() -> Void)? = nil) -> UIButton {
+        var config = UIButton.Configuration.plain()
+
+        if let imageName {
+            config.image = UIImage(named: imageName)
+        }
+        config.contentInsets = .zero
+
+        let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
+
+        return button
+    }
+
+    public static func makeGrayCapsuleButton(
+        imageName: String? = nil,
+        action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
 
         config.background.backgroundColor = UIColor(named: "InputBackground") ?? .systemGray6
@@ -58,7 +59,7 @@ extension UIButton {
         let button = UIButton(configuration: config, primaryAction: UIAction { _ in action?() })
 
         button.contentHorizontalAlignment = .leading
-        
+
         button.imageView?.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()

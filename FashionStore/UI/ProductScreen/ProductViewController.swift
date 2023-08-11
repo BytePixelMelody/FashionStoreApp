@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol ProductViewProtocol: AnyObject {
-    
+
     // fill view with info
     func fillProduct(
         productBrandLabelTitle: String,
@@ -18,29 +18,29 @@ protocol ProductViewProtocol: AnyObject {
         productDescriptionLabelTitle: String,
         image: UIImage?
     )
-        
+
     // fill first (face) image
     func fillFaceImage(image: UIImage) async
-    
+
     // enable button in product is not in cart
     func enableAddToCartButton() async
-        
+
     // disable button if product is in cart
     func disableAddToCartButton() async
 }
 
 final class ProductViewController: UIViewController {
-    
+
     private var addToCartTitle = "Add to cart"
     private var inTheCartTitle = "In the cart"
     private lazy var addToCartButtonTitle = addToCartTitle
-    
+
     private var productBrandLabelTitle: String?
     private var productNameLabelTitle: String?
     private var productPriceLabelTitle: String?
     private let descriptionLabelTitle = "Description"
     private var productDescriptionLabelTitle: String?
-    
+
     private let presenter: ProductPresenterProtocol
 
     private lazy var goBackAction: () -> Void = { [weak presenter] in
@@ -50,7 +50,7 @@ final class ProductViewController: UIViewController {
     private lazy var goCartAction: () -> Void = { [weak presenter] in
         presenter?.showCart()
     }
-    
+
     private lazy var headerBrandedView = HeaderBrandedView(
         leftFirstButtonAction: goBackAction,
         leftFirstButtonImageName: ImageName.backLowered,
@@ -74,7 +74,7 @@ final class ProductViewController: UIViewController {
     private let productPriceLabel = UILabel.makeLabel(numberOfLines: 0)
     private let descriptionLabel = UILabel.makeLabel(numberOfLines: 0)
     private let productDescriptionLabel = UILabel.makeLabel(numberOfLines: 0)
-    
+
     private lazy var addToCartAction: () -> Void = { [weak presenter] in
         Task<Void, Never> { [weak presenter] in
             do {
@@ -85,9 +85,9 @@ final class ProductViewController: UIViewController {
             }
         }
     }
-    
+
     private lazy var addToCartButton = UIButton.makeDarkButton(imageName: ImageName.plusDark, action: addToCartAction)
-    
+
     // storing task, cancelling is in willDisappearHandler()
     private lazy var checkAndLoadFaceImageTask: Task<Void, Never> = Task { [weak presenter] in
         do {
@@ -97,7 +97,7 @@ final class ProductViewController: UIViewController {
             Errors.handler.checkError(error)
         }
     }
-    
+
     // check item in cart, creating and calling in viewWillAppear, cancelation is in viewWillDisappear
     private var checkInCartPresenceTask: Task<Void, Never>?
 
@@ -105,29 +105,29 @@ final class ProductViewController: UIViewController {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
-        
+
         presenter.loadInfo()
-        
+
         // one-time task call in the lifecycle of the view controller
         _ = checkAndLoadFaceImageTask
-        
+
         setupUiTexts()
         fillProductStackView()
         arrangeLayout()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // creating and calling task, cancelation is in viewWillDisappear
         checkInCartPresenceTask = Task { [weak presenter] in
             do {
@@ -138,14 +138,14 @@ final class ProductViewController: UIViewController {
             }
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         checkAndLoadFaceImageTask.cancel()
         checkInCartPresenceTask?.cancel()
     }
-    
+
     private func setupUiTexts() {
         if let productBrandLabelTitle,
             let productNameLabelTitle,
@@ -159,7 +159,7 @@ final class ProductViewController: UIViewController {
         }
         addToCartButton.configuration?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
-    
+
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -167,7 +167,7 @@ final class ProductViewController: UIViewController {
             setupUiTexts()
         }
     }
-    
+
     private func fillProductStackView() {
         productStackView.addArrangedSubview(productImageView)
         productStackView.setCustomSpacing(29, after: productImageView)
@@ -187,14 +187,14 @@ final class ProductViewController: UIViewController {
         arrangeProductImageView()
         arrangeAddToCartButton()
     }
-    
+
     private func arrangeHeaderBrandedView() {
         view.addSubview(headerBrandedView)
         headerBrandedView.snp.makeConstraints { make in
             make.top.right.left.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
+
     private func arrangeProductScrollView() {
         view.addSubview(productScrollView)
         productScrollView.snp.makeConstraints { make in
@@ -207,7 +207,7 @@ final class ProductViewController: UIViewController {
         }
         // contentLayoutGuide must have top and bottom constraints
     }
-    
+
     private func arrangeProductStackView() {
         productScrollView.addSubview(productStackView)
         productStackView.snp.makeConstraints { make in
@@ -216,7 +216,7 @@ final class ProductViewController: UIViewController {
             make.left.right.equalTo(productScrollView.contentLayoutGuide).inset(16)
         }
     }
-    
+
     private func arrangeProductImageView() {
         productImageView.snp.makeConstraints { make in
             make.height.equalTo(productImageView.snp.width).multipliedBy(4.0 / 3.0)
@@ -231,11 +231,11 @@ final class ProductViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
+
 }
 
 extension ProductViewController: ProductViewProtocol {
-    
+
     func fillProduct(
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
@@ -249,11 +249,11 @@ extension ProductViewController: ProductViewProtocol {
         self.productDescriptionLabelTitle = productDescriptionLabelTitle
         self.productImageView.image = image
     }
-    
+
     func fillFaceImage(image: UIImage) async {
         self.productImageView.image = image
     }
-    
+
     // enable button in product is not in cart
     func enableAddToCartButton() async {
         addToCartButton.isEnabled = true
@@ -264,7 +264,7 @@ extension ProductViewController: ProductViewProtocol {
         config?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
         addToCartButton.configuration = config
     }
-    
+
     // disable button if product is in cart
     func disableAddToCartButton() async {
         addToCartButton.isEnabled = false
@@ -275,5 +275,5 @@ extension ProductViewController: ProductViewProtocol {
         config?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
         addToCartButton.configuration = config
     }
-    
+
 }

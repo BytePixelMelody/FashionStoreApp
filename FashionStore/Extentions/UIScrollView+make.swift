@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIScrollView {
-    
+
     public static func makeScrollView() -> UIScrollView {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.showsVerticalScrollIndicator = false
@@ -17,5 +17,5 @@ extension UIScrollView {
         scrollView.keyboardDismissMode = .onDrag
         return scrollView
     }
-    
+
 }

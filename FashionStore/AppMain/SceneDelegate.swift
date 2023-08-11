@@ -19,26 +19,26 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        
+
         let rootNavigationController = UINavigationController()
         rootNavigationController.navigationBar.isHidden = true
- 
+
         let moduleBuilder = ModuleBuilder(coreDataService: coreDataService, webService: webService)
         router = Router(navigationController: rootNavigationController, moduleBuilder: moduleBuilder)
         // errors handler singleton
         Errors.handler.router = router
         router?.showStoreScreen()
-        
+
         // processing deep link if App was closed
         // if product id found - show product screen
         if let productID = deepLinkService.fetchProductID(url: connectionOptions.urlContexts.first?.url) {
             switchToProduct(productID: productID)
         }
-        
+
         window?.rootViewController = rootNavigationController
         window?.makeKeyAndVisible()
     }
-    
+
     // processing deep link if App was opened 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // if product id found - show product screen
@@ -46,7 +46,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             switchToProduct(productID: productID)
         }
     }
-    
+
     private func switchToProduct(productID: String) {
         Task {
             do {
@@ -66,4 +66,3 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 }
-

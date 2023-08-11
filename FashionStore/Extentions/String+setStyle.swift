@@ -10,27 +10,27 @@ import UIKit
 extension String {
     public func setStyle(style: TextStyle) -> NSMutableAttributedString {
         let string = self
-        
+
         // accessibility font scale
         let scaledFont = style.fontMetrics.scaledFont(for: style.font)
         let scaledLineHeight = style.fontMetrics.scaledValue(for: style.lineHeight)
         let scaledLetterSpacing = style.fontMetrics.scaledValue(for: style.letterSpacing)
-        
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = scaledLineHeight
         paragraphStyle.alignment = style.alignment
-        
+
         let mutableAttributedString = NSMutableAttributedString(
             string: string,
             attributes: [
-                .font : scaledFont,
-                .foregroundColor : style.color,
-                .kern : scaledLetterSpacing,
-                .paragraphStyle : paragraphStyle,
-                .baselineOffset : (scaledLineHeight - scaledFont.lineHeight) / 4
+                .font: scaledFont,
+                .foregroundColor: style.color,
+                .kern: scaledLetterSpacing,
+                .paragraphStyle: paragraphStyle,
+                .baselineOffset: (scaledLineHeight - scaledFont.lineHeight) / 4
             ]
         )
-        
+
         return mutableAttributedString
     }
 }
@@ -206,5 +206,3 @@ extension TextStyle {
         alignment: .center
     )
 }
-
-

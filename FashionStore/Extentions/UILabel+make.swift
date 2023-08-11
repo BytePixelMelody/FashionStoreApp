@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-    
+
     public static func makeLabel(numberOfLines: Int) -> UILabel {
         let label = UILabel(frame: .zero)
         label.numberOfLines = numberOfLines

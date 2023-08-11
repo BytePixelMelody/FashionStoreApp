@@ -37,7 +37,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
     private let discardChangesImage = UIImageView.makeImageView(imageName: ImageName.message)
 
     private let notIntegerInputErrorMessage = "Card number, expiration month/year and CVV must contain only digits"
-    
+
     init(router: Routing, keychainService: KeychainServiceProtocol) {
         self.router = router
         self.keychainService = keychainService
@@ -60,7 +60,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             router.popScreen()
         }
     }
-    
+
     func saveChanges(
         someTextFieldEdited: Bool,
         nameOnCard: String?,
@@ -74,20 +74,20 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             guard
                 let nameOnCard, !nameOnCard.isEmpty,
                 let cardNumber, !cardNumber.isEmpty,
-                let expMonth,   !expMonth.isEmpty,
-                let expYear,    !expYear.isEmpty,
-                let cvv,        !cvv.isEmpty
+                let expMonth, !expMonth.isEmpty,
+                let expYear, !expYear.isEmpty,
+                let cvv, !cvv.isEmpty
             else {
                 throw Errors.ErrorType.emptyTextFieldError
             }
-            
+
            // checking if fields was edited
            guard someTextFieldEdited == true else {
                 // nothing was edited, just closing the screen
                 router.popScreen()
                 return
             }
-            
+
             // something was edited, checking types and saving data
             guard
                 // type conversion
@@ -97,7 +97,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             else {
                 throw Errors.ErrorType.notIntegerInputError(errorMessage: notIntegerInputErrorMessage)
             }
-            
+
             let paymentMethod = PaymentMethod(
                 nameOnCard: nameOnCard,
                 cardNumber: cardNumber,
@@ -105,7 +105,7 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
                 expYear: expYearInt,
                 cvv: cvvInt
             )
-            
+
             // saving to keychain
             try keychainService.add(keychainID: Settings.keychainPaymentMethodID, value: paymentMethod)
             router.popScreen()
@@ -114,13 +114,13 @@ final class PaymentMethodPresenter: PaymentMethodPresenterProtocol {
             Errors.handler.checkError(error)
         }
     }
-    
+
     func paymentMethodWillAppear() {
         checkPaymentMethod()
     }
-    
+
     private func checkPaymentMethod() {
-        var paymentMethod: PaymentMethod? = nil
+        var paymentMethod: PaymentMethod?
         do {
             paymentMethod = try keychainService.read(keychainID: Settings.keychainPaymentMethodID)
         } catch {

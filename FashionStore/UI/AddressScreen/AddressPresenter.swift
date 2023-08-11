@@ -28,7 +28,7 @@ final class AddressPresenter: AddressPresenterProtocol {
     weak var view: AddressViewProtocol?
     private let router: Routing
     private let keychainService: KeychainServiceProtocol
-    
+
     // popup when back button tapped, but there is any edits
     private let discardChangesPopupTitle = "We care"
     private let discardChangesPopupMessageText = "You have unsaved changes"
@@ -43,7 +43,7 @@ final class AddressPresenter: AddressPresenterProtocol {
         self.router = router
         self.keychainService = keychainService
     }
-    
+
     func backScreen(someTextFieldEdited: Bool) {
         // if there is any edits, than show popup warning screen
         if someTextFieldEdited == true {
@@ -61,7 +61,7 @@ final class AddressPresenter: AddressPresenterProtocol {
             router.popScreen()
         }
     }
-    
+
     func saveChanges(
         someTextFieldEdited: Bool,
         firstName: String?,
@@ -76,25 +76,25 @@ final class AddressPresenter: AddressPresenterProtocol {
         do {
             // check empty fields
             guard
-                let firstName,   !firstName.isEmpty,
-                let lastName,    !lastName.isEmpty,
-                let address,     !address.isEmpty,
-                let city,        !city.isEmpty,
+                let firstName, !firstName.isEmpty,
+                let lastName, !lastName.isEmpty,
+                let address, !address.isEmpty,
+                let city, !city.isEmpty,
                 let state,                          // state text field filling is not necessary
-                let zipCode,     !zipCode.isEmpty,
-                let country,     !country.isEmpty,
+                let zipCode, !zipCode.isEmpty,
+                let country, !country.isEmpty,
                 let phoneNumber, !phoneNumber.isEmpty
             else {
                 throw Errors.ErrorType.emptyTextFieldError
             }
-            
+
             // checking if fields was edited
             guard someTextFieldEdited == true else {
                 // nothing was edited, just closing the screen
                 router.popScreen()
                 return
             }
-            
+
             // something was edited, saving data...
             let chippingAddress = ChippingAddress(
                 firstName: firstName,
@@ -106,7 +106,7 @@ final class AddressPresenter: AddressPresenterProtocol {
                 country: country,
                 phoneNumber: phoneNumber
             )
-            
+
             try keychainService.add(keychainID: Settings.keychainChippingAddressID, value: chippingAddress)
             router.popScreen()
         } catch {
@@ -114,20 +114,20 @@ final class AddressPresenter: AddressPresenterProtocol {
             Errors.handler.checkError(error)
         }
     }
-    
+
     func addressScreenWillAppear() {
         checkAddress()
     }
-    
+
     private func checkAddress() {
-        var chippingAddress: ChippingAddress? = nil
+        var chippingAddress: ChippingAddress?
         do {
             chippingAddress = try keychainService.read(keychainID: Settings.keychainChippingAddressID)
         } catch {
             Errors.handler.checkError(error)
         }
 
-        if let chippingAddress { 
+        if let chippingAddress {
             view?.showSaveAddressButton()
             // fill text fields address data
             view?.fillAddress(

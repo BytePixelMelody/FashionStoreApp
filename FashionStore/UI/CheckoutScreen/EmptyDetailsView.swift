@@ -9,7 +9,7 @@ import UIKit
 
 // view with button like "Add address +"
 final class EmptyDetailsView: UIView {
-    
+
     // label
     private let infoLabelText: String
     private let infoNameLabel = UILabel.makeLabel(numberOfLines: 0)
@@ -19,7 +19,7 @@ final class EmptyDetailsView: UIView {
     private lazy var addInfoButton = UIButton.makeGrayCapsuleButton(imageName: ImageName.plus, action: addInfoAction)
     // creating a line image
     private let lineImage = UIImageView(image: UIImage(named: ImageName.lineGray))
-    
+
     init(
         infoLabelText: String,
         addInfoButtonTitle: String,
@@ -30,21 +30,21 @@ final class EmptyDetailsView: UIView {
         self.addInfoButtonTitle = addInfoButtonTitle
         self.addInfoAction = addInfoAction
         super.init(frame: frame)
-        
+
         setupUiTexts()
         arrangeLayout()
     }
-    
+
     // view doesn't support storyboards
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupUiTexts() {
         infoNameLabel.attributedText = infoLabelText.uppercased().setStyle(style: .subHeader)
         addInfoButton.configuration?.attributedTitle = AttributedString(addInfoButtonTitle.setStyle(style: .bodyLarge))
     }
-    
+
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -52,7 +52,7 @@ final class EmptyDetailsView: UIView {
             setupUiTexts()
         }
     }
-    
+
     private func arrangeLayout() {
         arrangeInfoNameLabel()
         arrangeAddInfoButton()
@@ -66,7 +66,7 @@ final class EmptyDetailsView: UIView {
             make.left.right.equalToSuperview()
         }
     }
-    
+
     private func arrangeAddInfoButton() {
         self.addSubview(addInfoButton)
         addInfoButton.snp.makeConstraints { make in
@@ -75,7 +75,7 @@ final class EmptyDetailsView: UIView {
             make.height.equalTo(50)
         }
     }
-    
+
     private func arrangeLineImage() {
         self.addSubview(lineImage)
         lineImage.snp.makeConstraints { make in

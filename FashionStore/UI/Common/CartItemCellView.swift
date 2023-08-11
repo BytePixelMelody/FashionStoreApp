@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class CartItemCellView: UICollectionViewCell {
-    
+
     // setup properties
     private var imageName: String?
     private var itemBrandLabelTitle: String?
@@ -19,13 +19,13 @@ final class CartItemCellView: UICollectionViewCell {
     private var count: Int?
     private var plusButtonAction: ((UUID, Int) async throws -> Void)?
     private var itemPrice: Decimal?
-    
+
     // price calculation
     private var itemTotalPrice: Decimal? {
         guard let count, let itemPrice else { return nil }
         return Decimal(count) * itemPrice
     }
-    
+
     // UI elements
     private let itemImageView = UIImageView.makeImageView(
         contentMode: .scaleAspectFill,
@@ -43,21 +43,21 @@ final class CartItemCellView: UICollectionViewCell {
     private let itemCountLabel = UILabel.makeLabel(numberOfLines: 1)
     private let plusButton = UIButton.makeIconicButton(imageName: ImageName.plusCircled)
     private let itemTotalPriceLabel = UILabel.makeLabel(numberOfLines: 1)
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-                
+
         // arrange elements
         arrangeLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
         // arrange elements
         arrangeLayout()
     }
-    
+
     // setup properties and actions
     public func setup(
         imageName: String?,
@@ -78,7 +78,7 @@ final class CartItemCellView: UICollectionViewCell {
             setupUiTexts()
             return
         }
-        
+
         // setup properties
         self.imageName = imageName
         self.itemBrandLabelTitle = itemBrand
@@ -88,17 +88,17 @@ final class CartItemCellView: UICollectionViewCell {
         self.count = count
         self.plusButtonAction = plusButtonAction
         self.itemPrice = itemPrice
-        
+
         // image loading
         loadImage(loadImageAction: loadImageAction)
-        
+
         // setup button actions
         setButtonActions()
 
         // setup typography texts
         setupUiTexts()
     }
-    
+
     // load image
     private func loadImage(loadImageAction: @escaping (String) async throws -> UIImage?) {
         Task<Void, Never> {
@@ -106,7 +106,7 @@ final class CartItemCellView: UICollectionViewCell {
                 guard let imageName else { return }
 
                 let image = try await loadImageAction(imageName)
-                
+
                 // cell image name check after loading
                 if imageName == self.imageName {
                     itemImageView.image = image
@@ -116,7 +116,7 @@ final class CartItemCellView: UICollectionViewCell {
             }
         }
     }
-    
+
     // adding button actions, that will change item count
     private func setButtonActions() {
         minusButton.addAction(UIAction { [weak self] _ in
@@ -155,7 +155,7 @@ final class CartItemCellView: UICollectionViewCell {
             itemTotalPriceLabel.attributedText = itemTotalPriceString.setStyle(style: .priceMedium)
         }
     }
-    
+
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -163,9 +163,9 @@ final class CartItemCellView: UICollectionViewCell {
             setupUiTexts()
         }
     }
-    
+
     private func arrangeLayout() {
-        
+
         // image
         contentView.addSubview(itemImageView)
         itemImageView.snp.makeConstraints { make in
@@ -174,7 +174,7 @@ final class CartItemCellView: UICollectionViewCell {
             make.height.equalTo(itemImageView.snp.width).multipliedBy(4.0 / 3.0).priority(.high)
             make.height.lessThanOrEqualToSuperview()
         }
-        
+
         // right info section
         contentView.addSubview(infoView)
         infoView.snp.makeConstraints { make in
@@ -182,40 +182,40 @@ final class CartItemCellView: UICollectionViewCell {
             make.top.trailing.equalToSuperview()
             make.bottom.equalToSuperview().priority(.medium)
         }
-        
+
         // brand and model stack with minimum size by spacer
         infoView.addSubview(spacerBrandModelHorizontalStack)
         spacerBrandModelHorizontalStack.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(4.0)
             make.leading.equalToSuperview().inset(2.0)
         }
-        
+
         // minimus size spacer
         spacerBrandModelHorizontalStack.addArrangedSubview(spacerView)
         spacerView.snp.makeConstraints { make in
             make.width.equalTo(10.0)
             make.height.greaterThanOrEqualTo(61.0)
         }
-        
+
         // brand and model labels stack
         spacerBrandModelHorizontalStack.addArrangedSubview(brandModelVerticalStack)
-        
+
         // brand and model labels
         brandModelVerticalStack.addArrangedSubview(itemBrandLabel)
         brandModelVerticalStack.addArrangedSubview(itemModelColorSizeLabel)
-        
+
         // plus/minus buttons and count label stack
         infoView.addSubview(minusPlusCountHorizontalStack)
         minusPlusCountHorizontalStack.snp.makeConstraints { make in
             make.top.equalTo(spacerBrandModelHorizontalStack.snp.bottom)
             make.leading.equalToSuperview().inset(2.0)
         }
-        
+
         // plus/minus buttons and count label
         minusPlusCountHorizontalStack.addArrangedSubview(minusButton)
         minusPlusCountHorizontalStack.addArrangedSubview(itemCountLabel)
         minusPlusCountHorizontalStack.addArrangedSubview(plusButton)
-        
+
         // price label
         infoView.addSubview(itemTotalPriceLabel)
         itemTotalPriceLabel.snp.makeConstraints { make in
@@ -224,16 +224,16 @@ final class CartItemCellView: UICollectionViewCell {
             make.trailing.lessThanOrEqualToSuperview().inset(4.0)
             make.bottom.equalToSuperview().inset(2.0)
         }
-        
+
         // buttons to front
         contentView.bringSubviewToFront(minusButton)
         contentView.bringSubviewToFront(plusButton)
     }
-    
+
     // clean cell for reuse
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         // clean info
         imageName = nil
         itemBrandLabelTitle = nil
@@ -243,26 +243,26 @@ final class CartItemCellView: UICollectionViewCell {
         count = nil
         plusButtonAction = nil
         itemPrice = nil
-        
+
         // clean image
         itemImageView.image = nil
-        
+
         // clean button actions
         minusButton.removeTarget(nil, action: nil, for: .allEvents)
         plusButton.removeTarget(nil, action: nil, for: .allEvents)
-        
+
         // clean texts
         itemBrandLabel.attributedText = nil
         itemModelColorSizeLabel.attributedText = nil
         itemCountLabel.attributedText = nil
         itemTotalPriceLabel.attributedText = nil
     }
-    
+
     // automatic cell size calculation for collection view
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        
+
         let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
-        
+
         let collectionViewWidth: CGFloat
         if let superviewCollectionViewWidth = superview?.frame.width {
             collectionViewWidth = superviewCollectionViewWidth
@@ -271,15 +271,15 @@ final class CartItemCellView: UICollectionViewCell {
         }
         let leftRightInsetsWidth = CartItemsFlowLayoutConstants.sectionInset.left + CartItemsFlowLayoutConstants.sectionInset.right
         let allInteritemSpacings = CartItemsFlowLayoutConstants.minimumInteritemSpacing * (CartItemsFlowLayoutConstants.cellsInLineCount - 1)
-        let itemWidth = ((collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / CartItemsFlowLayoutConstants.cellsInLineCount).rounded(.down)
+        let itemWidth = ((collectionViewWidth - leftRightInsetsWidth - allInteritemSpacings) / CartItemsFlowLayoutConstants.cellsInLineCount)
+            .rounded(.down)
 
         let targetSize = CGSize(width: itemWidth, height: .zero)
         let size = self.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
 
         layoutAttributes.size = size
-        
+
         return layoutAttributes
     }
-    
-}
 
+}

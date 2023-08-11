@@ -14,7 +14,7 @@ protocol PopupPresenterProtocol: AnyObject {
 final class PopupPresenter: PopupPresenterProtocol {
     private let router: Routing
     weak var view: PopupViewProtocol?
-    
+
     init(router: Routing) {
         self.router = router
     }

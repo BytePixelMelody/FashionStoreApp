@@ -9,7 +9,7 @@ import UIKit
 
 // making animations for use with setViewControllers
 extension CATransition {
-    
+
     public static var toBottom: CATransition {
         let caTransition = CATransition()
         caTransition.duration = 0.4
@@ -18,7 +18,7 @@ extension CATransition {
         caTransition.subtype = .fromBottom
         return caTransition
     }
-    
+
     public static var toTop: CATransition {
         let caTransition = CATransition()
         caTransition.duration = 0.25
@@ -27,7 +27,7 @@ extension CATransition {
         caTransition.subtype = .fromTop
         return caTransition
     }
-    
+
     public static var systemDefault: CATransition {
         CATransition()
     }

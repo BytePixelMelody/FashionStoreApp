@@ -13,7 +13,7 @@ protocol CacheServiceProtocol {
 }
 
 final actor CacheService: CacheServiceProtocol {
-    
+
     // async func of actor to cache image
     func cacheImage(imageName: String, image: UIImage) {
         guard let url = getCacheURL()?.appending(path: imageName) else { return }
@@ -27,7 +27,7 @@ final actor CacheService: CacheServiceProtocol {
             Errors.handler.logError(error)
         }
     }
-    
+
     // async func of actor to retrieve image
     func loadCachedImage(imageName: String) -> UIImage? {
         guard let url = getCacheURL()?.appending(path: imageName) else { return nil }
@@ -39,7 +39,7 @@ final actor CacheService: CacheServiceProtocol {
             return nil
         }
     }
-    
+
     // generate cache url
     private func getCacheURL() -> URL? {
         do {
@@ -57,5 +57,5 @@ final actor CacheService: CacheServiceProtocol {
             return nil
         }
     }
-    
+
 }

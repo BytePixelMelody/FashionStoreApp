@@ -38,14 +38,11 @@
 		1185D6CD29B72C0600833991 /* AddressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6CC29B72C0600833991 /* AddressPresenter.swift */; };
 		1185D6CF29B72C1000833991 /* PaymentMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6CE29B72C1000833991 /* PaymentMethodPresenter.swift */; };
 		1185D6D129B72C1D00833991 /* CheckoutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D029B72C1D00833991 /* CheckoutPresenter.swift */; };
-		1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D229B72C2E00833991 /* TestPresenter.swift */; };
 		1185D6D829B72D8B00833991 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D729B72D8B00833991 /* ModuleBuilder.swift */; };
 		1185D6DA29B72D9C00833991 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6D929B72D9C00833991 /* Router.swift */; };
 		1185D6DC29B7C09500833991 /* UIButton+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185D6DB29B7C09500833991 /* UIButton+make.swift */; };
 		1186C931299FFA66002852BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C930299FFA66002852BB /* AppDelegate.swift */; };
 		1186C933299FFA66002852BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C932299FFA66002852BB /* SceneDelegate.swift */; };
-		1186C935299FFA66002852BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186C934299FFA66002852BB /* TestViewController.swift */; };
-		1186C938299FFA66002852BB /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C936299FFA66002852BB /* TestStoryboard.storyboard */; };
 		1186C93A299FFA66002852BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1186C939299FFA66002852BB /* Assets.xcassets */; };
 		1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1186C93B299FFA66002852BB /* LaunchScreen.storyboard */; };
 		1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1186C98629A2A0B7002852BB /* TenorSans-Regular.ttf */; };
@@ -100,15 +97,12 @@
 		1185D6CC29B72C0600833991 /* AddressPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPresenter.swift; sourceTree = "<group>"; };
 		1185D6CE29B72C1000833991 /* PaymentMethodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPresenter.swift; sourceTree = "<group>"; };
 		1185D6D029B72C1D00833991 /* CheckoutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutPresenter.swift; sourceTree = "<group>"; };
-		1185D6D229B72C2E00833991 /* TestPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPresenter.swift; sourceTree = "<group>"; };
 		1185D6D729B72D8B00833991 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		1185D6D929B72D9C00833991 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1185D6DB29B7C09500833991 /* UIButton+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+make.swift"; sourceTree = "<group>"; };
 		1186C92D299FFA66002852BB /* FashionStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FashionStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1186C930299FFA66002852BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1186C932299FFA66002852BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1186C934299FFA66002852BB /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		1186C937299FFA66002852BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestStoryboard.storyboard; sourceTree = "<group>"; };
 		1186C939299FFA66002852BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1186C93C299FFA66002852BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1186C93E299FFA66002852BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -298,19 +292,8 @@
 				117CB25129AE1250006F4192 /* AddressScreen */,
 				117CB25229AE1297006F4192 /* PaymentMethodScreen */,
 				1160A04A29E97064009AB1C6 /* PopupScreen */,
-				1186C98929A2A324002852BB /* TestScreen */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		1186C98929A2A324002852BB /* TestScreen */ = {
-			isa = PBXGroup;
-			children = (
-				1186C936299FFA66002852BB /* TestStoryboard.storyboard */,
-				1186C934299FFA66002852BB /* TestViewController.swift */,
-				1185D6D229B72C2E00833991 /* TestPresenter.swift */,
-			);
-			path = TestScreen;
 			sourceTree = "<group>";
 		};
 		1186C98D29A2ACDD002852BB /* Extentions */ = {
@@ -373,6 +356,7 @@
 				1186C929299FFA66002852BB /* Sources */,
 				1186C92A299FFA66002852BB /* Frameworks */,
 				1186C92B299FFA66002852BB /* Resources */,
+				11226CA42A84D53F0039A2A3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -434,11 +418,31 @@
 				1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */,
 				1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */,
 				1186C93A299FFA66002852BB /* Assets.xcassets in Resources */,
-				1186C938299FFA66002852BB /* TestStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11226CA42A84D53F0039A2A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1186C929299FFA66002852BB /* Sources */ = {
@@ -446,7 +450,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1185D6CB29B72BF800833991 /* CartPresenter.swift in Sources */,
-				1186C935299FFA66002852BB /* TestViewController.swift in Sources */,
 				112B524C2A18CA7800C08146 /* FashionStoreDb.xcdatamodeld in Sources */,
 				118981252A2DD66C00952D01 /* ProductsFlowLayoutConstants.swift in Sources */,
 				1186C931299FFA66002852BB /* AppDelegate.swift in Sources */,
@@ -467,7 +470,6 @@
 				11E5F4AD29BE095200B979B4 /* Cart.swift in Sources */,
 				117C0BE22A1230E300138CA9 /* WebService.swift in Sources */,
 				11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */,
-				1185D6D329B72C2E00833991 /* TestPresenter.swift in Sources */,
 				1160A04E29E970D6009AB1C6 /* PopupPresenter.swift in Sources */,
 				117CB25429AE13DE006F4192 /* PaymentMethodViewController.swift in Sources */,
 				1171F78329F2E2550011465D /* DeepLinkService.swift in Sources */,
@@ -503,14 +505,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1186C936299FFA66002852BB /* TestStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1186C937299FFA66002852BB /* Base */,
-			);
-			name = TestStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
 		1186C93B299FFA66002852BB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -650,7 +644,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Fashion Store";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = TestStoryboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -682,7 +676,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Fashion Store";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = TestStoryboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

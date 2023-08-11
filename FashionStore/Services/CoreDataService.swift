@@ -14,12 +14,12 @@ protocol CoreDataServiceProtocol: AnyObject {
     func fetchEntireCart() async throws -> Cart
     func editCartItemCount(itemID: UUID, newCount: Int) async throws
     func removeCartItemFromCart(itemID: UUID) async throws
-    func removeUnavailableCartItems(itemIDsInStockCount: [UUID : Int]) async throws -> Int
+    func removeUnavailableCartItems(itemIDsInStockCount: [UUID: Int]) async throws -> Int
     func removeAllCartItemsFromCart() async throws
 }
 
 final actor CoreDataService: CoreDataServiceProtocol {
-    
+
     // creating of Core Data persistentContainer
     private lazy var persistentContainer: NSPersistentContainer = {
         /*
@@ -28,7 +28,7 @@ final actor CoreDataService: CoreDataServiceProtocol {
          error conditions that could cause the creation of the store to fail.
         */
         let container = NSPersistentContainer(name: "FashionStoreDb")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             do {
                 if let error { throw error }
                 /*
@@ -45,19 +45,19 @@ final actor CoreDataService: CoreDataServiceProtocol {
         })
         return container
     }()
-    
+
     // Background queue Core Data context. Use with backgroundContext.perform { }
     private lazy var backgroundContext = persistentContainer.newBackgroundContext()
-    
+
     // add item to cart or change count += 1
     func addCartItemToCart(itemID: UUID) async throws {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
-        
+
         try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
-                        
+
             if cartItemsModel.isEmpty {
                 // create a new entry
                 let cartItemModel = CartItemModel(context: self.backgroundContext)
@@ -73,26 +73,26 @@ final actor CoreDataService: CoreDataServiceProtocol {
             }
         }
     }
-    
+
     // check the presence of item in the cart
     func checkItemInCart(itemID: UUID) async throws -> Bool {
         // check existing
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
-                
+
         return try await backgroundContext.perform {
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
             return !cartItemsModel.isEmpty
         }
     }
-    
+
     // return all cart items
     func fetchEntireCart() async throws -> Cart {
         return try await backgroundContext.perform {
             let fetchRequest = CartItemModel.fetchRequest()
             // Core Data result of request SELECT * FROM CartItemModel
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
-            
+
             // struct Result of request SELECT * FROM CartItemModel
             var cartItems: [CartItem] = []
             for cartItemModel in cartItemsModel {
@@ -114,7 +114,7 @@ final actor CoreDataService: CoreDataServiceProtocol {
             return cart
         }
     }
-    
+
     // edit CartItem count
     func editCartItemCount(itemID: UUID, newCount: Int) async throws {
         let fetchRequest = CartItemModel.fetchRequest()
@@ -130,13 +130,13 @@ final actor CoreDataService: CoreDataServiceProtocol {
             try self.backgroundContext.save()
         }
     }
-    
+
     // remove CartItem from cart
     func removeCartItemFromCart(itemID: UUID) async throws {
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "itemID == %@", itemID.uuidString)
         fetchRequest.includesPropertyValues = false
-        
+
         // run on background
         try await backgroundContext.perform {
             // all items by itemID
@@ -149,34 +149,34 @@ final actor CoreDataService: CoreDataServiceProtocol {
             try self.backgroundContext.save()
         }
     }
-    
+
     // delete cartItems that are not in stock in necessary count
-    func removeUnavailableCartItems(itemIDsInStockCount: [UUID : Int]) async throws -> Int {
+    func removeUnavailableCartItems(itemIDsInStockCount: [UUID: Int]) async throws -> Int {
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.includesPropertyValues = true
-        
+
         // run on background
         return try await backgroundContext.perform {
             // deleted cart items count
             var deletedCartItemsCount = 0
-            
+
             // all cart items
             let cartItemsModel = try self.backgroundContext.fetch(fetchRequest)
-            
+
             // delete cartItems that are not in stock in necessary count
             for cartItemModel in cartItemsModel {
-                
+
                 // is cartItem in stock?
                 if let cartItemID = cartItemModel.itemID,
                    itemIDsInStockCount.keys.contains(cartItemID) {
-                    
+
                     // is count not sufficient?
                     if let itemInStockCount = itemIDsInStockCount[cartItemID],
                        cartItemModel.count > itemInStockCount {
                         deletedCartItemsCount += Int(cartItemModel.count) - itemInStockCount
                         cartItemModel.count = Int64(itemInStockCount)
                     }
-                    
+
                 // cart item not found in stock, delete it
                 } else {
                     // add count of deleted items
@@ -184,18 +184,18 @@ final actor CoreDataService: CoreDataServiceProtocol {
                     self.backgroundContext.delete(cartItemModel)
                 }
             }
-            
+
             // save
             try self.backgroundContext.save()
-            
+
             return deletedCartItemsCount
         }
     }
-    
+
     func removeAllCartItemsFromCart() async throws {
         let fetchRequest = CartItemModel.fetchRequest()
         fetchRequest.includesPropertyValues = false
-        
+
         // run on background
         try await backgroundContext.perform {
             // all cart items
@@ -208,5 +208,5 @@ final actor CoreDataService: CoreDataServiceProtocol {
             try self.backgroundContext.save()
         }
     }
-    
+
 }

@@ -37,30 +37,30 @@ final class AddressViewController: UIViewController {
     private static let phoneNumberTextFieldPlaceholder = "Phone Number*"
     private static let addAddressButtonTitle = "Add address"
     private static let saveAddressButtonTitle = "Save address"
-    
+
     private let presenter: AddressPresenterProtocol
-    
+
     private var cancellables: Set<AnyCancellable> = []
-    
+
     private var someTextFieldEditedFlag = false
-    
+
     private lazy var backScreenAction: () -> Void = { [weak self] in
         guard let self else { return }
         presenter.backScreen(someTextFieldEdited: someTextFieldEditedFlag)
     }
 
     private lazy var closableHeaderView = HeaderNamedView(backScreenAction: backScreenAction, headerTitle: Self.headerTitle)
-    
+
     private let addressScrollView = UIScrollView.makeScrollView()
-    
+
     // stack view
     private let fullAddressVerticalStackView = UIStackView.makeVerticalStackView()
-    
+
     // 2 columns: first name, last name
     private let fullNameHorizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12.0, distribution: .fillEqually)
     private let firstNameVerticalStackView = UIStackView.makeVerticalStackView()
     private let lastNameVerticalStackView = UIStackView.makeVerticalStackView()
-    
+
     // 2 columns: state, zip
     private let stateZipCodeHorizontalStackView = UIStackView.makeHorizontalStackView(spacing: 12.0, distribution: .fillEqually)
     private let stateVerticalStackView = UIStackView.makeVerticalStackView()
@@ -109,21 +109,21 @@ final class AddressViewController: UIViewController {
 
     private lazy var addAddressButton = UIButton.makeDarkButton(imageName: ImageName.plusDark) // action by Combine
     private lazy var saveAddressButton = UIButton.makeDarkButton() // action by Combine
-    
+
     private lazy var backgroundTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 
     init(presenter: AddressPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // hide keyboard on background tap
         view.addGestureRecognizer(backgroundTap)
         view.backgroundColor = .white
@@ -134,22 +134,22 @@ final class AddressViewController: UIViewController {
         textFieldsChaining()
         makeAddOrSaveButtonPublisher()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // check address and fill
         presenter.addressScreenWillAppear()
-        
+
         // making publisher to check if there are any changes
         makeTextFieldsPublisher()
     }
-    
+
     private func setupUiTexts() {
         addAddressButton.configuration?.attributedTitle = AttributedString(Self.addAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
         saveAddressButton.configuration?.attributedTitle = AttributedString(Self.saveAddressButtonTitle.uppercased().setStyle(style: .buttonDark))
     }
-    
+
     // accessibility settings was changed - scale fonts
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -157,7 +157,7 @@ final class AddressViewController: UIViewController {
             setupUiTexts()
         }
     }
-    
+
     // creating a line image
     private func createLineGray() -> UIImageView {
        let imageView = UIImageView(image: UIImage(named: ImageName.lineGray))
@@ -165,7 +165,7 @@ final class AddressViewController: UIViewController {
         imageView.setContentHuggingPriority(.required, for: .vertical)
         return imageView
     }
-    
+
     private func fillStackViews() {
         // 2 columns row: first name, last name
         fullAddressVerticalStackView.addArrangedSubview(fullNameHorizontalStackView)
@@ -186,7 +186,7 @@ final class AddressViewController: UIViewController {
         fullAddressVerticalStackView.addArrangedSubview(addressUnderline)
         // custom spacing
         fullAddressVerticalStackView.setCustomSpacing(5, after: addressUnderline)
-        
+
         // city row
         fullAddressVerticalStackView.addArrangedSubview(cityTextField)
         let cityUnderline = createLineGray()
@@ -218,7 +218,7 @@ final class AddressViewController: UIViewController {
         fullAddressVerticalStackView.addArrangedSubview(phoneNumberTextField)
         fullAddressVerticalStackView.addArrangedSubview(createLineGray())
     }
-  
+
     private func arrangeLayout() {
         arrangeClosableHeaderView()
         arrangeAddressScrollView()
@@ -227,14 +227,14 @@ final class AddressViewController: UIViewController {
         arrangeSaveAddressButton()
         arrangeKeyboardLayoutGuide()
     }
-    
+
     private func arrangeClosableHeaderView() {
         view.addSubview(closableHeaderView)
         closableHeaderView.snp.makeConstraints { make in
             make.left.right.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
+
     private func arrangeAddressScrollView() {
         view.addSubview(addressScrollView)
         addressScrollView.snp.makeConstraints { make in
@@ -244,7 +244,7 @@ final class AddressViewController: UIViewController {
             // bottom is in button constraints
         }
     }
-    
+
     private func arrangeAddressStackView() {
         addressScrollView.addSubview(fullAddressVerticalStackView)
         fullAddressVerticalStackView.snp.makeConstraints { make in
@@ -252,7 +252,7 @@ final class AddressViewController: UIViewController {
             make.left.right.equalTo(addressScrollView.contentLayoutGuide).inset(16)
         }
     }
-    
+
     private func arrangeAddAddressButton() {
         view.addSubview(addAddressButton)
         addAddressButton.snp.makeConstraints { make in
@@ -260,7 +260,7 @@ final class AddressViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-        
+
     private func arrangeSaveAddressButton() {
         view.addSubview(saveAddressButton)
         saveAddressButton.snp.makeConstraints { make in
@@ -270,14 +270,14 @@ final class AddressViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
+
     // using keyboard layout
     private func arrangeKeyboardLayoutGuide() {
         addressScrollView.snp.makeConstraints { make in
             make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).priority(.high)
         }
     }
-    
+
     // chaining text fields to move from one to another by "Next" keyboard button
     private func textFieldsChaining() {
         firstNameTextField.addTarget(lastNameTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
@@ -288,13 +288,13 @@ final class AddressViewController: UIViewController {
         zipCodeTextField.addTarget(countryTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
         countryTextField.addTarget(phoneNumberTextField, action: #selector(becomeFirstResponder), for: .editingDidEndOnExit)
     }
-    
+
     // hide keyboard
     @objc
     private func hideKeyboard() {
         view.endEditing(false)
     }
-    
+
     // configure publishers using framework CombineCocoa
     private func makeAddOrSaveButtonPublisher() {
         // saveAddressButton or addAddressButton tapped
@@ -302,26 +302,26 @@ final class AddressViewController: UIViewController {
             saveAddressButton.controlEventPublisher(for: .primaryActionTriggered),
             addAddressButton.controlEventPublisher(for: .primaryActionTriggered)
         )
-        
+
         // call presenter.saveChanges
         addOrSaveTapped
             .sink { [weak self] in
                 guard let self else { return }
                 presenter.saveChanges(
                     someTextFieldEdited: someTextFieldEditedFlag,
-                    firstName:   firstNameTextField.text,
-                    lastName:    lastNameTextField.text,
-                    address:     addressTextField.text,
-                    city:        cityTextField.text,
-                    state:       stateTextField.text,
-                    zipCode:     zipCodeTextField.text,
-                    country:     countryTextField.text,
+                    firstName: firstNameTextField.text,
+                    lastName: lastNameTextField.text,
+                    address: addressTextField.text,
+                    city: cityTextField.text,
+                    state: stateTextField.text,
+                    zipCode: zipCodeTextField.text,
+                    country: countryTextField.text,
                     phoneNumber: phoneNumberTextField.text
                 )
             }
             .store(in: &cancellables)
     }
-    
+
     // make publisher to check if there are any edits in text fields
     private func makeTextFieldsPublisher() {
         // initial values of text fields
@@ -336,7 +336,7 @@ final class AddressViewController: UIViewController {
         else {
             return
         }
-        
+
         // flag - if text field was edited
         var firstNameEdited   = false
         var lastNameEdited    = false
@@ -346,11 +346,11 @@ final class AddressViewController: UIViewController {
         var zipCodeEdited     = false
         var countryEdited     = false
         var phoneNumberEdited = false
-        
+
         // if the entered value differs from the initial one than edited flag = true
         firstNameTextField.textPublisher
-            .map { firstName != $0 }
-            .sink { firstNameEdited = $0 }
+            .map { firstName != $0 } // if text changed than return true
+            .sink { firstNameEdited = $0 } // and edited = true
             .store(in: &cancellables)
         lastNameTextField.textPublisher
             .map { lastName != $0 }
@@ -392,30 +392,39 @@ final class AddressViewController: UIViewController {
             countryTextField.textPublisher,
             phoneNumberTextField.textPublisher
         )
-        
+
         // if any text field was edited, than self edited flag = true
         anyEdits
             .sink { [weak self] _ in
                 guard let self else { return }
-                someTextFieldEditedFlag = (firstNameEdited || lastNameEdited || addressEdited || cityEdited || stateEdited || zipCodeEdited || countryEdited || phoneNumberEdited)
+                someTextFieldEditedFlag = (
+                    firstNameEdited ||
+                    lastNameEdited ||
+                    addressEdited ||
+                    cityEdited ||
+                    stateEdited ||
+                    zipCodeEdited ||
+                    countryEdited ||
+                    phoneNumberEdited
+                )
             }
             .store(in: &cancellables)
     }
-    
+
 }
 
 extension AddressViewController: AddressViewProtocol {
-    
+
     func showAddAddressButton() {
         addAddressButton.isHidden = false
         saveAddressButton.isHidden = true
     }
-    
+
     func showSaveAddressButton() {
         addAddressButton.isHidden = true
         saveAddressButton.isHidden = false
     }
-    
+
     // filling text fields by text
     func fillAddress(
         firstName: String,
@@ -436,5 +445,5 @@ extension AddressViewController: AddressViewProtocol {
         countryTextField.text = country
         phoneNumberTextField.text = phoneNumber
     }
-    
+
 }

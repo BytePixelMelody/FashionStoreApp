@@ -31,7 +31,7 @@ struct Product: Codable, Hashable {
     var price: Decimal // 45.00...950.00
     var images: [String] // ["100001", "200001", "300001" etc]
     var material: String // "Cotton", "Wool", "Linum" etc
-    var information: String // "Long sleeve jacket with tuxedo collar. Front flap pockets and chest welt pocket. Tonal matching inner lining. Front button closure." etc
+    var information: String // "Long sleeve jacket with tuxedo collar. Front flap pockets..." etc
     var styles: [Style]
     var colors: [Color]
 }

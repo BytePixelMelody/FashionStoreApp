@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIStackView {
-    
+
     public static func makeVerticalStackView(
         spacing: Double = 0,
         alignment: UIStackView.Alignment = .fill,
@@ -21,7 +21,7 @@ extension UIStackView {
         stackView.distribution = distribution
         return stackView
     }
-    
+
     public static func makeHorizontalStackView(
         spacing: Double = 0,
         alignment: UIStackView.Alignment = .fill,
@@ -34,5 +34,5 @@ extension UIStackView {
         stackView.distribution = distribution
         return stackView
     }
-    
+
 }

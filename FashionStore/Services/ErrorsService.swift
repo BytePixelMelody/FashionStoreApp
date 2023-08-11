@@ -10,13 +10,13 @@ import UIKit
 import OSLog
 
 final class Errors {
-    
+
     // singletone
     public static let handler = Errors()
-    
+
     // for router injection
     public var router: Routing?
-    
+
     // logger, use Console to view logs
     private let logger = Logger(subsystem: #file, category: "Errors handler")
 
@@ -37,33 +37,33 @@ final class Errors {
         case modelUnwrapError
         case loadImageError(errorMessage: String)
         case cartItemsDeleted(count: Int)
-        
+
         // errors localized descriptions
         var errorDescription: String? {
             switch self {
-                
+
             case .paymentFail:
                 return "Payment unsuccessful\n\nPlease check your payment method information"
-                
+
             case .networkConnectionFail:
                 return "Please check your Internet connection"
-            
+
             // client connection error
             case .httpError(let statusCode, let urlString) where (400...499).contains(statusCode):
                 return "HTTP error \(statusCode) for URL \(urlString)"
-                
+
             // server connection error
             case .httpError(let statusCode, _) where (500...599).contains(statusCode):
                 return "HTTP error \(statusCode)\n\nServer is not available, please try again later"
-                
+
             // other http error
             case .httpError(let statusCode, let urlString):
                 return "HTTP error \(statusCode) for URL \(urlString)\n\nPlease try again later"
-                
+
             // keychain save error
             case .keyChainSaveError(let errSecCode):
                 return "Can not save data to keychain, error \(errSecCode)"
-                
+
             // keychain read error
             case .keyChainReadError(let errSecCode):
                 return "Can not read data from keychain, error \(errSecCode)"
@@ -81,13 +81,13 @@ final class Errors {
                 return "Please fill all required text fields marked with *"
 
            // text is not integer
-            case .notIntegerInputError (let errorMessage):
+            case .notIntegerInputError(let errorMessage):
                 return "Not Integer input error: " + errorMessage
 
            // invalid URL string error
             case .invalidURLStringError:
                 return "URL string is invalid"
-                
+
             case .urlResponseCastError:
                 return "URLResponse casting to HTTPURLResponse finished with error"
 
@@ -106,24 +106,24 @@ final class Errors {
             }
         }
     }
-        
+
     // private init to access deny
     private init() {
     }
-    
+
     // handling errors
     public func checkError(_ checkingError: Error) {
         guard let router else { return }
-        
+
         // default popup message values
         let headerTitle = "Sorry"
         var errorMessage = checkingError.localizedDescription
         let errorSubMessage: String? = nil
         var buttonTitle = "OK"
-        var buttonAction: (() -> Void)? = nil
+        var buttonAction: (() -> Void)?
         let closeAction: (() -> Void)? = nil
         let image = UIImageView.makeImageView(imageName: ImageName.smileDisappointed, width: 35, height: 35, contentMode: .scaleAspectFit)
-        
+
         switch checkingError {
         // сhanging popup values
         case Errors.ErrorType.paymentFail:
@@ -159,7 +159,7 @@ final class Errors {
         default:
             break
         }
-        
+
         // show popup screen with error message and actions
         router.showPopupScreen(
             headerTitle: headerTitle,
@@ -170,14 +170,14 @@ final class Errors {
             closeAction: closeAction,
             image: image
         )
-        
+
         // log error
         logger.error("\(checkingError.localizedDescription, privacy: .public)")
     }
-    
+
     // logging errors with public privacy
     public func logError(_ error: Error) {
         logger.error("\(error.localizedDescription, privacy: .public)")
     }
-    
+
 }
