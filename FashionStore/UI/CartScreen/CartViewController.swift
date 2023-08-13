@@ -197,7 +197,7 @@ final class CartViewController: UIViewController {
 
 extension CartViewController: CartViewProtocol {
 
-    public func showEmptyCartWithAnimation() {
+    func showEmptyCartWithAnimation() {
 
         // show gradually
         cartIsEmptyLabel.alpha = 0
@@ -242,7 +242,7 @@ extension CartViewController: CartViewProtocol {
         )
     }
 
-    public func showFullCart() {
+    func showFullCart() {
         // show
         footerTotalPriceView.isHidden = false
         // hide
@@ -258,7 +258,7 @@ extension CartViewController: CartViewProtocol {
         }
     }
 
-    public func setTotalPrice(price: Decimal?) {
+    func setTotalPrice(price: Decimal?) {
         footerTotalPriceView.setTotalPrice(price: price)
     }
 

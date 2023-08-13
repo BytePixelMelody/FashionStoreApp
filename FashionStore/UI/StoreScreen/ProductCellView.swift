@@ -47,7 +47,7 @@ final class ProductCellView: UICollectionViewCell {
         arrangeLayout()
     }
 
-    public func setup(
+    func setup(
         productBrandLabelTitle: String,
         productNameLabelTitle: String,
         productPriceLabelTitle: String,

@@ -10,7 +10,7 @@ import SnapKit
 
 extension UIImageView {
 
-    public static func makeImageView(
+    static func makeImageView(
         imageName: String? = nil,
         width: Double? = nil,
         height: Double? = nil,

@@ -11,8 +11,10 @@ import UIKit
 // button factory
 extension UIButton {
 
-    public static func makeDarkButton(imageName: String? = nil,
-                                      action: (() -> Void)? = nil) -> UIButton {
+    static func makeDarkButton(
+        imageName: String? = nil,
+        action: (() -> Void)? = nil
+    ) -> UIButton {
         var config = UIButton.Configuration.filled()
 
         config.background.backgroundColor = UIColor(named: "Active") ?? .black
@@ -27,8 +29,10 @@ extension UIButton {
         return button
     }
 
-    public static func makeIconicButton(imageName: String? = nil,
-                                        action: (() -> Void)? = nil) -> UIButton {
+    static func makeIconicButton(
+        imageName: String? = nil,
+        action: (() -> Void)? = nil
+    ) -> UIButton {
         var config = UIButton.Configuration.plain()
 
         if let imageName {
@@ -41,7 +45,7 @@ extension UIButton {
         return button
     }
 
-    public static func makeGrayCapsuleButton(
+    static func makeGrayCapsuleButton(
         imageName: String? = nil,
         action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()

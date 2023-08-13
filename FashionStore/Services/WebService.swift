@@ -24,7 +24,7 @@ final class WebService: WebServiceProtocol {
 
     // usage example:
     // let catalog: Catalog = try await WebService().getData(urlString: Settings.catalogURL)
-    public func getData<T: Codable>(urlString: String) async throws -> T {
+    func getData<T: Codable>(urlString: String) async throws -> T {
         // urlString check
         guard let url = URL(string: urlString) else {
             throw Errors.ErrorType.invalidURLStringError

@@ -113,7 +113,7 @@ final class FooterTotalPriceView: UIView {
         }
     }
 
-    public func setTotalPrice(price: Decimal?) {
+    func setTotalPrice(price: Decimal?) {
         if let price {
             totalPrice = "\(currencySign)\(price)"
         } else {

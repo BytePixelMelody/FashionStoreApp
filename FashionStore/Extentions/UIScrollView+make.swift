@@ -9,7 +9,7 @@ import UIKit
 
 extension UIScrollView {
 
-    public static func makeScrollView() -> UIScrollView {
+    static func makeScrollView() -> UIScrollView {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false

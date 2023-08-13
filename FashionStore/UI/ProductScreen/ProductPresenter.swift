@@ -84,5 +84,5 @@ final class ProductPresenter: ProductPresenterProtocol {
             await view?.enableAddToCartButton()
         }
     }
-    
+
 }

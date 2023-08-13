@@ -59,7 +59,7 @@ final class CartItemCellView: UICollectionViewCell {
     }
 
     // setup properties and actions
-    public func setup(
+    func setup(
         imageName: String?,
         loadImageAction: @escaping (String) async throws -> UIImage?,
         itemBrand: String,

@@ -10,7 +10,7 @@ import UIKit
 // making animations for use with setViewControllers
 extension CATransition {
 
-    public static var toBottom: CATransition {
+    static var toBottom: CATransition {
         let caTransition = CATransition()
         caTransition.duration = 0.4
         caTransition.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -19,7 +19,7 @@ extension CATransition {
         return caTransition
     }
 
-    public static var toTop: CATransition {
+    static var toTop: CATransition {
         let caTransition = CATransition()
         caTransition.duration = 0.25
         caTransition.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -28,7 +28,7 @@ extension CATransition {
         return caTransition
     }
 
-    public static var systemDefault: CATransition {
+    static var systemDefault: CATransition {
         CATransition()
     }
 }

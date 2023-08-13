@@ -272,11 +272,11 @@ final class CheckoutViewController: UIViewController {
 
 extension CheckoutViewController: CheckoutViewProtocol {
 
-    public func showAddAddressView() {
+    func showAddAddressView() {
         addressContainerView.setSubView(addAddressView)
     }
 
-    public func showFilledAddressView(firstAndLastName: String, address: String, cityStateZip: String, country: String, phone: String) {
+    func showFilledAddressView(firstAndLastName: String, address: String, cityStateZip: String, country: String, phone: String) {
 
         filledAddressView = FilledAddressView(
             firstLastNameLabelText: firstAndLastName,
@@ -293,11 +293,11 @@ extension CheckoutViewController: CheckoutViewProtocol {
         }
     }
 
-    public func showAddPaymentMethodView() {
+    func showAddPaymentMethodView() {
         paymentMethodContainerView.setSubView(addPaymentMethodView)
     }
 
-    public func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String) {
+    func showFilledPaymentMethodView(paymentSystemImageName: String, paymentSystemName: String, cardLastDigits: String) {
 
         filledPaymentMethodView = FilledPaymentMethodView(
             paymentSystemImageName: paymentSystemImageName,
@@ -312,7 +312,7 @@ extension CheckoutViewController: CheckoutViewProtocol {
         }
     }
 
-    public func showEmptyCheckoutWithAnimation() {
+    func showEmptyCheckoutWithAnimation() {
 
         // adding checkoutIsEmptyLabel to stackView
         detailsAndProductsStackView.addArrangedSubview(checkoutIsEmptyLabel)
@@ -364,7 +364,7 @@ extension CheckoutViewController: CheckoutViewProtocol {
         )
     }
 
-    public func showFullCheckout() {
+    func showFullCheckout() {
         // deleting checkoutIsEmptyLabel from stackView
         detailsAndProductsStackView.removeArrangedSubview(checkoutIsEmptyLabel)
         detailsAndProductsStackView.setCustomSpacing(29, after: paymentMethodContainerView)
@@ -386,7 +386,7 @@ extension CheckoutViewController: CheckoutViewProtocol {
         }
     }
 
-    public func setTotalPrice(price: Decimal?) {
+    func setTotalPrice(price: Decimal?) {
         footerTotalPriceView.setTotalPrice(price: price)
     }
 

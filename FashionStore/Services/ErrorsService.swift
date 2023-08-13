@@ -12,16 +12,16 @@ import OSLog
 final class Errors {
 
     // singletone
-    public static let handler = Errors()
+    static let handler = Errors()
 
     // for router injection
-    public var router: Routing?
+    var router: Routing?
 
     // logger, use Console to view logs
     private let logger = Logger(subsystem: #file, category: "Errors handler")
 
     // error types
-    public enum ErrorType: LocalizedError {
+    enum ErrorType: LocalizedError {
         case paymentFail
         case networkConnectionFail
         case httpError(statusCode: Int, urlString: String)
@@ -112,7 +112,7 @@ final class Errors {
     }
 
     // handling errors
-    public func checkError(_ checkingError: Error) {
+    func checkError(_ checkingError: Error) {
         guard let router else { return }
 
         // default popup message values
@@ -175,8 +175,8 @@ final class Errors {
         logger.error("\(checkingError.localizedDescription, privacy: .public)")
     }
 
-    // logging errors with public privacy
-    public func logError(_ error: Error) {
+    // logging errors with privacy
+    func logError(_ error: Error) {
         logger.error("\(error.localizedDescription, privacy: .public)")
     }
 

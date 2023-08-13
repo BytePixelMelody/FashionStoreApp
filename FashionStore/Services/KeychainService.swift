@@ -17,7 +17,7 @@ protocol KeychainServiceProtocol: AnyObject {
 final class KeychainService: KeychainServiceProtocol {
 
     // add item to keychain
-    public func add<T>(keychainID: String, value: T) throws where T: Codable {
+    func add<T>(keychainID: String, value: T) throws where T: Codable {
         let jsonEncoder = JSONEncoder()
         let data = try jsonEncoder.encode(value)
 
@@ -54,7 +54,7 @@ final class KeychainService: KeychainServiceProtocol {
     }
 
     // read item from keychain
-    public func read<T>(keychainID: String) throws -> T where T: Codable {
+    func read<T>(keychainID: String) throws -> T where T: Codable {
         // creating keychain query for read operation
         let readQuery: [String: Any] = [
             kSecAttrService as String: keychainID, // id to data access
@@ -87,7 +87,7 @@ final class KeychainService: KeychainServiceProtocol {
     }
 
     // delete item from keychain by keychainID
-    public func delete(keychainID: String) throws {
+    func delete(keychainID: String) throws {
         // creating keychain query for delete operation
         let deleteQuery: [String: Any] = [
             kSecAttrService as String: keychainID, // service + account = id to data access

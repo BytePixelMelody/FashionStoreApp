@@ -8,7 +8,7 @@
 import UIKit
 
 extension String {
-    public func setStyle(style: TextStyle) -> NSMutableAttributedString {
+    func setStyle(style: TextStyle) -> NSMutableAttributedString {
         let string = self
 
         // accessibility font scale
@@ -35,7 +35,7 @@ extension String {
     }
 }
 
-public struct TextStyle {
+struct TextStyle {
     var font: UIFont {
         UIFont(name: fontName, size: size) ?? .systemFont(ofSize: size)
     }
