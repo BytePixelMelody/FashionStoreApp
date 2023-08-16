@@ -7,7 +7,7 @@
       </td>
       <td>
         <h1>Fashion Store App</h1>
-        <p>Fashion Store - pet-project application of an online Fashion Store. Allows users choose products in the online catalog, add them to the cart and make a fake order after adding the delivery address and payment method. App can be opened via deeplink and has dynamic font scaling.</p>
+        <p>Fashion Store - pet-project application of an online Fashion Store. Allows users choose products in the online catalog, add them to the cart and make a fake order after adding the delivery address and payment method. The app can be opened via deeplink and has dynamic font scaling.</p>
       </td>
     </tr>
   </table>
