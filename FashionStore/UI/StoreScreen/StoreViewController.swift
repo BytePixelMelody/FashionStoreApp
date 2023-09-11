@@ -32,11 +32,17 @@
 import UIKit
 import SnapKit
 
+// MARK: - StoreViewProtocol
+
 protocol StoreViewProtocol: AnyObject {
 
 }
 
+// MARK: - StoreViewController
+
 final class StoreViewController: UIViewController {
+
+    // MARK: Private Properties
 
     private let presenter: StorePresenterProtocol
 
@@ -54,6 +60,8 @@ final class StoreViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     private let refreshControl = UIRefreshControl(frame: .zero)
 
+    // MARK: Initialisers
+
     init(presenter: StorePresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -62,6 +70,8 @@ final class StoreViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +111,8 @@ final class StoreViewController: UIViewController {
         }
     }
 
+    // MARK: Private Methods
+
     private func arrangeLayout() {
         arrangeHeaderBrandedView()
         arrangeProductsCollectionView()
@@ -124,8 +136,11 @@ final class StoreViewController: UIViewController {
 
 }
 
-// collection view implementing
+// MARK: - UICollectionView
+
 extension StoreViewController {
+
+    // MARK: Private Methods
 
     // create and configure collection view
     private func configureCollectionView() {
@@ -159,11 +174,11 @@ extension StoreViewController {
         productsCollectionView?.refreshControl = refreshControl
     }
 
-    enum Section: Hashable {
+    private enum Section: Hashable {
         case productSection
     }
 
-    enum Item: Hashable {
+    private enum Item: Hashable {
         case product(Product)
     }
 
@@ -218,6 +233,8 @@ extension StoreViewController {
     }
 
 }
+
+// MARK: - StoreViewProtocol
 
 extension StoreViewController: StoreViewProtocol {
 

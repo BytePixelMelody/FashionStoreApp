@@ -283,11 +283,11 @@ extension CartViewController {
         cartItemsCollectionView?.showsVerticalScrollIndicator = false // no scroll indicator
     }
 
-    enum Section: Hashable {
+    private enum Section: Hashable {
         case cartItemSection
     }
 
-    enum Item: Hashable {
+    private enum Item: Hashable {
         case cartItem(CatalogItem.ID)
     }
 
