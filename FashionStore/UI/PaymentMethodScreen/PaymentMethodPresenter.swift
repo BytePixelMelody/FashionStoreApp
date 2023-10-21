@@ -5,7 +5,6 @@
 //  Created by Vyacheslav on 07.03.2023.
 //
 
-import Foundation
 import UIKit
 
 protocol PaymentMethodPresenterProtocol: AnyObject {

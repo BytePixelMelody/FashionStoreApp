@@ -140,6 +140,16 @@ final class StoreViewController: UIViewController {
 
 extension StoreViewController {
 
+    // MARK: Types
+
+    private enum Section: Hashable {
+        case productSection
+    }
+
+    private enum Item: Hashable {
+        case product(Product)
+    }
+
     // MARK: Private Methods
 
     // create and configure collection view
@@ -172,14 +182,6 @@ extension StoreViewController {
             }
         }, for: .primaryActionTriggered)
         productsCollectionView?.refreshControl = refreshControl
-    }
-
-    private enum Section: Hashable {
-        case productSection
-    }
-
-    private enum Item: Hashable {
-        case product(Product)
     }
 
     private func createProductCellRegistration() -> UICollectionView.CellRegistration<ProductCellView, Product> {
