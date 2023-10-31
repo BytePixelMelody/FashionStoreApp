@@ -3,7 +3,7 @@
   <table>
     <tr>
       <td>
-        <img src="PresentationMedia/FashionStoreAppIcon.png" alt="Fashion Store App Icon" width="320">
+        <img src="Media/FashionStoreAppIcon.png" alt="Fashion Store App Icon" width="320">
       </td>
       <td>
         <h1>Fashion Store App</h1>
@@ -53,7 +53,7 @@
 - [x] Factories
 
 ## Screenshots
-<img src="PresentationMedia/StoreScreen.png" width="273"/> <img src="PresentationMedia/ProductScreen.png" width="273"/> <img src="PresentationMedia/CartScreen.png" width="273"/> <img src="PresentationMedia/AddressScreen.png" width="273"/> <img src="PresentationMedia/CheckoutScreen.png" width="273"/> <img src="PresentationMedia/PopupScreen.png" width="273"/>
+<img src="Media/StoreScreen.png" width="273"/> <img src="Media/ProductScreen.png" width="273"/> <img src="Media/CartScreen.png" width="273"/> <img src="Media/AddressScreen.png" width="273"/> <img src="Media/CheckoutScreen.png" width="273"/> <img src="Media/PopupScreen.png" width="273"/>
 
 ## Videos
 | Catalog | Cart | Address |
