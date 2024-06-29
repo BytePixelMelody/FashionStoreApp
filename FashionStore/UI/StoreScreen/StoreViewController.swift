@@ -86,6 +86,9 @@ final class StoreViewController: UIViewController {
 
         // configure collection view data source
         configureDataSource()
+
+        // scale fonts
+        registerFontScaling()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -104,10 +107,11 @@ final class StoreViewController: UIViewController {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            productsCollectionView?.collectionViewLayout.invalidateLayout()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.productsCollectionView?.collectionViewLayout.invalidateLayout()
+            }
         }
     }
 

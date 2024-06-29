@@ -85,6 +85,7 @@ final class CartViewController: UIViewController {
 
         // setup texts with styles
         setupUiTexts()
+        registerFontScaling()
 
         // arrange layouts
         arrangeLayout()
@@ -129,11 +130,12 @@ final class CartViewController: UIViewController {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            setupUiTexts()
-            cartItemsCollectionView?.collectionViewLayout.invalidateLayout()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.setupUiTexts()
+                self.cartItemsCollectionView?.collectionViewLayout.invalidateLayout()
+            }
         }
     }
 

@@ -48,6 +48,7 @@ final class UITextFieldStyled: UITextField {
         clearButtonMode = .whileEditing
 
         setupUiTexts()
+        registerFontScaling()
     }
 
     required init?(coder: NSCoder) {
@@ -74,10 +75,11 @@ final class UITextFieldStyled: UITextField {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            setupUiTexts()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.setupUiTexts()
+            }
         }
     }
 
