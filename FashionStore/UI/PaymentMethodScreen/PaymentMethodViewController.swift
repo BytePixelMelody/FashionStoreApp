@@ -104,6 +104,7 @@ final class PaymentMethodViewController: UIViewController {
         view.backgroundColor = .white
 
         setupUiTexts()
+        registerFontScaling()
         fillStackViews()
         arrangeLayout()
         textFieldsChaining()
@@ -129,10 +130,11 @@ final class PaymentMethodViewController: UIViewController {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            setupUiTexts()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.setupUiTexts()
+            }
         }
     }
 

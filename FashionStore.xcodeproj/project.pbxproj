@@ -249,7 +249,7 @@
 		1186C92F299FFA66002852BB /* FashionStore */ = {
 			isa = PBXGroup;
 			children = (
-				1186C98D29A2ACDD002852BB /* Extentions */,
+				1186C98D29A2ACDD002852BB /* Extensions */,
 				1186C98429A29E05002852BB /* AppMain */,
 				1186C98829A2A30E002852BB /* UI */,
 				11E5F4AB29BE093900B979B4 /* Model */,
@@ -296,7 +296,7 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		1186C98D29A2ACDD002852BB /* Extentions */ = {
+		1186C98D29A2ACDD002852BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				1186C98E29A2AD07002852BB /* String+setStyle.swift */,
@@ -307,7 +307,7 @@
 				114466CA29D2D36200E504F8 /* UIStackView+make.swift */,
 				11A8F63C29E195A70048EF2E /* UIImageView+make.swift */,
 			);
-			path = Extentions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		11CF2AFD29CC3FAD0065D47F /* Common */ = {
@@ -379,7 +379,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					1186C92C299FFA66002852BB = {
 						CreatedOnToolsVersion = 14.2;
@@ -520,6 +520,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -567,13 +568,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 			};
 			name = Debug;
 		};
@@ -581,6 +583,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -622,12 +625,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

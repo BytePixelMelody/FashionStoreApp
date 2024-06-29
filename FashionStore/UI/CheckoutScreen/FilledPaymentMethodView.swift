@@ -54,6 +54,7 @@ final class FilledPaymentMethodView: UIView {
 
         // setup typography texts
         setupUiTexts()
+        registerFontScaling()
 
         // arrange elements
         arrangeLayout()
@@ -77,10 +78,11 @@ final class FilledPaymentMethodView: UIView {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            setupUiTexts()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.setupUiTexts()
+            }
         }
     }
 

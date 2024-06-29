@@ -96,6 +96,7 @@ final class CartItemCellView: UICollectionViewCell {
 
         // setup typography texts
         setupUiTexts()
+        registerFontScaling()
     }
 
     // load image
@@ -156,10 +157,11 @@ final class CartItemCellView: UICollectionViewCell {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            setupUiTexts()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.setupUiTexts()
+            }
         }
     }
 

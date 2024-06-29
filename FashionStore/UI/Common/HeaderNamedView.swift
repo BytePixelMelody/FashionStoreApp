@@ -34,6 +34,7 @@ final class HeaderNamedView: UIView {
         super.init(frame: frame)
 
         setupUiTexts()
+        registerFontScaling()
         arrangeLayout()
     }
 
@@ -47,10 +48,11 @@ final class HeaderNamedView: UIView {
     }
 
     // accessibility settings was changed - scale fonts
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
-            setupUiTexts()
+    private func registerFontScaling() {
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                self.setupUiTexts()
+            }
         }
     }
 
