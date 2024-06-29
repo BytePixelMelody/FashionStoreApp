@@ -258,7 +258,7 @@ extension ProductViewController: ProductViewProtocol {
     func enableAddToCartButton() async {
         addToCartButton.isEnabled = true
         var config = addToCartButton.configuration
-        config?.background.backgroundColor = UIColor(named: "Active") ?? .black
+        config?.background.backgroundColor = .active
         config?.image = UIImage(named: ImageName.plusDark)
         addToCartButtonTitle = addToCartTitle
         config?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
@@ -269,7 +269,7 @@ extension ProductViewController: ProductViewProtocol {
     func disableAddToCartButton() async {
         addToCartButton.isEnabled = false
         var config = addToCartButton.configuration
-        config?.background.backgroundColor = UIColor(named: "ButtonDisabled") ?? .lightGray
+        config?.background.backgroundColor = .buttonDisabled
         config?.image = nil
         addToCartButtonTitle = inTheCartTitle
         config?.attributedTitle = AttributedString(addToCartButtonTitle.uppercased().setStyle(style: .buttonDark))
