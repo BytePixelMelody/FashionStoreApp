@@ -16,7 +16,7 @@ extension UIButton {
     ) -> UIButton {
         var config = UIButton.Configuration.filled()
 
-        config.background.backgroundColor = UIColor(named: "Active") ?? .black
+        config.background.backgroundColor = .active
         config.cornerStyle = .capsule
         if let imageName {
             config.image = UIImage(named: imageName)
@@ -49,7 +49,7 @@ extension UIButton {
         action: (() -> Void)? = nil) -> UIButton {
         var config = UIButton.Configuration.filled()
 
-        config.background.backgroundColor = UIColor(named: "InputBackground") ?? .systemGray6
+            config.background.backgroundColor = .inputBackground
         config.cornerStyle = .capsule
         if let imageName {
             config.image = UIImage(named: imageName)
