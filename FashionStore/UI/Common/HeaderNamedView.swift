@@ -112,3 +112,8 @@ final class HeaderNamedView: UIView {
     }
 
 }
+
+@available(iOS 17, *)
+#Preview("Header", traits: .sizeThatFitsLayout) {
+    HeaderNamedView(headerTitle: "Fashion Store")
+}

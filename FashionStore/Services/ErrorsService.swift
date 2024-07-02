@@ -17,7 +17,7 @@ final class Errors {
     var router: Routing?
 
     // logger, use Console to view logs
-    private let logger = Logger(subsystem: #file, category: "Errors handler")
+    private let logger = Logger(subsystem: "com.bytepixelmelody.fashion.store", category: "\(#file) - handler")
 
     // error types
     enum ErrorType: LocalizedError {
