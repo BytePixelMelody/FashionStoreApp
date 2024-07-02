@@ -56,6 +56,8 @@
 		11CF2AFB29CC23DC0065D47F /* UILabel+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */; };
 		11CF2AFF29CC3FE70065D47F /* HeaderNamedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */; };
 		11CF2B0129CD8B3B0065D47F /* FooterTotalPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */; };
+		11D5C3332C33FE2600B874FA /* FashionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5C3322C33FE2600B874FA /* FashionStoreTests.swift */; };
+		11D5C33A2C340DB900B874FA /* Tag+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5C3392C340DAF00B874FA /* Tag+extension.swift */; };
 		11D89A452A247A14008FB732 /* CartItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D89A442A247A14008FB732 /* CartItemCellView.swift */; };
 		11E2C9D22A02213400BDED92 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2C9D12A02213400BDED92 /* KeychainService.swift */; };
 		11E2C9D42A02784D00BDED92 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2C9D32A02784C00BDED92 /* Settings.swift */; };
@@ -65,6 +67,16 @@
 		11E5F4B329BF398A00B979B4 /* CATransitionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5F4B229BF398A00B979B4 /* CATransitionFactory.swift */; };
 		11F0DACA29E85868003ADE45 /* HeaderBrandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0DAC929E85868003ADE45 /* HeaderBrandedView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11D5C3342C33FE2600B874FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1186C925299FFA66002852BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1186C92C299FFA66002852BB;
+			remoteInfo = FashionStore;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		110EFE8A2A482B09009153B6 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
@@ -116,6 +128,9 @@
 		11CF2AFA29CC23DB0065D47F /* UILabel+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+make.swift"; sourceTree = "<group>"; };
 		11CF2AFE29CC3FE70065D47F /* HeaderNamedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNamedView.swift; sourceTree = "<group>"; };
 		11CF2B0029CD8B3B0065D47F /* FooterTotalPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTotalPriceView.swift; sourceTree = "<group>"; };
+		11D5C3302C33FE2600B874FA /* FashionStoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FashionStoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11D5C3322C33FE2600B874FA /* FashionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FashionStoreTests.swift; sourceTree = "<group>"; };
+		11D5C3392C340DAF00B874FA /* Tag+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+extension.swift"; sourceTree = "<group>"; };
 		11D89A442A247A14008FB732 /* CartItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCellView.swift; sourceTree = "<group>"; };
 		11E2C9D12A02213400BDED92 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		11E2C9D32A02784C00BDED92 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -133,6 +148,13 @@
 			files = (
 				11B5E3E02A099E6F00321004 /* CombineCocoa in Frameworks */,
 				117CB24C29AE1185006F4192 /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11D5C32D2C33FE2600B874FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +256,7 @@
 			children = (
 				1186C92F299FFA66002852BB /* FashionStore */,
 				117C0BDE2A1165C100138CA9 /* Website */,
+				11D5C3312C33FE2600B874FA /* FashionStoreTests */,
 				1186C92E299FFA66002852BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -242,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				1186C92D299FFA66002852BB /* FashionStore.app */,
+				11D5C3302C33FE2600B874FA /* FashionStoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,6 +348,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		11D5C3312C33FE2600B874FA /* FashionStoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				11D5C3392C340DAF00B874FA /* Tag+extension.swift */,
+				11D5C3322C33FE2600B874FA /* FashionStoreTests.swift */,
+			);
+			path = FashionStoreTests;
+			sourceTree = "<group>";
+		};
 		11E5F4AB29BE093900B979B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +404,24 @@
 			productReference = 1186C92D299FFA66002852BB /* FashionStore.app */;
 			productType = "com.apple.product-type.application";
 		};
+		11D5C32F2C33FE2600B874FA /* FashionStoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11D5C3362C33FE2600B874FA /* Build configuration list for PBXNativeTarget "FashionStoreTests" */;
+			buildPhases = (
+				11D5C32C2C33FE2600B874FA /* Sources */,
+				11D5C32D2C33FE2600B874FA /* Frameworks */,
+				11D5C32E2C33FE2600B874FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11D5C3352C33FE2600B874FA /* PBXTargetDependency */,
+			);
+			name = FashionStoreTests;
+			productName = FashionStoreTests;
+			productReference = 11D5C3302C33FE2600B874FA /* FashionStoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -378,11 +429,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					1186C92C299FFA66002852BB = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					11D5C32F2C33FE2600B874FA = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 1186C92C299FFA66002852BB;
 					};
 				};
 			};
@@ -404,6 +459,7 @@
 			projectRoot = "";
 			targets = (
 				1186C92C299FFA66002852BB /* FashionStore */,
+				11D5C32F2C33FE2600B874FA /* FashionStoreTests */,
 			);
 		};
 /* End PBXProject section */
@@ -418,6 +474,13 @@
 				1186C93D299FFA66002852BB /* LaunchScreen.storyboard in Resources */,
 				1186C98729A2A0B7002852BB /* TenorSans-Regular.ttf in Resources */,
 				1186C93A299FFA66002852BB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11D5C32E2C33FE2600B874FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +565,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		11D5C32C2C33FE2600B874FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11D5C33A2C340DB900B874FA /* Tag+extension.swift in Sources */,
+				11D5C3332C33FE2600B874FA /* FashionStoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11D5C3352C33FE2600B874FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1186C92C299FFA66002852BB /* FashionStore */;
+			targetProxy = 11D5C3342C33FE2600B874FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1186C93B299FFA66002852BB /* LaunchScreen.storyboard */ = {
@@ -576,6 +656,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
+				_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES = YES;
 			};
 			name = Debug;
 		};
@@ -633,6 +714,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				VALIDATE_PRODUCT = YES;
+				_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES = YES;
 			};
 			name = Release;
 		};
@@ -702,6 +784,49 @@
 			};
 			name = Release;
 		};
+		11D5C3372C33FE2600B874FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3NTG39P2L6;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytepixelmelody.FashionStoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FashionStore.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FashionStore";
+			};
+			name = Debug;
+		};
+		11D5C3382C33FE2600B874FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3NTG39P2L6;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytepixelmelody.FashionStoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FashionStore.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FashionStore";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -719,6 +844,15 @@
 			buildConfigurations = (
 				1186C942299FFA66002852BB /* Debug */,
 				1186C943299FFA66002852BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11D5C3362C33FE2600B874FA /* Build configuration list for PBXNativeTarget "FashionStoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11D5C3372C33FE2600B874FA /* Debug */,
+				11D5C3382C33FE2600B874FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

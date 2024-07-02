@@ -28,6 +28,7 @@
 - [x] Security
 - [x] OSLog
 - [x] SwiftLint
+- [x] Testing
 
 ## Technologies
 - [x] UI fully by code, forced unwrap avoided
@@ -40,12 +41,14 @@
 - [x] Keychain service with iCloud sync by native API
 - [x] Deep link service
 - [x] Errors service with logging
+- [x] Unit tests by Swift Testing
 - [x] Async/await and Tasks on main and background queues
 - [x] Generics
-- [x] Collection views based on snapshots
-- [x] Reactive text checking with Combine
-- [x] Typographic font styles, dynamic accessibility font scaling
+- [x] Diffable Data Source Collection Views
+- [x] Reactive text field validation using Combine
+- [x] Typographic font styles, dynamic font scaling
 - [x] Customised screen transitions
+- [x] Using the #Preview macros
 
 ## Code patterns
 - [x] Protocols
