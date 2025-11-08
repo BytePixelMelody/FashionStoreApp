@@ -8,5 +8,5 @@
 import Testing
 
 extension Tag {
-    @Tag static let cart: Self
+    @Tag static var cart: Self
 }
