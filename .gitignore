@@ -1,6 +1,4 @@
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+### Xcode
 
 ## User settings
 xcuserdata/
@@ -34,8 +32,7 @@ DerivedData/
 timeline.xctimeline
 playground.xcworkspace
 
-# Swift Package Manager
-#
+## Swift Package Manager
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
@@ -48,8 +45,7 @@ playground.xcworkspace
 
 .build/
 
-# CocoaPods
-#
+## CocoaPods
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
@@ -59,19 +55,17 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
 
-# Carthage
-#
+## Carthage
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
 
 Carthage/Build/
 
-# Accio dependency management
+## Accio dependency management
 Dependencies/
 .accio/
 
-# fastlane
-#
+## Fastlane
 # It is recommended to not store the screenshots in the git repo.
 # Instead, use fastlane to re-generate the screenshots whenever they are needed.
 # For more information about the recommended setup visit:
@@ -82,13 +76,8 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-# Code Injection
-#
-# After new code Injection tools there's a generated folder /iOSInjectionProject
-# https://github.com/johnno1962/injectionforxcode
-
-iOSInjectionProject/
-
-# Photoshop projects
-
+## Design 
 PSD/
+
+## MacOS
+*.DS_Store
